@@ -1,0 +1,42 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AvaloniaRibbon.Views;assembly=AvaloniaRibbon">
+  <Design.PreviewWith>
+    <local:RibbonControl>
+      <local:RibbonTab Header="File">FileContent</local:RibbonTab>
+    </local:RibbonControl>
+  </Design.PreviewWith>
+
+  <Style Selector="local|RibbonControl">
+    <Setter Property="RemainingTabControlHeaderColor" Value="#2B579A"/>
+    <Setter Property="Background" Value="#f0f0f0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+            <StackPanel>
+              <ItemsPresenter
+                  Name="PART_ItemsPresenter"
+                  Items="{TemplateBinding Items}"
+                  ItemsPanel="{TemplateBinding ItemsPanel}"
+                  ItemTemplate="{TemplateBinding ItemTemplate}"
+                  MemberSelector="{TemplateBinding MemberSelector}">
+              </ItemsPresenter>
+              <ContentPresenter
+                  Name="PART_SelectedContentHost"
+                  Margin="{TemplateBinding Padding}"
+                  Height="90"
+                  Background="{TemplateBinding Background}"
+                  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                  Content="{TemplateBinding SelectedContent}"
+                  ContentTemplate="{TemplateBinding SelectedContentTemplate}">
+              </ContentPresenter>
+            </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  
+  <Style Selector="local|RibbonControl WrapPanel">
+    <Setter Property="Background" Value="{Binding $parent[local:RibbonControl].RemainingTabControlHeaderColor}"/>
+  </Style>
+  
+</Styles>

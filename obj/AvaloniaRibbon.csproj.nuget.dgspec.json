@@ -1,0 +1,106 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Clouds\\pCloud\\CSharp_projets\\AvaloniaRibbon\\AvaloniaRibbon.csproj": {}
+  },
+  "projects": {
+    "D:\\Clouds\\pCloud\\CSharp_projets\\AvaloniaRibbon\\AvaloniaRibbon.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Clouds\\pCloud\\CSharp_projets\\AvaloniaRibbon\\AvaloniaRibbon.csproj",
+        "projectName": "AvaloniaRibbon",
+        "projectPath": "D:\\Clouds\\pCloud\\CSharp_projets\\AvaloniaRibbon\\AvaloniaRibbon.csproj",
+        "packagesPath": "C:\\Users\\Alban MAZEROLLES\\.nuget\\packages\\",
+        "outputPath": "D:\\Clouds\\pCloud\\CSharp_projets\\AvaloniaRibbon\\obj\\",
+        "projectStyle": "PackageReference",
+        "crossTargeting": true,
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Alban MAZEROLLES\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net461",
+          "netcoreapp2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/aspnet-aspnetcore-tooling/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/aspnet-aspnetcore/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/aspnet-entityframeworkcore/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/aspnet-extensions/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {},
+          "https://dotnetfeed.blob.core.windows.net/dotnet-windowsdesktop/index.json": {},
+          "https://www.myget.org/F/avalonia-ci/api/v2": {},
+          "https://www.myget.org/F/avalonia-prs/api/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.1": {
+            "projectReferences": {}
+          },
+          "net461": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.1": {
+          "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[0.8.1-cibuild0002927-beta, )"
+            },
+            "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[0.8.1-cibuild0002927-beta, )"
+            },
+            "Avalonia.ReactiveUI": {
+              "target": "Package",
+              "version": "[0.8.1-cibuild0002927-beta, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.1.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        },
+        "net461": {
+          "dependencies": {
+            "Avalonia": {
+              "target": "Package",
+              "version": "[0.8.1-cibuild0002927-beta, )"
+            },
+            "Avalonia.Desktop": {
+              "target": "Package",
+              "version": "[0.8.1-cibuild0002927-beta, )"
+            },
+            "Avalonia.ReactiveUI": {
+              "target": "Package",
+              "version": "[0.8.1-cibuild0002927-beta, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win7-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

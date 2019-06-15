@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\*" />
+    <AvaloniaResource Include="Assets\Window\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Views\RibbonButton.xaml" />
+    <None Remove="Views\RibbonControl.xaml" />
+    <None Remove="Views\RibbonTab.xaml" />
+    <None Remove="Views\RibbonWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RibbonButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RibbonControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RibbonTab.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RibbonWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.8.1-cibuild0002927-beta" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.8.1-cibuild0002927-beta" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.1-cibuild0002927-beta" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Assets\Window\already_maximized.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Window\close.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Window\maximize.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Window\minimize.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

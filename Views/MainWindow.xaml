@@ -1,0 +1,29 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:AvaloniaRibbon.ViewModels;assembly=AvaloniaRibbon"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:v="clr-namespace:AvaloniaRibbon.Views;assembly=AvaloniaRibbon"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="AvaloniaRibbon.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="AvaloniaRibbon"
+        HasSystemDecorations="False">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <v:RibbonWindow>
+      <v:RibbonControl>
+        <v:RibbonTab Header="RibbonTab 1">
+          <StackPanel Orientation="Horizontal">
+            <Button> test1 </Button>
+            <Button> test2 </Button>
+          </StackPanel>
+        </v:RibbonTab>
+        <v:RibbonTab Header="RibbonTab 2">qsdfqsdf</v:RibbonTab>
+      </v:RibbonControl>
+    </v:RibbonWindow>
+
+</Window>
