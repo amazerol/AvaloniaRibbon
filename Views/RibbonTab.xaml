@@ -30,19 +30,12 @@
       </ControlTemplate>
     </Setter>
   </Style>
-    
-  <Style Selector="local|RibbonTab:focus">
-    <Setter Property="Foreground" Value="#2B579A"/>
-    <Setter Property="Margin" Value="0 0 0 0"/>
-    <Setter Property="Padding" Value="10 0"/>
-    <Setter Property="Background" Value="#f0f0f0"/>
-  </Style>
 
   <Style Selector="local|RibbonTab:selected">
     <Setter Property="Foreground" Value="#2B579A"/>
     <Setter Property="Margin" Value="0 0 0 0"/>
     <Setter Property="Padding" Value="10 0"/>
-    <Setter Property="Background" Value="#f0f0f0"/>
+    <Setter Property="Background" Value="{Binding $parent.Background}"/>
   </Style>
    
 </Styles>

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.1;net461</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -13,12 +13,19 @@
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\*" />
     <AvaloniaResource Include="Assets\Window\*" />
+    <AvaloniaResource Include="Assets\RibbonIcons\*" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\settings.png" />
     <None Remove="Views\RibbonButton.xaml" />
     <None Remove="Views\RibbonControl.xaml" />
     <None Remove="Views\RibbonTab.xaml" />
     <None Remove="Views\RibbonWindow.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\RibbonIcons\settings.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\RibbonButton.xaml">
@@ -40,6 +47,11 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.1-cibuild0002927-beta" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Converters\BitmapValueConverter.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <None Update="Assets\Window\already_maximized.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -50,6 +62,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Update="Assets\Window\minimize.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\RibbonIcons\settings.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

@@ -21,8 +21,8 @@
                   MemberSelector="{TemplateBinding MemberSelector}">
               </ItemsPresenter>
               <ContentPresenter
-                  Name="PART_SelectedContentHost"
-                  Margin="{TemplateBinding Padding}"
+                  Name="PART_SelectedContentHost"           
+                  Padding="5 5 5 5"
                   Height="90"
                   Background="{TemplateBinding Background}"
                   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"

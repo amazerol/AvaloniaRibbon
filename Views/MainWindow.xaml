@@ -18,8 +18,7 @@
       <v:RibbonControl>
         <v:RibbonTab Header="RibbonTab 1">
           <StackPanel Orientation="Horizontal">
-            <Button> test1 </Button>
-            <Button> test2 </Button>
+            <v:RibbonButton Text="Test3" IconPath="settings.png" />
           </StackPanel>
         </v:RibbonTab>
         <v:RibbonTab Header="RibbonTab 2">qsdfqsdf</v:RibbonTab>

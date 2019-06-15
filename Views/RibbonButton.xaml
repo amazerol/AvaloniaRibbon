@@ -1,5 +1,47 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:AvaloniaRibbon.Viewsassembly=AvaloniaRibbon">
+        xmlns:local="clr-namespace:AvaloniaRibbon.Views;assembly=AvaloniaRibbon"
+        xmlns:conv="clr-namespace:AvaloniaRibbon.Converters;assembly=AvaloniaRibbon">
+  <Design.PreviewWith>
+    <local:RibbonButton Text="Du texte pour un bouton" IconPath="/Assets/RibbonIcons/settings.png">
+    </local:RibbonButton>
+  </Design.PreviewWith>
   
+  <Style Selector="local|RibbonButton">
+    <Style.Resources>
+      <conv:BitmapValueConverter x:Key="bitmapConverter"/>
+    </Style.Resources>
+    <Setter Property="Template">
+      <ControlTemplate TargetType="local:RibbonButton"> 
+        <StackPanel Orientation="Vertical">
+          <Button>
+            <StackPanel>
+              <Image Source="{TemplateBinding IconPath, Converter={StaticResource bitmapConverter}}" Height="32" />
+              <TextBlock Text="{TemplateBinding Text}"/>
+            </StackPanel>
+
+          </Button>
+
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                            Items="{TemplateBinding Items}"
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            MemberSelector="{TemplateBinding MemberSelector}" >
+          </ItemsPresenter>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  
+  
+  <Style Selector="local|RibbonButton:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="#c6c6c6"/>
+    <Setter Property="BorderBrush" Value="#939393"/>
+  </Style>
+  <Style Selector="local|RibbonButton:pressed  /template/ ContentPresenter">
+    <Setter Property="Background" Value="#a4a4a4"/>
+    <Setter Property="BorderBrush" Value="#717171"/>
+  </Style>
+  <Style Selector="local|RibbonButton:disabled">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
 </Styles>
