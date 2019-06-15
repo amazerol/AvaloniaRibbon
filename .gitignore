@@ -1,0 +1,4 @@
+# folders I do not want to track
+bin/
+obj/
+
