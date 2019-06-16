@@ -2,6 +2,7 @@
 Ribbon for avalonia
 
 The purpose of this Avalonia component is to achieve something like this (the component can already be used but is definitely not considered as completed) :
+
 ![2019-06-16_18-00-19](https://user-images.githubusercontent.com/16206389/59566444-a752ea80-9060-11e9-828b-593d347f797d.gif)
 
 By downloading this project, you should be able to obtain the same result (don't use Avalonia 0.8.0 but the nightly build).
