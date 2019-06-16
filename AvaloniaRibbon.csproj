@@ -20,6 +20,7 @@
     <None Remove="Views\RibbonButton.xaml" />
     <None Remove="Views\RibbonControl.xaml" />
     <None Remove="Views\RibbonTab.xaml" />
+    <None Remove="Views\RibbonTabGroup.xaml" />
     <None Remove="Views\RibbonWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
@@ -38,6 +39,9 @@
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\RibbonWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+      <EmbeddedResource Include="Views\RibbonTabGroup.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -22,7 +22,6 @@ namespace AvaloniaRibbon.Converters
                 if ((string)value != String.Empty)
                 {
                     string val = "." + (string)value;
-                    Console.WriteLine(val);
                     return new Avalonia.Media.Imaging.Bitmap(val);
                 }
                 return null;

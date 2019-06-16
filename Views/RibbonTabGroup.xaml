@@ -3,32 +3,27 @@
         xmlns:local="clr-namespace:AvaloniaRibbon.Views;assembly=AvaloniaRibbon"
         xmlns:conv="clr-namespace:AvaloniaRibbon.Converters;assembly=AvaloniaRibbon">
   <Design.PreviewWith>
-    <local:RibbonButton Text="Du texte pour un bouton" IconPath="/Assets/RibbonIcons/settings.png">
-    </local:RibbonButton>
+
   </Design.PreviewWith>
-  
-  <Style Selector="local|RibbonButton">
+
+  <Style Selector="local|RibbonTabGroup">
     <Style.Resources>
       <conv:BitmapValueConverter x:Key="bitmapConverter"/>
     </Style.Resources>
     <Setter Property="Template">
-      <ControlTemplate TargetType="local:RibbonButton"> 
-        <StackPanel Orientation="Vertical">
-          <Button Name="rButton">
-            <Border>
-              <StackPanel>
-                <Image Source="{TemplateBinding IconPath, Converter={StaticResource bitmapConverter}}" Height="32" />
-                <TextBlock Text="{TemplateBinding Text}"/>
-              </StackPanel>
-            </Border>
-          </Button>
-          <ItemsPresenter Name="PART_ItemsPresenter"
-                          Items="{TemplateBinding Items}"
-                          ItemTemplate="{TemplateBinding ItemTemplate}"
-                          ItemsPanel="{TemplateBinding ItemsPanel}"
-                          MemberSelector="{TemplateBinding MemberSelector}" >
-          </ItemsPresenter>
-        </StackPanel>
+      <ControlTemplate TargetType="local:RibbonTabGroup">
+        <DockPanel>
+          <Border DockPanel.Dock="Right" Background="#b5b5b5" Width="1" Margin="5 0 5 0"/>
+          <ContentControl Content="{TemplateBinding Content}" DockPanel.Dock="Top" />
+          <Grid RowDefinitions="*" ColumnDefinitions="*,18" DockPanel.Dock="Bottom" Margin="0 0 -5 0">
+            <TextBlock Text="{TemplateBinding Text}" Grid.Column="0" HorizontalAlignment="Center"/>
+            <Button Name="rButton" Height="15" Width="15" Grid.Column="1">
+              <Border>
+                <Image Source="/Assets/RibbonIcons/settings.png" Height="10" Width="10" />
+              </Border>
+            </Button>
+          </Grid>
+        </DockPanel>
       </ControlTemplate>
     </Setter>
   </Style>
@@ -47,9 +42,5 @@
   </Style>
   <Style Selector="Button#rButton:disabled">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
-  </Style>
-
-  <Style Selector="Button#rButton > Border">
-    <Setter Property="Padding" Value="3"/>
   </Style>
 </Styles>

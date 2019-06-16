@@ -18,7 +18,22 @@
       <v:RibbonControl>
         <v:RibbonTab Header="RibbonTab 1">
           <StackPanel Orientation="Horizontal">
-            <v:RibbonButton Text="Test3" IconPath="settings.png" />
+            <v:RibbonTabGroup Text="Un premier groupe">
+              <StackPanel Orientation="Horizontal">
+                <v:RibbonButton Text="Test3" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+              </StackPanel>
+            </v:RibbonTabGroup>
+            <v:RibbonTabGroup Text="Un premier groupe">
+              <StackPanel Orientation="Horizontal">
+                <v:RibbonButton Text="Test3" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+              </StackPanel>
+            </v:RibbonTabGroup>
           </StackPanel>
         </v:RibbonTab>
         <v:RibbonTab Header="RibbonTab 2">qsdfqsdf</v:RibbonTab>

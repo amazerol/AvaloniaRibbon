@@ -14,5 +14,6 @@
         <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonTab.xaml"/>
         <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonWindow.xaml"/>
         <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonButton.xaml"/>
+        <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonTabGroup.xaml"/>
     </Application.Styles>
 </Application>
