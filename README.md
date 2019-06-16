@@ -5,3 +5,9 @@ The purpose of this Avalonia component is to achieve something like this (the co
 ![2019-06-15_17-19-44](https://user-images.githubusercontent.com/16206389/59553194-e0705980-8f91-11e9-9052-85dc73d7b51c.gif)
 
 By downloading this project, you should be able to obtain the same result (don't use Avalonia 0.8.0 but the nightly build).
+
+# Update (16/06/2019)
+- Improvement of the look&feel of the ribbon
+The remaining things to do :
+- Take care of the disapearance of icons in case of window resizing
+- Handle easily click actions
