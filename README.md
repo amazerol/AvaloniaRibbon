@@ -10,6 +10,36 @@ By downloading this project, you should be able to obtain the same result (don't
 # Update (16/06/2019)
 - Improvement of the look&feel of the ribbon
 - Update of the previous gif with new look&feel
+
 The remaining things to do :
 - Take care of the disapearance of icons in case of window resizing
 - Handle easily click actions
+
+Here is an example of syntax :
+```xaml
+    <v:RibbonWindow>
+      <v:RibbonControl>
+        <v:RibbonTab Header="RibbonTab 1">
+          <StackPanel Orientation="Horizontal">
+            <v:RibbonTabGroup Text="Un premier groupe">
+              <StackPanel Orientation="Horizontal">
+                <v:RibbonButton Text="Test3" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+              </StackPanel>
+            </v:RibbonTabGroup>
+            <v:RibbonTabGroup Text="Un premier groupe">
+              <StackPanel Orientation="Horizontal">
+                <v:RibbonButton Text="Test3" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+                <v:RibbonButton Text="Test4" IconPath="settings.png" />
+              </StackPanel>
+            </v:RibbonTabGroup>
+          </StackPanel>
+        </v:RibbonTab>
+        <v:RibbonTab Header="RibbonTab 2">qsdfqsdf</v:RibbonTab>
+      </v:RibbonControl>
+    </v:RibbonWindow>
+```
