@@ -43,3 +43,14 @@ Here is an example of syntax :
       </v:RibbonControl>
     </v:RibbonWindow>
 ```
+
+
+# Update (17/06/2019)
+- Control fully usable
+- NuGet done
+- Wiki written
+
+The remaining things to do :
+- implements more controls (especially TOGGLE button)
+- allow color stylesheets for a fully customizable control
+- take care of the resizing matter (I don't know how to do yet ...)
