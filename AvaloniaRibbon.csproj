@@ -4,8 +4,10 @@
     <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
     <Version>1.0.0-build170619-07</Version>
     <Authors>Alban MAZEROLLES</Authors>
-    <PackageId>Avalonia.Ribbon</PackageId>
+    <PackageId>RibbonControl</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/amazerol/AvaloniaRibbon</PackageProjectUrl>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\" />
