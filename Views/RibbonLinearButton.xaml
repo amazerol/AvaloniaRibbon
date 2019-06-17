@@ -1,0 +1,27 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:AvaloniaRibbon.Views;assembly=AvaloniaRibbon"
+        xmlns:conv="clr-namespace:AvaloniaRibbon.Converters;assembly=AvaloniaRibbon">
+  <Design.PreviewWith>
+    <local:RibbonLinearButton Text="Du texte pour un bouton">
+    </local:RibbonLinearButton>
+  </Design.PreviewWith>
+
+  <Style Selector="local|RibbonLinearButton">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="local:RibbonLinearButton">
+        <StackPanel Orientation="Horizontal">
+          <Button Name="rButton" Command="{TemplateBinding Command}" Padding="0">
+            <Border Margin="0">
+              <StackPanel Orientation="Horizontal">
+                <Image Source="{TemplateBinding IconPath}" Height="12" Width="18" Margin="0" />
+                <TextBlock Text="{TemplateBinding Text}" />
+              </StackPanel>
+            </Border>
+          </Button>
+        </StackPanel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+</Styles>

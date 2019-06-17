@@ -1,28 +1,29 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:AvaloniaRibbon.Views;assembly=AvaloniaRibbon"
-        xmlns:conv="clr-namespace:AvaloniaRibbon.Converters;assembly=AvaloniaRibbon">
+        xmlns:local="clr-namespace:AvaloniaRibbon.Views;assembly=AvaloniaRibbon">
   <Design.PreviewWith>
 
   </Design.PreviewWith>
 
   <Style Selector="local|RibbonTabGroup">
-    <Style.Resources>
-      <conv:BitmapValueConverter x:Key="bitmapConverter"/>
-    </Style.Resources>
     <Setter Property="Template">
       <ControlTemplate TargetType="local:RibbonTabGroup">
         <DockPanel>
           <Border DockPanel.Dock="Right" Background="#b5b5b5" Width="1" Margin="5 0 5 0"/>
-          <ContentControl Content="{TemplateBinding Content}" DockPanel.Dock="Top" />
-          <Grid RowDefinitions="*" ColumnDefinitions="*,18" DockPanel.Dock="Bottom" Margin="0 0 -5 0">
-            <TextBlock Text="{TemplateBinding Text}" Grid.Column="0" HorizontalAlignment="Center"/>
-            <Button Name="rButton" Height="15" Width="15" Grid.Column="1">
-              <Border>
-                <Image Source="/Assets/RibbonIcons/settings.png" Height="10" Width="10" />
-              </Border>
-            </Button>
-          </Grid>
+          <Grid RowDefinitions="72,16" ColumnDefinitions="*" DockPanel.Dock="Left">
+      
+            <ContentControl Content="{TemplateBinding Content}" Grid.Row="0"/>
+            
+            <Grid RowDefinitions="*" ColumnDefinitions="*,18" Margin="0 -1 -5 0" Grid.Row="1">
+              <TextBlock Text="{TemplateBinding Text}" Grid.Column="0" HorizontalAlignment="Center" FontSize="11" FontWeight="DemiBold"/>
+              <Button Name="rButton" Height="15" Width="15" Grid.Column="1" Command="{TemplateBinding Command}">
+                <Border>
+                  <Image Source="/Assets/RibbonIcons/corner.png" Height="10" Width="10" />
+                </Border>
+              </Button>
+            </Grid>            
+            
+          </Grid>          
         </DockPanel>
       </ControlTemplate>
     </Setter>

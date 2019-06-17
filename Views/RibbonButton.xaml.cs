@@ -20,7 +20,7 @@ using Avalonia.Platform;
 
 namespace AvaloniaRibbon.Views
 {
-    public class RibbonButton : ItemsControl
+    public class RibbonButton : Button
     {
 
         public static readonly StyledProperty<string> TextProperty =
@@ -33,14 +33,15 @@ namespace AvaloniaRibbon.Views
         }
 
 
-        public static readonly StyledProperty<string> IconPathProperty =
-            AvaloniaProperty.Register<RibbonButton, string>(nameof(IconPath));
+        public static readonly StyledProperty<IBitmap> IconPathProperty =
+            AvaloniaProperty.Register<RibbonButton, IBitmap>(nameof(IconPath));
 
-        public string IconPath
+        public IBitmap IconPath
         {
             get { return GetValue(IconPathProperty); }
-            set { SetValue(IconPathProperty, "/Assets/RibbonIcons/settings.png"); }
+            set { SetValue(IconPathProperty, value); }
         }
+
     }
 
 }

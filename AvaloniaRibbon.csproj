@@ -2,6 +2,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
+    <Version>1.0.0-build170619-07</Version>
+    <Authors>Alban MAZEROLLES</Authors>
+    <PackageId>Avalonia.Ribbon</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -16,19 +20,26 @@
     <AvaloniaResource Include="Assets\RibbonIcons\*" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Assets\settings.png" />
+    <None Remove="Assets\RibbonIcons\chevron.png" />
+    <None Remove="Assets\RibbonIcons\corner.png" />
+    <None Remove="Assets\RibbonIcons\settings.png" />
     <None Remove="Views\RibbonButton.xaml" />
     <None Remove="Views\RibbonControl.xaml" />
+    <None Remove="Views\RibbonLinearButton.xaml" />
     <None Remove="Views\RibbonTab.xaml" />
     <None Remove="Views\RibbonTabGroup.xaml" />
     <None Remove="Views\RibbonWindow.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\RibbonIcons\settings.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
+    <EmbeddedResource Include="Assets\RibbonIcons\chevron.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\RibbonIcons\corner.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\RibbonIcons\settings.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\RibbonButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
@@ -51,9 +62,9 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.1-cibuild0002927-beta" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Converters\BitmapValueConverter.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="Views\RibbonLinearButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Update="Assets\Window\already_maximized.png">
@@ -68,8 +79,8 @@
     <None Update="Assets\Window\minimize.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="Assets\RibbonIcons\settings.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <None Update="AvaloniaRibbonNuGetTest\App.xaml">
+      <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>
 </Project>

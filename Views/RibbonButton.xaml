@@ -8,26 +8,17 @@
   </Design.PreviewWith>
   
   <Style Selector="local|RibbonButton">
-    <Style.Resources>
-      <conv:BitmapValueConverter x:Key="bitmapConverter"/>
-    </Style.Resources>
     <Setter Property="Template">
       <ControlTemplate TargetType="local:RibbonButton"> 
         <StackPanel Orientation="Vertical">
-          <Button Name="rButton">
+          <Button Name="rButton" Command="{TemplateBinding Command}">
             <Border>
               <StackPanel>
-                <Image Source="{TemplateBinding IconPath, Converter={StaticResource bitmapConverter}}" Height="32" />
-                <TextBlock Text="{TemplateBinding Text}"/>
+                <Image Source="{TemplateBinding IconPath}" Height="28" Width="28" Margin="0 0 0 5"/>
+                <TextBlock Text="{TemplateBinding Text}" />
               </StackPanel>
             </Border>
           </Button>
-          <ItemsPresenter Name="PART_ItemsPresenter"
-                          Items="{TemplateBinding Items}"
-                          ItemTemplate="{TemplateBinding ItemTemplate}"
-                          ItemsPanel="{TemplateBinding ItemsPanel}"
-                          MemberSelector="{TemplateBinding MemberSelector}" >
-          </ItemsPresenter>
         </StackPanel>
       </ControlTemplate>
     </Setter>
