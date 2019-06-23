@@ -6,6 +6,8 @@
   <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonTab.xaml"/>
   <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonWindow.xaml"/>
   <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonButton.xaml"/>
+  <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonSmallButton.xaml"/>
+  <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonSmallButtonHGroup.xaml"/>
   <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonComboButton.xaml"/>
   <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonTabGroup.xaml"/>
   <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonLinearButton.xaml"/>

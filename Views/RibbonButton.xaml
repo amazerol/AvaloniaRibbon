@@ -14,7 +14,7 @@
           <Button Name="rButton" Command="{TemplateBinding Command}">
             <Border>
               <StackPanel>
-                <Image Source="{TemplateBinding IconPath}" Height="28" Width="28" Margin="0 0 0 5"/>
+                <Image Source="{TemplateBinding IconPath}"/>
                 <TextBlock Text="{TemplateBinding Text}" />
               </StackPanel>
             </Border>
@@ -27,6 +27,11 @@
   <Style Selector="Button#rButton">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
+  </Style>
+  <Style Selector="Button#rButton Image">
+    <Setter Property="Height" Value="28" />
+    <Setter Property="Width" Value="28" />
+    <Setter Property="Margin" Value="0 0 0 5" />
   </Style>
   <Style Selector="Button#rButton:pointerover /template/ ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}"/>

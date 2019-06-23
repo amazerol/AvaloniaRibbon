@@ -38,6 +38,13 @@
                   <ComboBoxItem>ksdlfml</ComboBoxItem>
                   <ComboBoxItem>ksdnvbl</ComboBoxItem>  
                 </v:RibbonComboButton>
+                <StackPanel>
+                  <v:RibbonSmallButtonHGroup>
+                    <v:RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" ToolTip.Tip="A small tooltip" />
+                    <v:RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png"  />
+                    <v:RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png"  />
+                  </v:RibbonSmallButtonHGroup>  
+                </StackPanel>
               </StackPanel>
             </v:RibbonTabGroup>
           </StackPanel>
