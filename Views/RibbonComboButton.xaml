@@ -9,9 +9,9 @@
         <Border Name="border"
                 Background="{TemplateBinding Background}"
                 BorderBrush="{TemplateBinding BorderBrush}"
-                BorderThickness="{TemplateBinding BorderThickness}">
+                BorderThickness="1">
           <Grid RowDefinitions="*,Auto">
-            <local:RibbonButton IconPath="{TemplateBinding IconPath}" />
+            <local:RibbonButton IconPath="{TemplateBinding IconPath}" Margin="0"/>
             <ToggleButton Name="toggle"
                           BorderThickness="0"
                           ClickMode="Press"
@@ -26,7 +26,8 @@
                       Stretch="Uniform"
                       HorizontalAlignment="Center"
                       VerticalAlignment="Center"
-                      Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z"/>
+                      Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z"
+                      Margin="0 2 0 1"/>
               </StackPanel>
             </ToggleButton>
 
@@ -46,8 +47,7 @@
                                     ItemsPanel="{TemplateBinding ItemsPanel}"
                                     ItemTemplate="{TemplateBinding ItemTemplate}"
                                     MemberSelector="{TemplateBinding MemberSelector}"
-                                    VirtualizationMode="{TemplateBinding VirtualizationMode}"
-                                  />
+                                    VirtualizationMode="{TemplateBinding VirtualizationMode}" />
                   </ScrollViewer>
                 </AdornerDecorator>
               </Border>
@@ -58,17 +58,29 @@
     </Setter>
   </Style>
 
+
+  <Style Selector="local|RibbonComboButton:pointerover /template/ Border#border">
+    <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}"/>
+  </Style>
+  <Style Selector="local|RibbonComboButton local|RibbonButton /template/ Button#rButton">
+    <Setter Property="BorderThickness" Value="0"/>
+  </Style>
+  <Style Selector="local|RibbonComboButton local|RibbonButton /template/ Image">
+    <Setter Property="Margin" Value="0"/>
+  </Style>
+  
+
   <Style Selector="local|RibbonComboButton ToggleButton#toggle">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
   </Style>
   <Style Selector="local|RibbonComboButton ToggleButton#toggle:pointerover /template/ ContentPresenter">
-    <Setter Property="Background" Value="#c6c6c6"/>
-    <Setter Property="BorderBrush" Value="#b5b5b5"/>
+    <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}"/>
   </Style>
   <Style Selector="local|RibbonComboButton ToggleButton#toggle:checked /template/ ContentPresenter">
-    <Setter Property="Background" Value="#a4a4a4"/>
-    <Setter Property="BorderBrush" Value="#939393"/>
+    <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}"/>
   </Style>
 
 

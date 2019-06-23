@@ -8,8 +8,8 @@
   </Design.PreviewWith>
 
   <Style Selector="local|RibbonControl">
-    <Setter Property="RemainingTabControlHeaderColor" Value="#2B579A"/>
-    <Setter Property="Background" Value="#f0f0f0"/>
+    <Setter Property="RemainingTabControlHeaderColor" Value="{DynamicResource TitleBarColorBrush}"/>
+    <Setter Property="Background" Value="{DynamicResource ActiveRibbonBackgroundColorBrush}"/>
     <Setter Property="Template">
       <ControlTemplate>
             <StackPanel>

@@ -9,7 +9,7 @@
     <Setter Property="Template">
       <ControlTemplate TargetType="local:RibbonTabGroup">
         <DockPanel>
-          <Border DockPanel.Dock="Right" Background="#b5b5b5" Width="1" Margin="5 0 5 0"/>
+          <Border DockPanel.Dock="Right" Background="{DynamicResource HoveredBorderBackgroundColorBrush}" Width="1" Margin="5 0 5 0"/>
           <Grid RowDefinitions="72,16" ColumnDefinitions="*" DockPanel.Dock="Left">
       
             <ContentControl Content="{TemplateBinding Content}" Grid.Row="0"/>
@@ -34,12 +34,12 @@
     <Setter Property="BorderBrush" Value="Transparent"/>
   </Style>
   <Style Selector="Button#rButton:pointerover /template/ ContentPresenter">
-    <Setter Property="Background" Value="#c6c6c6"/>
-    <Setter Property="BorderBrush" Value="#b5b5b5"/>
+    <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}"/>
   </Style>
   <Style Selector="Button#rButton:pressed  /template/ ContentPresenter">
-    <Setter Property="Background" Value="#a4a4a4"/>
-    <Setter Property="BorderBrush" Value="#939393"/>
+    <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}"/>
   </Style>
   <Style Selector="Button#rButton:disabled">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>

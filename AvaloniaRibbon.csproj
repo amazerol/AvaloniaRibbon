@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
-    <Version>1.0.0-build230619-10</Version>
+    <Version>1.0.0-build230619-11</Version>
     <Authors>Alban MAZEROLLES</Authors>
     <PackageId>RibbonControl</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -27,6 +27,7 @@
     <None Remove="Assets\RibbonIcons\corner.png" />
     <None Remove="Assets\RibbonIcons\settings.png" />
     <None Remove="Config\RibbonStyles.xaml" />
+    <None Remove="Config\RibbonThemeColor.xaml" />
     <None Remove="Views\RibbonButton.xaml" />
     <None Remove="Views\RibbonComboButton.xaml" />
     <None Remove="Views\RibbonControl.xaml" />
@@ -78,6 +79,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\RibbonComboButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\RibbonThemeColor.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

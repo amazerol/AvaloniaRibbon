@@ -11,5 +11,6 @@
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
 
         <StyleInclude Source="avares://AvaloniaRibbon/Config/RibbonStyles.xaml"/>
+        <StyleInclude Source="avares://AvaloniaRibbon/Config/RibbonThemeColor.xaml"/>
     </Application.Styles>
 </Application>

@@ -3,8 +3,7 @@
         xmlns:local="clr-namespace:AvaloniaRibbon.Views;assembly=AvaloniaRibbon">
   
   <Style Selector="local|RibbonWindow">
-    <Setter Property="TitleBarColor" Value="#2B579A"/>
-    <Setter Property="Background" Value="#f0f0f0"/>
+    <Setter Property="TitleBarColor" Value="{DynamicResource TitleBarColorBrush}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Grid RowDefinitions="4,64,86,*,8" ColumnDefinitions="8,*,8" Name="OuterGrid">
@@ -38,18 +37,18 @@
             </Grid>
             <ItemsPresenter Items="{TemplateBinding Items}" />
           </DockPanel>
-          <Border Name="TopLeft" Background="{TemplateBinding TitleBarColor}" BorderBrush="#2B579A" BorderThickness="1,1,0,0"/>
-          <Border Name="TopRight" Background="{TemplateBinding TitleBarColor}" Grid.Column="2" BorderBrush="#2B579A" BorderThickness="0,1,1,0"/>
-          <Border Name="BottomLeft" Background="Transparent" Grid.Row="4" BorderBrush="#2B579A" BorderThickness="1,0,0,1"/>
-          <Border Name="BottomRight" Background="Transparent"  Grid.Row="4" Grid.Column="2" BorderBrush="#2B579A" BorderThickness="0,0,1,1"/>
+          <Border Name="TopLeft" Background="{TemplateBinding TitleBarColor}" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="1,1,0,0"/>
+          <Border Name="TopRight" Background="{TemplateBinding TitleBarColor}" Grid.Column="2" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="0,1,1,0"/>
+          <Border Name="BottomLeft" Background="Transparent" Grid.Row="4" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="1,0,0,1"/>
+          <Border Name="BottomRight" Background="Transparent"  Grid.Row="4" Grid.Column="2" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="0,0,1,1"/>
           <Border Name="Top" Background="{TemplateBinding TitleBarColor}" Grid.Column="1" />
-          <Border Name="Right_top" Background="Transparent" Grid.Row="1"  Grid.Column="2" BorderBrush="#2B579A" BorderThickness="0,0,1,0"/>
-          <Border Name="Right_mid" Background="Transparent" Grid.Row="2"  Grid.Column="2" BorderBrush="#2B579A" BorderThickness="0,0,1,0"/>
-          <Border Name="Right_bottom" Background="Transparent" Grid.Row="3"  Grid.Column="2" BorderBrush="#2B579A" BorderThickness="0,0,1,0"/>
-          <Border Name="Bottom" Background="Transparent" Grid.Row="4" Grid.Column="1" BorderBrush="#2B579A" BorderThickness="0,0,0,1"/>
-          <Border Name="Left_top" Background="Transparent" Grid.Row="1" BorderBrush="#2B579A" BorderThickness="1,0,0,0"/>
-          <Border Name="Left_mid" Background="Transparent" Grid.Row="2" BorderBrush="#2B579A" BorderThickness="1,0,0,0"/>
-          <Border Name="Left_bottom" Background="Transparent" Grid.Row="3" BorderBrush="#2B579A" BorderThickness="1,0,0,0"/>
+          <Border Name="Right_top" Background="Transparent" Grid.Row="1"  Grid.Column="2" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="0,0,1,0"/>
+          <Border Name="Right_mid" Background="Transparent" Grid.Row="2"  Grid.Column="2" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="0,0,1,0"/>
+          <Border Name="Right_bottom" Background="Transparent" Grid.Row="3"  Grid.Column="2" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="0,0,1,0"/>
+          <Border Name="Bottom" Background="Transparent" Grid.Row="4" Grid.Column="1" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="0,0,0,1"/>
+          <Border Name="Left_top" Background="Transparent" Grid.Row="1" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="1,0,0,0"/>
+          <Border Name="Left_mid" Background="Transparent" Grid.Row="2" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="1,0,0,0"/>
+          <Border Name="Left_bottom" Background="Transparent" Grid.Row="3" BorderBrush="{DynamicResource TitleBarColorBrush}" BorderThickness="1,0,0,0"/>
         </Grid>
       </ControlTemplate>
     </Setter>

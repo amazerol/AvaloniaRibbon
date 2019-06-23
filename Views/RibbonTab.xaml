@@ -9,8 +9,8 @@
     <Setter Property="FontSize" Value="12"/>
     <Setter Property="Height" Value="34"/>
     <Setter Property="VerticalContentAlignment" Value="Center"/>
-    <Setter Property="Background" Value="#2B579A"/>
-    <Setter Property="Foreground" Value="#F0F0F0"/>
+    <Setter Property="Background" Value="{DynamicResource TitleBarColorBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ActiveRibbonBackgroundColorBrush}"/>
     <Setter Property="Margin" Value="0 0 0 0"/>
     <Setter Property="Padding" Value="10 0"/>
     <Setter Property="Template">
@@ -32,7 +32,7 @@
   </Style>
 
   <Style Selector="local|RibbonTab:selected">
-    <Setter Property="Foreground" Value="#2B579A"/>
+    <Setter Property="Foreground" Value="{DynamicResource TitleBarColorBrush}"/>
     <Setter Property="Margin" Value="0 0 0 0"/>
     <Setter Property="Padding" Value="10 0"/>
     <Setter Property="Background" Value="{Binding $parent.Background}"/>
