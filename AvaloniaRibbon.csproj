@@ -2,10 +2,10 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
-    <Version>1.0.0-build230619-11</Version>
+    <Version>1.0.0-build230619-12</Version>
     <Authors>Alban MAZEROLLES</Authors>
     <PackageId>RibbonControl</PackageId>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/amazerol/AvaloniaRibbon</PackageProjectUrl>
     <Description></Description>
@@ -31,6 +31,8 @@
     <None Remove="Views\RibbonComboButton.xaml" />
     <None Remove="Views\RibbonControl.xaml" />
     <None Remove="Views\RibbonLinearButton.xaml" />
+    <None Remove="Views\RibbonSmallButton.xaml" />
+    <None Remove="Views\RibbonSmallButtonHGroup.xaml" />
     <None Remove="Views\RibbonTab.xaml" />
     <None Remove="Views\RibbonTabGroup.xaml" />
     <None Remove="Views\RibbonWindow.xaml" />
@@ -78,6 +80,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Config\RibbonThemeColor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RibbonSmallButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RibbonSmallButtonHGroup.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

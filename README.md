@@ -11,6 +11,8 @@ By downloading this project, you should be able to obtain the same result (don't
 - In `App.xaml`, only one line of `<StyleInclude>` required -> update of the wiki
 - Add of the special button (top part : a button, lower part: a combobox)
 - The entire control is themable
+- Smallbutton added and its HorizontalGroup
+- tootips added
 
 # Update (17/06/2019)
 - Control fully usable
