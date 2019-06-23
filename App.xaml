@@ -10,11 +10,6 @@
         <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
         <StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml"/>
 
-        <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonControl.xaml"/>
-        <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonTab.xaml"/>
-        <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonWindow.xaml"/>
-        <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonButton.xaml"/>
-        <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonTabGroup.xaml"/>
-        <StyleInclude Source="avares://AvaloniaRibbon/Views/RibbonLinearButton.xaml"/>
+        <StyleInclude Source="avares://AvaloniaRibbon/Config/RibbonStyles.xaml"/>
     </Application.Styles>
 </Application>

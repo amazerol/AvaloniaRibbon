@@ -1,13 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp3.0;net461</TargetFrameworks>
-    <Version>1.0.0-build170619-07</Version>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <Version>1.0.0-build230619-10</Version>
     <Authors>Alban MAZEROLLES</Authors>
     <PackageId>RibbonControl</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/amazerol/AvaloniaRibbon</PackageProjectUrl>
+    <Description></Description>
   </PropertyGroup>
   <ItemGroup>
     <Folder Include="Models\" />
@@ -25,7 +26,9 @@
     <None Remove="Assets\RibbonIcons\chevron.png" />
     <None Remove="Assets\RibbonIcons\corner.png" />
     <None Remove="Assets\RibbonIcons\settings.png" />
+    <None Remove="Config\RibbonStyles.xaml" />
     <None Remove="Views\RibbonButton.xaml" />
+    <None Remove="Views\RibbonComboButton.xaml" />
     <None Remove="Views\RibbonControl.xaml" />
     <None Remove="Views\RibbonLinearButton.xaml" />
     <None Remove="Views\RibbonTab.xaml" />
@@ -65,6 +68,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\RibbonLinearButton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Config\RibbonStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\RibbonComboButton.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>

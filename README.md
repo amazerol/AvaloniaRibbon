@@ -7,6 +7,21 @@ The purpose of this Avalonia component is to achieve something like this (the co
 
 By downloading this project, you should be able to obtain the same result (don't use Avalonia 0.8.0 but the nightly build).
 
+# Update(23/06/2019)
+- In `App.xaml`, only one line of `<StyleInclude>` required -> update of the wiki
+- Add of the special button (top part : a button, lower part: a combobox)
+
+# Update (17/06/2019)
+- Control fully usable
+- NuGet done
+- Wiki written
+
+The remaining things to do :
+- implements more controls (especially TOGGLE button)
+- allow color stylesheets for a fully customizable control
+- take care of the resizing matter (I don't know how to do yet ...)
+
+
 # Update (16/06/2019)
 - Improvement of the look&feel of the ribbon
 - Update of the previous gif with new look&feel
@@ -45,12 +60,4 @@ Here is an example of syntax :
 ```
 
 
-# Update (17/06/2019)
-- Control fully usable
-- NuGet done
-- Wiki written
 
-The remaining things to do :
-- implements more controls (especially TOGGLE button)
-- allow color stylesheets for a fully customizable control
-- take care of the resizing matter (I don't know how to do yet ...)
