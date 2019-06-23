@@ -26,7 +26,6 @@
     <None Remove="Assets\RibbonIcons\chevron.png" />
     <None Remove="Assets\RibbonIcons\corner.png" />
     <None Remove="Assets\RibbonIcons\settings.png" />
-    <None Remove="Config\RibbonStyles.xaml" />
     <None Remove="Config\RibbonThemeColor.xaml" />
     <None Remove="Views\RibbonButton.xaml" />
     <None Remove="Views\RibbonComboButton.xaml" />
@@ -69,11 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Views\RibbonLinearButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Config\RibbonStyles.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
   </ItemGroup>
