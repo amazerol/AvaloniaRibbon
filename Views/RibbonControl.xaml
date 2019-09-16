@@ -38,5 +38,6 @@
   <Style Selector="local|RibbonControl WrapPanel">
     <Setter Property="Background" Value="{Binding $parent[local:RibbonControl].RemainingTabControlHeaderColor}"/>
   </Style>
-  
+
+
 </Styles>

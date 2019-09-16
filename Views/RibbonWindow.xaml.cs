@@ -12,7 +12,7 @@ namespace AvaloniaRibbon.Views
     public class RibbonWindow : ItemsControl
     {
         public static readonly StyledProperty<IBrush> TitleBarColorProperty =
-            AvaloniaProperty.Register<Border, IBrush>(nameof(TitleBarColor));
+            AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarColor));
 
         public IBrush TitleBarColor
         {

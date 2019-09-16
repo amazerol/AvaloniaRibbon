@@ -12,7 +12,7 @@ namespace AvaloniaRibbon.Views
     {
 
         public static readonly StyledProperty<IBrush> RemainingTabControlHeaderColorProperty =
-            AvaloniaProperty.Register<Border, IBrush>(nameof(RemainingTabControlHeaderColor));
+            AvaloniaProperty.Register<RibbonControl, IBrush>(nameof(RemainingTabControlHeaderColor));
 
         public IBrush RemainingTabControlHeaderColor
         {

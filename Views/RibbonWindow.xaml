@@ -25,13 +25,13 @@
                   </Style>
                 </StackPanel.Styles>
                 <Button Name="MinimizeButton">
-                  <Image Source="/Assets/Window/minimize.png" Height="22"/>
+                  <Image Source="avares://AvaloniaRibbon/Assets/Window/minimize.png" Height="22"/>
                 </Button>
                 <Button Name="MaximizeButton">
-                  <Image Source="/Assets/Window/maximize.png" Height="22" Name="ImageMaximizeButton"/>
+                  <Image Source="avares://AvaloniaRibbon/Assets/Window/maximize.png" Height="22" Name="ImageMaximizeButton"/>
                 </Button>
                 <Button Name="CloseButton">
-                  <Image Source="/Assets/Window/close.png" Height="25"/>
+                  <Image Source="avares://AvaloniaRibbon/Assets/Window/close.png" Height="25"/>
                 </Button>
               </StackPanel>
             </Grid>

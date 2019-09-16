@@ -8,7 +8,7 @@ namespace AvaloniaRibbon.Views
     public class RibbonComboButton : ComboBox
     {
         public static readonly StyledProperty<string> TextProperty =
-            AvaloniaProperty.Register<RibbonButton, string>(nameof(Text));
+            AvaloniaProperty.Register<RibbonComboButton, string>(nameof(Text));
 
         public string Text
         {
@@ -17,7 +17,7 @@ namespace AvaloniaRibbon.Views
         }
 
         public static readonly StyledProperty<IBitmap> IconPathProperty =
-            AvaloniaProperty.Register<RibbonButton, IBitmap>(nameof(IconPath));
+            AvaloniaProperty.Register<RibbonComboButton, IBitmap>(nameof(IconPath));
 
         public IBitmap IconPath
         {
