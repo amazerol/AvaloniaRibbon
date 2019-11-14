@@ -5,7 +5,14 @@ The purpose of this Avalonia component is to achieve something like Microsoft Ri
 
 The original piece of work is from [Alban Mazerolles](https://github.com/amazerol) which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
 
-Here is an example of the syntax :
+![Preview](https://user-images.githubusercontent.com/16206389/59566444-a752ea80-9060-11e9-828b-593d347f797d.gif)
+
+Include ribbon styles to App.xaml as shown below.
+```xaml
+    <StyleInclude Source="avares://Avalonia.Controls.Ribbon/Styles/RibbonStyles.xaml" />
+```
+
+Use the below mentioned sample as an example to use the ribbon control. 
 ```xaml
     <RibbonWindow>
         <RibbonControl>
