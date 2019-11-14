@@ -1,20 +1,13 @@
-﻿<Styles
-    x:Class="AvaloniaRibbon.Config.RibbonTemplates"
-    xmlns="https://github.com/avaloniaui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StyleInclude Source="/Styles/RibbonThemeColor.xaml" />
 
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonTemplates.xaml" />
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonThemeColor.xaml" />
-
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonControl.xaml" />
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonTab.xaml" />
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonWindow.xaml" />
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonButton.xaml" />
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonSmallButton.xaml" />
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonSmallButtonHGroup.xaml" />
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonComboButton.xaml" />
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonTabGroup.xaml" />
-    <StyleInclude Source="avares://Avalonia.Ribbon/Styles/RibbonLinearButton.xaml" />
+    <StyleInclude Source="/Styles/RibbonControlStyle.xaml" />
+    <StyleInclude Source="/Styles/RibbonTabStyle.xaml" />
+    <StyleInclude Source="/Styles/RibbonWindowStyle.xaml" />
+    <StyleInclude Source="/Styles/RibbonButtonStyle.xaml" />
+    <StyleInclude Source="/Styles/RibbonSmallButtonStyle.xaml" />
+    <StyleInclude Source="/Styles/RibbonSmallButtonHGroupStyle.xaml" />
+    <StyleInclude Source="/Styles/RibbonComboButtonStyle.xaml" />
+    <StyleInclude Source="/Styles/RibbonTabGroupStyle.xaml" />
+    <StyleInclude Source="/Styles/RibbonLinearButtonStyle.xaml" />
 </Styles>
-
-

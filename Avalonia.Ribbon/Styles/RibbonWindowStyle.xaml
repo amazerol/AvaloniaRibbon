@@ -1,7 +1,7 @@
 ﻿<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Ribbon">
+    xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
 
     <Style Selector="local|RibbonWindow">
         <Setter Property="TitleBarColor" Value="{DynamicResource TitleBarColorBrush}" />
@@ -46,16 +46,16 @@
                                     </Style>
                                 </StackPanel.Styles>
                                 <Button Name="MinimizeButton">
-                                    <Image Height="22" Source="avares://Avalonia.Ribbon/Assets/minimize.png" />
+                                    <Image Height="22" Source="avares://Avalonia.Controls.Ribbon/Assets/minimize.png" />
                                 </Button>
                                 <Button Name="MaximizeButton">
                                     <Image
                                         Name="ImageMaximizeButton"
                                         Height="22"
-                                        Source="avares://Avalonia.Ribbon/Assets/maximize.png" />
+                                        Source="avares://Avalonia.Controls.Ribbon/Assets/maximize.png" />
                                 </Button>
                                 <Button Name="CloseButton">
-                                    <Image Height="25" Source="avares://Avalonia.Ribbon/Assets/close.png" />
+                                    <Image Height="25" Source="avares://Avalonia.Controls.Ribbon/Assets/close.png" />
                                 </Button>
                             </StackPanel>
                         </Grid>

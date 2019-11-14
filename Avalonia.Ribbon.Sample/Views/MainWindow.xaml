@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:v="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Ribbon"
+    xmlns:v="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon"
     xmlns:vm="clr-namespace:Avalonia.Ribbon.Sample.ViewModels;assembly=Avalonia.Ribbon.Sample"
     Title="Avalonia Ribbon"
     d:DesignHeight="450"

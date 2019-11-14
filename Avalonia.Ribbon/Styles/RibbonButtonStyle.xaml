@@ -1,7 +1,7 @@
 ﻿<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Ribbon">
+    xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
     <Design.PreviewWith>
         <local:RibbonButton IconPath="/Assets/settings.png" Text="Du texte pour un bouton" />
     </Design.PreviewWith>
