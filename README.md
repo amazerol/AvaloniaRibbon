@@ -1,11 +1,11 @@
 # Avalonia Ribbon
 Ribbon Control for Avalonia
 
-The purpose of this Avalonia component is to achieve something like this (the component can already be used but is definitely not considered as completed) :
+The purpose of this Avalonia component is to achieve something like Microsoft Ribbon UI found in Office and all around Windows operating system. The component can already be used but is definitely not considered as complete. I had to implement ribbon interface for my project **[Jaya - Cross Plat](https://github.com/waliarubal/Jaya)** so had to tailor things accordingly. 
 
-![2019-06-16_18-00-19](https://user-images.githubusercontent.com/16206389/59566444-a752ea80-9060-11e9-828b-593d347f797d.gif)
+The original piece of work is from [Alban Mazerolles](https://github.com/amazerol) which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
 
-Here is an example of syntax :
+Here is an example of the syntax :
 ```xaml
     <v:RibbonWindow>
       <v:RibbonControl>
