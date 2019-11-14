@@ -1,140 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
     <Version>1.0.2</Version>
-    <Authors>Alban MAZEROLLES</Authors>
-    <PackageId>RibbonControl</PackageId>
+    <Authors>Alban Mazerolles,Rubal Walia</Authors>
+    <PackageId>AvaloniaRibbon</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/amazerol/AvaloniaRibbon</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/waliarubal/AvaloniaRibbon</PackageProjectUrl>
     <Description></Description>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <AvaloniaResource Include="**\*.xaml">
       <SubType>Designer</SubType>
     </AvaloniaResource>
-    <AvaloniaResource Include="Assets\*" />
-    <AvaloniaResource Include="Assets\Window\*" />
-    <AvaloniaResource Include="Assets\RibbonIcons\*" />
+    <Compile Update="**\*.paml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.paml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Assets\RibbonIcons\chevron.png" />
-    <None Remove="Assets\RibbonIcons\corner.png" />
-    <None Remove="Assets\RibbonIcons\settings.png" />
-    <None Remove="Config\RibbonThemeColor.xaml" />
-    <None Remove="Views\RibbonButton.xaml" />
-    <None Remove="Views\RibbonComboButton.xaml" />
-    <None Remove="Views\RibbonControl.xaml" />
-    <None Remove="Views\RibbonLinearButton.xaml" />
-    <None Remove="Views\RibbonSmallButton.xaml" />
-    <None Remove="Views\RibbonSmallButtonHGroup.xaml" />
-    <None Remove="Views\RibbonTab.xaml" />
-    <None Remove="Views\RibbonTabGroup.xaml" />
-    <None Remove="Views\RibbonWindow.xaml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Assets\RibbonIcons\chevron.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\RibbonIcons\corner.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\RibbonIcons\settings.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\RibbonButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\RibbonControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\RibbonTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\RibbonWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-      <EmbeddedResource Include="Views\RibbonTabGroup.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.8.1" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.8.1" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\RibbonLinearButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\RibbonComboButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Config\RibbonThemeColor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\RibbonSmallButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Views\RibbonSmallButtonHGroup.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Assets\Window\already_maximized.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Window\close.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Window\maximize.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="Assets\Window\minimize.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="AvaloniaRibbonNuGetTest\App.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Config\RibbonThemeColor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\RibbonButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\RibbonComboButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\RibbonControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\RibbonLinearButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\RibbonSmallButton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\RibbonSmallButtonHGroup.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\RibbonTab.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\RibbonTabGroup.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
-    <None Update="Views\RibbonWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
+    <PackageReference Include="Avalonia" Version="0.8.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.8.3" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.8.3" />
   </ItemGroup>
 </Project>

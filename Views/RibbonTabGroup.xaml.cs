@@ -1,8 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Primitives;
-using Avalonia.Markup.Xaml;
-using System;
 using System.Windows.Input;
 
 namespace AvaloniaRibbon.Views
