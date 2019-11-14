@@ -1,8 +1,7 @@
-﻿using Avalonia;
-using Avalonia.Logging;
+﻿using Avalonia.Logging;
 using Avalonia.Logging.Serilog;
 
-namespace AvaloniaRibbon
+namespace Avalonia.Ribbon.Samples
 {
     class Program
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AvaloniaRibbon.ViewModels
+namespace Avalonia.Ribbon.Samples.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {

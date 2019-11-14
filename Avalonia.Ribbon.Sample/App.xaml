@@ -1,8 +1,8 @@
 ﻿<Application
-    x:Class="AvaloniaRibbon.App"
+    x:Class="Avalonia.Ribbon.Samples.App"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:AvaloniaRibbon">
+    xmlns:local="clr-namespace:Avalonia.Ribbon.Samples">
     <Application.DataTemplates>
         <local:ViewLocator />
     </Application.DataTemplates>

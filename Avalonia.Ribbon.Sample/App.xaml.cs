@@ -1,9 +1,8 @@
-﻿using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
+﻿using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using AvaloniaRibbon.Views;
+using Avalonia.Ribbon.Samples.Views;
 
-namespace AvaloniaRibbon
+namespace Avalonia.Ribbon.Samples
 {
     public class App : Application
     {

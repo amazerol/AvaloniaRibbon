@@ -1,10 +1,9 @@
 ﻿<Window
-    x:Class="AvaloniaRibbon.Views.MainWindow"
+    x:Class="Avalonia.Ribbon.Samples.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:v="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon"
     xmlns:vm="clr-namespace:Avalonia.Ribbon.Sample.ViewModels;assembly=Avalonia.Ribbon.Sample"
     Title="Avalonia Ribbon"
     d:DesignHeight="450"
@@ -17,46 +16,46 @@
         <vm:MainWindowViewModel />
     </Design.DataContext>
 
-    <v:RibbonWindow>
-        <v:RibbonControl>
-            <v:RibbonTab Header="RibbonTab 1">
+    <RibbonWindow>
+        <RibbonControl>
+            <RibbonTab Header="RibbonTab 1">
                 <StackPanel Orientation="Horizontal">
-                    <v:RibbonTabGroup Text="Un premier groupe">
+                    <RibbonTabGroup Text="Un premier groupe">
                         <StackPanel Orientation="Horizontal">
-                            <v:RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test3" />
-                            <v:RibbonButton IconPath="/Assets/RibbonIcons/corner.png" Text="Test4" />
-                            <v:RibbonButton IconPath="/Assets/RibbonIcons/chevron.png" Text="Test5" />
-                            <v:RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test6" />
+                            <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test3" />
+                            <RibbonButton IconPath="/Assets/RibbonIcons/corner.png" Text="Test4" />
+                            <RibbonButton IconPath="/Assets/RibbonIcons/chevron.png" Text="Test5" />
+                            <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test6" />
                         </StackPanel>
-                    </v:RibbonTabGroup>
-                    <v:RibbonTabGroup Command="{Binding OnClickCommand}" Text="Paragraphe">
+                    </RibbonTabGroup>
+                    <RibbonTabGroup Command="{Binding OnClickCommand}" Text="Paragraphe">
                         <StackPanel Orientation="Horizontal">
                             <StackPanel Orientation="Vertical">
                                 <!--  Maximum 3 buttons per vertical stackpanel  -->
-                                <v:RibbonLinearButton
+                                <RibbonLinearButton
                                     Command="{Binding OnClickCommand}"
                                     IconPath="/Assets/RibbonIcons/corner.png"
                                     Text="Reproduire la mise en forme" />
-                                <v:RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test8" />
-                                <v:RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test9" />
+                                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test8" />
+                                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test9" />
                             </StackPanel>
-                            <v:RibbonComboButton IconPath="/Assets/RibbonIcons/settings.png" Text="Coller">
+                            <RibbonComboButton IconPath="/Assets/RibbonIcons/settings.png" Text="Coller">
                                 <ComboBoxItem>ksdlfml</ComboBoxItem>
                                 <ComboBoxItem>ksdnvbl</ComboBoxItem>
-                            </v:RibbonComboButton>
+                            </RibbonComboButton>
                             <StackPanel>
-                                <v:RibbonSmallButtonHGroup>
-                                    <v:RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" ToolTip.Tip="A small tooltip" />
-                                    <v:RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
-                                    <v:RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
-                                </v:RibbonSmallButtonHGroup>
+                                <RibbonSmallButtonHGroup>
+                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" ToolTip.Tip="A small tooltip" />
+                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
+                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
+                                </RibbonSmallButtonHGroup>
                             </StackPanel>
                         </StackPanel>
-                    </v:RibbonTabGroup>
+                    </RibbonTabGroup>
                 </StackPanel>
-            </v:RibbonTab>
-            <v:RibbonTab Header="RibbonTab 2">qsdfqsdf</v:RibbonTab>
-        </v:RibbonControl>
-    </v:RibbonWindow>
+            </RibbonTab>
+            <RibbonTab Header="RibbonTab 2">qsdfqsdf</RibbonTab>
+        </RibbonControl>
+    </RibbonWindow>
 
 </Window>
