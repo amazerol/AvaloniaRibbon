@@ -7,31 +7,47 @@ The original piece of work is from [Alban Mazerolles](https://github.com/amazero
 
 Here is an example of the syntax :
 ```xaml
-    <v:RibbonWindow>
-      <v:RibbonControl>
-        <v:RibbonTab Header="RibbonTab 1">
-          <StackPanel Orientation="Horizontal">
-            <v:RibbonTabGroup Text="Un premier groupe">
-              <StackPanel Orientation="Horizontal">
-                <v:RibbonButton Text="Test3" IconPath="settings.png" />
-                <v:RibbonButton Text="Test4" IconPath="settings.png" />
-                <v:RibbonButton Text="Test4" IconPath="settings.png" />
-                <v:RibbonButton Text="Test4" IconPath="settings.png" />
-              </StackPanel>
-            </v:RibbonTabGroup>
-            <v:RibbonTabGroup Text="Un premier groupe">
-              <StackPanel Orientation="Horizontal">
-                <v:RibbonButton Text="Test3" IconPath="settings.png" />
-                <v:RibbonButton Text="Test4" IconPath="settings.png" />
-                <v:RibbonButton Text="Test4" IconPath="settings.png" />
-                <v:RibbonButton Text="Test4" IconPath="settings.png" />
-              </StackPanel>
-            </v:RibbonTabGroup>
-          </StackPanel>
-        </v:RibbonTab>
-        <v:RibbonTab Header="RibbonTab 2">qsdfqsdf</v:RibbonTab>
-      </v:RibbonControl>
-    </v:RibbonWindow>
+    <RibbonWindow>
+        <RibbonControl>
+            <RibbonTab Header="RibbonTab 1">
+                <StackPanel Orientation="Horizontal">
+                    <RibbonTabGroup Text="Un premier groupe">
+                        <StackPanel Orientation="Horizontal">
+                            <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test3" />
+                            <RibbonButton IconPath="/Assets/RibbonIcons/corner.png" Text="Test4" />
+                            <RibbonButton IconPath="/Assets/RibbonIcons/chevron.png" Text="Test5" />
+                            <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test6" />
+                        </StackPanel>
+                    </RibbonTabGroup>
+                    <RibbonTabGroup Command="{Binding OnClickCommand}" Text="Paragraphe">
+                        <StackPanel Orientation="Horizontal">
+                            <StackPanel Orientation="Vertical">
+                                <!--  Maximum 3 buttons per vertical stackpanel  -->
+                                <RibbonLinearButton
+                                    Command="{Binding OnClickCommand}"
+                                    IconPath="/Assets/RibbonIcons/corner.png"
+                                    Text="Reproduire la mise en forme" />
+                                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test8" />
+                                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test9" />
+                            </StackPanel>
+                            <RibbonComboButton IconPath="/Assets/RibbonIcons/settings.png" Text="Coller">
+                                <ComboBoxItem>ksdlfml</ComboBoxItem>
+                                <ComboBoxItem>ksdnvbl</ComboBoxItem>
+                            </RibbonComboButton>
+                            <StackPanel>
+                                <RibbonSmallButtonHGroup>
+                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" ToolTip.Tip="A small tooltip" />
+                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
+                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
+                                </RibbonSmallButtonHGroup>
+                            </StackPanel>
+                        </StackPanel>
+                    </RibbonTabGroup>
+                </StackPanel>
+            </RibbonTab>
+            <RibbonTab Header="RibbonTab 2">qsdfqsdf</RibbonTab>
+        </RibbonControl>
+    </RibbonWindow>
 ```
 
 
