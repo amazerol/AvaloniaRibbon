@@ -1,0 +1,50 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
+    <Design.PreviewWith>
+        <local:RibbonButton IconPath="/Assets/settings.png" Text="Du texte pour un bouton" />
+    </Design.PreviewWith>
+
+    <Style Selector="local|RibbonButton">
+        <Setter Property="Template">
+            <ControlTemplate TargetType="local:RibbonButton">
+                <StackPanel Orientation="Vertical">
+                    <Button Name="rButton" Command="{TemplateBinding Command}">
+                        <Border>
+                            <StackPanel>
+                                <Image Source="{TemplateBinding IconPath}" />
+                                <TextBlock Text="{TemplateBinding Text}" />
+                            </StackPanel>
+                        </Border>
+                    </Button>
+                </StackPanel>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="Button#rButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+    </Style>
+    <Style Selector="Button#rButton Image">
+        <Setter Property="Height" Value="28" />
+        <Setter Property="Width" Value="28" />
+        <Setter Property="Margin" Value="0 0 0 5" />
+    </Style>
+    <Style Selector="Button#rButton:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
+    </Style>
+    <Style Selector="Button#rButton:pressed  /template/ ContentPresenter">
+        <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}" />
+    </Style>
+    <Style Selector="Button#rButton:disabled">
+        <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+    </Style>
+
+    <Style Selector="Button#rButton &gt; Border">
+        <Setter Property="Padding" Value="3" />
+    </Style>
+</Styles>

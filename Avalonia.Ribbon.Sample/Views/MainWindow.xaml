@@ -1,19 +1,21 @@
-# Avalonia Ribbon
-Ribbon Control for Avalonia
+﻿<Window
+    x:Class="Avalonia.Ribbon.Samples.Views.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:Avalonia.Ribbon.Samples.ViewModels;assembly=Avalonia.Ribbon.Sample"
+    Title="Avalonia Ribbon"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    HasSystemDecorations="False"
+    Icon="/Assets/avalonia-logo.ico"
+    mc:Ignorable="d">
 
-The purpose of this Avalonia component is to achieve something like Microsoft Ribbon UI found in Office and all around Windows operating system. The component can be used in its present state but is definitely not considered as complete. I had to implement ribbon interface for my project **[Jaya - Cross Plat](https://github.com/waliarubal/Jaya)** so had to tailor things accordingly. 
+    <Design.DataContext>
+        <vm:MainWindowViewModel />
+    </Design.DataContext>
 
-The original piece of work is by [Alban Mazerolles](https://github.com/amazerol) which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
-
-![Preview](https://user-images.githubusercontent.com/16206389/59566444-a752ea80-9060-11e9-828b-593d347f797d.gif)
-
-Include ribbon styles to App.xaml as shown below.
-```xaml
-    <StyleInclude Source="avares://Avalonia.Controls.Ribbon/Styles/RibbonStyles.xaml" />
-```
-
-Use the below mentioned sample as an example to use the ribbon control. 
-```xaml
     <RibbonWindow>
         <RibbonControl>
             <RibbonTab Header="RibbonTab 1">
@@ -55,37 +57,5 @@ Use the below mentioned sample as an example to use the ribbon control.
             <RibbonTab Header="RibbonTab 2">qsdfqsdf</RibbonTab>
         </RibbonControl>
     </RibbonWindow>
-```
 
-## Change Log
-
-### Update (14/11/2019)
-- Added separate sample project to demosntrate the usage.
-- Architectural improvements have been done.
-- Standardized control to be an assembly instead of executable.
-- Added ribbon classes to Avalonia's namespace.
-
-### Update (23/06/2019)
-- In `App.xaml`, only one line of `<StyleInclude>` is required now.
-- Adddition of the special buttons (top part: button, lower part: combobox)
-- The entire control is themable now.
-- Small button added and its HorizontalGroup.
-- Tootips added.
-
-### Update (17/06/2019)
-- Control is now fully usable.
-- NuGet done.
-- Wiki has been written.
-
-Below mentioned are some plans for the future.
-- Implement more controls, especially toggle button.
-- Allow color stylesheets for a fully customizable control.
-- Take care of the resizing matters.
-
-### Update (16/06/2019)
-- Improvement of the look &amp; feel of the ribbon.
-- Update of the previous preview image with new look &amp; feel.
-
-The remaining things which have be done are as follows.
-- Take care of the disapearance of icons in case of window resizing.
-- Handle click actions easily.
+</Window>

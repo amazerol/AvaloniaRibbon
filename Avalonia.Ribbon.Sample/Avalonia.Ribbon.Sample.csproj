@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <Compile Update="**\*.paml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.paml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.9.0-preview7" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.0-preview7" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.0-preview7" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Avalonia.Ribbon\Avalonia.Ribbon.csproj" />
+  </ItemGroup>
+</Project>
