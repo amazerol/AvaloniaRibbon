@@ -60,7 +60,7 @@ Use the below mentioned sample as an example to use the ribbon control.
 ## Change Log
 
 ### Update (14/11/2019)
-- Added separate sample project to demosntrate the usage.
+- Added separate sample project to demonstrate the usage.
 - Architectural improvements have been done.
 - Standardized control to be an assembly instead of executable.
 - Added ribbon classes to Avalonia's namespace.
