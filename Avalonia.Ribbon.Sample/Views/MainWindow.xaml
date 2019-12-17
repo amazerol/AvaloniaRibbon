@@ -18,6 +18,22 @@
 
     <RibbonWindow>
         <RibbonControl>
+            <RibbonControl.MenuItems>
+                <MenuItem Header="Item 1">
+                  <MenuItem Header="SubItem 1"/>
+                  <MenuItem Header="SubItem 2"/>
+                </MenuItem>
+              <MenuItem Header="Item 2">
+                <MenuItem Header="SubItem 1"/>
+                <MenuItem Header="SubItem 2"/>
+                <MenuItem Header="SubItem 3"/>
+              </MenuItem>
+            </RibbonControl.MenuItems>
+            <RibbonControl.MenuPlacesItems>
+              <ListBoxItem Content="Place 1"/>
+              <ListBoxItem Content="Place 2"/>
+              <ListBoxItem Content="Place 3"/>
+            </RibbonControl.MenuPlacesItems>
             <RibbonTab Header="RibbonTab 1">
                 <StackPanel Orientation="Horizontal">
                     <RibbonTabGroup Text="Un premier groupe">
