@@ -66,16 +66,12 @@ namespace Avalonia.Controls.Ribbon
             {
                 if (e.Delta.Y > 0)
                 {
-                    if (SelectedIndex == 0)
-                        SelectedIndex = ItemCount - 1;
-                    else
+                    if (SelectedIndex > 0)
                         SelectedIndex--;
                 }
                 else if (e.Delta.Y < 0)
                 {
-                    if (SelectedIndex == (ItemCount - 1))
-                        SelectedIndex = 0;
-                    else
+                    if (SelectedIndex < (ItemCount - 1))
                         SelectedIndex++;
                 }
             }

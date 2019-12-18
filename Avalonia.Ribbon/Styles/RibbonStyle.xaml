@@ -103,7 +103,7 @@
     <Style Selector="local|Ribbon /template/ ToggleButton#MenuButton:checked /template/ ContentPresenter">
         <Setter Property="Background" Value="#1A000000"/>
     </Style>
-  <Style Selector="local|Ribbon /template/ ToggleButton#BackButton:checked /template/ ContentPresenter">
+    <Style Selector="local|Ribbon /template/ ToggleButton#BackButton:not(:checked) /template/ ContentPresenter">
         <Setter Property="Background" Value="#1A000000"/>
     </Style>
   
