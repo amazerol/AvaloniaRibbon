@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class RibbonTabGroup : ContentControl, IStyleable
+    public class RibbonTabGroup : ItemsControl, IStyleable
     {
         public static readonly StyledProperty<string> TextProperty;
         public static readonly DirectProperty<RibbonTabGroup, ICommand> CommandProperty;
@@ -24,7 +24,7 @@ namespace Avalonia.Controls.Ribbon
             get { return GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
-        
+
         public ICommand Command
         {
             get { return _command; }
@@ -33,5 +33,3 @@ namespace Avalonia.Controls.Ribbon
 
     }
 }
-
-

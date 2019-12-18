@@ -31,23 +31,21 @@
             </ControlTemplate>
         </Setter>
     </Style>
-    <Style Selector="Window[IsActive=False] local|RibbonControl local|RibbonTab:not(:selected)">
+    <Style Selector="Window[IsActive=False] local|Ribbon local|RibbonTab:not(:selected)">
         <Setter Property="Foreground" Value="#7FFFFFFF"/>
     </Style>
-    <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonControl local|RibbonTab:not(:selected)">
+    <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon local|RibbonTab:not(:selected)">
         <Setter Property="Foreground" Value="#7FFFFFFF"/>
     </Style>
-  <Style Selector="Window[IsActive=False] local|RibbonControl[IsCollapsed=True] local|RibbonTab:selected">
+  <Style Selector="Window[IsActive=False] local|Ribbon[IsCollapsed=True] local|RibbonTab:selected">
     <Setter Property="Foreground" Value="#7FFFFFFF"/>
   </Style>
-  <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonControl[IsCollapsed=True] local|RibbonTab:selected">
+  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon[IsCollapsed=True] local|RibbonTab:selected">
     <Setter Property="Foreground" Value="#7FFFFFFF"/>
   </Style>
 
-    <Style Selector="local|RibbonControl[IsCollapsed=False] local|RibbonTab:selected">
+    <Style Selector="local|Ribbon[IsCollapsed=False] local|RibbonTab:selected">
         <Setter Property="Foreground" Value="{DynamicResource TitleBarColorBrush}" />
-        <Setter Property="Margin" Value="0 0 0 0" />
-        <Setter Property="Padding" Value="10 0" />
         <Setter Property="Background" Value="{Binding $parent.Background}" />
     </Style>
 </Styles>

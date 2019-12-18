@@ -8,7 +8,7 @@ using System.Collections;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class RibbonControl : TabControl, IStyleable
+    public class Ribbon : TabControl, IStyleable
     {
         private IEnumerable _menuItems = new AvaloniaList<object>();
         private IEnumerable _menuPlacesItems = new AvaloniaList<object>();
@@ -28,19 +28,19 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<IBrush> RemainingTabControlHeaderColorProperty;
         public static readonly StyledProperty<bool> IsCollapsedProperty;
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
-        public static readonly DirectProperty<RibbonControl, IEnumerable> MenuItemsProperty;
-        public static readonly DirectProperty<RibbonControl, IEnumerable> MenuPlacesItemsProperty;
+        public static readonly DirectProperty<Ribbon, IEnumerable> MenuItemsProperty;
+        public static readonly DirectProperty<Ribbon, IEnumerable> MenuPlacesItemsProperty;
 
-        static RibbonControl()
+        static Ribbon()
         {
-            RemainingTabControlHeaderColorProperty = AvaloniaProperty.Register<RibbonControl, IBrush>(nameof(RemainingTabControlHeaderColor));
-            IsCollapsedProperty = AvaloniaProperty.Register<RibbonControl, bool>(nameof(IsCollapsed));
-            IsMenuOpenProperty = AvaloniaProperty.Register<RibbonControl, bool>(nameof(IsMenuOpen));
-            MenuItemsProperty = MenuBase.ItemsProperty.AddOwner<RibbonControl>(x => x.MenuItems, (x, v) => x.MenuItems = v);
-            MenuPlacesItemsProperty = ItemsControl.ItemsProperty.AddOwner<RibbonControl>(x => x.MenuPlacesItems, (x, v) => x.MenuPlacesItems = v);
+            RemainingTabControlHeaderColorProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(RemainingTabControlHeaderColor));
+            IsCollapsedProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsCollapsed));
+            IsMenuOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsMenuOpen));
+            MenuItemsProperty = MenuBase.ItemsProperty.AddOwner<Ribbon>(x => x.MenuItems, (x, v) => x.MenuItems = v);
+            MenuPlacesItemsProperty = ItemsControl.ItemsProperty.AddOwner<Ribbon>(x => x.MenuPlacesItems, (x, v) => x.MenuPlacesItems = v);
         }
 
-        Type IStyleable.StyleKey => typeof(RibbonControl);
+        Type IStyleable.StyleKey => typeof(Ribbon);
 
         public bool IsCollapsed
         {

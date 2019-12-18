@@ -21,7 +21,8 @@
                         DockPanel.Dock="Left"
                         RowDefinitions="72,16">
 
-                        <ContentPresenter Grid.Row="0" Content="{TemplateBinding Content}" Margin="{TemplateBinding Padding}" />
+                        <ItemsPresenter Grid.Row="0" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}" Margin="{TemplateBinding Padding}" />
+                      <!--ItemContainerGenerator="{TemplateBinding ItemContainerGenerator}"-->
 
                         <Grid
                             Grid.Row="1"
@@ -46,10 +47,6 @@
                                     <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="#FF7F7F7F" StrokeThickness="1"/>
                                     <Border BorderBrush="#FF7F7F7F" BorderThickness="0,0,1,1" Width="4" Height="4" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                                   </Grid>
-                                  <!--Image
-                                        Width="10"
-                                        Height="10"
-                                        Source="avares://Avalonia.Controls.Ribbon/Assets/corner.png" /-->
                                 </Border>
                             </Button>
                         </Grid>
@@ -58,6 +55,11 @@
                 </DockPanel>
             </ControlTemplate>
         </Setter>
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+      </Setter>
     </Style>
 
     <Style Selector="Button#rButton">
