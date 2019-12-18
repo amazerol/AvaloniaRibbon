@@ -1,77 +1,79 @@
-﻿<Window
+﻿<local:RibbonWindow
     x:Class="Avalonia.Ribbon.Samples.Views.MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Avalonia.Ribbon.Samples.ViewModels;assembly=Avalonia.Ribbon.Sample"
+    xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Ribbon"
     Title="Avalonia Ribbon"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    HasSystemDecorations="False"
+    HasSystemDecorations="false"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel />
-    </Design.DataContext>
-
-    <RibbonWindow>
-        <RibbonControl>
-            <RibbonControl.MenuItems>
-                <MenuItem Header="Item 1">
-                  <MenuItem Header="SubItem 1"/>
-                  <MenuItem Header="SubItem 2"/>
-                </MenuItem>
-              <MenuItem Header="Item 2">
-                <MenuItem Header="SubItem 1"/>
-                <MenuItem Header="SubItem 2"/>
-                <MenuItem Header="SubItem 3"/>
-              </MenuItem>
-            </RibbonControl.MenuItems>
-            <RibbonControl.MenuPlacesItems>
-              <ListBoxItem Content="Place 1"/>
-              <ListBoxItem Content="Place 2"/>
-              <ListBoxItem Content="Place 3"/>
-            </RibbonControl.MenuPlacesItems>
-            <RibbonTab Header="RibbonTab 1">
-                <StackPanel Orientation="Horizontal">
-                    <RibbonTabGroup Text="Un premier groupe">
-                        <StackPanel Orientation="Horizontal">
-                            <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test3" />
-                            <RibbonButton IconPath="/Assets/RibbonIcons/corner.png" Text="Test4" />
-                            <RibbonButton IconPath="/Assets/RibbonIcons/chevron.png" Text="Test5" />
-                            <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test6" />
-                        </StackPanel>
-                    </RibbonTabGroup>
-                    <RibbonTabGroup Command="{Binding OnClickCommand}" Text="Paragraphe">
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical">
-                                <!--  Maximum 3 buttons per vertical stackpanel  -->
-                                <RibbonLinearButton
-                                    Command="{Binding OnClickCommand}"
-                                    IconPath="/Assets/RibbonIcons/corner.png"
-                                    Text="Reproduire la mise en forme" />
-                                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test8" />
-                                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test9" />
-                            </StackPanel>
-                            <RibbonComboButton IconPath="/Assets/RibbonIcons/settings.png" Text="Coller">
-                                <ComboBoxItem>ksdlfml</ComboBoxItem>
-                                <ComboBoxItem>ksdnvbl</ComboBoxItem>
-                            </RibbonComboButton>
-                            <StackPanel>
-                                <RibbonSmallButtonHGroup>
-                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" ToolTip.Tip="A small tooltip" />
-                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
-                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
-                                </RibbonSmallButtonHGroup>
-                            </StackPanel>
-                        </StackPanel>
-                    </RibbonTabGroup>
-                </StackPanel>
-            </RibbonTab>
-            <RibbonTab Header="RibbonTab 2">qsdfqsdf</RibbonTab>
-        </RibbonControl>
-    </RibbonWindow>
-
-</Window>
+  <Design.DataContext>
+    <vm:MainWindowViewModel />
+  </Design.DataContext>
+  <DockPanel>
+    <RibbonControl DockPanel.Dock="Top">
+      <RibbonControl.MenuItems>
+        <MenuItem Header="Item 1">
+          <MenuItem Header="SubItem 1"/>
+          <MenuItem Header="SubItem 2"/>
+        </MenuItem>
+        <MenuItem Header="Item 2">
+          <MenuItem Header="SubItem 1"/>
+          <MenuItem Header="SubItem 2"/>
+          <MenuItem Header="SubItem 3"/>
+        </MenuItem>
+      </RibbonControl.MenuItems>
+      <RibbonControl.MenuPlacesItems>
+        <ListBoxItem Content="Place 1"/>
+        <ListBoxItem Content="Place 2"/>
+        <ListBoxItem Content="Place 3"/>
+      </RibbonControl.MenuPlacesItems>
+      <RibbonTab Header="RibbonTab 1">
+        <StackPanel Orientation="Horizontal">
+          <RibbonTabGroup Text="Un premier groupe">
+            <StackPanel Orientation="Horizontal">
+              <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test3" />
+              <RibbonButton IconPath="/Assets/RibbonIcons/corner.png" Text="Test4" />
+              <RibbonButton IconPath="/Assets/RibbonIcons/chevron.png" Text="Test5" />
+              <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test6" />
+            </StackPanel>
+          </RibbonTabGroup>
+          <RibbonTabGroup Command="{Binding OnClickCommand}" Text="Paragraphe">
+            <StackPanel Orientation="Horizontal">
+              <StackPanel Orientation="Vertical">
+                <!--  Maximum 3 buttons per vertical stackpanel  -->
+                <RibbonLinearButton
+                    Command="{Binding OnClickCommand}"
+                    IconPath="/Assets/RibbonIcons/corner.png"
+                    Text="Reproduire la mise en forme" />
+                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test8" />
+                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test9" />
+              </StackPanel>
+              <RibbonComboButton IconPath="/Assets/RibbonIcons/settings.png" Text="Coller">
+                <ComboBoxItem>ksdlfml</ComboBoxItem>
+                <ComboBoxItem>ksdnvbl</ComboBoxItem>
+              </RibbonComboButton>
+              <StackPanel>
+                <RibbonSmallButtonHGroup>
+                  <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" ToolTip.Tip="A small tooltip" />
+                  <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
+                  <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
+                </RibbonSmallButtonHGroup>
+              </StackPanel>
+            </StackPanel>
+          </RibbonTabGroup>
+        </StackPanel>
+      </RibbonTab>
+      <RibbonTab Header="RibbonTab 2">qsdfqsdf</RibbonTab>
+    </RibbonControl>
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+      <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
+    </Grid>
+  </DockPanel>
+</local:RibbonWindow>

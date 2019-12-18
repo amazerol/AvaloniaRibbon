@@ -10,7 +10,8 @@
     </Design.PreviewWith>
 
     <Style Selector="local|RibbonControl">
-        <Setter Property="RemainingTabControlHeaderColor" Value="{DynamicResource TitleBarColorBrush}" />
+      <Setter Property="Margin" Value="0,0,0,-4"/>
+      <Setter Property="RemainingTabControlHeaderColor" Value="{DynamicResource TitleBarColorBrush}" />
       <Setter Property="Background" Value="{DynamicResource ActiveRibbonBackgroundColorBrush}" />
         <Setter Property="Template">
             <ControlTemplate>
@@ -44,13 +45,21 @@
                     <ContentPresenter
                         Name="PART_SelectedContentHost"
                         Height="90"
-                        Padding="5,2,5,5"
+                        Padding="5,0"
                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                         Background="{TemplateBinding Background}"
                         Content="{TemplateBinding SelectedContent}"
                         ContentTemplate="{TemplateBinding SelectedContentTemplate}">
                     </ContentPresenter>
+                    <Rectangle Height="4">
+                      <Rectangle.Fill>
+                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                          <GradientStop Offset="0" Color="#40000000"/>
+                          <GradientStop Offset="1" Color="#00000000"/>
+                        </LinearGradientBrush>
+                      </Rectangle.Fill>
+                    </Rectangle>
                 </StackPanel>
             </ControlTemplate>
         </Setter>
@@ -59,16 +68,27 @@
     <Style Selector="local|RibbonControl /template/ ToggleButton.RibbonToggleButton">
         <Setter Property="BorderBrush" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
+    </Style>
+    <Style Selector="Window[IsActive=True] local|RibbonControl /template/ ToggleButton.RibbonToggleButton">
         <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style Selector="Window[IsActive=False] local|RibbonControl /template/ ToggleButton.RibbonToggleButton">
+        <Setter Property="Foreground" Value="#7FFFFFFF"/>
+    </Style>
+    <Style Selector="local|RibbonWindow[IsActive=True] local|RibbonControl /template/ ToggleButton.RibbonToggleButton">
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+    <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonControl /template/ ToggleButton.RibbonToggleButton">
+        <Setter Property="Foreground" Value="#7FFFFFFF"/>
     </Style>
     <Style Selector="local|RibbonControl /template/ ToggleButton.RibbonToggleButton:not(:pointerover) /template/ ContentPresenter">
       <Setter Property="Background" Value="Transparent"/>
     </Style>
     <Style Selector="local|RibbonControl /template/ ToggleButton.RibbonToggleButton:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="#40FFFFFF"/>
+        <Setter Property="Background" Value="#1A000000"/>
     </Style>
-    <Style Selector="local|RibbonControl /template/ ToggleButton.RibbonToggleButton:checked /template/ ContentPresenter">
-        <Setter Property="Background" Value="#40FFFFFF"/>
+    <Style Selector="local|RibbonControl /template/ ToggleButton#MenuButton:checked /template/ ContentPresenter">
+        <Setter Property="Background" Value="#1A000000"/>
     </Style>
   
     <Style Selector="local|RibbonControl[IsCollapsed=False] /template/ ToggleButton.RibbonToggleButton Path.RibbonExpandCollapsePath">
@@ -159,5 +179,11 @@
         </Border>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="Window[IsActive=False] local|RibbonControl">
+    <Setter Property="RemainingTabControlHeaderColor" Value="{DynamicResource InactiveTitleBarColorBrush}" />
+  </Style>
+  <Style Selector="local|RibbonWindow local|RibbonControl">
+    <Setter Property="RemainingTabControlHeaderColor" Value="{Binding TitleBarColor, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RibbonWindow}}}" />
   </Style>
 </Styles>
