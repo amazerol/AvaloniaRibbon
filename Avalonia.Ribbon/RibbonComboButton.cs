@@ -4,29 +4,54 @@ using System;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class RibbonComboButton : ComboBox, IStyleable
+    public class RibbonComboButton : ComboBox, IStyleable, IRibbonControl
     {
-        public static readonly StyledProperty<string> TextProperty;
-        public static readonly StyledProperty<IBitmap> IconPathProperty;
+        public static readonly StyledProperty<object> ContentProperty;
+        public static readonly StyledProperty<object> IconProperty;
+        public static readonly StyledProperty<object> LargeIconProperty;
+        public static readonly StyledProperty<RibbonControlSize> SizeProperty;
+        public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
         static RibbonComboButton()
         {
-            TextProperty = AvaloniaProperty.Register<RibbonComboButton, string>(nameof(Text));
-            IconPathProperty = AvaloniaProperty.Register<RibbonComboButton, IBitmap>(nameof(IconPath));
+            ContentProperty = RibbonButton.ContentProperty.AddOwner<RibbonComboButton>();
+            IconProperty = RibbonButton.IconProperty.AddOwner<RibbonComboButton>();
+            LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon), null);
+            SizeProperty = RibbonButton.SizeProperty.AddOwner<RibbonComboButton>();
+            CanAddToQuickAccessToolbarProperty = RibbonButton.CanAddToQuickAccessToolbarProperty.AddOwner<RibbonComboButton>();
         }
 
         Type IStyleable.StyleKey => typeof(RibbonComboButton);
 
-        public string Text
+        public object Content
         {
-            get { return GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
+            get => GetValue(ContentProperty);
+            set => SetValue(ContentProperty, value);
         }
 
-        public IBitmap IconPath
+        public object Icon
         {
-            get { return GetValue(IconPathProperty); }
-            set { SetValue(IconPathProperty, value); }
+            get => GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
+        }
+
+        public object LargeIcon
+        {
+            get => GetValue(LargeIconProperty);
+            set => SetValue(LargeIconProperty, value);
+        }
+
+
+        public RibbonControlSize Size
+        {
+            get => GetValue(SizeProperty);
+            set => SetValue(SizeProperty, value);
+        }
+
+        public bool CanAddToQuickAccessToolbar
+        {
+            get => GetValue(CanAddToQuickAccessToolbarProperty);
+            set => SetValue(CanAddToQuickAccessToolbarProperty, value);
         }
     }
 }

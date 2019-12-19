@@ -12,17 +12,18 @@
                     BorderBrush="{TemplateBinding BorderBrush}"
                     BorderThickness="1">
                     <Grid RowDefinitions="*,Auto">
-                        <local:RibbonButton Margin="0" IconPath="{TemplateBinding IconPath}" />
+                        <local:RibbonButton Margin="0" LargeIcon="{TemplateBinding LargeIcon}" />
                         <ToggleButton
                             Name="toggle"
                             Grid.Row="1"
                             BorderThickness="0"
                             ClickMode="Press"
                             Focusable="False"
+                            Padding="5,2"
                             IsChecked="{TemplateBinding IsDropDownOpen,
                                                         Mode=TwoWay}">
                             <StackPanel>
-                                <TextBlock Text="{TemplateBinding Text}" />
+                                <ContentPresenter Content="{TemplateBinding Content}" />
                                 <Path
                                     Width="8"
                                     Height="4"
@@ -30,7 +31,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z"
-                                    Fill="{DynamicResource ThemeForegroundBrush}"
+                                    Fill="{TemplateBinding Foreground}"
                                     Stretch="Uniform" />
                             </StackPanel>
                         </ToggleButton>
