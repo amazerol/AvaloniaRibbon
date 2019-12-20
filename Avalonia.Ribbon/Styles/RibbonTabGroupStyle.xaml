@@ -7,12 +7,13 @@
     </Design.PreviewWith>
 
     <Style Selector="local|RibbonTabGroup">
+        <Setter Property="Padding" Value="0,2"/>
         <Setter Property="Template">
             <ControlTemplate TargetType="local:RibbonTabGroup">
                 <DockPanel>
                     <Border
                         Width="1"
-                        Margin="5,0,5,0"
+                        Margin="5"
                         Background="{DynamicResource HoveredBorderBackgroundColorBrush}"
                         DockPanel.Dock="Right" />
                     <Grid
@@ -20,7 +21,8 @@
                         DockPanel.Dock="Left"
                         RowDefinitions="72,16">
 
-                        <ContentControl Grid.Row="0" Content="{TemplateBinding Content}" />
+                        <ItemsPresenter Grid.Row="0" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}" Margin="{TemplateBinding Padding}" />
+                      <!--ItemContainerGenerator="{TemplateBinding ItemContainerGenerator}"-->
 
                         <Grid
                             Grid.Row="1"
@@ -40,10 +42,11 @@
                                 Height="15"
                                 Command="{TemplateBinding Command}">
                                 <Border>
-                                    <Image
-                                        Width="10"
-                                        Height="10"
-                                        Source="avares://Avalonia.Controls.Ribbon/Assets/corner.png" />
+                                  <Grid Width="9" Height="9">
+                                    <Border BorderBrush="#FF7F7F7F" BorderThickness="1,1,0,0"/>
+                                    <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="#FF7F7F7F" StrokeThickness="1"/>
+                                    <Border BorderBrush="#FF7F7F7F" BorderThickness="0,0,1,1" Width="4" Height="4" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                                  </Grid>
                                 </Border>
                             </Button>
                         </Grid>
@@ -52,6 +55,11 @@
                 </DockPanel>
             </ControlTemplate>
         </Setter>
+      <Setter Property="ItemsPanel">
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Horizontal"/>
+        </ItemsPanelTemplate>
+      </Setter>
     </Style>
 
     <Style Selector="Button#rButton">

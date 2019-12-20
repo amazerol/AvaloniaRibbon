@@ -4,16 +4,20 @@ using System;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class RibbonButton : Button, IStyleable
+    public class RibbonButton : Button, IStyleable, IRibbonControl
     {
 
         public static readonly StyledProperty<string> TextProperty;
-        public static readonly StyledProperty<IBitmap> IconPathProperty;
+        public static readonly StyledProperty<object> IconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(Icon));
+        public static readonly StyledProperty<object> LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon));
+        public static readonly StyledProperty<RibbonControlSize> SizeProperty;
+        public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
         static RibbonButton()
         {
             TextProperty = AvaloniaProperty.Register<RibbonButton, string>(nameof(Text));
-            IconPathProperty = AvaloniaProperty.Register<RibbonButton, IBitmap>(nameof(IconPath));
+            SizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize>(nameof(RibbonControlSize), RibbonControlSize.Large);
+            CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<RibbonButton, bool>(nameof(CanAddToQuickAccessToolbar), true);
         }
 
         Type IStyleable.StyleKey => typeof(RibbonButton);
@@ -23,13 +27,31 @@ namespace Avalonia.Controls.Ribbon
             get { return GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
-
-        public IBitmap IconPath
+        
+        public object Icon
         {
-            get { return GetValue(IconPathProperty); }
-            set { SetValue(IconPathProperty, value); }
+            get => GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
+        public object LargeIcon
+        {
+            get => GetValue(LargeIconProperty);
+            set => SetValue(LargeIconProperty, value);
+        }
+
+
+        public RibbonControlSize Size
+        {
+            get => GetValue(SizeProperty);
+            set => SetValue(SizeProperty, value);
+        }
+
+        public bool CanAddToQuickAccessToolbar
+        {
+            get => GetValue(CanAddToQuickAccessToolbarProperty);
+            set => SetValue(CanAddToQuickAccessToolbarProperty, value);
+        }
     }
 
 }

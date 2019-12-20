@@ -5,6 +5,7 @@
         <Color x:Key="ClickedBackgroundColor">#a4a4a4</Color>
         <Color x:Key="ClickedBorderBackgroundColor">#939393</Color>
         <Color x:Key="TitleBarColor">#2b579a</Color>
+        <Color x:Key="InactiveTitleBarColor">#466799</Color>
         <Color x:Key="ActiveRibbonBackgroundColor">#f0f0f0</Color>
 
         <SolidColorBrush x:Key="HoveredBackgroundColorBrush" Color="{DynamicResource HoveredBackgroundColor}" />
@@ -12,6 +13,7 @@
         <SolidColorBrush x:Key="ClickedBackgroundColorBrush" Color="{DynamicResource ClickedBackgroundColor}" />
         <SolidColorBrush x:Key="ClickedBorderBackgroundColorBrush" Color="{DynamicResource ClickedBorderBackgroundColor}" />
         <SolidColorBrush x:Key="TitleBarColorBrush" Color="{DynamicResource TitleBarColor}" />
+        <SolidColorBrush x:Key="InactiveTitleBarColorBrush" Color="{DynamicResource InactiveTitleBarColor}" />
         <SolidColorBrush x:Key="ActiveRibbonBackgroundColorBrush" Color="{DynamicResource ActiveRibbonBackgroundColor}" />
     </Style.Resources>
 </Style>

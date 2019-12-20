@@ -5,7 +5,7 @@
     <Style Selector="local|RibbonSmallButton">
         <Setter Property="Template">
             <ControlTemplate>
-                <local:RibbonButton Name="smallbutton" IconPath="{TemplateBinding IconPath}" />
+                <local:RibbonButton Name="smallbutton"/>
             </ControlTemplate>
         </Setter>
     </Style>

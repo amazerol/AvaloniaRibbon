@@ -2,142 +2,178 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
-
-    <Style Selector="local|RibbonWindow">
-        <Setter Property="TitleBarColor" Value="{DynamicResource TitleBarColorBrush}" />
-        <Setter Property="Template">
-            <ControlTemplate>
-                <Grid
-                    Name="OuterGrid"
-                    ColumnDefinitions="8,*,8"
-                    RowDefinitions="4,64,86,*,8">
-                    <DockPanel
-                        Grid.Row="1"
-                        Grid.RowSpan="3"
-                        Grid.Column="0"
-                        Grid.ColumnSpan="3">
-                        <Grid
-                            Name="TitleBar"
-                            Height="31"
-                            Background="{TemplateBinding TitleBarColor}"
-                            ColumnDefinitions="Auto,*,Auto"
-                            DockPanel.Dock="Top">
-                            <TextBlock
-                                Margin="5,0,0,0"
-                                VerticalAlignment="Center"
-                                Foreground="White">
-                                Title
-                            </TextBlock>
-                            <StackPanel
-                                Grid.Column="2"
-                                Margin="0,0,8,0"
-                                Orientation="Horizontal">
-                                <StackPanel.Styles>
-                                    <Style Selector="Button">
-                                        <Setter Property="BorderThickness" Value="0" />
-                                        <Setter Property="Background" Value="Transparent" />
-                                        <Setter Property="Width" Value="45" />
-                                    </Style>
-                                    <Style Selector="Button:pointerover">
-                                        <Setter Property="Background" Value="#124078" />
-                                    </Style>
-                                    <Style Selector="Button#CloseButton:pointerover">
-                                        <Setter Property="Background" Value="red" />
-                                    </Style>
-                                </StackPanel.Styles>
-                                <Button Name="MinimizeButton">
-                                    <Image Height="22" Source="avares://Avalonia.Controls.Ribbon/Assets/minimize.png" />
-                                </Button>
-                                <Button Name="MaximizeButton">
-                                    <Image
-                                        Name="ImageMaximizeButton"
-                                        Height="22"
-                                        Source="avares://Avalonia.Controls.Ribbon/Assets/maximize.png" />
-                                </Button>
-                                <Button Name="CloseButton">
-                                    <Image Height="25" Source="avares://Avalonia.Controls.Ribbon/Assets/close.png" />
-                                </Button>
-                            </StackPanel>
+  <Style Selector="local|RibbonWindow">
+    <Setter Property="BorderBrush" Value="{DynamicResource TitleBarColorBrush}"/>
+    <Setter Property="TitleBarColor" Value="{DynamicResource TitleBarColorBrush}" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid>
+          <Border Classes="OuterBorder">
+            <DockPanel>
+              <Grid
+                Name="TitleBar"
+                Height="30"
+                Background="{TemplateBinding TitleBarColor}"
+                ColumnDefinitions="Auto,*,Auto"
+                DockPanel.Dock="Top">
+                <TextBlock
+                    Margin="5,0,0,0"
+                    VerticalAlignment="Center"
+                    Foreground="White">
+                  Title
+                </TextBlock>
+                <StackPanel
+                    Grid.Column="2"
+                    Orientation="Horizontal">
+                  <StackPanel.Styles>
+                    <Style Selector="Button">
+                      <Setter Property="BorderThickness" Value="0" />
+                      <Setter Property="Background" Value="Transparent" />
+                      <Setter Property="Width" Value="45" />
+                      <Setter Property="Height" Value="30" />
+                      <Setter Property="VerticalAlignment" Value="Top"/>
+                      <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                    <Style Selector="Button > Path">
+                      <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                      <Setter Property="StrokeThickness" Value="1"/>
+                    </Style>
+                    <Style Selector="Button:pointerover">
+                      <Setter Property="Background" Value="#1A000000" />
+                    </Style>
+                    <Style Selector="Button:pressed">
+                      <Setter Property="Background" Value="#36000000" />
+                    </Style>
+                    <Style Selector="Button:Disabled">
+                      <Setter Property="Foreground" Value="#33FFFFFF" />
+                    </Style>
+                    <Style Selector="Button#MinimizeButton > Rectangle">
+                      <Setter Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                    </Style>
+                    <Style Selector="Button#MaximizeButton Rectangle">
+                      <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                      <Setter Property="StrokeThickness" Value="1"/>
+                    </Style>
+                    <Style Selector="Button#MaximizeButton > Grid > Grid Border">
+                      <Setter Property="BorderBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                    </Style>
+                    <Style Selector="local|RibbonWindow[WindowState=Maximized] /template/ Button#MaximizeButton > Grid > Rectangle">
+                      <Setter Property="IsVisible" Value="False"/>
+                    </Style>
+                    <Style Selector="local|RibbonWindow[WindowState=Normal] /template/ Button#MaximizeButton > Grid > Grid">
+                      <Setter Property="IsVisible" Value="False"/>
+                    </Style>
+                    <Style Selector="local|RibbonWindow[WindowState=Minimized] /template/ Button#MaximizeButton > Grid > Grid">
+                      <Setter Property="IsVisible" Value="False"/>
+                    </Style>
+                    <Style Selector="Button#MaximizeButton > Grid > Grid > Rectangle">
+                      <Setter Property="Stroke" Value="Transparent"/>
+                      <Setter Property="StrokeThickness" Value="0"/>
+                      <Setter Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                    </Style>
+                    <Style Selector="Button#CloseButton:pointerover">
+                      <Setter Property="Background" Value="#FFE81123" />
+                    </Style>
+                    <Style Selector="Button#CloseButton:pressed">
+                      <Setter Property="Background" Value="#99E71022" />
+                    </Style>
+                    <Style Selector="local|RibbonWindow[IsActive=false] /template/ Button:not(:pointerover):not(:pressed)">
+                      <Setter Property="Opacity" Value="0.5"/>
+                    </Style>
+                  </StackPanel.Styles>
+                  <Button Name="MinimizeButton">
+                    <Rectangle Width="10" Height="1"/>
+                  </Button>
+                  <Button Name="MaximizeButton">
+                    <Grid>
+                      <Rectangle Width="10" Height="10"/>
+                      <Grid Width="10" Height="10">
+                        <Border BorderThickness="1" Width="8" Height="8" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                        <Grid Width="8" Height="8" HorizontalAlignment="Right" VerticalAlignment="Top">
+                          <Border BorderThickness="0,1,1,0"/>
+                          <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Width="1" Height="3"/>
+                          <Rectangle HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="3" Height="1"/>
                         </Grid>
-                        <ItemsPresenter Items="{TemplateBinding Items}" />
-                    </DockPanel>
-                    <Border
-                        Name="TopLeft"
-                        Background="{TemplateBinding TitleBarColor}"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="1,1,0,0" />
-                    <Border
-                        Name="TopRight"
-                        Grid.Column="2"
-                        Background="{TemplateBinding TitleBarColor}"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="0,1,1,0" />
-                    <Border
-                        Name="BottomLeft"
-                        Grid.Row="4"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="1,0,0,1" />
-                    <Border
-                        Name="BottomRight"
-                        Grid.Row="4"
-                        Grid.Column="2"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="0,0,1,1" />
-                    <Border
-                        Name="Top"
-                        Grid.Column="1"
-                        Background="{TemplateBinding TitleBarColor}" />
-                    <Border
-                        Name="Right_top"
-                        Grid.Row="1"
-                        Grid.Column="2"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="0,0,1,0" />
-                    <Border
-                        Name="Right_mid"
-                        Grid.Row="2"
-                        Grid.Column="2"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="0,0,1,0" />
-                    <Border
-                        Name="Right_bottom"
-                        Grid.Row="3"
-                        Grid.Column="2"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="0,0,1,0" />
-                    <Border
-                        Name="Bottom"
-                        Grid.Row="4"
-                        Grid.Column="1"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="0,0,0,1" />
-                    <Border
-                        Name="Left_top"
-                        Grid.Row="1"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="1,0,0,0" />
-                    <Border
-                        Name="Left_mid"
-                        Grid.Row="2"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="1,0,0,0" />
-                    <Border
-                        Name="Left_bottom"
-                        Grid.Row="3"
-                        Background="Transparent"
-                        BorderBrush="{DynamicResource TitleBarColorBrush}"
-                        BorderThickness="1,0,0,0" />
-                </Grid>
-            </ControlTemplate>
-        </Setter>
-    </Style>
-
+                      </Grid>
+                    </Grid>
+                  </Button>
+                  <Button Name="CloseButton">
+                    <Path Data="M 0 0 L 10 10 M 10 0 L 0 10"/>
+                  </Button>
+                </StackPanel>
+              </Grid>
+              <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Background="{TemplateBinding Background}"/>
+            </DockPanel>
+          </Border>
+          <Grid Name="ResizeGrid" ColumnDefinitions="8,*,8" RowDefinitions="8,*,8">
+            <Border Name="TopLeft"/>
+            <Border
+                Name="TopRight"
+                Grid.Column="2"/>
+            <Border
+                Name="BottomLeft"
+                Grid.Row="2"/>
+            <Border
+                Name="BottomRight"
+                Grid.Row="2"
+                Grid.Column="2"/>
+            <Border
+                Name="Top"
+                Grid.Column="1"/>
+            <Border
+                Name="Right_top"
+                Grid.Row="0"
+                Grid.Column="2"/>
+            <Border
+                Name="Right_mid"
+                Grid.Row="0"
+                Grid.Column="2"/>
+            <Border
+                Name="Right_bottom"
+                Grid.Row="1"
+                Grid.Column="2"/>
+            <Border
+                Name="Bottom"
+                Grid.Row="2"
+                Grid.Column="1"/>
+            <Border
+                Name="Left_top"
+                Grid.Row="0"/>
+            <Border
+                Name="Left_mid"
+                Grid.Row="0"/>
+            <Border
+                Name="Left_bottom"
+                Grid.Row="1"/>
+          </Grid>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonWindow[HasSystemDecorations=False] /template/ Border.OuterBorder">
+    <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[WindowState=Maximized] /template/ Border.OuterBorder">
+    <Setter Property="BorderThickness" Value="0"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[HasSystemDecorations=True] /template/ Grid#TitleBar">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="local|RibbonWindow /template/ Grid#ResizeGrid Border">
+    <Setter Property="Background" Value="#01000000"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[WindowState=Maximized] /template/ Grid#ResizeGrid">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[HasSystemDecorations=True] /template/ Grid#ResizeGrid">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[IsActive=false]">
+    <Setter Property="BorderBrush" Value="{DynamicResource InactiveTitleBarColorBrush}"/>
+    <Setter Property="TitleBarColor" Value="{DynamicResource InactiveTitleBarColorBrush}" />
+  </Style>
+  <Style Selector="local|RibbonWindow[IsActive=false] /template/ Grid#TitleBar > TextBlock">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
 </Styles>
