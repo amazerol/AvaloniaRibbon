@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>Avalonia.Controls.Ribbon</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Version>1.1.1-build171219-01</Version>
+    <Version>1.1.1-build201219-01</Version>
     <Authors>Alban Mazerolles, Rubal Walia</Authors>
     <PackageId>AvaloniaRibbon</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
