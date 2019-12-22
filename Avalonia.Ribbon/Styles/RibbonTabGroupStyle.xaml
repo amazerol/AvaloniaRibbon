@@ -2,79 +2,92 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
-    <Design.PreviewWith>
+  <Design.PreviewWith>
 
-    </Design.PreviewWith>
-
-    <Style Selector="local|RibbonTabGroup">
-        <Setter Property="Padding" Value="0,2"/>
-        <Setter Property="Template">
-            <ControlTemplate TargetType="local:RibbonTabGroup">
-                <DockPanel>
-                    <Border
-                        Width="1"
-                        Margin="5"
-                        Background="{DynamicResource HoveredBorderBackgroundColorBrush}"
-                        DockPanel.Dock="Right" />
-                    <Grid
-                        ColumnDefinitions="*"
-                        DockPanel.Dock="Left"
-                        RowDefinitions="72,16">
-
-                        <ItemsPresenter Grid.Row="0" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}" Margin="{TemplateBinding Padding}" />
-                      <!--ItemContainerGenerator="{TemplateBinding ItemContainerGenerator}"-->
-
-                        <Grid
-                            Grid.Row="1"
-                            Margin="0,-1,-5,0"
-                            ColumnDefinitions="*,18"
-                            RowDefinitions="*">
-                            <TextBlock
-                                Grid.Column="0"
-                                HorizontalAlignment="Center"
-                                FontSize="11"
-                                FontWeight="DemiBold"
-                                Text="{TemplateBinding Text}" />
-                            <Button
-                                Name="rButton"
-                                Grid.Column="1"
-                                Width="15"
-                                Height="15"
-                                Command="{TemplateBinding Command}">
-                                <Border>
-                                  <Grid Width="9" Height="9">
-                                    <Border BorderBrush="#FF7F7F7F" BorderThickness="1,1,0,0"/>
-                                    <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="#FF7F7F7F" StrokeThickness="1"/>
-                                    <Border BorderBrush="#FF7F7F7F" BorderThickness="0,0,1,1" Width="4" Height="4" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                                  </Grid>
-                                </Border>
-                            </Button>
-                        </Grid>
-
-                    </Grid>
-                </DockPanel>
-            </ControlTemplate>
-        </Setter>
-      <Setter Property="ItemsPanel">
-        <ItemsPanelTemplate>
-          <StackPanel Orientation="Horizontal"/>
-        </ItemsPanelTemplate>
-      </Setter>
-    </Style>
-
+  </Design.PreviewWith>
+  <Style Selector="local|RibbonTabGroup">
+    <Setter Property="Template">
+      <ControlTemplate TargetType="local:RibbonTabGroup">
+        <DockPanel>
+          <Border
+              Width="1"
+              Margin="5"
+              Background="{DynamicResource HoveredBorderBackgroundColorBrush}"
+              DockPanel.Dock="Right" />
+          <LayoutTransformControl Classes="LayoutInvert">
+            <!--ItemContainerGenerator="{TemplateBinding ItemContainerGenerator}"-->
+            <Grid Name="ContentsGrid"
+                ColumnDefinitions="*,14"
+                RowDefinitions="*,14">
+              <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}" Margin="{TemplateBinding Padding}" Grid.ColumnSpan="2"/>
+              <TextBlock Grid.Column="0" Grid.Row="1"
+                         TextAlignment="Center"
+                  HorizontalAlignment="Stretch"
+                  FontSize="11"
+                  FontWeight="DemiBold"
+                  Text="{TemplateBinding Text}" />
+              <Button Grid.Column="1" Grid.Row="1"
+                  Name="rButton"
+                  Width="15"
+                  Height="15"
+                      HorizontalAlignment="Right"
+                  Command="{TemplateBinding Command}">
+                <Border>
+                  <Grid Width="9" Height="9">
+                    <Border BorderBrush="#FF7F7F7F" BorderThickness="1,1,0,0"/>
+                    <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="#FF7F7F7F" StrokeThickness="1"/>
+                    <Border BorderBrush="#FF7F7F7F" BorderThickness="0,0,1,1" Width="4" Height="4" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                  </Grid>
+                </Border>
+              </Button>
+            </Grid>
+          </LayoutTransformControl>
+        </DockPanel>
+      </ControlTemplate>
+    </Setter>
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <WrapPanel Name="ItemsWrapPanel"/>
+        <!--Orientation="{Binding Orientation, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Ribbon}}}"-->
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonTabGroup /template/ WrapPanel#ItemsWrapPanel">
+    <Setter Property="Orientation" Value="Vertical"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonTabGroup /template/ WrapPanel#ItemsWrapPanel">
+    <Setter Property="Orientation" Value="Horizontal"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonTabGroup">
+    <Setter Property="Padding" Value="0,2"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonTabGroup">
+    <Setter Property="Padding" Value="2,0"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonTabGroup /template/ LayoutTransformControl.LayoutInvert">
+    <Setter Property="Margin" Value="0,0,0,2"/>
+    <Setter Property="LayoutTransform">
+      <RotateTransform Angle="90"/>
+    </Setter>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonTabGroup /template/ LayoutTransformControl.LayoutInvert">
+    <Setter Property="LayoutTransform">
+      <RotateTransform Angle="0"/>
+    </Setter>
+  </Style>
     <Style Selector="Button#rButton">
-        <Setter Property="Background" Value="transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-    </Style>
-    <Style Selector="Button#rButton:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
-    </Style>
-    <Style Selector="Button#rButton:pressed  /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}" />
-    </Style>
-    <Style Selector="Button#rButton:disabled">
-        <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-    </Style>
+    <Setter Property="Background" Value="transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="Button#rButton:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
+  </Style>
+  <Style Selector="Button#rButton:pressed  /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}" />
+  </Style>
+  <Style Selector="Button#rButton:disabled">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+  </Style>
 </Styles>

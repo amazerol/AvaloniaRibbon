@@ -16,7 +16,7 @@
         <vm:MainWindowViewModel />
     </ribbon:RibbonWindow.DataContext>
     <DockPanel>
-        <ribbon:Ribbon DockPanel.Dock="Top">
+        <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top">
             <ribbon:Ribbon.MenuItems>
                 <MenuItem Header="Item 1">
                     <MenuItem Header="SubItem 1"/>
@@ -58,8 +58,7 @@
                         </ribbon:RibbonButton>
                     </ribbon:RibbonTabGroup>
                     <ribbon:RibbonTabGroup Command="{Binding OnClickCommand}" Text="Paragraphe">
-                        <StackPanel Orientation="Vertical">
-                            <!--  Maximum 3 buttons per vertical stackpanel  -->
+                        <!--  Maximum 3 buttons per vertical stackpanel  -->
                             <ribbon:RibbonButton Size="Medium"
                     Command="{Binding OnClickCommand}"
                     Content="Reproduire la mise en forme">
@@ -77,7 +76,6 @@
                                     <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
                                 </ribbon:RibbonButton.Icon>
                             </ribbon:RibbonButton>
-                        </StackPanel>
                         <ribbon:RibbonComboButton Content="Coller">
                             <ribbon:RibbonComboButton.LargeIcon>
                                 <Image Source="/Assets/RibbonIcons/settings.png" Width="32" Height="32"/>
@@ -85,8 +83,6 @@
                             <ComboBoxItem>ksdlfml</ComboBoxItem>
                             <ComboBoxItem>ksdnvbl</ComboBoxItem>
                         </ribbon:RibbonComboButton>
-                        <StackPanel>
-                            <ribbon:RibbonSmallButtonHGroup>
                                 <ribbon:RibbonButton Size="Small" ToolTip.Tip="A small tooltip">
                                     <ribbon:RibbonButton.Icon>
                                         <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
@@ -102,8 +98,6 @@
                                         <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
                                     </ribbon:RibbonButton.Icon>
                                 </ribbon:RibbonButton>
-                            </ribbon:RibbonSmallButtonHGroup>
-                        </StackPanel>
                     </ribbon:RibbonTabGroup>
                 </StackPanel>
             </ribbon:RibbonTab>
@@ -186,8 +180,10 @@
                 </StackPanel>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
-        </Grid>
+            <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation"/>
+            <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
+        </StackPanel>
     </DockPanel>
 </ribbon:RibbonWindow>

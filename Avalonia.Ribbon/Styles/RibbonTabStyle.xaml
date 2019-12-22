@@ -6,31 +6,32 @@
         <local:RibbonTab Header="Test" />
     </Design.PreviewWith>
 
-    <Style Selector="local|RibbonTab">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="Height" Value="34" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="{DynamicResource ActiveRibbonBackgroundColorBrush}" />
-        <Setter Property="Margin" Value="0 0 0 0" />
-        <Setter Property="Padding" Value="10 0" />
-        <Setter Property="Template">
-            <ControlTemplate TargetType="TabItem">
-                <ContentPresenter
-                    Name="PART_ContentPresenter"
-                    Margin="{TemplateBinding Margin}"
-                    Padding="{TemplateBinding Padding}"
-                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Content="{TemplateBinding Header}"
-                    ContentTemplate="{TemplateBinding HeaderTemplate}">
-                </ContentPresenter>
-            </ControlTemplate>
-        </Setter>
-    </Style>
+  <Style Selector="local|RibbonTab">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="MinHeight" Value="34" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{DynamicResource ActiveRibbonBackgroundColorBrush}" />
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="Padding" Value="10,0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+          <ContentPresenter
+              Name="PART_ContentPresenter"
+              Margin="{TemplateBinding Padding}"
+              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+              Content="{TemplateBinding Header}"
+              ContentTemplate="{TemplateBinding HeaderTemplate}">
+          </ContentPresenter>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
     <Style Selector="Window[IsActive=False] local|Ribbon local|RibbonTab:not(:selected)">
         <Setter Property="Foreground" Value="#7FFFFFFF"/>
     </Style>
@@ -43,9 +44,8 @@
   <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon[IsCollapsed=True] local|RibbonTab:selected">
     <Setter Property="Foreground" Value="#7FFFFFFF"/>
   </Style>
-
-    <Style Selector="local|Ribbon[IsCollapsed=False] local|RibbonTab:selected">
-        <Setter Property="Foreground" Value="{DynamicResource TitleBarColorBrush}" />
-        <Setter Property="Background" Value="{Binding $parent.Background}" />
-    </Style>
+  <Style Selector="local|Ribbon[IsCollapsed=False] local|RibbonTab:selected">
+    <Setter Property="Foreground" Value="{DynamicResource TitleBarColorBrush}" />
+    <Setter Property="Background" Value="{Binding $parent.Background}" />
+  </Style>
 </Styles>

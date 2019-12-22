@@ -1,6 +1,7 @@
 ﻿using Avalonia.Collections;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
@@ -13,6 +14,7 @@ namespace Avalonia.Controls.Ribbon
         private IEnumerable _menuItems = new AvaloniaList<object>();
         private IEnumerable _menuPlacesItems = new AvaloniaList<object>();
 
+        
         public IEnumerable MenuItems
         {
             get { return _menuItems; }
@@ -25,6 +27,13 @@ namespace Avalonia.Controls.Ribbon
             set { SetAndRaise(MenuPlacesItemsProperty, ref _menuPlacesItems, value); }
         }
 
+        public Orientation Orientation
+        {
+            get { return GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
+
+        public static readonly StyledProperty<Orientation> OrientationProperty;
         public static readonly StyledProperty<IBrush> RemainingTabControlHeaderColorProperty;
         public static readonly StyledProperty<bool> IsCollapsedProperty;
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
@@ -33,6 +42,8 @@ namespace Avalonia.Controls.Ribbon
 
         static Ribbon()
         {
+            OrientationProperty = StackLayout.OrientationProperty.AddOwner<Ribbon>();
+            OrientationProperty.OverrideDefaultValue<Ribbon>(Orientation.Horizontal);
             RemainingTabControlHeaderColorProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(RemainingTabControlHeaderColor));
             IsCollapsedProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsCollapsed));
             IsMenuOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsMenuOpen));
@@ -64,12 +75,12 @@ namespace Avalonia.Controls.Ribbon
         {
             if (ItemCount > 1)
             {
-                if (e.Delta.Y > 0)
+                if (((Orientation == Orientation.Horizontal) && (e.Delta.Y > 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y < 0)))
                 {
                     if (SelectedIndex > 0)
                         SelectedIndex--;
                 }
-                else if (e.Delta.Y < 0)
+                else if (((Orientation == Orientation.Horizontal) && (e.Delta.Y < 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y > 0)))
                 {
                     if (SelectedIndex < (ItemCount - 1))
                         SelectedIndex++;
