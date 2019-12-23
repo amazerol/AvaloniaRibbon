@@ -3,11 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
   <Design.PreviewWith>
-
+  <Grid Height="90" Width="90">
+    <local:RibbonGroupBox>
+      <local:RibbonButton Size="Large"/>
+    </local:RibbonGroupBox>
+  </Grid>
   </Design.PreviewWith>
-  <Style Selector="local|RibbonTabGroup">
+
+  <Style Selector="local|RibbonGroupBox">
     <Setter Property="Template">
-      <ControlTemplate TargetType="local:RibbonTabGroup">
+      <ControlTemplate TargetType="local:RibbonGroupBox">
         <DockPanel>
           <Border
               Width="1"
@@ -20,18 +25,29 @@
                 ColumnDefinitions="*,14"
                 RowDefinitions="*,14">
               <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}" Margin="{TemplateBinding Padding}" Grid.ColumnSpan="2"/>
-              <TextBlock Grid.Column="0" Grid.Row="1"
+              <!--TextBlock Grid.Column="0" Grid.Row="1"
                          TextAlignment="Center"
                   HorizontalAlignment="Stretch"
                   FontSize="11"
                   FontWeight="DemiBold"
-                  Text="{TemplateBinding Text}" />
+                  Text="{TemplateBinding Text}" /-->
+              <ContentPresenter Name="PART_HeaderPresenter" TextBlock.FontSize="11" Grid.Column="0" Grid.Row="1"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              Content="{TemplateBinding Header}"/>
               <Button Grid.Column="1" Grid.Row="1"
-                  Name="rButton"
+                  Name="commandButton"
                   Width="15"
                   Height="15"
-                      HorizontalAlignment="Right"
-                  Command="{TemplateBinding Command}">
+                  HorizontalAlignment="Right"
+                  Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}">
+                <Button.IsVisible>
+                  <Binding Path="!Command" Mode="OneWay" RelativeSource="{RelativeSource Mode=TemplatedParent}">
+                    <Binding.Converter>
+                      <local:IsNullConverter/>
+                    </Binding.Converter>
+                  </Binding>
+                </Button.IsVisible>
                 <Border>
                   <Grid Width="9" Height="9">
                     <Border BorderBrush="#FF7F7F7F" BorderThickness="1,1,0,0"/>
@@ -52,42 +68,48 @@
       </ItemsPanelTemplate>
     </Setter>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonTabGroup /template/ WrapPanel#ItemsWrapPanel">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ WrapPanel#ItemsWrapPanel">
     <Setter Property="Orientation" Value="Vertical"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonTabGroup /template/ WrapPanel#ItemsWrapPanel">
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ WrapPanel#ItemsWrapPanel">
     <Setter Property="Orientation" Value="Horizontal"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonTabGroup">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox">
     <Setter Property="Padding" Value="0,2"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonTabGroup">
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox">
     <Setter Property="Padding" Value="2,0"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonTabGroup /template/ LayoutTransformControl.LayoutInvert">
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ LayoutTransformControl.LayoutInvert">
     <Setter Property="Margin" Value="0,0,0,2"/>
     <Setter Property="LayoutTransform">
       <RotateTransform Angle="90"/>
     </Setter>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonTabGroup /template/ LayoutTransformControl.LayoutInvert">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ LayoutTransformControl.LayoutInvert">
     <Setter Property="LayoutTransform">
       <RotateTransform Angle="0"/>
     </Setter>
   </Style>
-    <Style Selector="Button#rButton">
+    <Style Selector="local|RibbonGroupBox /template/ Button#commandButton">
     <Setter Property="Background" Value="transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
   </Style>
-  <Style Selector="Button#rButton:pointerover /template/ ContentPresenter">
+  <Style Selector="local|RibbonGroupBox /template/ Button#commandButton:pointerover /template/ ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
   </Style>
-  <Style Selector="Button#rButton:pressed  /template/ ContentPresenter">
+  <Style Selector="local|RibbonGroupBox /template/ Button#commandButton:pressed  /template/ ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}" />
   </Style>
-  <Style Selector="Button#rButton:disabled">
+  <Style Selector="local|RibbonGroupBox /template/ Button#commandButton:disabled">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
   </Style>
+  <!--Style Selector="local|RibbonGroupBox[Command={x:Null}] /template/ Button#commandButton">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+  <Style Selector="local|RibbonGroupBox[Command={x:Null}] /template/ ContentPresenter#PART_HeaderPresenter">
+    <Setter Property="Grid.ColumnSpan" Value="2" />
+  </Style-->
 </Styles>

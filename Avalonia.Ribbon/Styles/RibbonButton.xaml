@@ -1,0 +1,91 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
+  <Design.PreviewWith>
+    <Grid Height="90">
+      <local:RibbonGroupBox Header="Group">
+        <StackPanel Orientation="Horizontal" Spacing="10">
+          <local:RibbonButton Content="Large Ribbon Button">
+            <local:RibbonButton.LargeIcon>
+              <Image Source="/Assets/settings.png" Width="32" Height="32"/>
+            </local:RibbonButton.LargeIcon>
+          </local:RibbonButton>
+          <local:RibbonButton Size="Medium" Content="Medium Ribbon Button">
+            <local:RibbonButton.Icon>
+              <Image Source="/Assets/settings.png" Width="16" Height="16"/>
+            </local:RibbonButton.Icon>
+          </local:RibbonButton>
+          <local:RibbonButton Size="Small" Content="Small Ribbon Button">
+            <local:RibbonButton.Icon>
+              <Image Source="/Assets/settings.png" Width="16" Height="16"/>
+            </local:RibbonButton.Icon>
+          </local:RibbonButton>
+        </StackPanel>
+      </local:RibbonGroupBox>
+    </Grid>
+  </Design.PreviewWith>
+
+  <Style Selector="local|RibbonButton[Size=Large]">
+    <Setter Property="Padding" Value="9" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Classes="RibbonButtonBackgroundBorder">
+          <StackPanel Orientation="Vertical">
+            <ContentPresenter Content="{TemplateBinding LargeIcon}" />
+            <ContentPresenter Content="{TemplateBinding Content}" Margin="0,3,0,2"/>
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonButton[Size=Medium]">
+    <Setter Property="Height" Value="24"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Classes="RibbonButtonBackgroundBorder">
+          <StackPanel Orientation="Horizontal">
+            <ContentPresenter Content="{TemplateBinding Icon}" />
+            <ContentPresenter Content="{TemplateBinding Content}" Margin="3,0,0,0" />
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonButton[Size=Small]">
+    <Setter Property="Width" Value="24"/>
+    <Setter Property="Height" Value="24"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Classes="RibbonButtonBackgroundBorder">
+          <ContentPresenter Content="{TemplateBinding Icon}"/>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonButton:not(local|RibbonButton[Size=Large])">
+    <Setter Property="Padding" Value="3" />
+  </Style>
+  <Style Selector="local|RibbonButton">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="1" />
+  </Style>
+  <Style Selector="local|RibbonButton:pointerover">
+    <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
+  </Style>
+  <Style Selector="local|RibbonButton:pressed">
+    <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}" />
+  </Style>
+  <Style Selector="local|RibbonButton:disabled">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+  </Style>
+  <Style Selector="local|RibbonButton /template/ Border.RibbonButtonBackgroundBorder">
+    <Setter Property="Padding" Value="{TemplateBinding Padding}"/>
+    <Setter Property="Background" Value="{TemplateBinding Background}"/>
+    <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
+    <Setter Property="BorderThickness" Value="{TemplateBinding BorderThickness}"/>
+  </Style>
+</Styles>

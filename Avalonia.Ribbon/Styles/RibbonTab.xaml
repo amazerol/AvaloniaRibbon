@@ -26,8 +26,7 @@
               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
               VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
               Content="{TemplateBinding Header}"
-              ContentTemplate="{TemplateBinding HeaderTemplate}">
-          </ContentPresenter>
+              ContentTemplate="{TemplateBinding HeaderTemplate}"/>
         </Border>
       </ControlTemplate>
     </Setter>
