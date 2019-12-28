@@ -3,8 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
   <Style Selector="local|RibbonWindow">
-    <Setter Property="BorderBrush" Value="{DynamicResource TitleBarColorBrush}"/>
-    <Setter Property="TitleBarColor" Value="{DynamicResource TitleBarColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
+    <Setter Property="TitleBarBackground" Value="{DynamicResource ThemeBackgroundBrush}" />
+    <Setter Property="TitleBarForeground" Value="{DynamicResource ThemeForegroundBrush}" />
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="FontSize" Value="{DynamicResource FontSizeNormal}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Grid>
@@ -13,39 +17,46 @@
               <Grid
                 Name="TitleBar"
                 Height="30"
-                Background="{TemplateBinding TitleBarColor}"
+                Background="{TemplateBinding TitleBarBackground}"
                 ColumnDefinitions="Auto,*,Auto"
                 DockPanel.Dock="Top">
-                <TextBlock
+                <TextBlock Name="TitleTextBlock"
                     Margin="5,0,0,0"
                     VerticalAlignment="Center"
-                    Foreground="White">
-                  Title
-                </TextBlock>
+                    Foreground="{TemplateBinding TitleBarForeground}" Text="{TemplateBinding Title}"/>
                 <StackPanel
                     Grid.Column="2"
                     Orientation="Horizontal">
                   <StackPanel.Styles>
                     <Style Selector="Button">
-                      <Setter Property="BorderThickness" Value="0" />
-                      <Setter Property="Background" Value="Transparent" />
+                      <!--Setter Property="BorderThickness" Value="0" /-->
                       <Setter Property="Width" Value="45" />
                       <Setter Property="Height" Value="30" />
                       <Setter Property="VerticalAlignment" Value="Top"/>
-                      <Setter Property="Foreground" Value="White"/>
+                      <Setter Property="Background" Value="Transparent" />
+                      <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Ribbon}}}"/>
+                      <Setter Property="BorderBrush" Value="Transparent" />
+                    </Style>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                      <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
+                      <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+                    </Style>
+                    <Style Selector="Button:pressed  /template/ ContentPresenter">
+                      <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
                     </Style>
                     <Style Selector="Button > Path">
                       <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
                       <Setter Property="StrokeThickness" Value="1"/>
                     </Style>
-                    <Style Selector="Button:pointerover">
+                    <!--Style Selector="Button:pointerover">
                       <Setter Property="Background" Value="#1A000000" />
                     </Style>
                     <Style Selector="Button:pressed">
                       <Setter Property="Background" Value="#36000000" />
-                    </Style>
-                    <Style Selector="Button:Disabled">
-                      <Setter Property="Foreground" Value="#33FFFFFF" />
+                    </Style-->
+                    <Style Selector="Button:not(:pointerover):not(:pressed):disabled">
+                      <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+                      <!--Setter Property="Foreground" Value="#33FFFFFF" /-->
                     </Style>
                     <Style Selector="Button#MinimizeButton > Rectangle">
                       <Setter Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
@@ -71,12 +82,12 @@
                       <Setter Property="StrokeThickness" Value="0"/>
                       <Setter Property="Fill" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
                     </Style>
-                    <Style Selector="Button#CloseButton:pointerover">
+                    <!--Style Selector="Button#CloseButton:pointerover">
                       <Setter Property="Background" Value="#FFE81123" />
                     </Style>
                     <Style Selector="Button#CloseButton:pressed">
                       <Setter Property="Background" Value="#99E71022" />
-                    </Style>
+                    </Style-->
                     <Style Selector="local|RibbonWindow[IsActive=false] /template/ Button:not(:pointerover):not(:pressed)">
                       <Setter Property="Opacity" Value="0.5"/>
                     </Style>
@@ -170,10 +181,10 @@
     <Setter Property="IsVisible" Value="False"/>
   </Style>
   <Style Selector="local|RibbonWindow[IsActive=false]">
-    <Setter Property="BorderBrush" Value="{DynamicResource InactiveTitleBarColorBrush}"/>
-    <Setter Property="TitleBarColor" Value="{DynamicResource InactiveTitleBarColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="TitleBarBackground" Value="{DynamicResource ThemeControlMidHighBrush}" />
   </Style>
-  <Style Selector="local|RibbonWindow[IsActive=false] /template/ Grid#TitleBar > TextBlock">
+  <Style Selector="local|RibbonWindow[IsActive=false] /template/ TextBlock#TitleTextBlock">
     <Setter Property="Opacity" Value="0.5"/>
   </Style>
 </Styles>

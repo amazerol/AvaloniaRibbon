@@ -11,7 +11,8 @@ namespace Avalonia.Controls.Ribbon
 {
     public class RibbonWindow : Window, IStyleable
     {
-        public static readonly StyledProperty<IBrush> TitleBarColorProperty;
+        public static readonly StyledProperty<IBrush> TitleBarBackgroundProperty;
+        public static readonly StyledProperty<IBrush> TitleBarForegroundProperty;
         
         /*public static readonly StyledProperty<WindowState> WindowStateProperty;
         public WindowState WindowState
@@ -29,7 +30,8 @@ namespace Avalonia.Controls.Ribbon
 
         static RibbonWindow()
         {
-            TitleBarColorProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarColor));
+            TitleBarBackgroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarBackground));
+            TitleBarForegroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarForeground));
             /*WindowStateProperty = Window.WindowStateProperty.AddOwner<RibbonWindow>();
             IsActiveProperty = Window.IsActiveProperty.AddOwner<RibbonWindow>(x => x.IsActive, (x, o) => x.IsActive = o);*/
             //HasSystemDecorationsProperty.OverrideDefaultValue(typeof(RibbonWindow), false);
@@ -37,10 +39,16 @@ namespace Avalonia.Controls.Ribbon
 
         Type IStyleable.StyleKey => typeof(RibbonWindow);
 
-        public IBrush TitleBarColor
+        public IBrush TitleBarBackground
         {
-            get { return GetValue(TitleBarColorProperty); }
-            set { SetValue(TitleBarColorProperty, value); }
+            get { return GetValue(TitleBarBackgroundProperty); }
+            set { SetValue(TitleBarBackgroundProperty, value); }
+        }
+
+        public IBrush TitleBarForeground
+        {
+            get { return GetValue(TitleBarForegroundProperty); }
+            set { SetValue(TitleBarForegroundProperty, value); }
         }
 
         void SetupSide(string name, StandardCursorType cursor, WindowEdge edge, ref TemplateAppliedEventArgs e)

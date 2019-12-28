@@ -11,13 +11,19 @@
   </Design.PreviewWith>
 
   <Style Selector="local|RibbonGroupBox">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Template">
       <ControlTemplate TargetType="local:RibbonGroupBox">
         <DockPanel>
           <Border
               Width="1"
-              Margin="5"
-              Background="{DynamicResource HoveredBorderBackgroundColorBrush}"
+              Margin="5,0"
+              Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}"
               DockPanel.Dock="Right" />
           <LayoutTransformControl Classes="LayoutInvert">
             <!--ItemContainerGenerator="{TemplateBinding ItemContainerGenerator}"-->
@@ -34,7 +40,7 @@
               <ContentPresenter Name="PART_HeaderPresenter" TextBlock.FontSize="11" Grid.Column="0" Grid.Row="1"
               HorizontalAlignment="Center"
               VerticalAlignment="Center"
-              Content="{TemplateBinding Header}"/>
+              Content="{TemplateBinding Header}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
               <Button Grid.Column="1" Grid.Row="1"
                   Name="commandButton"
                   Width="15"
@@ -50,9 +56,9 @@
                 </Button.IsVisible>
                 <Border>
                   <Grid Width="9" Height="9">
-                    <Border BorderBrush="#FF7F7F7F" BorderThickness="1,1,0,0"/>
-                    <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="#FF7F7F7F" StrokeThickness="1"/>
-                    <Border BorderBrush="#FF7F7F7F" BorderThickness="0,0,1,1" Width="4" Height="4" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="1,1,0,0"/>
+                    <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="1"/>
+                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="0,0,1,1" Width="4" Height="4" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                   </Grid>
                 </Border>
               </Button>
@@ -92,10 +98,14 @@
     </Setter>
   </Style>
     <Style Selector="local|RibbonGroupBox /template/ Button#commandButton">
-    <Setter Property="Background" Value="transparent" />
+    <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
   </Style>
-  <Style Selector="local|RibbonGroupBox /template/ Button#commandButton:pointerover /template/ ContentPresenter">
+  <Style Selector="local|RibbonGroupBox /template/ Button#commandButton:pointerover">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+  </Style>
+  <!--Style Selector="local|RibbonGroupBox /template/ Button#commandButton:pointerover /template/ ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}" />
     <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
   </Style>
@@ -105,7 +115,7 @@
   </Style>
   <Style Selector="local|RibbonGroupBox /template/ Button#commandButton:disabled">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
-  </Style>
+  </Style-->
   <!--Style Selector="local|RibbonGroupBox[Command={x:Null}] /template/ Button#commandButton">
     <Setter Property="IsVisible" Value="False" />
   </Style>

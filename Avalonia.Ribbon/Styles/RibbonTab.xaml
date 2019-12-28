@@ -12,7 +12,8 @@
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="Background" Value="Transparent" />
-    <Setter Property="Foreground" Value="{DynamicResource ActiveRibbonBackgroundColorBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}"/>
     <Setter Property="Margin" Value="0" />
     <Setter Property="Padding" Value="10,0" />
     <Setter Property="Template">
@@ -20,31 +21,48 @@
         <Border Background="{TemplateBinding Background}"
               BorderBrush="{TemplateBinding BorderBrush}"
               BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-          <ContentPresenter
-              Name="PART_ContentPresenter"
-              Margin="{TemplateBinding Padding}"
-              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-              Content="{TemplateBinding Header}"
-              ContentTemplate="{TemplateBinding HeaderTemplate}"/>
+          <Grid>
+            <ContentPresenter
+                Name="PART_ContentPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding Header}"
+                TextBlock.Foreground="{TemplateBinding Foreground}"
+                ContentTemplate="{TemplateBinding HeaderTemplate}"/>
+            <Border Name="SelectedBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+          </Grid>
         </Border>
       </ControlTemplate>
     </Setter>
   </Style>
-    <Style Selector="Window[IsActive=False] local|Ribbon local|RibbonTab:not(:selected)">
-        <Setter Property="Foreground" Value="#7FFFFFFF"/>
-    </Style>
-    <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon local|RibbonTab:not(:selected)">
-        <Setter Property="Foreground" Value="#7FFFFFFF"/>
-    </Style>
-  <Style Selector="Window[IsActive=False] local|Ribbon[IsCollapsed=True] local|RibbonTab:selected">
-    <Setter Property="Foreground" Value="#7FFFFFFF"/>
+  <Style Selector="local|RibbonTab:not(:selected) /template/ Border#SelectedBorder">
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
   </Style>
-  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon[IsCollapsed=True] local|RibbonTab:selected">
-    <Setter Property="Foreground" Value="#7FFFFFFF"/>
+  <Style Selector="local|RibbonTab:not(:selected):not(:pointerover):not(:pressed) /template/ Border#SelectedBorder">
+    <Setter Property="IsVisible" Value="False"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
   </Style>
-  <Style Selector="local|Ribbon[IsCollapsed=False] local|RibbonTab:selected">
+  <Style Selector="local|RibbonTab:not(:selected):pointerover /template/ Border#SelectedBorder">
+    <Setter Property="Margin" Value="3,0"/>
+  </Style>
+  <Style Selector="Window[IsActive=False] local|Ribbon local|RibbonTab:not(:selected) /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
+  <Style Selector="Window[IsActive=False] local|Ribbon[IsCollapsed=True] local|RibbonTab:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon local|RibbonTab:not(:selected) /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon[IsCollapsed=True] local|RibbonTab:selected /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
+  <Style Selector="local|RibbonTab:disabled">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+  <!--Style Selector="local|Ribbon[IsCollapsed=False] local|RibbonTab:selected">
     <Setter Property="Foreground" Value="{DynamicResource TitleBarColorBrush}" />
     <Setter Property="Background" Value="{Binding $parent.Background}" />
-  </Style>
+  </Style-->
 </Styles>

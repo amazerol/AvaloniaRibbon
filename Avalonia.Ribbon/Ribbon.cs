@@ -34,7 +34,8 @@ namespace Avalonia.Controls.Ribbon
         }
 
         public static readonly StyledProperty<Orientation> OrientationProperty;
-        public static readonly StyledProperty<IBrush> RemainingTabControlHeaderColorProperty;
+        public static readonly StyledProperty<IBrush> HeaderBackgroundProperty;
+        public static readonly StyledProperty<IBrush> HeaderForegroundProperty;
         public static readonly StyledProperty<bool> IsCollapsedProperty;
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
         public static readonly DirectProperty<Ribbon, IEnumerable> MenuItemsProperty;
@@ -44,7 +45,8 @@ namespace Avalonia.Controls.Ribbon
         {
             OrientationProperty = StackLayout.OrientationProperty.AddOwner<Ribbon>();
             OrientationProperty.OverrideDefaultValue<Ribbon>(Orientation.Horizontal);
-            RemainingTabControlHeaderColorProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(RemainingTabControlHeaderColor));
+            HeaderBackgroundProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(HeaderBackground));
+            HeaderForegroundProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(HeaderForeground));
             IsCollapsedProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsCollapsed));
             IsMenuOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsMenuOpen));
             MenuItemsProperty = MenuBase.ItemsProperty.AddOwner<Ribbon>(x => x.MenuItems, (x, v) => x.MenuItems = v);
@@ -65,10 +67,16 @@ namespace Avalonia.Controls.Ribbon
             set => SetValue(IsMenuOpenProperty, value);
         }
 
-        public IBrush RemainingTabControlHeaderColor
+        public IBrush HeaderBackground
         {
-            get { return GetValue(RemainingTabControlHeaderColorProperty); }
-            set { SetValue(RemainingTabControlHeaderColorProperty, value); }
+            get { return GetValue(HeaderBackgroundProperty); }
+            set { SetValue(HeaderBackgroundProperty, value); }
+        }
+
+        public IBrush HeaderForeground
+        {
+            get { return GetValue(HeaderForegroundProperty); }
+            set { SetValue(HeaderForegroundProperty, value); }
         }
 
         protected override void OnPointerWheelChanged(PointerWheelEventArgs e)

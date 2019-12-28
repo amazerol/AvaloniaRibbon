@@ -3,6 +3,9 @@ using Avalonia.Controls;
 using Avalonia.Controls.Ribbon;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
+using Avalonia.Markup.Xaml.MarkupExtensions;
+using Avalonia.Markup.Xaml.Styling;
+using System;
 
 namespace Avalonia.Ribbon.Samples.Views
 {
@@ -33,6 +36,19 @@ namespace Avalonia.Ribbon.Samples.Views
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
+            //this.Find<CheckBox>("LightsOnCheckBox").Click += LightsOnCheckBox_Click;
+        }
+
+        private void LightsOnCheckBox_Click(object sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            string includeString = "avares://Avalonia.Themes.Default/Accents/BaseLight.xaml";
+            if (!((sender as CheckBox).IsChecked.Value))
+                includeString = "avares://Avalonia.Themes.Default/Accents/BaseDark.xaml";
+
+            App.Current.Styles[1] = new StyleInclude(new Uri("resm:Styles?assembly=Avalonia.Ribbon.Sample"))
+            {
+                Source = new Uri(includeString)
+            };
         }
     }
 }
