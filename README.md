@@ -5,7 +5,7 @@ The purpose of this Avalonia component is to achieve something like Microsoft Ri
 
 The original piece of work is by [Alban Mazerolles](https://github.com/amazerol) which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
 
-![Preview](https://user-images.githubusercontent.com/16206389/59566444-a752ea80-9060-11e9-828b-593d347f797d.gif)
+![Preview](https://i.imgur.com/r1LniW3.png)
 
 Include ribbon styles to App.xaml as shown below.
 ```xaml

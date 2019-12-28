@@ -12,7 +12,7 @@
 		<!--BaseLight
 		or
         BaseDark-->
-		<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseDark.xaml" />
+		<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml" />
         <StyleInclude Source="avares://Avalonia.Controls.Ribbon/Styles/RibbonStyles.xaml" />
     </Application.Styles>
 </Application>

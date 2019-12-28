@@ -81,19 +81,24 @@ namespace Avalonia.Controls.Ribbon
 
         protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
         {
+            int oldIndex = SelectedIndex;
+            int newIndex = SelectedIndex;
             if (ItemCount > 1)
             {
                 if (((Orientation == Orientation.Horizontal) && (e.Delta.Y > 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y < 0)))
                 {
-                    if (SelectedIndex > 0)
-                        SelectedIndex--;
+                    if (newIndex > 0)
+                        newIndex--;
                 }
                 else if (((Orientation == Orientation.Horizontal) && (e.Delta.Y < 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y > 0)))
                 {
-                    if (SelectedIndex < (ItemCount - 1))
-                        SelectedIndex++;
+                    if (newIndex < (ItemCount - 1))
+                        newIndex++;
                 }
             }
+            SelectedIndex = newIndex;
+            if ((SelectedItem is RibbonTab tab) && (!tab.IsEnabled))
+                SelectedIndex = oldIndex;
             base.OnPointerWheelChanged(e);
         }
     }
