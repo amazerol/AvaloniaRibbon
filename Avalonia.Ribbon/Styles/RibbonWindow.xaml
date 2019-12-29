@@ -46,7 +46,7 @@
                     </Style>
                     <Style Selector="Button > Path">
                       <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
-                      <Setter Property="StrokeThickness" Value="1"/>
+                      <Setter Property="StrokeThickness" Value="2"/>
                     </Style>
                     <!--Style Selector="Button:pointerover">
                       <Setter Property="Background" Value="#1A000000" />
@@ -63,7 +63,7 @@
                     </Style>
                     <Style Selector="Button#MaximizeButton Rectangle">
                       <Setter Property="Stroke" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
-                      <Setter Property="StrokeThickness" Value="1"/>
+                      <Setter Property="StrokeThickness" Value="2"/>
                     </Style>
                     <Style Selector="Button#MaximizeButton > Grid > Grid Border">
                       <Setter Property="BorderBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
@@ -93,17 +93,17 @@
                     </Style>
                   </StackPanel.Styles>
                   <Button Name="MinimizeButton">
-                    <Rectangle Width="10" Height="1"/>
+                    <Rectangle Width="10" Height="2"/>
                   </Button>
                   <Button Name="MaximizeButton">
                     <Grid>
                       <Rectangle Width="10" Height="10"/>
                       <Grid Width="10" Height="10">
-                        <Border BorderThickness="1" Width="8" Height="8" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                        <Border BorderThickness="2" Width="8" Height="8" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
                         <Grid Width="8" Height="8" HorizontalAlignment="Right" VerticalAlignment="Top">
-                          <Border BorderThickness="0,1,1,0"/>
-                          <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Width="1" Height="3"/>
-                          <Rectangle HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="3" Height="1"/>
+                          <Border BorderThickness="0,2,2,0"/>
+                          <Rectangle HorizontalAlignment="Left" VerticalAlignment="Top" Width="2" Height="3"/>
+                          <Rectangle HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="3" Height="2"/>
                         </Grid>
                       </Grid>
                     </Grid>

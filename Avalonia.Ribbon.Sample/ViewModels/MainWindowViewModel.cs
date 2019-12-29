@@ -12,9 +12,16 @@ namespace Avalonia.Ribbon.Samples.ViewModels
     {
         public void OnClickCommand(object parameter)
         {
-            string paramString = parameter.ToString();
-            if (parameter is string str)
-                paramString = str;
+            string paramString = "[NO CONTENT]";
+            
+            if (parameter != null)
+            {
+                if (parameter is string str)
+                    paramString = str;
+                else
+                    paramString = parameter.ToString();
+            }
+
             Console.WriteLine("OnClickCommand invoked: " + paramString);
         }
     }

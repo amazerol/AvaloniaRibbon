@@ -19,7 +19,18 @@
         <Style Selector="ribbon|RibbonGroupBox">
             <Setter Property="CommandParameter" Value="{Binding Path=Header, RelativeSource={RelativeSource Mode=Self}}"/>
         </Style>
+        <Style Selector="ribbon|RibbonButton[Size=Small]">
+            <Setter Property="CommandParameter" Value="{Binding Path=(ToolTip.Tip), RelativeSource={RelativeSource Mode=Self}}"/>
+        </Style>
         <Style Selector="ribbon|RibbonButton">
+            <Setter Property="Command" Value="{Binding OnClickCommand}"/>
+            <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Mode=Self}}"/>
+        </Style>
+        <Style Selector="ribbon|RibbonComboButton[Size=Small]">
+            <Setter Property="CommandParameter" Value="{Binding Path=(ToolTip.Tip), RelativeSource={RelativeSource Mode=Self}}"/>
+        </Style>
+        <Style Selector="ribbon|RibbonComboButton">
+            <Setter Property="Command" Value="{Binding OnClickCommand}"/>
             <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Mode=Self}}"/>
         </Style>
     </ribbon:RibbonWindow.Styles>
@@ -43,7 +54,7 @@
             </ribbon:Ribbon.MenuPlacesItems>
             <ribbon:RibbonTab Header="RibbonButtons">
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonGroupBox Header="Large buttons">
+                    <ribbon:RibbonGroupBox Header="Large buttons" Command="{Binding OnClickCommand}">
                         <ribbon:RibbonButton Content="Button with raster icon">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
@@ -70,10 +81,9 @@
                             </ribbon:RibbonButton.LargeIcon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Command="{Binding OnClickCommand}" Header="Medium buttons">
+                    <ribbon:RibbonGroupBox Header="Medium buttons">
                         <!--  Maximum 3 buttons per vertical stackpanel  -->
                         <ribbon:RibbonButton Size="Medium"
-                    Command="{Binding OnClickCommand}"
                     Content="Button with vector icon">
                             <ribbon:RibbonButton.Icon>
                                 <Grid Width="16" Height="16">
@@ -91,7 +101,7 @@
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Command="{Binding OnClickCommand}" Header="Small buttons">
+                    <ribbon:RibbonGroupBox Header="Small buttons">
                         <ribbon:RibbonButton Size="Small" ToolTip.Tip="Button with vector icon">
                             <ribbon:RibbonButton.Icon>
                                 <Grid Width="16" Height="16">
@@ -113,7 +123,7 @@
             </ribbon:RibbonTab>
             <ribbon:RibbonTab Header="RibbonComboButtons">
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonGroupBox Command="{Binding OnClickCommand}" Header="Large combobuttons">
+                    <ribbon:RibbonGroupBox Header="Large combobuttons">
                         <ribbon:RibbonComboButton Content="Button with vector icon">
                             <ribbon:RibbonComboButton.LargeIcon>
                                 <Grid Width="32" Height="32">
@@ -136,7 +146,7 @@
                             <ComboBoxItem>Item 2</ComboBoxItem>
                         </ribbon:RibbonComboButton>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Command="{Binding OnClickCommand}" Header="Medium combobuttons">
+                    <ribbon:RibbonGroupBox Header="Medium combobuttons">
                         <ribbon:RibbonComboButton Size="Medium" Content="Button with vector icon">
                             <ribbon:RibbonComboButton.Icon>
                                 <Grid Width="16" Height="16">
@@ -158,7 +168,7 @@
                             <ComboBoxItem>Item 2</ComboBoxItem>
                         </ribbon:RibbonComboButton>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Command="{Binding OnClickCommand}" Header="Small combobuttons">
+                    <ribbon:RibbonGroupBox Header="Small combobuttons">
                         <ribbon:RibbonComboButton Size="Small" ToolTip.Tip="Button with vector icon">
                             <ribbon:RibbonComboButton.Icon>
                                 <Grid Width="16" Height="16">

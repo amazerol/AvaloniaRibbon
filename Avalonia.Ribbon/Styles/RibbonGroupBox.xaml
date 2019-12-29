@@ -56,9 +56,9 @@
                 </Button.IsVisible>
                 <Border>
                   <Grid Width="9" Height="9">
-                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="1,1,0,0"/>
-                    <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="1"/>
-                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="0,0,1,1" Width="4" Height="4" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="2,2,0,0"/>
+                    <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="2"/>
+                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="0,0,2,2" Width="5" Height="5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                   </Grid>
                 </Border>
               </Button>

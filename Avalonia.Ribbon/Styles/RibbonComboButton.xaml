@@ -3,88 +3,221 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
 
-    <Style Selector="local|RibbonComboButton">
-        <Setter Property="Template">
-            <ControlTemplate TargetType="local:RibbonComboButton">
-                <Border
-                    Name="border"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="1">
-                    <Grid RowDefinitions="*,Auto">
-                        <local:RibbonButton Margin="0" LargeIcon="{TemplateBinding LargeIcon}" />
-                        <ToggleButton
-                            Name="toggle"
-                            Grid.Row="1"
-                            BorderThickness="0"
-                            ClickMode="Press"
-                            Focusable="False"
-                            Padding="5,2"
-                            IsChecked="{TemplateBinding IsDropDownOpen,
+  <Style Selector="local|RibbonComboButton">
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+  </Style>
+  <Style Selector="local|RibbonComboButton[Size=Large]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Classes="RibbonButtonBackgroundBorder">
+          <StackPanel Orientation="Vertical">
+            <Button Name="RibbonComboButtonTopButton" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+              <ContentPresenter Content="{TemplateBinding LargeIcon}" />
+            </Button>
+            <ToggleButton
+                Name="toggle"
+                Grid.Row="1"
+                BorderThickness="0"
+                ClickMode="Press"
+                Focusable="False"
+                Padding="5,2"
+                IsChecked="{TemplateBinding IsDropDownOpen,
                                                         Mode=TwoWay}">
-                            <StackPanel>
-                                <ContentPresenter Content="{TemplateBinding Content}" />
-                                <Path
-                                    Width="8"
-                                    Height="4"
-                                    Margin="0,2,0,1"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Data="F1 M 301.14,-189.041L 311.57,-189.041L 306.355,-182.942L 301.14,-189.041 Z"
-                                    Fill="{TemplateBinding Foreground}"
-                                    Stretch="Uniform" />
-                            </StackPanel>
-                        </ToggleButton>
-
-                        <Popup
-                            Name="PART_Popup"
-                            MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
-                            MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                            IsOpen="{TemplateBinding IsDropDownOpen,
+              <WrapPanel Margin="0,3,0,2">
+                <ContentPresenter Content="{TemplateBinding Content}"/>
+                <Path
+                    Width="8"
+                    Height="4"
+                    Margin="5,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
+                    Fill="{TemplateBinding Foreground}"
+                    Stretch="Uniform" />
+                <Popup
+                  Name="PART_Popup"
+                  MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                  IsOpen="{TemplateBinding IsDropDownOpen,
                                                      Mode=TwoWay}"
-                            ObeyScreenEdges="True"
-                            PlacementTarget="{TemplateBinding}"
-                            StaysOpen="False">
-                            <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
-                                <VisualLayerManager Margin="-1,-1,0,0">
-                                    <ScrollViewer>
-                                        <ItemsPresenter
-                                            Name="PART_ItemsPresenter"
-                                            ItemTemplate="{TemplateBinding ItemTemplate}"
-                                            Items="{TemplateBinding Items}"
-                                            ItemsPanel="{TemplateBinding ItemsPanel}"
-                                            VirtualizationMode="{TemplateBinding VirtualizationMode}" />
-                                    </ScrollViewer>
-                                </VisualLayerManager>
-                            </Border>
-                        </Popup>
-                    </Grid>
-                </Border>
-            </ControlTemplate>
-        </Setter>
-    </Style>
+                  ObeyScreenEdges="True"
+                  PlacementTarget="{TemplateBinding}"
+                  StaysOpen="False">
+                  <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                    <VisualLayerManager Margin="-1,-1,0,0">
+                      <ScrollViewer>
+                        <ItemsPresenter
+                            Name="PART_ItemsPresenter"
+                            ItemTemplate="{TemplateBinding ItemTemplate}"
+                            Items="{TemplateBinding Items}"
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            VirtualizationMode="{TemplateBinding VirtualizationMode}" />
+                      </ScrollViewer>
+                    </VisualLayerManager>
+                  </Border>
+                </Popup>
+              </WrapPanel>
+            </ToggleButton>
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonComboButton[Size=Medium]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Classes="RibbonButtonBackgroundBorder">
+          <DockPanel>
+            <ToggleButton DockPanel.Dock="Right"
+                Name="toggle"
+                BorderThickness="0"
+                ClickMode="Press"
+                Focusable="False"
+                Padding="5,2"
+                IsChecked="{TemplateBinding IsDropDownOpen,
+                                                        Mode=TwoWay}">
+              <Grid>
+                <Path
+                    Width="8"
+                    Height="4"
+                    Margin="0,3,0,2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
+                    Fill="{TemplateBinding Foreground}"
+                    Stretch="Uniform" />
+                <Popup
+                  Name="PART_Popup"
+                  MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                  IsOpen="{TemplateBinding IsDropDownOpen,
+                                                     Mode=TwoWay}"
+                  ObeyScreenEdges="True"
+                  PlacementTarget="{TemplateBinding}"
+                  StaysOpen="False">
+                  <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                    <VisualLayerManager Margin="-1,-1,0,0">
+                      <ScrollViewer>
+                        <ItemsPresenter
+                            Name="PART_ItemsPresenter"
+                            ItemTemplate="{TemplateBinding ItemTemplate}"
+                            Items="{TemplateBinding Items}"
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            VirtualizationMode="{TemplateBinding VirtualizationMode}" />
+                      </ScrollViewer>
+                    </VisualLayerManager>
+                  </Border>
+                </Popup>
+              </Grid>
+            </ToggleButton>
+            <Button Name="RibbonComboButtonTopButton" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+              <StackPanel Orientation="Horizontal">
+                <ContentPresenter Content="{TemplateBinding Icon}" />
+                <ContentPresenter Content="{TemplateBinding Content}" Margin="3,0,0,0" />
+              </StackPanel>
+            </Button>
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonComboButton[Size=Small]">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Classes="RibbonButtonBackgroundBorder">
+          <DockPanel>
+            <ToggleButton DockPanel.Dock="Right"
+                Name="toggle"
+                BorderThickness="0"
+                ClickMode="Press"
+                Focusable="False"
+                Padding="5,2"
+                IsChecked="{TemplateBinding IsDropDownOpen,
+                                                        Mode=TwoWay}">
+              <Grid>
+                <Path
+                    Width="8"
+                    Height="4"
+                    Margin="0,3,0,2"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
+                    Fill="{TemplateBinding Foreground}"
+                    Stretch="Uniform" />
+                <Popup
+                  Name="PART_Popup"
+                  MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
+                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
+                  IsOpen="{TemplateBinding IsDropDownOpen,
+                                                     Mode=TwoWay}"
+                  ObeyScreenEdges="True"
+                  PlacementTarget="{TemplateBinding}"
+                  StaysOpen="False">
+                  <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                    <VisualLayerManager Margin="-1,-1,0,0">
+                      <ScrollViewer>
+                        <ItemsPresenter
+                            Name="PART_ItemsPresenter"
+                            ItemTemplate="{TemplateBinding ItemTemplate}"
+                            Items="{TemplateBinding Items}"
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            VirtualizationMode="{TemplateBinding VirtualizationMode}" />
+                      </ScrollViewer>
+                    </VisualLayerManager>
+                  </Border>
+                </Popup>
+              </Grid>
+            </ToggleButton>
+            <Button Name="RibbonComboButtonTopButton" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+              <ContentPresenter Content="{TemplateBinding Icon}" />
+            </Button>
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
 
 
-    <Style Selector="local|RibbonComboButton:pointerover /template/ Border#border">
-        <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
-    </Style>
-    <Style Selector="local|RibbonComboButton local|RibbonButton /template/ Button#rButton">
-        <Setter Property="BorderThickness" Value="0" />
-    </Style>
-    <Style Selector="local|RibbonComboButton local|RibbonButton /template/ Image">
-        <Setter Property="Margin" Value="0" />
-    </Style>
 
-    <Style Selector="local|RibbonComboButton ToggleButton#toggle">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderBrush" Value="Transparent" />
-    </Style>
-    <Style Selector="local|RibbonComboButton ToggleButton#toggle:pointerover /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
-    </Style>
-    <Style Selector="local|RibbonComboButton ToggleButton#toggle:checked /template/ ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}" />
-    </Style>
+  <Style Selector="local|RibbonComboButton:pointerover /template/ Border#border">
+    <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
+  </Style>
+  <Style Selector="local|RibbonComboButton local|RibbonButton /template/ Image">
+    <Setter Property="Margin" Value="0" />
+  </Style>
+  <Style Selector="local|RibbonComboButton /template/ ToggleButton#toggle:not(:pointerover):not(:pressed):not(:checked)">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <!--Style Selector="local|RibbonComboButton ToggleButton#toggle:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
+  </Style>
+  <Style Selector="local|RibbonComboButton ToggleButton#toggle:checked /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}" />
+  </Style-->
+  <Style Selector="local|RibbonComboButton /template/ Border.RibbonButtonBackgroundBorder">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+    <Setter Property="BorderThickness" Value="{TemplateBinding BorderThickness}" />
+    <Setter Property="Padding" Value="{TemplateBinding Padding}"/>
+  </Style>
+  <Style Selector="local|RibbonComboButton:pointerover /template/ Border.RibbonButtonBackgroundBorder">
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+  </Style>
+  <Style Selector="local|RibbonComboButton:disabled /template/ Border.RibbonButtonBackgroundBorder">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+
+  <Style Selector="local|RibbonComboButton /template/ Button#RibbonComboButtonTopButton:not(:pointerover):not(:pressed)">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="local|RibbonComboButton /template/ Button#RibbonComboButtonTopButton:pointerover">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
+  </Style>
+  <Style Selector="local|RibbonComboButton /template/ Button#RibbonComboButtonTopButton:pressed">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
+  </Style>
 </Styles>
