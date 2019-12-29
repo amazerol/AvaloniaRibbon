@@ -192,9 +192,64 @@
                     </ribbon:RibbonGroupBox>
                 </StackPanel>
             </ribbon:RibbonTab>
-            <ribbon:RibbonTab Header="Galleries (NYI)" IsEnabled="False">
+            <ribbon:RibbonTab Header="Galleries">
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonGroupBox Header="Un premier groupe">
+                    <ribbon:RibbonGroupBox Header="Large gallery">
+                        <ribbon:Gallery>
+                            <ListBoxItem Content="Item 1"/>
+                            <ListBoxItem Content="Item 2"/>
+                            <ListBoxItem Content="Item 3"/>
+                            <ListBoxItem Content="Item 4"/>
+                            <ListBoxItem Content="Item 5"/>
+                            <ListBoxItem Content="Item 6"/>
+                            <ListBoxItem Content="Item 7"/>
+                            <ListBoxItem Content="Item 8"/>
+                            <ListBoxItem Content="Item 9"/>
+                            <ListBoxItem Content="Item 10"/>
+                            <ListBoxItem Content="Item 11"/>
+                            <ListBoxItem Content="Item 12"/>
+                            <ListBoxItem Content="Item 13"/>
+                            <ListBoxItem Content="Item 14"/>
+                            <ListBoxItem Content="Item 15"/>
+                        </ribbon:Gallery>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Large gallery">
+                        <ribbon:Gallery Size="Medium">
+                            <ListBoxItem Content="Item 1"/>
+                            <ListBoxItem Content="Item 2"/>
+                            <ListBoxItem Content="Item 3"/>
+                            <ListBoxItem Content="Item 4"/>
+                            <ListBoxItem Content="Item 5"/>
+                            <ListBoxItem Content="Item 6"/>
+                            <ListBoxItem Content="Item 7"/>
+                            <ListBoxItem Content="Item 8"/>
+                            <ListBoxItem Content="Item 9"/>
+                            <ListBoxItem Content="Item 10"/>
+                            <ListBoxItem Content="Item 11"/>
+                            <ListBoxItem Content="Item 12"/>
+                            <ListBoxItem Content="Item 13"/>
+                            <ListBoxItem Content="Item 14"/>
+                            <ListBoxItem Content="Item 15"/>
+                        </ribbon:Gallery>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Large gallery">
+                        <ribbon:Gallery Size="Small">
+                            <ListBoxItem Content="Item 1"/>
+                            <ListBoxItem Content="Item 2"/>
+                            <ListBoxItem Content="Item 3"/>
+                            <ListBoxItem Content="Item 4"/>
+                            <ListBoxItem Content="Item 5"/>
+                            <ListBoxItem Content="Item 6"/>
+                            <ListBoxItem Content="Item 7"/>
+                            <ListBoxItem Content="Item 8"/>
+                            <ListBoxItem Content="Item 9"/>
+                            <ListBoxItem Content="Item 10"/>
+                            <ListBoxItem Content="Item 11"/>
+                            <ListBoxItem Content="Item 12"/>
+                            <ListBoxItem Content="Item 13"/>
+                            <ListBoxItem Content="Item 14"/>
+                            <ListBoxItem Content="Item 15"/>
+                        </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
                 </StackPanel>
             </ribbon:RibbonTab>

@@ -7,7 +7,6 @@ namespace Avalonia.Controls.Ribbon
     public class RibbonButton : Button, IStyleable, IRibbonControl
     {
 
-        public static readonly StyledProperty<string> TextProperty;
         public static readonly StyledProperty<object> IconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(Icon));
         public static readonly StyledProperty<object> LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon));
         public static readonly StyledProperty<RibbonControlSize> SizeProperty;
@@ -15,19 +14,12 @@ namespace Avalonia.Controls.Ribbon
 
         static RibbonButton()
         {
-            TextProperty = AvaloniaProperty.Register<RibbonButton, string>(nameof(Text));
             SizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize>(nameof(RibbonControlSize), RibbonControlSize.Large);
             CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<RibbonButton, bool>(nameof(CanAddToQuickAccessToolbar), true);
         }
 
         Type IStyleable.StyleKey => typeof(RibbonButton);
 
-        public string Text
-        {
-            get { return GetValue(TextProperty); }
-            set { SetValue(TextProperty, value); }
-        }
-        
         public object Icon
         {
             get => GetValue(IconProperty);

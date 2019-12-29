@@ -1,6 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StyleInclude Source="/Styles/RibbonThemeColor.xaml" />
+  <!--StyleInclude Source="/Styles/RibbonThemeColor.xaml" /-->
 
+    <StyleInclude Source="/Styles/Gallery.xaml" />
     <StyleInclude Source="/Styles/Ribbon.xaml" />
     <StyleInclude Source="/Styles/RibbonTab.xaml" />
     <StyleInclude Source="/Styles/RibbonWindow.xaml" />
