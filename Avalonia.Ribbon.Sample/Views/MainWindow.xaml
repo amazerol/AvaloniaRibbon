@@ -213,7 +213,7 @@
                             <ListBoxItem Content="Item 15"/>
                         </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Header="Large gallery">
+                    <ribbon:RibbonGroupBox Header="Medium gallery">
                         <ribbon:Gallery Size="Medium">
                             <ListBoxItem Content="Item 1"/>
                             <ListBoxItem Content="Item 2"/>
@@ -232,7 +232,7 @@
                             <ListBoxItem Content="Item 15"/>
                         </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Header="Large gallery">
+                    <ribbon:RibbonGroupBox Header="Small gallery">
                         <ribbon:Gallery Size="Small">
                             <ListBoxItem Content="Item 1"/>
                             <ListBoxItem Content="Item 2"/>
