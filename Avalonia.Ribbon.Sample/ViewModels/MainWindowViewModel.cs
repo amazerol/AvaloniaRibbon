@@ -1,14 +1,28 @@
 ﻿using System;
+using System.ComponentModel;
+using System.IO;
+using System.Text;
+using System.Windows.Input;
+using System.Runtime.CompilerServices;
+using ReactiveUI;
 
 namespace Avalonia.Ribbon.Samples.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        public string Greeting => "Welcome to Avalonia!";
-
-        public void OnClickCommand()
+        public void OnClickCommand(object parameter)
         {
-            Console.WriteLine("Je viens de cliquer sur le bouton test 7");
+            string paramString = "[NO CONTENT]";
+            
+            if (parameter != null)
+            {
+                if (parameter is string str)
+                    paramString = str;
+                else
+                    paramString = parameter.ToString();
+            }
+
+            Console.WriteLine("OnClickCommand invoked: " + paramString);
         }
     }
 }

@@ -17,12 +17,6 @@ namespace Avalonia.Controls.Ribbon
             get;
             set;
         }
-
-        object Icon
-        {
-            get;
-            set;
-        }
     }
 
     public enum RibbonControlSize

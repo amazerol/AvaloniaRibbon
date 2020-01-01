@@ -15,8 +15,27 @@
     <ribbon:RibbonWindow.DataContext>
         <vm:MainWindowViewModel />
     </ribbon:RibbonWindow.DataContext>
+    <ribbon:RibbonWindow.Styles>
+        <Style Selector="ribbon|RibbonGroupBox">
+            <Setter Property="CommandParameter" Value="{Binding Path=Header, RelativeSource={RelativeSource Mode=Self}}"/>
+        </Style>
+        <Style Selector="ribbon|RibbonButton[Size=Small]">
+            <Setter Property="CommandParameter" Value="{Binding Path=(ToolTip.Tip), RelativeSource={RelativeSource Mode=Self}}"/>
+        </Style>
+        <Style Selector="ribbon|RibbonButton">
+            <Setter Property="Command" Value="{Binding OnClickCommand}"/>
+            <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Mode=Self}}"/>
+        </Style>
+        <Style Selector="ribbon|RibbonComboButton[Size=Small]">
+            <Setter Property="CommandParameter" Value="{Binding Path=(ToolTip.Tip), RelativeSource={RelativeSource Mode=Self}}"/>
+        </Style>
+        <Style Selector="ribbon|RibbonComboButton">
+            <Setter Property="Command" Value="{Binding OnClickCommand}"/>
+            <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Mode=Self}}"/>
+        </Style>
+    </ribbon:RibbonWindow.Styles>
     <DockPanel>
-        <ribbon:Ribbon DockPanel.Dock="Top">
+        <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top">
             <ribbon:Ribbon.MenuItems>
                 <MenuItem Header="Item 1">
                     <MenuItem Header="SubItem 1"/>
@@ -33,161 +52,213 @@
                 <ListBoxItem Content="Place 2"/>
                 <ListBoxItem Content="Place 3"/>
             </ribbon:Ribbon.MenuPlacesItems>
-            <ribbon:RibbonTab Header="RibbonTab 1">
+            <ribbon:RibbonTab Header="RibbonButtons">
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTabGroup Text="Un premier groupe">
-                        <ribbon:RibbonButton Content="Test3">
+                    <ribbon:RibbonGroupBox Header="Large buttons" Command="{Binding OnClickCommand}">
+                        <ribbon:RibbonButton Content="Button with raster icon">
                             <ribbon:RibbonButton.LargeIcon>
-                                <Image Source="/Assets/RibbonIcons/settings.png" Width="32" Height="32"/>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
                             </ribbon:RibbonButton.LargeIcon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="Test4">
+                        <ribbon:RibbonButton Content="Button with vector icon">
                             <ribbon:RibbonButton.LargeIcon>
-                                <Image Source="/Assets/RibbonIcons/corner.png" Width="32" Height="32"/>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                                </Grid>
                             </ribbon:RibbonButton.LargeIcon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="Test5">
+                        <ribbon:RibbonButton Content="A Button">
                             <ribbon:RibbonButton.LargeIcon>
-                                <Image Source="/Assets/RibbonIcons/chevron.png" Width="32" Height="32"/>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
                             </ribbon:RibbonButton.LargeIcon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="Test6">
-                            <ribbon:RibbonButton.LargeIcon>
-                                <Image Source="/Assets/RibbonIcons/settings.png" Width="32" Height="32"/>
-                            </ribbon:RibbonButton.LargeIcon>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Medium buttons">
+                        <!--  Maximum 3 buttons per vertical stackpanel  -->
+                        <ribbon:RibbonButton Size="Medium"
+                    Content="Button with vector icon">
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                    </ribbon:RibbonTabGroup>
-                    <ribbon:RibbonTabGroup Command="{Binding OnClickCommand}" Text="Paragraphe">
-                        <StackPanel Orientation="Vertical">
-                            <!--  Maximum 3 buttons per vertical stackpanel  -->
-                            <ribbon:RibbonButton Size="Medium"
-                    Command="{Binding OnClickCommand}"
-                    Content="Reproduire la mise en forme">
-                                <ribbon:RibbonButton.Icon>
-                                    <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                </ribbon:RibbonButton.Icon>
-                            </ribbon:RibbonButton>
-                            <ribbon:RibbonButton Size="Medium" Content="Test8">
-                                <ribbon:RibbonButton.Icon>
-                                    <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                </ribbon:RibbonButton.Icon>
-                            </ribbon:RibbonButton>
-                            <ribbon:RibbonButton Size="Medium" Content="Test9">
-                                <ribbon:RibbonButton.Icon>
-                                    <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                </ribbon:RibbonButton.Icon>
-                            </ribbon:RibbonButton>
-                        </StackPanel>
-                        <ribbon:RibbonComboButton Content="Coller">
+                        <ribbon:RibbonButton Size="Medium" Content="Button with raster icon">
+                            <ribbon:RibbonButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Small buttons">
+                        <ribbon:RibbonButton Size="Small" ToolTip.Tip="Button with vector icon">
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Size="Small" ToolTip.Tip="Button with raster icon">
+                            <ribbon:RibbonButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                </StackPanel>
+            </ribbon:RibbonTab>
+            <ribbon:RibbonTab Header="RibbonComboButtons">
+                <StackPanel Orientation="Horizontal">
+                    <ribbon:RibbonGroupBox Header="Large combobuttons">
+                        <ribbon:RibbonComboButton Content="Button with vector icon">
                             <ribbon:RibbonComboButton.LargeIcon>
-                                <Image Source="/Assets/RibbonIcons/settings.png" Width="32" Height="32"/>
+                                <Grid Width="32" Height="32">
+                                    <Path Data="M 0 0 L 24 0 L 0 24 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="0,2"/>
+                                </Grid>
                             </ribbon:RibbonComboButton.LargeIcon>
-                            <ComboBoxItem>ksdlfml</ComboBoxItem>
-                            <ComboBoxItem>ksdnvbl</ComboBoxItem>
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
                         </ribbon:RibbonComboButton>
-                        <StackPanel>
-                            <ribbon:RibbonSmallButtonHGroup>
-                                <ribbon:RibbonButton Size="Small" ToolTip.Tip="A small tooltip">
-                                    <ribbon:RibbonButton.Icon>
-                                        <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                    </ribbon:RibbonButton.Icon>
-                                </ribbon:RibbonButton>
-                                <ribbon:RibbonButton Size="Small">
-                                    <ribbon:RibbonButton.Icon>
-                                        <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                    </ribbon:RibbonButton.Icon>
-                                </ribbon:RibbonButton>
-                                <ribbon:RibbonButton Size="Small">
-                                    <ribbon:RibbonButton.Icon>
-                                        <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                    </ribbon:RibbonButton.Icon>
-                                </ribbon:RibbonButton>
-                            </ribbon:RibbonSmallButtonHGroup>
-                        </StackPanel>
-                    </ribbon:RibbonTabGroup>
-                </StackPanel>
-            </ribbon:RibbonTab>
-            <ribbon:RibbonTab Header="RibbonTab 2">
-                <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTabGroup Command="{Binding OnClickCommand}" Text="Paragraphe">
-                        <StackPanel Orientation="Vertical">
-                            <!--  Maximum 3 buttons per vertical stackpanel  -->
-                            <ribbon:RibbonButton Size="Medium"
-                    Command="{Binding OnClickCommand}"
-                    Content="Reproduire la mise en forme">
-                                <ribbon:RibbonButton.Icon>
-                                    <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                </ribbon:RibbonButton.Icon>
-                            </ribbon:RibbonButton>
-                            <ribbon:RibbonButton Size="Medium" Content="Test8">
-                                <ribbon:RibbonButton.Icon>
-                                    <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                </ribbon:RibbonButton.Icon>
-                            </ribbon:RibbonButton>
-                            <ribbon:RibbonButton Size="Medium" Content="Test9">
-                                <ribbon:RibbonButton.Icon>
-                                    <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                </ribbon:RibbonButton.Icon>
-                            </ribbon:RibbonButton>
-                        </StackPanel>
-                        <ribbon:RibbonComboButton Content="Coller">
+                        <ribbon:RibbonComboButton Content="Button with raster icon">
+                            <ribbon:RibbonComboButton.LargeIcon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/corner.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonComboButton.LargeIcon>
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                        </ribbon:RibbonComboButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Medium combobuttons">
+                        <ribbon:RibbonComboButton Size="Medium" Content="Button with vector icon">
                             <ribbon:RibbonComboButton.Icon>
-                                <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
                             </ribbon:RibbonComboButton.Icon>
-                            <ComboBoxItem>ksdlfml</ComboBoxItem>
-                            <ComboBoxItem>ksdnvbl</ComboBoxItem>
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
                         </ribbon:RibbonComboButton>
-                        <StackPanel>
-                            <ribbon:RibbonSmallButtonHGroup>
-                                <ribbon:RibbonButton Size="Small" ToolTip.Tip="A small tooltip">
-                                    <ribbon:RibbonButton.Icon>
-                                        <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                    </ribbon:RibbonButton.Icon>
-                                </ribbon:RibbonButton>
-                                <ribbon:RibbonButton Size="Small">
-                                    <ribbon:RibbonButton.Icon>
-                                        <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                    </ribbon:RibbonButton.Icon>
-                                </ribbon:RibbonButton>
-                                <ribbon:RibbonButton Size="Small">
-                                    <ribbon:RibbonButton.Icon>
-                                        <Image Source="/Assets/RibbonIcons/settings.png" Width="16" Height="16"/>
-                                    </ribbon:RibbonButton.Icon>
-                                </ribbon:RibbonButton>
-                            </ribbon:RibbonSmallButtonHGroup>
-                        </StackPanel>
-                    </ribbon:RibbonTabGroup>
+                        <ribbon:RibbonComboButton Size="Medium" Content="Button with raster icon">
+                            <ribbon:RibbonComboButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/corner.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonComboButton.Icon>
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                        </ribbon:RibbonComboButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Small combobuttons">
+                        <ribbon:RibbonComboButton Size="Small" ToolTip.Tip="Button with vector icon">
+                            <ribbon:RibbonComboButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonComboButton.Icon>
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                        </ribbon:RibbonComboButton>
+                        <ribbon:RibbonComboButton Size="Small" ToolTip.Tip="Button with raster icon">
+                            <ribbon:RibbonComboButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/corner.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonComboButton.Icon>
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                        </ribbon:RibbonComboButton>
+                    </ribbon:RibbonGroupBox>
                 </StackPanel>
             </ribbon:RibbonTab>
-            <ribbon:RibbonTab Header="RibbonTab 3">
+            <ribbon:RibbonTab Header="Galleries">
                 <StackPanel Orientation="Horizontal">
-                    <ribbon:RibbonTabGroup Text="Un premier groupe">
-                        <ribbon:RibbonButton Content="Test3">
-                            <ribbon:RibbonButton.LargeIcon>
-                                <Image Source="/Assets/RibbonIcons/settings.png" Width="32" Height="32"/>
-                            </ribbon:RibbonButton.LargeIcon>
-                        </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="Test4">
-                            <ribbon:RibbonButton.LargeIcon>
-                                <Image Source="/Assets/RibbonIcons/corner.png" Width="32" Height="32"/>
-                            </ribbon:RibbonButton.LargeIcon>
-                        </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="Test5">
-                            <ribbon:RibbonButton.LargeIcon>
-                                <Image Source="/Assets/RibbonIcons/chevron.png" Width="32" Height="32"/>
-                            </ribbon:RibbonButton.LargeIcon>
-                        </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="Test6">
-                            <ribbon:RibbonButton.LargeIcon>
-                                <Image Source="/Assets/RibbonIcons/settings.png" Width="32" Height="32"/>
-                            </ribbon:RibbonButton.LargeIcon>
-                        </ribbon:RibbonButton>
-                    </ribbon:RibbonTabGroup>
+                    <ribbon:RibbonGroupBox Header="Large gallery">
+                        <ribbon:Gallery>
+                            <ListBoxItem Content="Item 1"/>
+                            <ListBoxItem Content="Item 2"/>
+                            <ListBoxItem Content="Item 3"/>
+                            <ListBoxItem Content="Item 4"/>
+                            <ListBoxItem Content="Item 5"/>
+                            <ListBoxItem Content="Item 6"/>
+                            <ListBoxItem Content="Item 7"/>
+                            <ListBoxItem Content="Item 8"/>
+                            <ListBoxItem Content="Item 9"/>
+                            <ListBoxItem Content="Item 10"/>
+                            <ListBoxItem Content="Item 11"/>
+                            <ListBoxItem Content="Item 12"/>
+                            <ListBoxItem Content="Item 13"/>
+                            <ListBoxItem Content="Item 14"/>
+                            <ListBoxItem Content="Item 15"/>
+                        </ribbon:Gallery>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Medium gallery">
+                        <ribbon:Gallery Size="Medium">
+                            <ListBoxItem Content="Item 1"/>
+                            <ListBoxItem Content="Item 2"/>
+                            <ListBoxItem Content="Item 3"/>
+                            <ListBoxItem Content="Item 4"/>
+                            <ListBoxItem Content="Item 5"/>
+                            <ListBoxItem Content="Item 6"/>
+                            <ListBoxItem Content="Item 7"/>
+                            <ListBoxItem Content="Item 8"/>
+                            <ListBoxItem Content="Item 9"/>
+                            <ListBoxItem Content="Item 10"/>
+                            <ListBoxItem Content="Item 11"/>
+                            <ListBoxItem Content="Item 12"/>
+                            <ListBoxItem Content="Item 13"/>
+                            <ListBoxItem Content="Item 14"/>
+                            <ListBoxItem Content="Item 15"/>
+                        </ribbon:Gallery>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Small gallery">
+                        <ribbon:Gallery Size="Small">
+                            <ListBoxItem Content="Item 1"/>
+                            <ListBoxItem Content="Item 2"/>
+                            <ListBoxItem Content="Item 3"/>
+                            <ListBoxItem Content="Item 4"/>
+                            <ListBoxItem Content="Item 5"/>
+                            <ListBoxItem Content="Item 6"/>
+                            <ListBoxItem Content="Item 7"/>
+                            <ListBoxItem Content="Item 8"/>
+                            <ListBoxItem Content="Item 9"/>
+                            <ListBoxItem Content="Item 10"/>
+                            <ListBoxItem Content="Item 11"/>
+                            <ListBoxItem Content="Item 12"/>
+                            <ListBoxItem Content="Item 13"/>
+                            <ListBoxItem Content="Item 14"/>
+                            <ListBoxItem Content="Item 15"/>
+                        </ribbon:Gallery>
+                    </ribbon:RibbonGroupBox>
                 </StackPanel>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
-        </Grid>
+            <!--CheckBox x:Name="LightsOnCheckBox" Content="Lights" IsChecked="True"/-->
+            <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation"/>
+            <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
+        </StackPanel>
     </DockPanel>
 </ribbon:RibbonWindow>

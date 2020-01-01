@@ -1,6 +1,7 @@
 ﻿using Avalonia.Collections;
 using Avalonia.Controls.Primitives;
 using Avalonia.Input;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
@@ -13,6 +14,7 @@ namespace Avalonia.Controls.Ribbon
         private IEnumerable _menuItems = new AvaloniaList<object>();
         private IEnumerable _menuPlacesItems = new AvaloniaList<object>();
 
+        
         public IEnumerable MenuItems
         {
             get { return _menuItems; }
@@ -25,7 +27,15 @@ namespace Avalonia.Controls.Ribbon
             set { SetAndRaise(MenuPlacesItemsProperty, ref _menuPlacesItems, value); }
         }
 
-        public static readonly StyledProperty<IBrush> RemainingTabControlHeaderColorProperty;
+        public Orientation Orientation
+        {
+            get { return GetValue(OrientationProperty); }
+            set { SetValue(OrientationProperty, value); }
+        }
+
+        public static readonly StyledProperty<Orientation> OrientationProperty;
+        public static readonly StyledProperty<IBrush> HeaderBackgroundProperty;
+        public static readonly StyledProperty<IBrush> HeaderForegroundProperty;
         public static readonly StyledProperty<bool> IsCollapsedProperty;
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
         public static readonly DirectProperty<Ribbon, IEnumerable> MenuItemsProperty;
@@ -33,7 +43,10 @@ namespace Avalonia.Controls.Ribbon
 
         static Ribbon()
         {
-            RemainingTabControlHeaderColorProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(RemainingTabControlHeaderColor));
+            OrientationProperty = StackLayout.OrientationProperty.AddOwner<Ribbon>();
+            OrientationProperty.OverrideDefaultValue<Ribbon>(Orientation.Horizontal);
+            HeaderBackgroundProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(HeaderBackground));
+            HeaderForegroundProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(HeaderForeground));
             IsCollapsedProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsCollapsed));
             IsMenuOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsMenuOpen));
             MenuItemsProperty = MenuBase.ItemsProperty.AddOwner<Ribbon>(x => x.MenuItems, (x, v) => x.MenuItems = v);
@@ -54,27 +67,38 @@ namespace Avalonia.Controls.Ribbon
             set => SetValue(IsMenuOpenProperty, value);
         }
 
-        public IBrush RemainingTabControlHeaderColor
+        public IBrush HeaderBackground
         {
-            get { return GetValue(RemainingTabControlHeaderColorProperty); }
-            set { SetValue(RemainingTabControlHeaderColorProperty, value); }
+            get { return GetValue(HeaderBackgroundProperty); }
+            set { SetValue(HeaderBackgroundProperty, value); }
+        }
+
+        public IBrush HeaderForeground
+        {
+            get { return GetValue(HeaderForegroundProperty); }
+            set { SetValue(HeaderForegroundProperty, value); }
         }
 
         protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
         {
+            int oldIndex = SelectedIndex;
+            int newIndex = SelectedIndex;
             if (ItemCount > 1)
             {
-                if (e.Delta.Y > 0)
+                if (((Orientation == Orientation.Horizontal) && (e.Delta.Y > 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y < 0)))
                 {
-                    if (SelectedIndex > 0)
-                        SelectedIndex--;
+                    if (newIndex > 0)
+                        newIndex--;
                 }
-                else if (e.Delta.Y < 0)
+                else if (((Orientation == Orientation.Horizontal) && (e.Delta.Y < 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y > 0)))
                 {
-                    if (SelectedIndex < (ItemCount - 1))
-                        SelectedIndex++;
+                    if (newIndex < (ItemCount - 1))
+                        newIndex++;
                 }
             }
+            SelectedIndex = newIndex;
+            if ((SelectedItem is RibbonTab tab) && (!tab.IsEnabled))
+                SelectedIndex = oldIndex;
             base.OnPointerWheelChanged(e);
         }
     }

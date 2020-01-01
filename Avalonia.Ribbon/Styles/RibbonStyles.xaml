@@ -1,13 +1,12 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <StyleInclude Source="/Styles/RibbonThemeColor.xaml" />
+  <!--StyleInclude Source="/Styles/RibbonThemeColor.xaml" /-->
 
-    <StyleInclude Source="/Styles/RibbonStyle.xaml" />
-    <StyleInclude Source="/Styles/RibbonTabStyle.xaml" />
-    <StyleInclude Source="/Styles/RibbonWindowStyle.xaml" />
-    <StyleInclude Source="/Styles/RibbonButtonStyle.xaml" />
-    <StyleInclude Source="/Styles/RibbonSmallButtonStyle.xaml" />
-    <StyleInclude Source="/Styles/RibbonSmallButtonHGroupStyle.xaml" />
-    <StyleInclude Source="/Styles/RibbonComboButtonStyle.xaml" />
-    <StyleInclude Source="/Styles/RibbonTabGroupStyle.xaml" />
-    <StyleInclude Source="/Styles/RibbonLinearButtonStyle.xaml" />
+    <StyleInclude Source="/Styles/Gallery.xaml" />
+    <StyleInclude Source="/Styles/Ribbon.xaml" />
+    <StyleInclude Source="/Styles/RibbonTab.xaml" />
+    <StyleInclude Source="/Styles/RibbonWindow.xaml" />
+    <StyleInclude Source="/Styles/RibbonButton.xaml" />
+    <StyleInclude Source="/Styles/RibbonSmallButtonHGroup.xaml" />
+    <StyleInclude Source="/Styles/RibbonComboButton.xaml" />
+    <StyleInclude Source="/Styles/RibbonGroupBox.xaml" />
 </Styles>

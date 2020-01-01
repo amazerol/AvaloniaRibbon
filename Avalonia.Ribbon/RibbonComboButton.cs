@@ -1,6 +1,7 @@
 ﻿using Avalonia.Media.Imaging;
 using Avalonia.Styling;
 using System;
+using System.Windows.Input;
 
 namespace Avalonia.Controls.Ribbon
 {
@@ -12,6 +13,9 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<RibbonControlSize> SizeProperty;
         public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
+        public static readonly DirectProperty<RibbonComboButton, ICommand> CommandProperty;
+        public static readonly StyledProperty<object> CommandParameterProperty;
+
         static RibbonComboButton()
         {
             ContentProperty = RibbonButton.ContentProperty.AddOwner<RibbonComboButton>();
@@ -19,6 +23,8 @@ namespace Avalonia.Controls.Ribbon
             LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon), null);
             SizeProperty = RibbonButton.SizeProperty.AddOwner<RibbonComboButton>();
             CanAddToQuickAccessToolbarProperty = RibbonButton.CanAddToQuickAccessToolbarProperty.AddOwner<RibbonComboButton>();
+            CommandProperty = Button.CommandProperty.AddOwner<RibbonComboButton>(button => button.Command, (button, command) => button.Command = command);
+            CommandParameterProperty = Button.CommandParameterProperty.AddOwner<RibbonComboButton>();
         }
 
         Type IStyleable.StyleKey => typeof(RibbonComboButton);
@@ -52,6 +58,19 @@ namespace Avalonia.Controls.Ribbon
         {
             get => GetValue(CanAddToQuickAccessToolbarProperty);
             set => SetValue(CanAddToQuickAccessToolbarProperty, value);
+        }
+
+        private ICommand _command = null;
+        public ICommand Command
+        {
+            get => _command;
+            set => SetAndRaise(CommandProperty, ref _command, value);
+        }
+
+        public object CommandParameter
+        {
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
         }
     }
 }
