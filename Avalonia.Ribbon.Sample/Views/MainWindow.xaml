@@ -54,8 +54,8 @@
             </ribbon:Ribbon.MenuPlacesItems>
             <ribbon:RibbonTab Header="Resize test">
                 <ribbon:RibbonGroupsStackPanel Orientation="Horizontal">
-                    <ribbon:RibbonGroupBox Header="Large buttons" Command="{Binding OnClickCommand}">
-                        <ribbon:RibbonButton Content="Button with raster icon">
+                    <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}">
+                        <ribbon:RibbonButton Content="Button 1" ToolTip.Tip="Button 1">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
                                     <Rectangle.OpacityMask>
@@ -64,7 +64,7 @@
                                 </Rectangle>
                             </ribbon:RibbonButton.LargeIcon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="Button with vector icon">
+                        <ribbon:RibbonButton Content="Button 2" ToolTip.Tip="Button 2">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Grid Width="32" Height="32">
                                     <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
@@ -72,7 +72,7 @@
                                 </Grid>
                             </ribbon:RibbonButton.LargeIcon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="A Button">
+                        <ribbon:RibbonButton Content="Button 3" ToolTip.Tip="Button 3">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Grid Width="32" Height="32">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
@@ -81,16 +81,33 @@
                             </ribbon:RibbonButton.LargeIcon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Header="Medium buttons">
-                        <!--  Maximum 3 buttons per vertical stackpanel  -->
-                        <ribbon:RibbonButton MaxSize="Medium" Content="Button with vector icon">
+                    <ribbon:RibbonGroupBox Header="Test Group 2">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 1" ToolTip.Tip="Button 1">
                             <ribbon:RibbonButton.Icon>
                                 <Grid Width="16" Height="16">
                                     <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                                 </Grid>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton MaxSize="Medium" Content="Button with raster icon">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 2" ToolTip.Tip="Button 2">
+                            <ribbon:RibbonButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Test Group 3">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 1" ToolTip.Tip="Button 1">
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 2" ToolTip.Tip="Button 2">
                             <ribbon:RibbonButton.Icon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
                                     <Rectangle.OpacityMask>

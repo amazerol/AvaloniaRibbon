@@ -36,12 +36,12 @@ namespace Avalonia.Controls.Ribbon
                 desired = desired.WithHeight(bigSize.Height);
             _prevSize = bigSize;
             
-            bool proceed = (desired.Width > 0) || (desired.Height > 0);
-            Debug.WriteLine("bigSize: " + bigSize + "\ndesired: " + desired + "\nnewCons: " + newConsWidth + ", " + newConsHeight + "\nproceed: " + proceed);
+            bool proceed = (desired.Width >= 0) || (desired.Height >= 0);
+            //Debug.WriteLine("bigSize: " + bigSize + "\ndesired: " + desired + "\nnewCons: " + newConsWidth + ", " + newConsHeight + "\nproceed: " + proceed);
 
             if (double.IsInfinity(newConsWidth) || double.IsInfinity(newConsHeight))
                 return bigSize;
-            if (proceed && 
+            if (proceed &&
                     (
                         ((Orientation == Orientation.Vertical) && (desired.Width > newConsWidth)) ||
                         ((Orientation == Orientation.Horizontal) && (desired.Height > newConsHeight))
@@ -62,13 +62,16 @@ namespace Avalonia.Controls.Ribbon
 
                 if (!_smallified)
                 {
-                    Debug.WriteLine("Smallified!");
+                    //Debug.WriteLine("Smallified!");
                     _smallified = true;
                 }
                 return arrSize; //smallSize; //new Size(Math.Max(newWidth, MinWidth), Math.Max(newHeight, MinHeight));
             }
             else
+            {
+                ArrangeOverride(bigSize);
                 return bigSize;
+            }
 
             if (false)
             {
