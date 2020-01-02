@@ -52,8 +52,8 @@
                 <ListBoxItem Content="Place 2"/>
                 <ListBoxItem Content="Place 3"/>
             </ribbon:Ribbon.MenuPlacesItems>
-            <ribbon:RibbonTab Header="RibbonButtons">
-                <StackPanel Orientation="Horizontal">
+            <ribbon:RibbonTab Header="Resize test">
+                <ribbon:RibbonGroupsStackPanel Orientation="Horizontal">
                     <ribbon:RibbonGroupBox Header="Large buttons" Command="{Binding OnClickCommand}">
                         <ribbon:RibbonButton Content="Button with raster icon">
                             <ribbon:RibbonButton.LargeIcon>
@@ -83,15 +83,64 @@
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Medium buttons">
                         <!--  Maximum 3 buttons per vertical stackpanel  -->
-                        <ribbon:RibbonButton Size="Medium"
-                    Content="Button with vector icon">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button with vector icon">
                             <ribbon:RibbonButton.Icon>
                                 <Grid Width="16" Height="16">
                                     <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                                 </Grid>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Size="Medium" Content="Button with raster icon">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button with raster icon">
+                            <ribbon:RibbonButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                </ribbon:RibbonGroupsStackPanel>
+            </ribbon:RibbonTab>
+            <ribbon:RibbonTab Header="RibbonButtons">
+                <ribbon:RibbonGroupsStackPanel Orientation="Horizontal">
+                    <ribbon:RibbonGroupBox Header="Large buttons" Command="{Binding OnClickCommand}">
+                        <ribbon:RibbonButton Content="Button with raster icon">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.LargeIcon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Content="Button with vector icon">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Content="A Button">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Medium buttons">
+                        <!--  Maximum 3 buttons per vertical stackpanel  -->
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button with vector icon">
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button with raster icon">
                             <ribbon:RibbonButton.Icon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
                                     <Rectangle.OpacityMask>
@@ -102,14 +151,14 @@
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Small buttons">
-                        <ribbon:RibbonButton Size="Small" ToolTip.Tip="Button with vector icon">
+                        <ribbon:RibbonButton MaxSize="Small" ToolTip.Tip="Button with vector icon">
                             <ribbon:RibbonButton.Icon>
                                 <Grid Width="16" Height="16">
                                     <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                                 </Grid>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Size="Small" ToolTip.Tip="Button with raster icon">
+                        <ribbon:RibbonButton MaxSize="Small" ToolTip.Tip="Button with raster icon">
                             <ribbon:RibbonButton.Icon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
                                     <Rectangle.OpacityMask>
@@ -119,10 +168,10 @@
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
-                </StackPanel>
+                </ribbon:RibbonGroupsStackPanel>
             </ribbon:RibbonTab>
             <ribbon:RibbonTab Header="RibbonComboButtons">
-                <StackPanel Orientation="Horizontal">
+                <ribbon:RibbonGroupsStackPanel Orientation="Horizontal">
                     <ribbon:RibbonGroupBox Header="Large combobuttons">
                         <ribbon:RibbonComboButton Content="Button with vector icon">
                             <ribbon:RibbonComboButton.LargeIcon>
@@ -147,7 +196,7 @@
                         </ribbon:RibbonComboButton>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Medium combobuttons">
-                        <ribbon:RibbonComboButton Size="Medium" Content="Button with vector icon">
+                        <ribbon:RibbonComboButton MaxSize="Medium" Content="Button with vector icon">
                             <ribbon:RibbonComboButton.Icon>
                                 <Grid Width="16" Height="16">
                                     <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
@@ -156,7 +205,7 @@
                             <ComboBoxItem>Item 1</ComboBoxItem>
                             <ComboBoxItem>Item 2</ComboBoxItem>
                         </ribbon:RibbonComboButton>
-                        <ribbon:RibbonComboButton Size="Medium" Content="Button with raster icon">
+                        <ribbon:RibbonComboButton MaxSize="Medium" Content="Button with raster icon">
                             <ribbon:RibbonComboButton.Icon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
                                     <Rectangle.OpacityMask>
@@ -169,7 +218,7 @@
                         </ribbon:RibbonComboButton>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Small combobuttons">
-                        <ribbon:RibbonComboButton Size="Small" ToolTip.Tip="Button with vector icon">
+                        <ribbon:RibbonComboButton MaxSize="Small" ToolTip.Tip="Button with vector icon">
                             <ribbon:RibbonComboButton.Icon>
                                 <Grid Width="16" Height="16">
                                     <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
@@ -178,7 +227,7 @@
                             <ComboBoxItem>Item 1</ComboBoxItem>
                             <ComboBoxItem>Item 2</ComboBoxItem>
                         </ribbon:RibbonComboButton>
-                        <ribbon:RibbonComboButton Size="Small" ToolTip.Tip="Button with raster icon">
+                        <ribbon:RibbonComboButton MaxSize="Small" ToolTip.Tip="Button with raster icon">
                             <ribbon:RibbonComboButton.Icon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
                                     <Rectangle.OpacityMask>
@@ -190,10 +239,10 @@
                             <ComboBoxItem>Item 2</ComboBoxItem>
                         </ribbon:RibbonComboButton>
                     </ribbon:RibbonGroupBox>
-                </StackPanel>
+                </ribbon:RibbonGroupsStackPanel>
             </ribbon:RibbonTab>
             <ribbon:RibbonTab Header="Galleries">
-                <StackPanel Orientation="Horizontal">
+                <ribbon:RibbonGroupsStackPanel Orientation="Horizontal">
                     <ribbon:RibbonGroupBox Header="Large gallery">
                         <ribbon:Gallery>
                             <ListBoxItem Content="Item 1"/>
@@ -214,7 +263,7 @@
                         </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Medium gallery">
-                        <ribbon:Gallery Size="Medium">
+                        <ribbon:Gallery MaxSize="Medium">
                             <StackPanel Orientation="Horizontal">
                                 <Button>AA</Button>
                                 <Button>BB</Button>
@@ -238,7 +287,7 @@
                         </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Small gallery">
-                        <ribbon:Gallery Size="Small">
+                        <ribbon:Gallery MaxSize="Small">
                             <ListBoxItem Content="Item 1"/>
                             <ListBoxItem Content="Item 2"/>
                             <ListBoxItem Content="Item 3"/>
@@ -256,14 +305,14 @@
                             <ListBoxItem Content="Item 15"/>
                         </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
-                </StackPanel>
+                </ribbon:RibbonGroupsStackPanel>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <ribbon:RibbonGroupsStackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
             <!--CheckBox x:Name="LightsOnCheckBox" Content="Lights" IsChecked="True"/-->
             <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation"/>
             <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
-        </StackPanel>
+        </ribbon:RibbonGroupsStackPanel>
     </DockPanel>
 </ribbon:RibbonWindow>

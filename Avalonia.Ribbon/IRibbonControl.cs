@@ -12,6 +12,18 @@ namespace Avalonia.Controls.Ribbon
             set;
         }
 
+        RibbonControlSize MinSize
+        {
+            get;
+            set;
+        }
+
+        RibbonControlSize MaxSize
+        {
+            get;
+            set;
+        }
+
         bool CanAddToQuickAccessToolbar
         {
             get;

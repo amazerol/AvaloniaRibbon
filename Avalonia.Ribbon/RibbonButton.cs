@@ -10,11 +10,15 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<object> IconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(Icon));
         public static readonly StyledProperty<object> LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon));
         public static readonly StyledProperty<RibbonControlSize> SizeProperty;
+        public static readonly StyledProperty<RibbonControlSize> MinSizeProperty;
+        public static readonly StyledProperty<RibbonControlSize> MaxSizeProperty;
         public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
         static RibbonButton()
         {
-            SizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize>(nameof(RibbonControlSize), RibbonControlSize.Large);
+            SizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize>(nameof(Size), RibbonControlSize.Large);
+            MinSizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize>(nameof(MinSize), RibbonControlSize.Small);
+            MaxSizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize>(nameof(MaxSize), RibbonControlSize.Large);
             CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<RibbonButton, bool>(nameof(CanAddToQuickAccessToolbar), true);
         }
 
@@ -37,6 +41,18 @@ namespace Avalonia.Controls.Ribbon
         {
             get => GetValue(SizeProperty);
             set => SetValue(SizeProperty, value);
+        }
+
+        public RibbonControlSize MinSize
+        {
+            get => GetValue(MinSizeProperty);
+            set => SetValue(MinSizeProperty, value);
+        }
+
+        public RibbonControlSize MaxSize
+        {
+            get => GetValue(MaxSizeProperty);
+            set => SetValue(MaxSizeProperty, value);
         }
 
         public bool CanAddToQuickAccessToolbar

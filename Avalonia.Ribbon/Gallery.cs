@@ -9,7 +9,9 @@ namespace Avalonia.Controls.Ribbon
 {
     public class Gallery : ListBox, IStyleable, IRibbonControl
     {
-        public static readonly StyledProperty<RibbonControlSize> SizeProperty = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(RibbonControlSize), RibbonControlSize.Large);
+        public static readonly StyledProperty<RibbonControlSize> SizeProperty = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(Size), RibbonControlSize.Large);
+        public static readonly StyledProperty<RibbonControlSize> MinSizeProperty = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(MinSize), RibbonControlSize.Small);
+        public static readonly StyledProperty<RibbonControlSize> MaxSizeProperty = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(MaxSize), RibbonControlSize.Large);
         public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<Gallery, bool>(nameof(CanAddToQuickAccessToolbar), true);
         public static readonly DirectProperty<Gallery, bool> IsDropDownOpenProperty;
 
@@ -36,6 +38,18 @@ namespace Avalonia.Controls.Ribbon
         {
             get => GetValue(SizeProperty);
             set => SetValue(SizeProperty, value);
+        }
+
+        public RibbonControlSize MinSize
+        {
+            get => GetValue(MinSizeProperty);
+            set => SetValue(MinSizeProperty, value);
+        }
+
+        public RibbonControlSize MaxSize
+        {
+            get => GetValue(MaxSizeProperty);
+            set => SetValue(MaxSizeProperty, value);
         }
 
         public bool CanAddToQuickAccessToolbar

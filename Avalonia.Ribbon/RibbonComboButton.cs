@@ -11,6 +11,8 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<object> IconProperty;
         public static readonly StyledProperty<object> LargeIconProperty;
         public static readonly StyledProperty<RibbonControlSize> SizeProperty;
+        public static readonly StyledProperty<RibbonControlSize> MinSizeProperty;
+        public static readonly StyledProperty<RibbonControlSize> MaxSizeProperty;
         public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
         public static readonly DirectProperty<RibbonComboButton, ICommand> CommandProperty;
@@ -22,6 +24,8 @@ namespace Avalonia.Controls.Ribbon
             IconProperty = RibbonButton.IconProperty.AddOwner<RibbonComboButton>();
             LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon), null);
             SizeProperty = RibbonButton.SizeProperty.AddOwner<RibbonComboButton>();
+            MinSizeProperty = RibbonButton.MinSizeProperty.AddOwner<RibbonComboButton>();
+            MaxSizeProperty = RibbonButton.MaxSizeProperty.AddOwner<RibbonComboButton>();
             CanAddToQuickAccessToolbarProperty = RibbonButton.CanAddToQuickAccessToolbarProperty.AddOwner<RibbonComboButton>();
             CommandProperty = Button.CommandProperty.AddOwner<RibbonComboButton>(button => button.Command, (button, command) => button.Command = command);
             CommandParameterProperty = Button.CommandParameterProperty.AddOwner<RibbonComboButton>();
@@ -52,6 +56,18 @@ namespace Avalonia.Controls.Ribbon
         {
             get => GetValue(SizeProperty);
             set => SetValue(SizeProperty, value);
+        }
+
+        public RibbonControlSize MinSize
+        {
+            get => GetValue(MinSizeProperty);
+            set => SetValue(MinSizeProperty, value);
+        }
+
+        public RibbonControlSize MaxSize
+        {
+            get => GetValue(MaxSizeProperty);
+            set => SetValue(MaxSizeProperty, value);
         }
 
         public bool CanAddToQuickAccessToolbar
