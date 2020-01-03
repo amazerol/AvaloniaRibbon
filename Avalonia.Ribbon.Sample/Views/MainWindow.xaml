@@ -63,6 +63,11 @@
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
                             </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                         <ribbon:RibbonButton Content="Button 2" ToolTip.Tip="Button 2">
                             <ribbon:RibbonButton.LargeIcon>
@@ -71,6 +76,11 @@
                                     <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
                                 </Grid>
                             </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                         <ribbon:RibbonButton Content="Button 3" ToolTip.Tip="Button 3">
                             <ribbon:RibbonButton.LargeIcon>
@@ -79,6 +89,11 @@
                                     <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
                                 </Grid>
                             </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Test Group 2">
@@ -97,6 +112,27 @@
                                     </Rectangle.OpacityMask>
                                 </Rectangle>
                             </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 3" ToolTip.Tip="Button 3">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Large" Content="Button 4" ToolTip.Tip="Button 4">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Test Group 3">
@@ -325,11 +361,11 @@
                 </ribbon:RibbonGroupsStackPanel>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
-        <ribbon:RibbonGroupsStackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
             <!--CheckBox x:Name="LightsOnCheckBox" Content="Lights" IsChecked="True"/-->
             <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation"/>
             <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
-        </ribbon:RibbonGroupsStackPanel>
+        </StackPanel>
     </DockPanel>
 </ribbon:RibbonWindow>

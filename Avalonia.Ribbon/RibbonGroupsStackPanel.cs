@@ -75,7 +75,7 @@ namespace Avalonia.Controls.Ribbon
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            var children = Children;
+            IEnumerable<RibbonGroupBox> children = Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
             bool fHorizontal = (Orientation == Orientation.Horizontal);
             Rect rcChild = new Rect(finalSize);
             double previousChildSize = 0.0;
@@ -84,12 +84,14 @@ namespace Avalonia.Controls.Ribbon
             //return finalSize;
 
             Rect[] rects = new Rect[children.Count()];
-            for (int i = 0; i < children.Count; i++)
+            for (int i = 0; i < children.Count(); i++)
             {
-                var child = children[i];
+                var child = children.ElementAt(i);
                 if (child == null || !child.IsVisible)
                 { continue; }
 
+                child.DisplayMode = GroupDisplayMode.Large;
+                
                 rcChild = rcChild.WithX(rcChild.X + previousChildSize);
                 previousChildSize = child.DesiredSize.Width;
                 rcChild = rcChild.WithWidth(previousChildSize);
@@ -100,15 +102,70 @@ namespace Avalonia.Controls.Ribbon
                 previousChildSize += rect.Width;
                 totalChildrenWidth += rect.Width;
                 rects[i] = rect;
+                child.Arrange(rects[i]);
+                child.Measure(rects[i].Size);
             }
 
-            if (children.Count > 0)
+            if (children.Count() > 0)
             {
                 totalChildrenWidth -= spacing;
-                Debug.WriteLine("widths: " + totalChildrenWidth + "; " + finalSize.Width);
+                //Debug.WriteLine("widths: " + totalChildrenWidth + "; " + finalSize.Width);
                 if (totalChildrenWidth > finalSize.Width)
                 {
-                    double totalOverflow = 0;
+                    double newTotalChildrenWidth = totalChildrenWidth;
+                    while (newTotalChildrenWidth > finalSize.Width)
+                    {
+                        RibbonGroupBox widest = null;
+                        foreach (RibbonGroupBox box in children)
+                        {
+                            if (box == null || !box.IsVisible)
+                            { continue; }
+
+                            if (widest == null)
+                                widest = box;
+                            else if (box.DesiredSize.Width >= widest.DesiredSize.Width)
+                                widest = box;
+                        }
+                        /*if (widest.DisplayMode == GroupDisplayMode.Small)
+                            widest.DisplayMode = GroupDisplayMode.Flyout; 
+                        else if (widest.DisplayMode == GroupDisplayMode.Large)
+                            widest.DisplayMode = GroupDisplayMode.Small;
+                        else
+                            break;*/
+                        if (widest.DisplayMode == GroupDisplayMode.Small)
+                            break;
+                        /*else if (widest.DisplayMode == GroupDisplayMode.Small)
+                            widest.DisplayMode = GroupDisplayMode.Flyout;*/
+                        else if (widest.DisplayMode == GroupDisplayMode.Large)
+                            widest.DisplayMode = GroupDisplayMode.Small;
+
+                        newTotalChildrenWidth = 0;
+                        foreach (RibbonGroupBox box in children)
+                            newTotalChildrenWidth += box.Bounds.Width + spacing;
+                        newTotalChildrenWidth -= spacing;
+
+                        totalChildrenWidth = 0;
+                        for (int i = 0; i < children.Count(); i++)
+                        {
+                            var child = children.ElementAt(i);
+                            if (child == null || !child.IsVisible)
+                            { continue; }
+
+                            child.Arrange(rects[i]);
+                            child.Measure(rects[i].Size);
+                            rcChild = rcChild.WithX(rcChild.X + previousChildSize);
+                            previousChildSize = child.DesiredSize.Width;
+                            rcChild = rcChild.WithWidth(previousChildSize);
+                            rcChild = rcChild.WithHeight(Math.Max(finalSize.Height, child.DesiredSize.Height));
+                            previousChildSize += spacing;
+                            Rect rect = GetChildRect(child, rcChild, finalSize);
+                            previousChildSize -= child.DesiredSize.Width;
+                            previousChildSize += rect.Width;
+                            totalChildrenWidth += rect.Width;
+                            rects[i] = rect;
+                        }
+                    }
+                    /*double totalOverflow = 0;
                     for (int i = children.Count - 1; i >= 0; i--)
                     {
                         var child = children[i];
@@ -117,31 +174,44 @@ namespace Avalonia.Controls.Ribbon
 
                         if (rects[i].Right > finalSize.Width)
                         {
-                            rects[i] = rects[i].WithX(rects[i].X - totalOverflow);
+                            //rects[i] = rects[i].WithX(rects[i].X - totalOverflow);
                             double newControlWidth = Math.Max(rects[i].Width - (rects[i].Right - finalSize.Width), children.ElementAt(i).MinWidth);
 
                             /*if (newControlWidth >= children.ElementAt(i).MinWidth)
                                 rects[i] = rects[i].WithWidth(newControlWidth);
                             else
-                            {*/
-                                double overflow = Math.Max(0, children.ElementAt(i).MinWidth - newControlWidth);
-                                totalOverflow += overflow;
-                                rects[i] = rects[i].WithWidth(newControlWidth + spacing);
+                            {*
+                            rects[i] = rects[i].WithWidth(newControlWidth + spacing);
+                            double overflow = Math.Max(0, rects[i].Right - finalSize.Width); //Math.Max(0, children.ElementAt(i).MinWidth - newControlWidth);
+                            totalOverflow += overflow;
+                            /*if ((overflow > 0) && ((i + 1) < children.Count))
+                            {
+                                rects[i] = rects[i].WithX(rects[i + 1].X - (rects[i + 1].Width + rects[i].Width));
+                            }*
+                            if ((i + 1) < children.Count)
+                            {
+                                //if ((overflow > 0) && (rects[i])
+                                if (rects[i + 1].X  < (rects[i].X + rects[i].Width))
+                                    rects[i] = rects[i].WithX(rects[i + 1].X - rects[i].Width);
+                            }
+                            else
+                                rects[i] = rects[i].WithX(rects[i].X - overflow);
+
                             //}
                         }
-                    }
+                    }*/
                 }
             }
 
-            for (int i = 0; i < children.Count; i++)
+            for (int i = 0; i < children.Count(); i++)
             {
-                var child = children[i];
+                var child = children.ElementAt(i);
                 if (child == null || !child.IsVisible)
                 { continue; }
 
                 Rect newRect = rects[i].WithWidth(rects[i].Width - Spacing);
                 child.Arrange(newRect);
-                child.Measure(new Size(newRect.Width, newRect.Height));
+                child.Measure(newRect.Size);
             }
 
             return finalSize;

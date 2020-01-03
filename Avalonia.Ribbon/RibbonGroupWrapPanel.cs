@@ -9,103 +9,151 @@ namespace Avalonia.Controls.Ribbon
 {
     public class RibbonGroupWrapPanel : WrapPanel
     {
+        public static readonly StyledProperty<GroupDisplayMode> DisplayModeProperty = AvaloniaProperty.Register<RibbonGroupWrapPanel, GroupDisplayMode>(nameof(DisplayMode), defaultValue: GroupDisplayMode.Large);
+        public GroupDisplayMode DisplayMode
+        {
+            get => GetValue(DisplayModeProperty);
+            set => SetValue(DisplayModeProperty, value);
+        }
+
+        public RibbonGroupWrapPanel()
+        {
+            if (TemplatedParent is RibbonGroupBox parentBox)
+            {
+                parentBox.Rearranged += (sneder, args) => ArrangeOverride(Bounds.Size);
+                parentBox.Remeasured += (sneder, args) => MeasureOverride(Bounds.Size);
+            }
+        }
+
         bool _smallified = false;
         Size _prevSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
         protected override Size MeasureOverride(Size constraint)
         {
-            double newConsWidth = constraint.Width;
-            double newConsHeight = constraint.Height;
-            /*if (!double.IsFinite(constraint.Width))
-                newConsWidth = 0;
-            if (!double.IsFinite(constraint.Height))
-                newConsHeight = 0;*/
-
-
-            var children = Children.Where(x => x is IRibbonControl);
-            foreach (IRibbonControl ctrl in children)
-                ctrl.Size = ctrl.MaxSize;
-
-            //double _prevSize.Width
-            
-
-            Size bigSize = base.MeasureOverride(constraint);
-            Size desired = _prevSize;
-            if (desired.Width <= 0)
-                desired = desired.WithWidth(bigSize.Width);
-            if (desired.Height <= 0)
-                desired = desired.WithHeight(bigSize.Height);
-            _prevSize = bigSize;
-            
-            bool proceed = (desired.Width >= 0) || (desired.Height >= 0);
-            //Debug.WriteLine("bigSize: " + bigSize + "\ndesired: " + desired + "\nnewCons: " + newConsWidth + ", " + newConsHeight + "\nproceed: " + proceed);
-
-            if (double.IsInfinity(newConsWidth) || double.IsInfinity(newConsHeight))
-                return bigSize;
-            if (proceed &&
-                    (
-                        ((Orientation == Orientation.Vertical) && (desired.Width > newConsWidth)) ||
-                        ((Orientation == Orientation.Horizontal) && (desired.Height > newConsHeight))
-                    )
-                )
+            if (false)
             {
+                double newConsWidth = constraint.Width;
+                double newConsHeight = constraint.Height;
+                /*if (!double.IsFinite(constraint.Width))
+                    newConsWidth = 0;
+                if (!double.IsFinite(constraint.Height))
+                    newConsHeight = 0;*/
+
+
+                var children = Children.Where(x => x is IRibbonControl);
                 foreach (IRibbonControl ctrl in children)
-                    ctrl.Size = ctrl.MinSize;
+                    ctrl.Size = ctrl.MaxSize;
 
-                Size smallSize = base.MeasureOverride(constraint);
-                Size arrSize = ArrangeOverride(smallSize);
-                double newWidth = smallSize.Width;
-                double newHeight = smallSize.Height;
-                /*if (Orientation == Orientation.Vertical)
-                    newWidth = Math.Min(smallSize.Width, desired.Width);
-                else
-                    newHeight = Math.Min(smallSize.Height, desired.Height);*/
+                //double _prevSize.Width
 
-                if (!_smallified)
+
+                Size bigSize = base.MeasureOverride(constraint);
+                Size desired = _prevSize;
+                if (desired.Width <= 0)
+                    desired = desired.WithWidth(bigSize.Width);
+                if (desired.Height <= 0)
+                    desired = desired.WithHeight(bigSize.Height);
+                _prevSize = bigSize;
+
+                bool proceed = (desired.Width >= 0) || (desired.Height >= 0);
+                //Debug.WriteLine("bigSize: " + bigSize + "\ndesired: " + desired + "\nnewCons: " + newConsWidth + ", " + newConsHeight + "\nproceed: " + proceed);
+
+                if (double.IsInfinity(newConsWidth) || double.IsInfinity(newConsHeight))
+                    return bigSize;
+                if (proceed &&
+                        (
+                            ((Orientation == Orientation.Vertical) && (desired.Width > newConsWidth)) ||
+                            ((Orientation == Orientation.Horizontal) && (desired.Height > newConsHeight))
+                        )
+                    )
                 {
-                    //Debug.WriteLine("Smallified!");
-                    _smallified = true;
+                    foreach (IRibbonControl ctrl in children)
+                        ctrl.Size = ctrl.MinSize;
+
+                    Size smallSize = base.MeasureOverride(constraint);
+                    Size arrSize = ArrangeOverride(smallSize);
+                    double newWidth = smallSize.Width;
+                    double newHeight = smallSize.Height;
+                    /*if (Orientation == Orientation.Vertical)
+                        newWidth = Math.Min(smallSize.Width, desired.Width);
+                    else
+                        newHeight = Math.Min(smallSize.Height, desired.Height);*/
+
+                    if (!_smallified)
+                    {
+                        //Debug.WriteLine("Smallified!");
+                        _smallified = true;
+                    }
+                    return arrSize; //smallSize; //new Size(Math.Max(newWidth, MinWidth), Math.Max(newHeight, MinHeight));
                 }
-                return arrSize; //smallSize; //new Size(Math.Max(newWidth, MinWidth), Math.Max(newHeight, MinHeight));
+                else
+                {
+                    ArrangeOverride(bigSize);
+                    return bigSize;
+                }
+
+                if (false)
+                {
+                    /*_prevSize = base.MeasureOverride(constraint);
+                    return _prevSize;*/
+                    ////var bigSize = base.MeasureOverride(constraint);
+                    double prevWidth = _prevSize.Width;
+                    double prevHeight = _prevSize.Height;
+                    Debug.WriteLine(prevWidth + ", " + prevHeight);
+                    _prevSize = bigSize;
+
+                    if (Orientation == Layout.Orientation.Vertical)
+                    {
+                        if (bigSize.Width < prevWidth)
+                        {
+                            foreach (IRibbonControl ctrl in children)
+                                ctrl.Size = ctrl.MinSize;
+
+                            return base.MeasureOverride(constraint);
+                        }
+                    }
+                    else if (Orientation == Layout.Orientation.Horizontal)
+                    {
+
+                        if (bigSize.Height < prevHeight)
+                        {
+                            foreach (IRibbonControl ctrl in children)
+                                ctrl.Size = ctrl.MinSize;
+
+                            return base.MeasureOverride(constraint);
+                        }
+                    }
+
+                    return bigSize;
+                }
             }
             else
             {
-                ArrangeOverride(bigSize);
-                return bigSize;
-            }
 
-            if (false)
-            {
-                /*_prevSize = base.MeasureOverride(constraint);
-                return _prevSize;*/
-                ////var bigSize = base.MeasureOverride(constraint);
-                double prevWidth = _prevSize.Width;
-                double prevHeight = _prevSize.Height;
-                Debug.WriteLine(prevWidth + ", " + prevHeight);
-                _prevSize = bigSize;
+                var children2 = Children.Where(x => x is IRibbonControl);
 
-                if (Orientation == Layout.Orientation.Vertical)
+                if (DisplayMode == GroupDisplayMode.Flyout)
                 {
-                    if (bigSize.Width < prevWidth)
-                    {
-                        foreach (IRibbonControl ctrl in children)
-                            ctrl.Size = ctrl.MinSize;
-
-                        return base.MeasureOverride(constraint);
-                    }
+                    Debug.WriteLine("FLYOUT");
+                    return base.MeasureOverride(constraint.WithWidth(MinWidth));
                 }
-                else if (Orientation == Layout.Orientation.Horizontal)
+                else
                 {
-
-                    if (bigSize.Height < prevHeight)
+                    if (DisplayMode == GroupDisplayMode.Large)
                     {
-                        foreach (IRibbonControl ctrl in children)
-                            ctrl.Size = ctrl.MinSize;
-
-                        return base.MeasureOverride(constraint);
+                        Debug.WriteLine("LARGE");
+                        foreach (IRibbonControl ctrl in children2)
+                            ctrl.Size = ctrl.MaxSize;
                     }
-                }
+                    else if (DisplayMode == GroupDisplayMode.Small)
+                    {
+                        Debug.WriteLine("SMALL");
+                        foreach (IRibbonControl ctrl in children2)
+                            ctrl.Size = ctrl.MinSize;
+                    }
 
-                return bigSize;
+                    return base.MeasureOverride(constraint);
+                    //return ArrangeOverride(measureSize);
+                }
             }
         }
 

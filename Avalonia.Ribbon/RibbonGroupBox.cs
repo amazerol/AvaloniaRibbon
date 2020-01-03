@@ -5,10 +5,24 @@ using System.Windows.Input;
 
 namespace Avalonia.Controls.Ribbon
 {
+    public enum GroupDisplayMode
+    {
+        Large,
+        Small,
+        Flyout
+    }
+
     public class RibbonGroupBox : HeaderedItemsControl, IStyleable
     {
         public static readonly DirectProperty<RibbonGroupBox, ICommand> CommandProperty;
         public static readonly StyledProperty<object> CommandParameterProperty = AvaloniaProperty.Register<RibbonGroupBox, object>(nameof(CommandParameter));
+        public static readonly StyledProperty<GroupDisplayMode> DisplayModeProperty = AvaloniaProperty.Register<RibbonGroupBox, GroupDisplayMode>(nameof(DisplayMode), defaultValue: GroupDisplayMode.Large);
+        
+        public GroupDisplayMode DisplayMode
+        {
+            get => GetValue(DisplayModeProperty);
+            set => SetValue(DisplayModeProperty, value);
+        }
 
         ICommand _command;
 
@@ -31,5 +45,26 @@ namespace Avalonia.Controls.Ribbon
             set { SetAndRaise(CommandProperty, ref _command, value); }
         }
 
+        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        {
+            base.OnTemplateApplied(e);
+            var panel = e.NameScope.Find<RibbonGroupWrapPanel>("PART_ItemsPanel");
+            System.Diagnostics.Debug.WriteLine("panel: " + (panel == null));
+        }
+
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            Rearranged?.Invoke(this, null);
+            return base.ArrangeOverride(finalSize);
+        }
+
+        protected override Size MeasureOverride(Size availableSize)
+        {
+            Remeasured?.Invoke(this, null);
+            return base.MeasureOverride(availableSize);
+        }
+
+        public event EventHandler Rearranged;
+        public event EventHandler Remeasured;
     }
 }

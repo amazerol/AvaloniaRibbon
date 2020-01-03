@@ -31,7 +31,13 @@
             <Grid Name="ContentsGrid"
                 ColumnDefinitions="*,14"
                 RowDefinitions="*,14">
-              <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}" Margin="{TemplateBinding Padding}" Grid.ColumnSpan="2"/>
+              <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" Margin="{TemplateBinding Padding}" Grid.ColumnSpan="2">
+                <ItemsPresenter.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <local:RibbonGroupWrapPanel x:Name="PART_ItemsPanel" DisplayMode="{TemplateBinding DisplayMode}"/>
+                  </ItemsPanelTemplate>
+                </ItemsPresenter.ItemsPanel>
+              </ItemsPresenter>
               <!--TextBlock Grid.Column="0" Grid.Row="1"
                          TextAlignment="Center"
                   HorizontalAlignment="Stretch"
@@ -68,17 +74,11 @@
         </DockPanel>
       </ControlTemplate>
     </Setter>
-    <Setter Property="ItemsPanel">
-      <ItemsPanelTemplate>
-        <local:RibbonGroupWrapPanel Name="ItemsWrapPanel"/>
-        <!--Orientation="{Binding Orientation, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Ribbon}}}"-->
-      </ItemsPanelTemplate>
-    </Setter>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#ItemsWrapPanel">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
     <Setter Property="Orientation" Value="Vertical"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#ItemsWrapPanel">
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
     <Setter Property="Orientation" Value="Horizontal"/>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox">
