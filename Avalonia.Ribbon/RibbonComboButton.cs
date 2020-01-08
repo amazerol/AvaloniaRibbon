@@ -29,6 +29,10 @@ namespace Avalonia.Controls.Ribbon
             CanAddToQuickAccessToolbarProperty = RibbonButton.CanAddToQuickAccessToolbarProperty.AddOwner<RibbonComboButton>();
             CommandProperty = Button.CommandProperty.AddOwner<RibbonComboButton>(button => button.Command, (button, command) => button.Command = command);
             CommandParameterProperty = Button.CommandParameterProperty.AddOwner<RibbonComboButton>();
+            //AffectsRender<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
+            AffectsMeasure<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
+            AffectsArrange<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
+            RibbonControLHelper<RibbonComboButton>.AddHandlers(MinSizeProperty, MaxSizeProperty);
         }
 
         Type IStyleable.StyleKey => typeof(RibbonComboButton);

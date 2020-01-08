@@ -23,12 +23,12 @@ namespace Avalonia.Controls.Ribbon
             DisplayModeProperty.Changed.AddClassHandler<RibbonGroupWrapPanel>((sneder, args) =>
             {
                 var children2 = sneder.Children.Where(x => x is IRibbonControl);
-                if (sneder.DisplayMode == GroupDisplayMode.Large)
+                if (((GroupDisplayMode)args.NewValue) == GroupDisplayMode.Large)
                 {
                     foreach (IRibbonControl ctrl in children2)
                         ctrl.Size = ctrl.MaxSize;
                 }
-                else if (sneder.DisplayMode == GroupDisplayMode.Small)
+                else if (((GroupDisplayMode)args.NewValue) == GroupDisplayMode.Small)
                 {
                     foreach (IRibbonControl ctrl in children2)
                         ctrl.Size = ctrl.MinSize;
