@@ -21,6 +21,7 @@ namespace Avalonia.Controls.Ribbon
         int _lastChildrenCount = 0;
         //double _lastTotalChildrenWidth = -1;
         double _lastArrangeSizeWidth = -1;
+        double _largeTotalChildrenWidth = -1;
         protected override Size ArrangeOverride(Size arrangeSize)
         {
             var children = Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
@@ -28,6 +29,18 @@ namespace Avalonia.Controls.Ribbon
             double largeTotalChildrenWidth = 0;
             double smallTotalChildrenWidth = 0;
             bool childrenCountChanged = children.Count() != _lastChildrenCount;
+
+            if ((_largeTotalChildrenWidth < 0) || childrenCountChanged)
+            {
+                _largeTotalChildrenWidth = 0;
+                for (int i = 0; i < children.Count(); i++)
+                {
+                    GroupDisplayMode prevMode = children.ElementAt(i).DisplayMode;
+                    children.ElementAt(i).DisplayMode = GroupDisplayMode.Large;
+                    _largeTotalChildrenWidth = children.ElementAt(i).Bounds.Width;
+                    children.ElementAt(i).DisplayMode = prevMode;
+                }
+            }
 
             //Size tempSize = new Size(100, Bounds.Height);
             //Rect tempRect = new Rect(0, 0, tempSize.Width, tempSize.Height);
@@ -81,10 +94,13 @@ namespace Avalonia.Controls.Ribbon
                     {
                         RibbonGroupBox box = children.ElementAt(i);
                         double newTotalChildrenWidth = 0;
-                        base.MeasureCore(arrangeSize);
+                        //base.MeasureCore(arrangeSize);
                         for (int j = 0; j < children.Count(); j++)
                         {
                             RibbonGroupBox box2 = children.ElementAt(j);
+                            box2.InvalidateArrange();
+                            box2.InvalidateMeasure();
+                            box2.Measure(arrangeSize);
                             //box2.DisplayMode = box2.DisplayMode;
                             //box.Arrange();
                             //box2.InvalidateArrange();
@@ -102,7 +118,7 @@ namespace Avalonia.Controls.Ribbon
                         }
                     }
                 }
-                else if ((totalChildrenWidth < arrangeSize.Width) && (arrangeSize.Width > _lastArrangeSizeWidth))
+                else if ((totalChildrenWidth <= arrangeSize.Width) && (arrangeSize.Width > _lastArrangeSizeWidth))
                 {
                     //for (int i = 0; i < children.Count; i++)
 
@@ -111,10 +127,13 @@ namespace Avalonia.Controls.Ribbon
                         RibbonGroupBox box = children.ElementAt(i);
                         box.DisplayMode = GroupDisplayMode.Large;
                         double newTotalChildrenWidth = 0;
-                        base.MeasureCore(arrangeSize);
+                        //base.MeasureCore(arrangeSize);
                         for (int j = 0; j < children.Count(); j++)
                         {
                             RibbonGroupBox box2 = children.ElementAt(j);
+                            box2.InvalidateArrange();
+                            box2.InvalidateMeasure();
+                            box2.Measure(arrangeSize);
                             //box2.DisplayMode = box2.DisplayMode;
                             //box2.Measure(tempSize);
                             /*box2.InvalidateArrange();

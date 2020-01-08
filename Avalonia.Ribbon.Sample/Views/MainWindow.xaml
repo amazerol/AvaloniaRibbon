@@ -365,7 +365,7 @@
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
             <!--CheckBox x:Name="LightsOnCheckBox" Content="Lights" IsChecked="True"/-->
-            <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation"/>
+            <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation" IsVisible="False"/>
             <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
         </StackPanel>
     </DockPanel>

@@ -36,14 +36,14 @@ namespace Avalonia.Controls.Ribbon
             });
         }
 
-        /*public RibbonGroupWrapPanel()
+        public RibbonGroupWrapPanel()
         {
             if (TemplatedParent is RibbonGroupBox parentBox)
             {
                 parentBox.Rearranged += (sneder, args) => ArrangeOverride(Bounds.Size);
                 parentBox.Remeasured += (sneder, args) => MeasureOverride(Bounds.Size);
             }
-        }*/
+        }
 
         bool _smallified = false;
         Size _prevSize = new Size(double.PositiveInfinity, double.PositiveInfinity);

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public interface IRibbonControl
+    public interface IRibbonControl : IAvaloniaObject
     {
         RibbonControlSize Size
         {
@@ -28,24 +28,6 @@ namespace Avalonia.Controls.Ribbon
         {
             get;
             set;
-        }
-    }
-
-    public static class RibbonControLHelper<T> where T : AvaloniaObject
-    {
-        public static void AddHandlers(StyledProperty<RibbonControlSize> minSize, StyledProperty<RibbonControlSize> maxSize)
-        {
-            minSize.Changed.AddClassHandler<T>((sender, args) =>
-            {
-                if (((int)args.NewValue) > (int)((sender as IRibbonControl).Size))
-                    (sender as IRibbonControl).Size = (RibbonControlSize)(args.NewValue);
-            });
-
-            maxSize.Changed.AddClassHandler<T>((sender, args) =>
-            {
-                if (((int)args.NewValue) < (int)((sender as IRibbonControl).Size))
-                    (sender as IRibbonControl).Size = (RibbonControlSize)(args.NewValue);
-            });
         }
     }
 

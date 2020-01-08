@@ -139,7 +139,7 @@
   </Style>
   <Style Selector="local|Ribbon[Orientation=Vertical] /template/ ItemsControl#PART_SelectedGroupsHost">
     <Setter Property="HorizontalAlignment" Value="Right"/>
-    <Setter Property="Height" Value="120"/>
+    <Setter Property="Height" Value="138"/>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Vertical] /template/ LayoutTransformControl#LayoutRoot">
     <Setter Property="LayoutTransform">

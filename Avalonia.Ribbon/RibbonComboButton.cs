@@ -10,9 +10,9 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<object> ContentProperty;
         public static readonly StyledProperty<object> IconProperty;
         public static readonly StyledProperty<object> LargeIconProperty;
-        public static readonly StyledProperty<RibbonControlSize> SizeProperty;
-        public static readonly StyledProperty<RibbonControlSize> MinSizeProperty;
-        public static readonly StyledProperty<RibbonControlSize> MaxSizeProperty;
+        public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty;
+        public static readonly AvaloniaProperty<RibbonControlSize> MinSizeProperty;
+        public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty;
         public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
         public static readonly DirectProperty<RibbonComboButton, ICommand> CommandProperty;
@@ -23,16 +23,17 @@ namespace Avalonia.Controls.Ribbon
             ContentProperty = RibbonButton.ContentProperty.AddOwner<RibbonComboButton>();
             IconProperty = RibbonButton.IconProperty.AddOwner<RibbonComboButton>();
             LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon), null);
-            SizeProperty = RibbonButton.SizeProperty.AddOwner<RibbonComboButton>();
-            MinSizeProperty = RibbonButton.MinSizeProperty.AddOwner<RibbonComboButton>();
-            MaxSizeProperty = RibbonButton.MaxSizeProperty.AddOwner<RibbonComboButton>();
+            //SizeProperty = RibbonButton.SizeProperty.AddOwner<RibbonComboButton>();
+            //MinSizeProperty = RibbonButton.MinSizeProperty.AddOwner<RibbonComboButton>();
+            //MaxSizeProperty = RibbonButton.MaxSizeProperty.AddOwner<RibbonComboButton>();
             CanAddToQuickAccessToolbarProperty = RibbonButton.CanAddToQuickAccessToolbarProperty.AddOwner<RibbonComboButton>();
             CommandProperty = Button.CommandProperty.AddOwner<RibbonComboButton>(button => button.Command, (button, command) => button.Command = command);
             CommandParameterProperty = Button.CommandParameterProperty.AddOwner<RibbonComboButton>();
             //AffectsRender<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            AffectsMeasure<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            AffectsArrange<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            RibbonControLHelper<RibbonComboButton>.AddHandlers(MinSizeProperty, MaxSizeProperty);
+            //AffectsMeasure<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
+            //AffectsArrange<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
+            //RibbonControLHelper<RibbonComboButton>.AddHandlers(MinSizeProperty, MaxSizeProperty);
+            RibbonControlHelper<RibbonComboButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
         }
 
         Type IStyleable.StyleKey => typeof(RibbonComboButton);

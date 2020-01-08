@@ -7,29 +7,23 @@ namespace Avalonia.Controls.Ribbon
     public class RibbonButton : Button, IStyleable, IRibbonControl
     {
 
+        public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty;
+        public static readonly AvaloniaProperty<RibbonControlSize> MinSizeProperty;
+        public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty;
         public static readonly StyledProperty<object> IconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(Icon));
         public static readonly StyledProperty<object> LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon));
-        public static readonly StyledProperty<RibbonControlSize> SizeProperty;
-        public static readonly StyledProperty<RibbonControlSize> MinSizeProperty;
-        public static readonly StyledProperty<RibbonControlSize> MaxSizeProperty;
         public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
         static RibbonButton()
         {
-            //Func<IAvaloniaObject, RibbonControlSize, RibbonControlSize> validat = ValidateRibbonControlSize;
-            SizeProperty = AvaloniaProperty.Register<IAvaloniaObject, RibbonControlSize>(nameof(Size), RibbonControlSize.Large, validate: ValidateSize);
-            /*((/*a, b, c*) => 
-            {
-                //ValidateRibbonControlSize
-            }
-            */
-            MinSizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize>(nameof(MinSize), RibbonControlSize.Small);
-            MaxSizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize >(nameof(MaxSize), RibbonControlSize.Large);
+            //SizeProperty = AvaloniaProperty.Register<IAvaloniaObject, RibbonControlSize>(nameof(Size), RibbonControlSize.Large, validate: ValidateSize);
+            //MinSizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize>(nameof(MinSize), RibbonControlSize.Small);
+            //MaxSizeProperty = AvaloniaProperty.Register<RibbonButton, RibbonControlSize >(nameof(MaxSize), RibbonControlSize.Large);
             CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<RibbonButton, bool>(nameof(CanAddToQuickAccessToolbar), true);
-            //AffectsRender<RibbonButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            AffectsMeasure<RibbonButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            AffectsArrange<RibbonButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            RibbonControLHelper<RibbonButton>.AddHandlers(MinSizeProperty, MaxSizeProperty);
+            //AffectsMeasure<RibbonButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
+            //AffectsArrange<RibbonButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
+            ////RibbonControLHelper<RibbonButton>.AddHandlers(MinSizeProperty, MaxSizeProperty);
+            RibbonControlHelper<RibbonButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
         }
 
         /*private static RibbonControlSize ValidateRibbonControlSize(IAvaloniaObject obj, RibbonControlSize val)
@@ -44,20 +38,6 @@ namespace Avalonia.Controls.Ribbon
             else
                 throw new Exception("obj must be an IRibbonControl!");
         }*/
-        private static RibbonControlSize ValidateSize(IAvaloniaObject obj, RibbonControlSize val)
-        {
-            if (obj is IRibbonControl ctrl)
-            {
-                if ((int)(ctrl.MinSize) > (int)val)
-                    return ctrl.MinSize;
-                else if ((int)(ctrl.MaxSize) < (int)val)
-                    return ctrl.MaxSize;
-                else
-                    return val;
-            }
-            else
-                throw new Exception("obj must be an IRibbonControl!");
-        }
 
         Type IStyleable.StyleKey => typeof(RibbonButton);
 

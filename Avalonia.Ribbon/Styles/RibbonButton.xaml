@@ -28,6 +28,16 @@
 
   <Style Selector="local|RibbonButton">
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Classes="RibbonButtonBackgroundBorder">
+          <StackPanel Orientation="Horizontal">
+            <ContentPresenter Content="{TemplateBinding Icon}" />
+            <ContentPresenter Content="{TemplateBinding Content}" Margin="3,0,0,0" />
+          </StackPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
   </Style>
   <Style Selector="local|RibbonButton[Size=Large]">
     <Setter Property="Padding" Value="9" />
@@ -44,16 +54,6 @@
   </Style>
   <Style Selector="local|RibbonButton[Size=Medium]">
     <Setter Property="Height" Value="24"/>
-    <Setter Property="Template">
-      <ControlTemplate>
-        <Border Classes="RibbonButtonBackgroundBorder">
-          <StackPanel Orientation="Horizontal">
-            <ContentPresenter Content="{TemplateBinding Icon}" />
-            <ContentPresenter Content="{TemplateBinding Content}" Margin="3,0,0,0" />
-          </StackPanel>
-        </Border>
-      </ControlTemplate>
-    </Setter>
   </Style>
   <Style Selector="local|RibbonButton[Size=Small]">
     <Setter Property="Width" Value="24"/>
@@ -65,6 +65,9 @@
         </Border>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonButton[Size=Medium]">
+    <Setter Property="Width" Value="132"/>
   </Style>
   <Style Selector="local|RibbonButton:not(local|RibbonButton[Size=Large])">
     <Setter Property="Padding" Value="3" />
