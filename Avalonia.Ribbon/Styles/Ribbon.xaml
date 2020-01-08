@@ -2,6 +2,7 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon"
+    xmlns:ge="clr-namespace:GridExtra.Avalonia;assembly=GridExtra.Avalonia"
     xmlns:sys="clr-namespace:System;assembly=netstandard">
   <Design.PreviewWith>
     <local:Ribbon>
@@ -19,44 +20,44 @@
     <Setter Property="Template">
       <ControlTemplate>
         <LayoutTransformControl Name="LayoutRoot">
-            <DockPanel Background="Transparent">
-              <DockPanel Background="{TemplateBinding HeaderBackground}" DockPanel.Dock="Top">
-                <LayoutTransformControl Name="MenuButtonHolder" Classes="LayoutInvert">
-                  <ToggleButton Name="MenuButton" Padding="16,0" FontWeight="SemiBold" Classes="RibbonToggleButton" Height="34" IsChecked="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Content="File"/>
-                </LayoutTransformControl>
-                <Popup PlacementTarget="{Binding Source=MenuButton}" PlacementMode="Bottom" VerticalOffset="-34" StaysOpen="False" IsOpen="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Width="500" MinHeight="300">
-                  <DockPanel>
-                    <DockPanel Name="MenuRightColumnDockPanel" Width="200" DockPanel.Dock="Right">
-                      <Grid Height="34" DockPanel.Dock="Top">
-                        <TextBlock Text="Places" FontWeight="SemiBold" Margin="10,0" VerticalAlignment="Center"/>
-                      </Grid>
-                      <ListBox Classes="RibbonMenuPlacesList" Items="{Binding MenuPlacesItems, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                    </DockPanel>
-                    <Grid>
-                      <Menu Classes="RibbonMenuMenu" Items="{Binding MenuItems, RelativeSource={RelativeSource Mode=TemplatedParent}}" Padding="0,34,0,0"/>
-                      <ToggleButton Name="BackButton" FontWeight="SemiBold" Classes="RibbonToggleButton" IsChecked="{Binding !IsChecked, ElementName=MenuButton, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="{Binding Bounds.Width, ElementName=MenuButton, Mode=OneWay}">
-                        <Grid Width="24" Height="24">
-                          <Ellipse Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" StrokeThickness="2"/>
-                          <Grid Width="14" Height="10">
-                            <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" Height="2" VerticalAlignment="Center"/>
-                            <Path Data="M 5 0 L 0 5 L 5 10" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" StrokeThickness="2" HorizontalAlignment="Left"/>
-                          </Grid>
-                        </Grid>
-                      </ToggleButton>
+          <DockPanel Background="Transparent">
+            <DockPanel Background="{TemplateBinding HeaderBackground}" DockPanel.Dock="Top">
+              <LayoutTransformControl Name="MenuButtonHolder" Classes="LayoutInvert">
+                <ToggleButton Name="MenuButton" Padding="16,0" FontWeight="SemiBold" Classes="RibbonToggleButton" Height="34" IsChecked="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Content="File"/>
+              </LayoutTransformControl>
+              <Popup PlacementTarget="{Binding Source=MenuButton}" PlacementMode="Bottom" VerticalOffset="-34" StaysOpen="False" IsOpen="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Width="500" MinHeight="300">
+                <DockPanel>
+                  <DockPanel Name="MenuRightColumnDockPanel" Width="200" DockPanel.Dock="Right">
+                    <Grid Height="34" DockPanel.Dock="Top">
+                      <TextBlock Text="Places" FontWeight="SemiBold" Margin="10,0" VerticalAlignment="Center"/>
                     </Grid>
+                    <ListBox Classes="RibbonMenuPlacesList" Items="{Binding MenuPlacesItems, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                   </DockPanel>
-                </Popup>
-                <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
-                  <!--ToggleButton.Template>
+                  <Grid>
+                    <Menu Classes="RibbonMenuMenu" Items="{Binding MenuItems, RelativeSource={RelativeSource Mode=TemplatedParent}}" Padding="0,34,0,0"/>
+                    <ToggleButton Name="BackButton" FontWeight="SemiBold" Classes="RibbonToggleButton" IsChecked="{Binding !IsChecked, ElementName=MenuButton, Mode=TwoWay}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="34" Width="{Binding Bounds.Width, ElementName=MenuButton, Mode=OneWay}">
+                      <Grid Width="24" Height="24">
+                        <Ellipse Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" StrokeThickness="2"/>
+                        <Grid Width="14" Height="10">
+                          <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" Height="2" VerticalAlignment="Center"/>
+                          <Path Data="M 5 0 L 0 5 L 5 10" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" StrokeThickness="2" HorizontalAlignment="Left"/>
+                        </Grid>
+                      </Grid>
+                    </ToggleButton>
+                  </Grid>
+                </DockPanel>
+              </Popup>
+              <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                <!--ToggleButton.Template>
                     <ControlTemplate>
                       <ContentPresenter BorderThickness="0" Content="{TemplateBinding Content}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
                     </ControlTemplate>
                   </ToggleButton.Template-->
-                  <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="4"/>
-                </ToggleButton>
-                <ItemsPresenter Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ItemTemplate="{TemplateBinding ItemTemplate}" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}"/>
-              </DockPanel>
-              <!--Rectangle Height="4" DockPanel.Dock="Bottom">
+                <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="4"/>
+              </ToggleButton>
+              <ItemsPresenter Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" ItemTemplate="{TemplateBinding ItemTemplate}" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}"/>
+            </DockPanel>
+            <!--Rectangle Height="4" DockPanel.Dock="Bottom">
               <Rectangle.Fill>
                 <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
                   <GradientStop Offset="0" Color="#40000000"/>
@@ -64,16 +65,40 @@
                 </LinearGradientBrush>
               </Rectangle.Fill>
             </Rectangle-->
-              <Rectangle Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Stretch" Height="1" IsVisible="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" DockPanel.Dock="Top"/>
-              <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                <ContentPresenter
-                    Name="PART_SelectedContentHost"
-                    Padding="5,0"
-                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                    TextBlock.Foreground="{TemplateBinding Foreground}"
-                    Content="{TemplateBinding SelectedContent}"
-                    ContentTemplate="{TemplateBinding SelectedContentTemplate}">
-                </ContentPresenter>
+            <Rectangle Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Stretch" Height="1" IsVisible="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" DockPanel.Dock="Top"/>
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+              <Grid>
+                <ContentPresenter Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" IsVisible="False"/>
+                <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="5,0" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <!--StackPanel x:Name="PART_ItemsPanel" Orientation="Horizontal"/-->
+                      <local:RibbonGroupsGrid x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch"/>
+                      <!--local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" Orientation="Horizontal"/-->
+                      <!--ge:ResponsiveGrid x:Name="PART_ItemsPanel">
+                        <ge:ResponsiveGrid.Styles>
+                          <Style Selector="Border.Section1">
+                            <Setter Property="ge:ResponsiveGrid.XS" Value="6" />
+                            <Setter Property="ge:ResponsiveGrid.SM" Value="3" />
+                            <Setter Property="ge:ResponsiveGrid.MD" Value="2" />
+                          </Style>
+                        </ge:ResponsiveGrid.Styles>
+                      </ge:ResponsiveGrid-->
+                    </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <!--ItemsControl.Template>
+                      <ControlTemplate>
+                        <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" VerticalAlignment="Stretch" TextBlock.Foreground="{TemplateBinding Foreground}">
+                          <ItemsPresenter.ItemsPanel>
+                            <ItemsPanelTemplate>
+                              <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                          </ItemsPresenter.ItemsPanel>
+                        </ItemsPresenter>
+                      </ControlTemplate>
+                    </ItemsControl.Template-->
+                  </ItemsControl>
+                </Grid>
               </Border>
             </DockPanel>
         </LayoutTransformControl>
@@ -108,12 +133,12 @@
       <RotateTransform Angle="0"/>
     </Setter>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] /template/ ContentPresenter#PART_SelectedContentHost">
-    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] /template/ ItemsControl#PART_SelectedGroupsHost">
+    <Setter Property="HorizontalAlignment" Value="Left"/>
     <Setter Property="Height" Value="90"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] /template/ ContentPresenter#PART_SelectedContentHost">
-    <Setter Property="HorizontalContentAlignment" Value="Right"/>
+  <Style Selector="local|Ribbon[Orientation=Vertical] /template/ ItemsControl#PART_SelectedGroupsHost">
+    <Setter Property="HorizontalAlignment" Value="Right"/>
     <Setter Property="Height" Value="120"/>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Vertical] /template/ LayoutTransformControl#LayoutRoot">
@@ -175,7 +200,7 @@
     <Setter Property="Data" Value="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"/>
   </Style>
 
-  <Style Selector="local|Ribbon[IsCollapsed=True] /template/ ContentPresenter#PART_SelectedContentHost">
+  <Style Selector="local|Ribbon[IsCollapsed=True] /template/ ItemsControl#PART_SelectedGroupsHost">
     <Setter Property="IsVisible" Value="false"/>
   </Style>
   <!--Style Selector="local|Ribbon[IsCollapsed=True] /template/ Border#SelectedContentBorder">

@@ -1,5 +1,7 @@
-﻿using Avalonia.Logging;
+﻿using Avalonia;
+using Avalonia.Logging;
 using Avalonia.Logging.Serilog;
+using Avalonia.Platform;
 
 namespace Avalonia.Ribbon.Samples
 {

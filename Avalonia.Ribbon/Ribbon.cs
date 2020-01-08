@@ -5,6 +5,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
+using System.Linq;
 using System.Collections;
 
 namespace Avalonia.Controls.Ribbon
@@ -40,6 +41,7 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
         public static readonly DirectProperty<Ribbon, IEnumerable> MenuItemsProperty;
         public static readonly DirectProperty<Ribbon, IEnumerable> MenuPlacesItemsProperty;
+        public static readonly DirectProperty<Ribbon, IEnumerable> SelectedGroupsProperty = AvaloniaProperty.RegisterDirect<Ribbon, IEnumerable>(nameof(SelectedGroups), o => o.SelectedGroups, (o, v) => o.SelectedGroups = v);
 
         static Ribbon()
         {
@@ -51,6 +53,21 @@ namespace Avalonia.Controls.Ribbon
             IsMenuOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsMenuOpen));
             MenuItemsProperty = MenuBase.ItemsProperty.AddOwner<Ribbon>(x => x.MenuItems, (x, v) => x.MenuItems = v);
             MenuPlacesItemsProperty = ItemsControl.ItemsProperty.AddOwner<Ribbon>(x => x.MenuPlacesItems, (x, v) => x.MenuPlacesItems = v);
+
+            SelectedIndexProperty.Changed.AddClassHandler<Ribbon>((x, e) =>
+            {
+                if (((int)e.NewValue >= 0) && (x.SelectedItem != null) && (x.SelectedItem is RibbonTab tab))
+                    x.SelectedGroups = tab.Groups;
+                else
+                    x.SelectedGroups = new AvaloniaList<object>();
+            });
+        }
+
+        private IEnumerable _selectedGroups = new AvaloniaList<object>();
+        public IEnumerable SelectedGroups
+        {
+            get { return _selectedGroups; }
+            set { SetAndRaise(SelectedGroupsProperty, ref _selectedGroups, value); }
         }
 
         Type IStyleable.StyleKey => typeof(Ribbon);

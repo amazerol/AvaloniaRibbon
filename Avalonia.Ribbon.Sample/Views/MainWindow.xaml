@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Avalonia.Ribbon.Samples.ViewModels;assembly=Avalonia.Ribbon.Sample"
+    xmlns:ge="clr-namespace:GridExtra.Avalonia;assembly=GridExtra.Avalonia"
     xmlns:ribbon="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon"
     Title="Avalonia Ribbon"
     d:DesignHeight="450"
@@ -53,7 +54,7 @@
                 <ListBoxItem Content="Place 3"/>
             </ribbon:Ribbon.MenuPlacesItems>
             <ribbon:RibbonTab Header="Resize test">
-                <ribbon:RibbonGroupsStackPanel Orientation="Horizontal">
+                <ribbon:RibbonTab.Groups>
                     <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}">
                         <ribbon:RibbonButton Content="Button 1" ToolTip.Tip="Button 1">
                             <ribbon:RibbonButton.LargeIcon>
@@ -153,10 +154,10 @@
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
-                </ribbon:RibbonGroupsStackPanel>
+                </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
             <ribbon:RibbonTab Header="RibbonButtons">
-                <ribbon:RibbonGroupsStackPanel Orientation="Horizontal">
+                <ribbon:RibbonTab.Groups>
                     <ribbon:RibbonGroupBox Header="Large buttons" Command="{Binding OnClickCommand}">
                         <ribbon:RibbonButton Content="Button with raster icon">
                             <ribbon:RibbonButton.LargeIcon>
@@ -221,10 +222,10 @@
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
-                </ribbon:RibbonGroupsStackPanel>
+                </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
             <ribbon:RibbonTab Header="RibbonComboButtons">
-                <ribbon:RibbonGroupsStackPanel Orientation="Horizontal">
+                <ribbon:RibbonTab.Groups>
                     <ribbon:RibbonGroupBox Header="Large combobuttons">
                         <ribbon:RibbonComboButton Content="Button with vector icon">
                             <ribbon:RibbonComboButton.LargeIcon>
@@ -292,10 +293,10 @@
                             <ComboBoxItem>Item 2</ComboBoxItem>
                         </ribbon:RibbonComboButton>
                     </ribbon:RibbonGroupBox>
-                </ribbon:RibbonGroupsStackPanel>
+                </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
             <ribbon:RibbonTab Header="Galleries">
-                <ribbon:RibbonGroupsStackPanel Orientation="Horizontal">
+                <ribbon:RibbonTab.Groups>
                     <ribbon:RibbonGroupBox Header="Large gallery">
                         <ribbon:Gallery>
                             <ListBoxItem Content="Item 1"/>
@@ -358,7 +359,7 @@
                             <ListBoxItem Content="Item 15"/>
                         </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
-                </ribbon:RibbonGroupsStackPanel>
+                </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
         </ribbon:Ribbon>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">

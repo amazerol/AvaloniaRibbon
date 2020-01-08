@@ -16,18 +16,38 @@ namespace Avalonia.Controls.Ribbon
             set => SetValue(DisplayModeProperty, value);
         }
 
-        public RibbonGroupWrapPanel()
+        static RibbonGroupWrapPanel()
+        {
+            AffectsArrange<RibbonGroupWrapPanel>(DisplayModeProperty);
+            AffectsMeasure<RibbonGroupWrapPanel>(DisplayModeProperty);
+            DisplayModeProperty.Changed.AddClassHandler<RibbonGroupWrapPanel>((sneder, args) =>
+            {
+                var children2 = sneder.Children.Where(x => x is IRibbonControl);
+                if (sneder.DisplayMode == GroupDisplayMode.Large)
+                {
+                    foreach (IRibbonControl ctrl in children2)
+                        ctrl.Size = ctrl.MaxSize;
+                }
+                else if (sneder.DisplayMode == GroupDisplayMode.Small)
+                {
+                    foreach (IRibbonControl ctrl in children2)
+                        ctrl.Size = ctrl.MinSize;
+                }
+            });
+        }
+
+        /*public RibbonGroupWrapPanel()
         {
             if (TemplatedParent is RibbonGroupBox parentBox)
             {
                 parentBox.Rearranged += (sneder, args) => ArrangeOverride(Bounds.Size);
                 parentBox.Remeasured += (sneder, args) => MeasureOverride(Bounds.Size);
             }
-        }
+        }*/
 
         bool _smallified = false;
         Size _prevSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
-        protected override Size MeasureOverride(Size constraint)
+        /*protected override */Size aMeasureOverride(Size constraint)
         {
             if (false)
             {
@@ -128,32 +148,48 @@ namespace Avalonia.Controls.Ribbon
             }
             else
             {
-
                 var children2 = Children.Where(x => x is IRibbonControl);
 
-                if (DisplayMode == GroupDisplayMode.Flyout)
+                if (false)
                 {
-                    Debug.WriteLine("FLYOUT");
-                    return base.MeasureOverride(constraint.WithWidth(MinWidth));
-                }
-                else
-                {
-                    if (DisplayMode == GroupDisplayMode.Large)
+                    if (DisplayMode == GroupDisplayMode.Flyout)
                     {
-                        Debug.WriteLine("LARGE");
-                        foreach (IRibbonControl ctrl in children2)
-                            ctrl.Size = ctrl.MaxSize;
+                        //Debug.WriteLine("FLYOUT");
+                        return base.MeasureOverride(constraint/*.WithWidth(MinWidth)*/);
                     }
-                    else if (DisplayMode == GroupDisplayMode.Small)
+                    else
                     {
-                        Debug.WriteLine("SMALL");
-                        foreach (IRibbonControl ctrl in children2)
-                            ctrl.Size = ctrl.MinSize;
-                    }
+                        if (DisplayMode == GroupDisplayMode.Large)
+                        {
+                            //Debug.WriteLine("LARGE");
+                            foreach (IRibbonControl ctrl in children2)
+                                ctrl.Size = ctrl.MaxSize;
+                        }
+                        else if (DisplayMode == GroupDisplayMode.Small)
+                        {
+                            //Debug.WriteLine("SMALL");
+                            foreach (IRibbonControl ctrl in children2)
+                                ctrl.Size = ctrl.MinSize;
+                        }
 
-                    return base.MeasureOverride(constraint);
-                    //return ArrangeOverride(measureSize);
+                        return base.MeasureOverride(constraint);
+                        //return ArrangeOverride(measureSize);
+                    }
                 }
+
+
+                /*if (DisplayMode == GroupDisplayMode.Large)
+                {
+                    foreach (IRibbonControl ctrl in children2)
+                        ctrl.Size = ctrl.MaxSize;
+                }
+                else if (DisplayMode == GroupDisplayMode.Small)
+                {
+                    foreach (IRibbonControl ctrl in children2)
+                        ctrl.Size = ctrl.MinSize;
+                }*/
+
+                return base.MeasureOverride(constraint);
             }
         }
 
