@@ -4,15 +4,15 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <RootNamespace>Avalonia.Controls.Ribbon</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Version>1.1.1-build201219-01</Version>
-    <Authors>Alban Mazerolles, Rubal Walia</Authors>
+    <Version>1.1.2-build100120-02</Version>
+    <Authors>Alban Mazerolles, Rubal Walia, Splitwirez</Authors>
     <PackageId>AvaloniaRibbon</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/waliarubal/AvaloniaRibbon</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/amazerol/AvaloniaRibbon</PackageProjectUrl>
     <Description></Description>
     <RepositoryType>Git</RepositoryType>
-    <RepositoryUrl>https://github.com/waliarubal/AvaloniaRibbon.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/amazerol/AvaloniaRibbon.git</RepositoryUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
     <AssemblyName>Avalonia.Controls.Ribbon</AssemblyName>
   </PropertyGroup>
