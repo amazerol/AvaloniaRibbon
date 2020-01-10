@@ -9,7 +9,7 @@
     Title="Avalonia Ribbon"
     d:DesignHeight="450"
     d:DesignWidth="800"
-    HasSystemDecorations="false"
+    HasSystemDecorations="false" BorderBrush="#2b579a" TitleBarBackground="#2b579a" TitleBarForeground="#ffffff"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
     <ribbon:RibbonWindow.DataContext>
@@ -215,6 +215,11 @@
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Medium gallery">
                         <ribbon:Gallery Size="Medium">
+                            <StackPanel Orientation="Horizontal">
+                                <Button>AA</Button>
+                                <Button>BB</Button>
+                                <Button>CC</Button>
+                            </StackPanel>
                             <ListBoxItem Content="Item 1"/>
                             <ListBoxItem Content="Item 2"/>
                             <ListBoxItem Content="Item 3"/>

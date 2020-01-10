@@ -132,7 +132,10 @@
   <Style Selector="local|Ribbon /template/ ToggleButton.RibbonToggleButton">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
-    <Setter Property="Foreground" Value="{Binding HeaderForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RibbonWindow}}}"/>
+    <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon /template/ ToggleButton.RibbonToggleButton:not(:pointerover):not(:pressed):not(:checked)">
+    <Setter Property="Opacity" Value="0.5"/>
   </Style>
   <Style Selector="local|Ribbon /template/ ToggleButton.RibbonToggleButton:pointerover">
     <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>

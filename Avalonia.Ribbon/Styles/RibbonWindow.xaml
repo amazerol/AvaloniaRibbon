@@ -34,7 +34,7 @@
                       <Setter Property="Height" Value="30" />
                       <Setter Property="VerticalAlignment" Value="Top"/>
                       <Setter Property="Background" Value="Transparent" />
-                      <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Ribbon}}}"/>
+                      <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
                       <Setter Property="BorderBrush" Value="Transparent" />
                     </Style>
                     <Style Selector="Button:pointerover /template/ ContentPresenter">

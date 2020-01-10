@@ -46,20 +46,15 @@
   <Style Selector="local|RibbonTab:not(:selected):pointerover /template/ Border#SelectedBorder">
     <Setter Property="Margin" Value="3,0"/>
   </Style>
-  <Style Selector="Window[IsActive=False] local|Ribbon local|RibbonTab:not(:selected) /template/ ContentPresenter#PART_ContentPresenter">
-    <Setter Property="Opacity" Value="0.5"/>
-  </Style>
-  <Style Selector="Window[IsActive=False] local|Ribbon[IsCollapsed=True] local|RibbonTab:selected /template/ ContentPresenter#PART_ContentPresenter">
-    <Setter Property="Opacity" Value="0.5"/>
-  </Style>
-  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon local|RibbonTab:not(:selected) /template/ ContentPresenter#PART_ContentPresenter">
-    <Setter Property="Opacity" Value="0.5"/>
-  </Style>
-  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon[IsCollapsed=True] local|RibbonTab:selected /template/ ContentPresenter#PART_ContentPresenter">
-    <Setter Property="Opacity" Value="0.5"/>
-  </Style>
   <Style Selector="local|RibbonTab:disabled">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+  <Style Selector="local|RibbonWindow local|RibbonTab">
+    <Setter Property="BorderBrush" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
+    <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonTab">
+    <Setter Property="Opacity" Value="0.5"/>
   </Style>
   <!--Style Selector="local|Ribbon[IsCollapsed=False] local|RibbonTab:selected">
     <Setter Property="Foreground" Value="{DynamicResource TitleBarColorBrush}" />
