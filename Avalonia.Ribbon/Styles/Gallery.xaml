@@ -133,23 +133,49 @@
       </ItemsPanelTemplate>
     </Setter>
   </Style>
-  <Style Selector="local|Gallery[Size=Large]">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Large]">
     <Setter Property="Width" Value="345"/>
   </Style>
-  <Style Selector="local|Gallery[Size=Medium]">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Medium]">
     <Setter Property="Width" Value="230"/>
   </Style>
-  <Style Selector="local|Gallery[Size=Small]">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Small]">
     <Setter Property="Width" Value="115"/>
   </Style>
-  <Style Selector="local|Gallery[Size=Large] /template/ UniformGrid#ItemsUniformGrid">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Large] /template/ UniformGrid#ItemsUniformGrid">
     <Setter Property="Columns" Value="3"/>
   </Style>
-  <Style Selector="local|Gallery[Size=Medium] /template/ UniformGrid#ItemsUniformGrid">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Medium] /template/ UniformGrid#ItemsUniformGrid">
     <Setter Property="Columns" Value="2"/>
   </Style>
-  <Style Selector="local|Gallery[Size=Small] /template/ UniformGrid#ItemsUniformGrid">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Small] /template/ UniformGrid#ItemsUniformGrid">
     <Setter Property="Columns" Value="1"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Large]">
+    <Setter Property="Width" Value="345"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Medium]">
+    <Setter Property="Width" Value="230"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Small]">
+    <Setter Property="Width" Value="115"/>
+  </Style>
+
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery">
+    <Setter Property="Width" Value="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}}"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery /template/ UniformGrid#ItemsUniformGrid">
+    <Setter Property="Columns" Value="2"/>
+  </Style>
+
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery[Size=Small]">
+    <Setter Property="Height" Value="62"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery[Size=Medium]">
+    <Setter Property="Height" Value="122"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery[Size=Large]">
+    <Setter Property="Height" Value="182"/>
   </Style>
 
   <Style Selector="local|Gallery ListBoxItem">

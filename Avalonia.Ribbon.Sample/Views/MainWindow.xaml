@@ -318,11 +318,6 @@
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Medium gallery">
                         <ribbon:Gallery MaxSize="Medium">
-                            <StackPanel Orientation="Horizontal">
-                                <Button>AA</Button>
-                                <Button>BB</Button>
-                                <Button>CC</Button>
-                            </StackPanel>
                             <ListBoxItem Content="Item 1"/>
                             <ListBoxItem Content="Item 2"/>
                             <ListBoxItem Content="Item 3"/>

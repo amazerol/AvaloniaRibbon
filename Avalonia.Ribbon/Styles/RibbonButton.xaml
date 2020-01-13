@@ -31,10 +31,10 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
-          <StackPanel Orientation="Horizontal">
-            <ContentPresenter Content="{TemplateBinding Icon}" />
-            <ContentPresenter Content="{TemplateBinding Content}" Margin="3,0,0,0" />
-          </StackPanel>
+          <DockPanel>
+            <ContentPresenter Content="{TemplateBinding Icon}" DockPanel.Dock="Left" />
+            <ContentPresenter Classes="MediumContentPresenter" Content="{TemplateBinding Content}" Margin="3,0,0,0" />
+          </DockPanel>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -67,8 +67,12 @@
     </Setter>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonButton[Size=Medium]">
-    <Setter Property="Width" Value="132"/>
+    <!--Setter Property="Width" Value="132"/-->
+    <Setter Property="Width" Value="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}}"/>
   </Style>
+  <!--Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonButton[Size=Medium] /template/ ContentPresenter.MediumContentPresenter">
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+  </Style-->
   <Style Selector="local|RibbonButton:not(local|RibbonButton[Size=Large])">
     <Setter Property="Padding" Value="3" />
   </Style>

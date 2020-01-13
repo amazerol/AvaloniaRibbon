@@ -23,7 +23,7 @@
           <DockPanel Background="Transparent">
             <DockPanel Background="{TemplateBinding HeaderBackground}" DockPanel.Dock="Top">
               <LayoutTransformControl Name="MenuButtonHolder" Classes="LayoutInvert">
-                <ToggleButton Name="MenuButton" Padding="16,0" FontWeight="SemiBold" Classes="RibbonToggleButton" Height="34" IsChecked="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Content="File"/>
+                <ToggleButton Name="MenuButton" FontWeight="SemiBold" Classes="RibbonToggleButton" Height="34" IsChecked="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Content="File"/>
               </LayoutTransformControl>
               <Popup PlacementTarget="{Binding Source=MenuButton}" PlacementMode="Bottom" VerticalOffset="-34" StaysOpen="False" IsOpen="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Width="500" MinHeight="300">
                 <DockPanel>
@@ -110,6 +110,12 @@
   </Style>
   <Style Selector="local|Ribbon[Orientation=Vertical]">
     <Setter Property="Margin" Value="0,0,-4,0"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] /template/ ToggleButton#MenuButton">
+    <Setter Property="Padding" Value="16,0"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] /template/ ToggleButton#MenuButton">
+    <Setter Property="Padding" Value="0"/>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Horizontal] /template/ LayoutTransformControl#MenuButtonHolder">
     <Setter Property="DockPanel.Dock" Value="Left"/>

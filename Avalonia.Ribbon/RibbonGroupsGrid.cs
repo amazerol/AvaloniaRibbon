@@ -3,34 +3,58 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
+using System.Collections.Specialized;
 
 namespace Avalonia.Controls.Ribbon
 {
     public class RibbonGroupsGrid : Grid
     {
-        /*public RibbonGroupGrid()
+        public RibbonGroupsGrid()
         {
-            if (TemplatedParent is RibbonGroupBox parentBox)
+            //this.LayoutUpdated += RibbonGroupsGrid_LayoutUpdated;
+            
+            /*if (TemplatedParent is RibbonGroupBox parentBox)
             {
-                
                 parentBox.Rearranged += (sneder, args) => ArrangeOverride(Bounds.Size);
                 parentBox.Remeasured += (sneder, args) => MeasureOverride(Bounds.Size);
-            }
-        }*/
+            }*/
+        }
 
-        int _lastChildrenCount = 0;
-        //double _lastTotalChildrenWidth = -1;
+        protected override void ChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            base.ChildrenChanged(sender, e);
+            _childrenCountChanged = true;
+        }
+
+        protected override void LogicalChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            base.LogicalChildrenCollectionChanged(sender, e);
+            _childrenCountChanged = true;
+        }
+
+        private void RibbonGroupsGrid_LayoutUpdated(object sender, EventArgs e)
+        {
+            OnSizeChanged(Bounds.Size);
+        }
+        Size OnSizeChanged(Size arrangeSize)
+        {
+            return ArrangeOverride(arrangeSize);
+        }
+
+        //int _lastChildrenCount = 0;
+        bool _childrenCountChanged = true;
+        
         double _lastArrangeSizeWidth = -1;
         double _largeTotalChildrenWidth = -1;
+        
         protected override Size ArrangeOverride(Size arrangeSize)
         {
             var children = Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
             double totalChildrenWidth = 0;
             double largeTotalChildrenWidth = 0;
             double smallTotalChildrenWidth = 0;
-            bool childrenCountChanged = children.Count() != _lastChildrenCount;
 
-            if ((_largeTotalChildrenWidth < 0) || childrenCountChanged)
+            if ((_largeTotalChildrenWidth < 0) || _childrenCountChanged)
             {
                 _largeTotalChildrenWidth = 0;
                 for (int i = 0; i < children.Count(); i++)
@@ -52,7 +76,7 @@ namespace Avalonia.Controls.Ribbon
                 RibbonGroupBox box = children.ElementAt(i);
                 GroupDisplayMode oldMode = box.DisplayMode;
                 //GridExtra.Avalonia.GridEx.SetAreaName(box, i.ToString());
-                if (childrenCountChanged)
+                if (_childrenCountChanged)
                     Grid.SetColumn(box, i);
                 //////displayModes[i] = box.DisplayMode;
                 
@@ -69,7 +93,7 @@ namespace Avalonia.Controls.Ribbon
                 box.DisplayMode = box.DisplayMode;
                 totalChildrenWidth += box.Bounds.Width;
             }
-            if ((children.Count() > 0) && childrenCountChanged)
+            if ((children.Count() > 0) && _childrenCountChanged)
             {
                 columnDefinitions = columnDefinitions.Substring(0, columnDefinitions.LastIndexOf(','));
                 ColumnDefinitions = new ColumnDefinitions(columnDefinitions);
@@ -198,7 +222,8 @@ namespace Avalonia.Controls.Ribbon
                 
             }*/
 
-            _lastChildrenCount = children.Count();
+            //_lastChildrenCount = children.Count();
+            _childrenCountChanged = false;
             try
             {
                 return base.ArrangeOverride(arrangeSize);
