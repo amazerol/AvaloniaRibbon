@@ -66,10 +66,10 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonButton[Size=Medium]">
-    <!--Setter Property="Width" Value="132"/-->
+  <!--Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonButton[Size=Medium]">
+    <!-Setter Property="Width" Value="132"/->
     <Setter Property="Width" Value="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}}"/>
-  </Style>
+  </Style-->
   <!--Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonButton[Size=Medium] /template/ ContentPresenter.MediumContentPresenter">
     <Setter Property="HorizontalContentAlignment" Value="Center"/>
   </Style-->

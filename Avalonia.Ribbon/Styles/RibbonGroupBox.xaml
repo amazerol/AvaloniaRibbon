@@ -15,7 +15,8 @@
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
-    <Setter Property="MinWidth" Value="50"/>
+    <!--Setter Property="VerticalAlignment" Value="Stretch"/-->
+    <Setter Property="Height" Value="{Binding Bounds.Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <DockPanel HorizontalAlignment="Stretch">
@@ -74,6 +75,12 @@
         </DockPanel>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="local|RibbonGroupBox:not(local|RibbonGroupBox[DisplayMode=Flyout])">
+    <Setter Property="MinWidth" Value="50"/>
+  </Style>
+  <Style Selector="local|RibbonGroupBox[DisplayMode=Flyout]">
+    <Setter Property="MinWidth" Value="32"/>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
     <Setter Property="Orientation" Value="Vertical"/>
