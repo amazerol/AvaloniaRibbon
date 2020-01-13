@@ -11,13 +11,31 @@ namespace Avalonia.Controls.Ribbon
     {
         public RibbonGroupsGrid()
         {
-            //this.LayoutUpdated += RibbonGroupsGrid_LayoutUpdated;
+            this.LayoutUpdated += RibbonGroupsGrid_LayoutUpdated2;
+            //this.OnSizeChanged
             
             /*if (TemplatedParent is RibbonGroupBox parentBox)
             {
                 parentBox.Rearranged += (sneder, args) => ArrangeOverride(Bounds.Size);
                 parentBox.Remeasured += (sneder, args) => MeasureOverride(Bounds.Size);
             }*/
+        }
+
+        double _lastTotalChildrenWidth = -1;
+        bool _cycle2 = false;
+        private void RibbonGroupsGrid_LayoutUpdated2(object sender, EventArgs e)
+        {
+            if ((_cycle2) && (_lastTotalChildrenWidth >= 0))
+            {
+                Arrange2(Bounds.Size, _lastTotalChildrenWidth);
+                _cycle2 = false;
+            }
+            else
+            {
+                _lastTotalChildrenWidth = Arrange1(Bounds.Size);
+                _cycle2 = true;
+                Measure(Bounds.Size);
+            }
         }
 
         protected override void ChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -38,6 +56,7 @@ namespace Avalonia.Controls.Ribbon
         }
         Size OnSizeChanged(Size arrangeSize)
         {
+            //Arrange2(Bounds.Size, Arrange1(Bounds.Size));
             return ArrangeOverride(arrangeSize);
         }
 
@@ -46,8 +65,175 @@ namespace Avalonia.Controls.Ribbon
         
         double _lastArrangeSizeWidth = -1;
         double _largeTotalChildrenWidth = -1;
-        
-        protected override Size ArrangeOverride(Size arrangeSize)
+
+        private double Arrange1(Size arrangeSize)
+        {
+            var children = Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
+            double totalChildrenWidth = 0;
+            double largeTotalChildrenWidth = 0;
+            double smallTotalChildrenWidth = 0;
+
+            if ((_largeTotalChildrenWidth < 0) || _childrenCountChanged)
+            {
+                _largeTotalChildrenWidth = 0;
+                for (int i = 0; i < children.Count(); i++)
+                {
+                    GroupDisplayMode prevMode = children.ElementAt(i).DisplayMode;
+                    children.ElementAt(i).DisplayMode = GroupDisplayMode.Large;
+                    _largeTotalChildrenWidth = children.ElementAt(i).Bounds.Width;
+                    children.ElementAt(i).DisplayMode = prevMode;
+                }
+            }
+            string columnDefinitions = string.Empty;
+            //////GroupDisplayMode[] displayModes = new GroupDisplayMode[children.Count()];
+            for (int i = 0; i < children.Count(); i++)
+            {
+                RibbonGroupBox box = children.ElementAt(i);
+                GroupDisplayMode oldMode = box.DisplayMode;
+                //GridExtra.Avalonia.GridEx.SetAreaName(box, i.ToString());
+                if (_childrenCountChanged)
+                    Grid.SetColumn(box, i);
+                //////displayModes[i] = box.DisplayMode;
+
+                /*box.DisplayMode = GroupDisplayMode.Large;
+                largeTotalChildrenWidth += box.DesiredSize.Width;
+                box.DisplayMode = GroupDisplayMode.Small;
+                smallTotalChildrenWidth += box.DesiredSize.Width;*/
+
+                //box.Measure(tempSize);
+                //box.Arrange(arrangeSize);
+                //templateArea += i.ToString() + " ";
+                columnDefinitions += "Auto,";
+                //box.DisplayMode = oldMode;
+                box.DisplayMode = box.DisplayMode;
+                totalChildrenWidth += box.Bounds.Width;
+            }
+            if ((children.Count() > 0) && _childrenCountChanged)
+            {
+                columnDefinitions = columnDefinitions.Substring(0, columnDefinitions.LastIndexOf(','));
+                ColumnDefinitions = new ColumnDefinitions(columnDefinitions);
+            }
+
+            /*for (int i = 0; i < children.Count(); i++)
+            {
+                //if (children.ElementAt(i).DisplayMode != GroupDisplayMode.Large)
+                children.ElementAt(i).DisplayMode = displayModes[i];
+            }*/
+
+            //templateArea += "/";
+            //GridExtra.Avalonia.GridEx.SetTemplateArea(this, templateArea);
+            //Size bigSize = base.ArrangeOverride(arrangeSize);
+            Debug.WriteLine(totalChildrenWidth + "; " + arrangeSize.Width + "; " + _lastArrangeSizeWidth);
+            return totalChildrenWidth;
+        }
+
+        private void Arrange2(Size arrangeSize, double totalChildrenWidth)
+        {
+            var children = Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
+            double largeTotalChildrenWidth = 0;
+            double smallTotalChildrenWidth = 0;
+
+            Debug.WriteLine("2: " + totalChildrenWidth + "; " + arrangeSize.Width + "; " + _lastArrangeSizeWidth);
+
+            if (_lastArrangeSizeWidth >= 0)
+            {
+                if ((totalChildrenWidth > arrangeSize.Width) && (arrangeSize.Width < _lastArrangeSizeWidth))
+                {
+                    //for (int i = children.Count() - 1; i >= 0; i--)
+                    foreach (RibbonGroupBox box in children.Where(x => x.DisplayMode == GroupDisplayMode.Large).Reverse())
+                    {
+                        //RibbonGroupBox box = children.ElementAt(i);
+                        double newTotalChildrenWidth = 0;
+                        //base.MeasureCore(arrangeSize);
+                        for (int j = 0; j < children.Count(); j++)
+                        {
+                            RibbonGroupBox box2 = children.ElementAt(j);
+                            box2.InvalidateArrange();
+                            box2.InvalidateMeasure();
+                            box2.Measure(arrangeSize);
+                            //box2.DisplayMode = box2.DisplayMode;
+                            //box.Arrange();
+                            //box2.InvalidateArrange();
+                            //box2.InvalidateMeasure();
+                            //box2.Arrange(tempRect);
+                            //box2.Measure(tempSize);
+                            newTotalChildrenWidth += box2.Bounds.Width;
+                        }
+                        Debug.WriteLine("newTotalChildrenWidth: " + newTotalChildrenWidth);
+                        if (GetChildrenTotalWidthForDisplayMode((GroupDisplayMode)(-1)) <= arrangeSize.Width)
+                            break;
+                        else
+                        {
+                            box.DisplayMode = GroupDisplayMode.Small;
+                        }
+                        break;
+                    }
+                }
+                else if ((totalChildrenWidth <= arrangeSize.Width) && (arrangeSize.Width > _lastArrangeSizeWidth))
+                {
+                    //for (int i = 0; i < children.Count; i++)
+
+                    //for (int i = 0; i < children.Count(); i++)
+                    foreach (RibbonGroupBox box in children.Where(x => x.DisplayMode != GroupDisplayMode.Large))
+                    {
+                        //RibbonGroupBox box = children.ElementAt(i);
+                        box.DisplayMode = GroupDisplayMode.Large;
+                        double newTotalChildrenWidth = 0;
+                        //base.MeasureCore(arrangeSize);
+                        for (int j = 0; j < children.Count(); j++)
+                        {
+                            RibbonGroupBox box2 = children.ElementAt(j);
+                            box2.InvalidateArrange();
+                            box2.InvalidateMeasure();
+                            box2.Measure(arrangeSize);
+                            //box2.DisplayMode = box2.DisplayMode;
+                            //box2.Measure(tempSize);
+                            /*box2.InvalidateArrange();
+                            box2.InvalidateMeasure();*/
+                            //box2.Arrange(tempRect);
+                            //box2.Measure(tempSize);
+                            newTotalChildrenWidth += box2.Bounds.Width;
+                        }
+
+                        Debug.WriteLine("newTotalChildrenWidth: " + newTotalChildrenWidth);
+                        if (GetChildrenTotalWidthForDisplayMode((GroupDisplayMode)(-1)) > arrangeSize.Width)
+                        {
+                            box.DisplayMode = GroupDisplayMode.Small;
+                            break;
+                        }
+                        break;
+                    }
+                }
+            }
+            //_lastTotalChildrenWidth = totalChildrenWidth;
+            _lastArrangeSizeWidth = arrangeSize.Width;
+            _childrenCountChanged = true;
+        }
+
+        double GetChildrenTotalWidthForDisplayMode(GroupDisplayMode mode)
+        {
+            var children = Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
+            double totalWidth = 0;
+            GroupDisplayMode[] oldModes = new GroupDisplayMode[children.Count()];
+
+            for (int i = 0; i < children.Count(); i++)
+            {
+                oldModes[i] = children.ElementAt(i).DisplayMode;
+                if ((int)mode >= 0)
+                    children.ElementAt(i).DisplayMode = mode;
+            }
+            Arrange(new Rect(DesiredSize));
+            Measure(DesiredSize);
+            for (int i = 0; i < children.Count(); i++)
+            {
+                totalWidth += children.ElementAt(i).Bounds.Width;
+                children.ElementAt(i).DisplayMode = oldModes[i];
+            }
+
+            return totalWidth;
+        }
+
+        private Size zArrangeOverride(Size arrangeSize)
         {
             var children = Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
             double totalChildrenWidth = 0;
@@ -223,7 +409,7 @@ namespace Avalonia.Controls.Ribbon
             }*/
 
             //_lastChildrenCount = children.Count();
-            _childrenCountChanged = false;
+            _childrenCountChanged = true;
             try
             {
                 return base.ArrangeOverride(arrangeSize);

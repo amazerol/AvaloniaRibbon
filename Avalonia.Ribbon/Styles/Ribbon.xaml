@@ -73,7 +73,8 @@
                   <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                       <!--StackPanel x:Name="PART_ItemsPanel" Orientation="Horizontal"/-->
-                      <local:RibbonGroupsGrid x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch"/>
+                      <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch" Orientation="Horizontal"/>
+                      <!--local:RibbonGroupsGrid x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch"/-->
                       <!--local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" Orientation="Horizontal"/-->
                       <!--ge:ResponsiveGrid x:Name="PART_ItemsPanel">
                         <ge:ResponsiveGrid.Styles>
