@@ -16,7 +16,7 @@
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <!--Setter Property="VerticalAlignment" Value="Stretch"/-->
-    <Setter Property="Height" Value="{Binding Bounds.Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}}"/>
+    <Setter Property="Height" Value="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}, Mode=OneWay}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <DockPanel HorizontalAlignment="Stretch">
