@@ -30,7 +30,6 @@ namespace Avalonia.Controls.Ribbon
         {
             AffectsArrange<RibbonGroupBox>(DisplayModeProperty);
             AffectsMeasure<RibbonGroupBox>(DisplayModeProperty);
-            //DisplayModeProperty.OverrideMetadata<RibbonGroupBox>(new StyledPropertyMetadata<GroupDisplayMode>()
             CommandProperty = AvaloniaProperty.RegisterDirect<RibbonGroupBox, ICommand>(nameof(Command), button => button.Command, (button, command) => button.Command = command, enableDataValidation: true);
         }
 
@@ -46,13 +45,6 @@ namespace Avalonia.Controls.Ribbon
         {
             get { return _command; }
             set { SetAndRaise(CommandProperty, ref _command, value); }
-        }
-
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
-        {
-            base.OnTemplateApplied(e);
-            var panel = e.NameScope.Find<RibbonGroupWrapPanel>("PART_ItemsPanel");
-            System.Diagnostics.Debug.WriteLine("panel: " + (panel == null));
         }
 
         protected override Size ArrangeOverride(Size finalSize)

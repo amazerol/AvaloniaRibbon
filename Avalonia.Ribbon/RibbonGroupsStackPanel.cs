@@ -11,6 +11,8 @@ namespace Avalonia.Controls.Ribbon
     {
         double _lastArrangeSizeWidth = -1;
         double _lastTotalChildrenWidth = -1;
+        double _lastArrangeSizeHeight = -1;
+        double _lastTotalChildrenHeight = -1;
         bool _cycle2 = false;
 
         public RibbonGroupsStackPanel()
@@ -39,51 +41,14 @@ namespace Avalonia.Controls.Ribbon
                 box.InvalidateMeasure();
                 box.Measure(Bounds.Size);
             }
-            if (IsInitialized && (_lastTotalChildrenWidth > 0) && (Children.Count() > 0))
+            if (IsInitialized && (
+                ((Orientation == Layout.Orientation.Horizontal) && (_lastTotalChildrenWidth > 0))
+                || ((Orientation == Layout.Orientation.Vertical) && (_lastTotalChildrenHeight > 0))
+                ) && (Children.Count() > 0))
             {
                 _cycle2 = false;
                 UpdateLayoutState();
             }
-            /*foreach (RibbonGroupBox box in Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>())
-            {
-                box.InvalidateArrange();
-                box.InvalidateMeasure();
-                box.Measure(Bounds.Size);
-            }*/
-            /*if (IsInitialized && (_lastTotalChildrenWidth > 0) && (Children.Count() > 0) && (GetChildrenTotalWidth() == _lastTotalChildrenWidth))
-            {
-                SizeControls(Bounds.Size, _lastTotalChildrenWidth);
-            }*/
-
-            //
-            /*double width = Bounds.Width;
-            if (GetChildrenTotalWidth() > width)
-            {
-                while (GetChildrenTotalWidth() > width)
-                {
-                    if (width == Bounds.Width)
-                        break;
-
-                    SizeControls(Bounds.Size, false, true);
-                    width = Bounds.Width;
-                }
-            }
-            else if (GetChildrenTotalWidth() < width)
-            {
-                while (GetChildrenTotalWidth() < width)
-                {
-                    SizeControls(Bounds.Size, true, false);
-                    width = Bounds.Width;
-                    
-                    if (width == Bounds.Width)
-                        break;
-                    else if (width > Bounds.Width)
-                    {
-                        SizeControls(Bounds.Size, false, true);
-                        break;
-                    }
-                }
-            }*/
         }
 
         private void RibbonGroupsStackPanel_LayoutUpdated(object sender, EventArgs e)
@@ -95,75 +60,136 @@ namespace Avalonia.Controls.Ribbon
         {
             if (_cycle2 && (_lastTotalChildrenWidth >= 0))
             {
-                SizeControls(Bounds.Size, _lastTotalChildrenWidth);
+                SizeControls(Bounds.Size, _lastTotalChildrenWidth, _lastTotalChildrenHeight);
                 _cycle2 = false;
             }
             else
             {
                 _lastTotalChildrenWidth = GetChildrenTotalWidth();
+                _lastTotalChildrenHeight = GetChildrenTotalHeight();
                 _cycle2 = true;
                 Measure(Bounds.Size);
             }
         }
 
-        private void SizeControls(Size arrangeSize, double lastTotalChildrenWidth)
+        private void SizeControls(Size arrangeSize, double lastTotalChildrenWidth, double lastTotalChildrenHeight)
         {
             var children = Children.Reverse().Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
 
-            if (_lastArrangeSizeWidth >= 0)
+            if (Orientation == Layout.Orientation.Vertical)
             {
-                if (lastTotalChildrenWidth > arrangeSize.Width)
+                if (_lastArrangeSizeHeight >= 0)
                 {
-                    int count = 0;
-                    while (GetChildrenTotalWidth() > arrangeSize.Width)
+                    if (lastTotalChildrenHeight > arrangeSize.Height)
                     {
-                        var largeChildren = children.Where(x => x.DisplayMode == GroupDisplayMode.Large);
-                        if (largeChildren.Count() > 0)
+                        int count = 0;
+                        while (GetChildrenTotalHeight() > arrangeSize.Height)
                         {
-                            var firstLargeChild = largeChildren.First();
-                            firstLargeChild.DisplayMode = GroupDisplayMode.Small;
-                            firstLargeChild.InvalidateArrange();
-                            firstLargeChild.InvalidateMeasure();
-                            firstLargeChild.Measure(arrangeSize);
-                        }
-                        else
-                            break;
-
-                        count++;
-                        if (count >= children.Count())
-                            break;
-                    }
-                }
-                else if (lastTotalChildrenWidth <= arrangeSize.Width)
-                {
-                    int count = 0;
-                    while (GetChildrenTotalWidth() <= arrangeSize.Width)
-                    {
-                        var nonLargeChildren = children.Where(x => x.DisplayMode != GroupDisplayMode.Large);
-                        if (nonLargeChildren.Count() > 0)
-                        {
-                            var lastNonLargeChild = nonLargeChildren.Last();
-                            lastNonLargeChild.DisplayMode = GroupDisplayMode.Large;
-                            lastNonLargeChild.InvalidateArrange();
-                            lastNonLargeChild.InvalidateMeasure();
-                            lastNonLargeChild.Measure(arrangeSize);
-
-                            if (GetChildrenTotalWidth() > arrangeSize.Width)
+                            var largeChildren = children.Where(x => x.DisplayMode == GroupDisplayMode.Large);
+                            if (largeChildren.Count() > 0)
                             {
-                                lastNonLargeChild.DisplayMode = GroupDisplayMode.Small;
-                                break;
+                                var firstLargeChild = largeChildren.First();
+                                firstLargeChild.DisplayMode = GroupDisplayMode.Small;
+                                firstLargeChild.InvalidateArrange();
+                                firstLargeChild.InvalidateMeasure();
+                                firstLargeChild.Measure(arrangeSize);
                             }
-                        }
-                        else
-                            break;
+                            else
+                                break;
 
-                        count++;
-                        if (count >= children.Count())
-                            break;
+                            count++;
+                            if (count >= children.Count())
+                                break;
+                        }
+                    }
+                    else if (lastTotalChildrenHeight <= arrangeSize.Height)
+                    {
+                        int count = 0;
+                        while (GetChildrenTotalHeight() <= arrangeSize.Height)
+                        {
+                            var nonLargeChildren = children.Where(x => x.DisplayMode != GroupDisplayMode.Large);
+                            if (nonLargeChildren.Count() > 0)
+                            {
+                                var lastNonLargeChild = nonLargeChildren.Last();
+                                lastNonLargeChild.DisplayMode = GroupDisplayMode.Large;
+                                lastNonLargeChild.InvalidateArrange();
+                                lastNonLargeChild.InvalidateMeasure();
+                                lastNonLargeChild.Measure(arrangeSize);
+
+                                if (GetChildrenTotalHeight() > arrangeSize.Height)
+                                {
+                                    lastNonLargeChild.DisplayMode = GroupDisplayMode.Small;
+                                    break;
+                                }
+                            }
+                            else
+                                break;
+
+                            count++;
+                            if (count >= children.Count())
+                                break;
+                        }
                     }
                 }
+                _lastArrangeSizeHeight = arrangeSize.Height;
             }
-            _lastArrangeSizeWidth = arrangeSize.Width;
+            else
+            {
+                if (_lastArrangeSizeWidth >= 0)
+                {
+                    if (lastTotalChildrenWidth > arrangeSize.Width)
+                    {
+                        int count = 0;
+                        while (GetChildrenTotalWidth() > arrangeSize.Width)
+                        {
+                            var largeChildren = children.Where(x => x.DisplayMode == GroupDisplayMode.Large);
+                            if (largeChildren.Count() > 0)
+                            {
+                                var firstLargeChild = largeChildren.First();
+                                firstLargeChild.DisplayMode = GroupDisplayMode.Small;
+                                firstLargeChild.InvalidateArrange();
+                                firstLargeChild.InvalidateMeasure();
+                                firstLargeChild.Measure(arrangeSize);
+                            }
+                            else
+                                break;
+
+                            count++;
+                            if (count >= children.Count())
+                                break;
+                        }
+                    }
+                    else if (lastTotalChildrenWidth <= arrangeSize.Width)
+                    {
+                        int count = 0;
+                        while (GetChildrenTotalWidth() <= arrangeSize.Width)
+                        {
+                            var nonLargeChildren = children.Where(x => x.DisplayMode != GroupDisplayMode.Large);
+                            if (nonLargeChildren.Count() > 0)
+                            {
+                                var lastNonLargeChild = nonLargeChildren.Last();
+                                lastNonLargeChild.DisplayMode = GroupDisplayMode.Large;
+                                lastNonLargeChild.InvalidateArrange();
+                                lastNonLargeChild.InvalidateMeasure();
+                                lastNonLargeChild.Measure(arrangeSize);
+
+                                if (GetChildrenTotalWidth() > arrangeSize.Width)
+                                {
+                                    lastNonLargeChild.DisplayMode = GroupDisplayMode.Small;
+                                    break;
+                                }
+                            }
+                            else
+                                break;
+
+                            count++;
+                            if (count >= children.Count())
+                                break;
+                        }
+                    }
+                }
+                _lastArrangeSizeWidth = arrangeSize.Width;
+            }
         }
 
         double GetChildrenTotalWidth()
@@ -177,6 +203,19 @@ namespace Avalonia.Controls.Ribbon
                 totalWidth += children.ElementAt(i).Bounds.Width;
 
             return totalWidth;
+        }
+
+        double GetChildrenTotalHeight()
+        {
+            var children = Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
+            double totalHeight = 0;
+
+            Arrange(new Rect(DesiredSize));
+            Measure(DesiredSize);
+            for (int i = 0; i < children.Count(); i++)
+                totalHeight += children.ElementAt(i).Bounds.Height;
+
+            return totalHeight;
         }
     }
 }

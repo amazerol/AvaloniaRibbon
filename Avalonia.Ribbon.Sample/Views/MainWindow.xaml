@@ -36,7 +36,7 @@
         </Style>
     </ribbon:RibbonWindow.Styles>
     <DockPanel>
-        <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top">
+        <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal">
             <ribbon:Ribbon.MenuItems>
                 <MenuItem Header="Item 1">
                     <MenuItem Header="SubItem 1"/>
@@ -127,7 +127,7 @@
                                 </Grid>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton MaxSize="Large" MinSize="Large" Content="Button 7" ToolTip.Tip="Button 7">
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 7" ToolTip.Tip="Button 7">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Grid Width="32" Height="32">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
@@ -153,7 +153,7 @@
                                 </Rectangle>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton MaxSize="Large" MinSize="Large" Content="Button 10" ToolTip.Tip="Button 10">
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 10" ToolTip.Tip="Button 10">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Grid Width="32" Height="32">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
@@ -301,7 +301,7 @@
             </ribbon:RibbonTab>
             <ribbon:RibbonTab Header="Galleries">
                 <ribbon:RibbonTab.Groups>
-                    <ribbon:RibbonGroupBox Header="Large gallery">
+                    <ribbon:RibbonGroupBox Header="Large gallery" Command="{Binding OnClickCommand}">
                         <ribbon:Gallery>
                             <ListBoxItem Content="Item 1"/>
                             <ListBoxItem Content="Item 2"/>
