@@ -9,17 +9,25 @@ namespace Avalonia.Controls.Ribbon
 {
     public class Gallery : ListBox, IStyleable, IRibbonControl
     {
-        public static readonly StyledProperty<RibbonControlSize> SizeProperty = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(RibbonControlSize), RibbonControlSize.Large);
-        public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<Gallery, bool>(nameof(CanAddToQuickAccessToolbar), true);
+        public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty; // = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(Size), RibbonControlSize.Large);
+        public static readonly AvaloniaProperty<RibbonControlSize> MinSizeProperty; // = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(MinSize), RibbonControlSize.Small);
+        public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty; // = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(MaxSize), RibbonControlSize.Large);
+        //public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<Gallery, bool>(nameof(CanAddToQuickAccessToolbar), true);
         public static readonly DirectProperty<Gallery, bool> IsDropDownOpenProperty;
 
         static Gallery()
         {
+            //SizeProperty = RibbonButton.SizeProperty.AddOwner<Gallery>();
+            //MinSizeProperty = RibbonButton.MinSizeProperty.AddOwner<Gallery>();
+            //MaxSizeProperty = RibbonButton.MaxSizeProperty.AddOwner<Gallery>();
             IsDropDownOpenProperty = ComboBox.IsDropDownOpenProperty.AddOwner<Gallery>(element => element.IsDropDownOpen, (element, value) => element.IsDropDownOpen = value);
             IsDropDownOpenProperty.Changed.AddClassHandler(new Action<Gallery, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
             {
                 sneder.UpdatePresenterLocation((bool)args.NewValue);
             }));
+            //AffectsRender<Gallery>(SizeProperty, MinSizeProperty, MaxSizeProperty);
+
+            RibbonControlHelper<Gallery>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
         }
 
         Type IStyleable.StyleKey => typeof(Gallery);
@@ -38,11 +46,23 @@ namespace Avalonia.Controls.Ribbon
             set => SetValue(SizeProperty, value);
         }
 
-        public bool CanAddToQuickAccessToolbar
+        public RibbonControlSize MinSize
+        {
+            get => GetValue(MinSizeProperty);
+            set => SetValue(MinSizeProperty, value);
+        }
+
+        public RibbonControlSize MaxSize
+        {
+            get => GetValue(MaxSizeProperty);
+            set => SetValue(MaxSizeProperty, value);
+        }
+
+        /*public bool CanAddToQuickAccessToolbar
         {
             get => GetValue(CanAddToQuickAccessToolbarProperty);
             set => SetValue(CanAddToQuickAccessToolbarProperty, value);
-        }
+        }*/
 
         ItemsPresenter _itemsPresenter;
         ContentControl _mainPresenter;

@@ -8,7 +8,7 @@ using ReactiveUI;
 
 namespace Avalonia.Ribbon.Samples.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : INotifyPropertyChanged
     {
         public void OnClickCommand(object parameter)
         {
@@ -23,6 +23,26 @@ namespace Avalonia.Ribbon.Samples.ViewModels
             }
 
             Console.WriteLine("OnClickCommand invoked: " + paramString);
+            LastActionText = paramString;
+        }
+
+        string _lastActionText = "none";
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public string LastActionText
+        {
+            get => _lastActionText;
+            set
+            {
+                _lastActionText = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public void NotifyPropertyChanged([CallerMemberName]string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

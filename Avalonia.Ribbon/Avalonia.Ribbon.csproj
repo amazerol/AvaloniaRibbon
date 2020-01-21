@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
     <RootNamespace>Avalonia.Controls.Ribbon</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Version>1.0.2</Version>

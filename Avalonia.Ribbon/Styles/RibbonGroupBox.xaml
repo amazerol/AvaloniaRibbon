@@ -15,22 +15,22 @@
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <!--Setter Property="Height" Value="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}, Mode=OneWay}"/-->
     <Setter Property="Template">
-      <ControlTemplate TargetType="local:RibbonGroupBox">
-        <DockPanel>
-          <Border
-              Width="1"
-              Margin="5,0"
-              Background="{TemplateBinding Background}"
-              BorderBrush="{TemplateBinding BorderBrush}"
-              BorderThickness="{TemplateBinding BorderThickness}"
-              DockPanel.Dock="Right" />
-          <LayoutTransformControl Classes="LayoutInvert">
-            <!--ItemContainerGenerator="{TemplateBinding ItemContainerGenerator}"-->
+      <ControlTemplate>
+        <Border x:Name="EdgeBorder" BorderBrush="{TemplateBinding BorderBrush}">
+          <DockPanel HorizontalAlignment="Stretch">
             <Grid Name="ContentsGrid"
                 ColumnDefinitions="*,14"
                 RowDefinitions="*,14">
-              <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}" Margin="{TemplateBinding Padding}" Grid.ColumnSpan="2"/>
+              <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" Grid.ColumnSpan="2">
+                <ItemsPresenter.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <local:RibbonGroupWrapPanel x:Name="PART_ItemsPanel" DisplayMode="{TemplateBinding DisplayMode}"/>
+                  </ItemsPanelTemplate>
+                </ItemsPresenter.ItemsPanel>
+              </ItemsPresenter>
               <!--TextBlock Grid.Column="0" Grid.Row="1"
                          TextAlignment="Center"
                   HorizontalAlignment="Stretch"
@@ -63,22 +63,36 @@
                 </Border>
               </Button>
             </Grid>
-          </LayoutTransformControl>
-        </DockPanel>
+          </DockPanel>
+        </Border>
       </ControlTemplate>
     </Setter>
-    <Setter Property="ItemsPanel">
-      <ItemsPanelTemplate>
-        <WrapPanel Name="ItemsWrapPanel"/>
-        <!--Orientation="{Binding Orientation, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Ribbon}}}"-->
-      </ItemsPanelTemplate>
-    </Setter>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ WrapPanel#ItemsWrapPanel">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ Border#EdgeBorder">
+    <Setter Property="BorderThickness" Value="0,0,1,0"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ Border#EdgeBorder">
+    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ ItemsPresenter#PART_ItemsPresenter">
+    <Setter Property="Margin" Value="5,2,5,3"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ ItemsPresenter#PART_ItemsPresenter">
+    <Setter Property="Margin" Value="3,5"/>
+  </Style>
+  <Style Selector="local|RibbonGroupBox:not(local|RibbonGroupBox[DisplayMode=Flyout])">
+    <Setter Property="MinWidth" Value="50"/>
+  </Style>
+  <Style Selector="local|RibbonGroupBox[DisplayMode=Flyout]">
+    <Setter Property="MinWidth" Value="32"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
     <Setter Property="Orientation" Value="Vertical"/>
+    <Setter Property="Height" Value="71"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ WrapPanel#ItemsWrapPanel">
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
     <Setter Property="Orientation" Value="Horizontal"/>
+    <Setter Property="Width" Value="132"/>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox">
     <Setter Property="Padding" Value="0,2"/>
@@ -86,18 +100,7 @@
   <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox">
     <Setter Property="Padding" Value="2,0"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ LayoutTransformControl.LayoutInvert">
-    <Setter Property="Margin" Value="0,0,0,2"/>
-    <Setter Property="LayoutTransform">
-      <RotateTransform Angle="90"/>
-    </Setter>
-  </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ LayoutTransformControl.LayoutInvert">
-    <Setter Property="LayoutTransform">
-      <RotateTransform Angle="0"/>
-    </Setter>
-  </Style>
-    <Style Selector="local|RibbonGroupBox /template/ Button#commandButton">
+  <Style Selector="local|RibbonGroupBox /template/ Button#commandButton">
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
   </Style>
