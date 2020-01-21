@@ -12,7 +12,7 @@ namespace Avalonia.Controls.Ribbon
         public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty; // = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(Size), RibbonControlSize.Large);
         public static readonly AvaloniaProperty<RibbonControlSize> MinSizeProperty; // = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(MinSize), RibbonControlSize.Small);
         public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty; // = AvaloniaProperty.Register<Gallery, RibbonControlSize>(nameof(MaxSize), RibbonControlSize.Large);
-        public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<Gallery, bool>(nameof(CanAddToQuickAccessToolbar), true);
+        //public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<Gallery, bool>(nameof(CanAddToQuickAccessToolbar), true);
         public static readonly DirectProperty<Gallery, bool> IsDropDownOpenProperty;
 
         static Gallery()
@@ -58,11 +58,11 @@ namespace Avalonia.Controls.Ribbon
             set => SetValue(MaxSizeProperty, value);
         }
 
-        public bool CanAddToQuickAccessToolbar
+        /*public bool CanAddToQuickAccessToolbar
         {
             get => GetValue(CanAddToQuickAccessToolbarProperty);
             set => SetValue(CanAddToQuickAccessToolbarProperty, value);
-        }
+        }*/
 
         ItemsPresenter _itemsPresenter;
         ContentControl _mainPresenter;

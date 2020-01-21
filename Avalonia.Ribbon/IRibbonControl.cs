@@ -24,11 +24,11 @@ namespace Avalonia.Controls.Ribbon
             set;
         }
 
-        bool CanAddToQuickAccessToolbar
+        /*bool CanAddToQuickAccessToolbar
         {
             get;
             set;
-        }
+        }*/
     }
 
     public enum RibbonControlSize

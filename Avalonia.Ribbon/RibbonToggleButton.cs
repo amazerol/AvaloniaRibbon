@@ -1,26 +1,27 @@
-﻿using Avalonia.Media.Imaging;
+﻿using Avalonia.Controls.Primitives;
 using Avalonia.Styling;
 using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class RibbonButton : Button, IStyleable, IRibbonControl
+    public class RibbonToggleButton : ToggleButton, IStyleable, IRibbonControl
     {
-
         public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MinSizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty;
-        public static readonly StyledProperty<object> IconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(Icon));
-        public static readonly StyledProperty<object> LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon));
+        public static readonly StyledProperty<object> IconProperty = RibbonButton.IconProperty.AddOwner<RibbonToggleButton>();
+        public static readonly StyledProperty<object> LargeIconProperty = RibbonButton.LargeIconProperty.AddOwner<RibbonToggleButton>();
         //public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
-        static RibbonButton()
+        static RibbonToggleButton()
         {
             //CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<RibbonButton, bool>(nameof(CanAddToQuickAccessToolbar), true);
-            RibbonControlHelper<RibbonButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
+            RibbonControlHelper<RibbonToggleButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
         }
 
-        Type IStyleable.StyleKey => typeof(RibbonButton);
+        Type IStyleable.StyleKey => typeof(RibbonToggleButton);
 
         public object Icon
         {
@@ -59,5 +60,4 @@ namespace Avalonia.Controls.Ribbon
             set => SetValue(CanAddToQuickAccessToolbarProperty, value);
         }*/
     }
-
 }

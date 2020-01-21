@@ -5,7 +5,7 @@ using System.Windows.Input;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class RibbonComboButton : ComboBox, IStyleable, IRibbonControl
+    public class RibbonSplitButton : ComboBox, IStyleable, IRibbonControl
     {
         public static readonly StyledProperty<object> ContentProperty;
         public static readonly StyledProperty<object> IconProperty;
@@ -13,30 +13,30 @@ namespace Avalonia.Controls.Ribbon
         public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MinSizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty;
-        public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
+        //public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
-        public static readonly DirectProperty<RibbonComboButton, ICommand> CommandProperty;
+        public static readonly DirectProperty<RibbonSplitButton, ICommand> CommandProperty;
         public static readonly StyledProperty<object> CommandParameterProperty;
 
-        static RibbonComboButton()
+        static RibbonSplitButton()
         {
-            ContentProperty = RibbonButton.ContentProperty.AddOwner<RibbonComboButton>();
-            IconProperty = RibbonButton.IconProperty.AddOwner<RibbonComboButton>();
+            ContentProperty = RibbonButton.ContentProperty.AddOwner<RibbonSplitButton>();
+            IconProperty = RibbonButton.IconProperty.AddOwner<RibbonSplitButton>();
             LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon), null);
             //SizeProperty = RibbonButton.SizeProperty.AddOwner<RibbonComboButton>();
             //MinSizeProperty = RibbonButton.MinSizeProperty.AddOwner<RibbonComboButton>();
             //MaxSizeProperty = RibbonButton.MaxSizeProperty.AddOwner<RibbonComboButton>();
-            CanAddToQuickAccessToolbarProperty = RibbonButton.CanAddToQuickAccessToolbarProperty.AddOwner<RibbonComboButton>();
-            CommandProperty = Button.CommandProperty.AddOwner<RibbonComboButton>(button => button.Command, (button, command) => button.Command = command);
-            CommandParameterProperty = Button.CommandParameterProperty.AddOwner<RibbonComboButton>();
+            //CanAddToQuickAccessToolbarProperty = RibbonButton.CanAddToQuickAccessToolbarProperty.AddOwner<RibbonComboButton>();
+            CommandProperty = Button.CommandProperty.AddOwner<RibbonSplitButton>(button => button.Command, (button, command) => button.Command = command);
+            CommandParameterProperty = Button.CommandParameterProperty.AddOwner<RibbonSplitButton>();
             //AffectsRender<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
             //AffectsMeasure<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
             //AffectsArrange<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
             //RibbonControLHelper<RibbonComboButton>.AddHandlers(MinSizeProperty, MaxSizeProperty);
-            RibbonControlHelper<RibbonComboButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
+            RibbonControlHelper<RibbonSplitButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
         }
 
-        Type IStyleable.StyleKey => typeof(RibbonComboButton);
+        Type IStyleable.StyleKey => typeof(RibbonSplitButton);
 
         public object Content
         {
@@ -75,11 +75,11 @@ namespace Avalonia.Controls.Ribbon
             set => SetValue(MaxSizeProperty, value);
         }
 
-        public bool CanAddToQuickAccessToolbar
+        /*public bool CanAddToQuickAccessToolbar
         {
             get => GetValue(CanAddToQuickAccessToolbarProperty);
             set => SetValue(CanAddToQuickAccessToolbarProperty, value);
-        }
+        }*/
 
         private ICommand _command = null;
         public ICommand Command
