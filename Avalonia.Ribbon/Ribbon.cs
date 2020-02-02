@@ -12,21 +12,7 @@ namespace Avalonia.Controls.Ribbon
 {
     public class Ribbon : TabControl, IStyleable
     {
-        private IEnumerable _menuItems = new AvaloniaList<object>();
-        private IEnumerable _menuPlacesItems = new AvaloniaList<object>();
-
         
-        public IEnumerable MenuItems
-        {
-            get { return _menuItems; }
-            set { SetAndRaise(MenuItemsProperty, ref _menuItems, value); }
-        }
-
-        public IEnumerable MenuPlacesItems
-        {
-            get { return _menuPlacesItems; }
-            set { SetAndRaise(MenuPlacesItemsProperty, ref _menuPlacesItems, value); }
-        }
 
         public Orientation Orientation
         {
@@ -38,9 +24,8 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<IBrush> HeaderBackgroundProperty;
         public static readonly StyledProperty<IBrush> HeaderForegroundProperty;
         public static readonly StyledProperty<bool> IsCollapsedProperty;
+        public static readonly StyledProperty<RibbonMenu> MenuProperty = AvaloniaProperty.Register<Ribbon, RibbonMenu>(nameof(Menu));
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
-        public static readonly DirectProperty<Ribbon, IEnumerable> MenuItemsProperty;
-        public static readonly DirectProperty<Ribbon, IEnumerable> MenuPlacesItemsProperty;
         public static readonly DirectProperty<Ribbon, IEnumerable> SelectedGroupsProperty = AvaloniaProperty.RegisterDirect<Ribbon, IEnumerable>(nameof(SelectedGroups), o => o.SelectedGroups, (o, v) => o.SelectedGroups = v);
 
         static Ribbon()
@@ -51,8 +36,6 @@ namespace Avalonia.Controls.Ribbon
             HeaderForegroundProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(HeaderForeground));
             IsCollapsedProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsCollapsed));
             IsMenuOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsMenuOpen));
-            MenuItemsProperty = MenuBase.ItemsProperty.AddOwner<Ribbon>(x => x.MenuItems, (x, v) => x.MenuItems = v);
-            MenuPlacesItemsProperty = ItemsControl.ItemsProperty.AddOwner<Ribbon>(x => x.MenuPlacesItems, (x, v) => x.MenuPlacesItems = v);
 
             SelectedIndexProperty.Changed.AddClassHandler<Ribbon>((x, e) =>
             {
@@ -76,6 +59,12 @@ namespace Avalonia.Controls.Ribbon
         {
             get => GetValue(IsCollapsedProperty);
             set => SetValue(IsCollapsedProperty, value);
+        }
+
+        public RibbonMenu Menu
+        {
+            get => GetValue(MenuProperty);
+            set => SetValue(MenuProperty, value);
         }
 
         public bool IsMenuOpen

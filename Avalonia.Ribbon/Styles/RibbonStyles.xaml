@@ -4,6 +4,7 @@
     <StyleInclude Source="/Styles/Gallery.xaml" />
     <StyleInclude Source="/Styles/Ribbon.xaml" />
     <StyleInclude Source="/Styles/RibbonTab.xaml" />
+    <StyleInclude Source="/Styles/RibbonMenu.xaml" />
     <StyleInclude Source="/Styles/RibbonWindow.xaml" />
     <StyleInclude Source="/Styles/RibbonButton.xaml" />
     <StyleInclude Source="/Styles/RibbonSmallButtonHGroup.xaml" />
