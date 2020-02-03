@@ -15,7 +15,7 @@ namespace Avalonia.Controls.Ribbon
         Flyout
     }
 
-    public class RibbonGroupBox : HeaderedItemsControl, IStyleable, IKeyTipHandler
+    public class RibbonGroupBox : HeaderedItemsControl, IStyleable
     {
         public static readonly DirectProperty<RibbonGroupBox, ICommand> CommandProperty;
         public static readonly StyledProperty<object> CommandParameterProperty = AvaloniaProperty.Register<RibbonGroupBox, object>(nameof(CommandParameter));
@@ -60,48 +60,6 @@ namespace Avalonia.Controls.Ribbon
         {
             Remeasured?.Invoke(this, null);
             return base.MeasureOverride(availableSize);
-        }
-
-        public void ActivateKeyTips()
-        {
-            foreach (Control child in Items)
-                Debug.WriteLine("CONTROL KEYS: " + IRibbonControl.GetKeyTipKeys(child));
-            
-            Focus();
-            KeyDown += RibbonGroupBox_KeyDown;
-        }
-
-        private void RibbonGroupBox_KeyDown(object sender, KeyEventArgs e)
-        {
-            e.Handled = HandleKeyTip(e.Key);
-            KeyDown -= RibbonGroupBox_KeyDown;
-        }
-
-        public bool HandleKeyTip(Key key)
-        {
-            bool retVal = false;
-            foreach (Control child in Items)
-            {
-                if (IRibbonControl.HasKeyTipKey(child, key))
-                {
-                    if (child is IKeyTipHandler hdlr)
-                    {
-                        hdlr.ActivateKeyTips();
-                        Debug.WriteLine("Group handled " + key.ToString() + " for IKeyTipHandler");
-                    }
-                    else
-                    {
-                        if ((child is Button btn) && (btn.Command != null))
-                            btn.Command.Execute(btn.CommandParameter);
-                        else
-                            child.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                        ((Parent as ItemsControl).TemplatedParent as Ribbon).Close();
-                    }
-                    retVal = true;
-                    break;
-                }
-            }
-            return retVal;
         }
 
         public event EventHandler Rearranged;

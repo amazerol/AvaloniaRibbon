@@ -46,7 +46,7 @@
                   Width="15"
                   Height="15"
                   HorizontalAlignment="Right"
-                  Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}">
+                  Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Focusable="False">
                 <Button.IsVisible>
                   <Binding Path="!Command" Mode="OneWay" RelativeSource="{RelativeSource Mode=TemplatedParent}">
                     <Binding.Converter>

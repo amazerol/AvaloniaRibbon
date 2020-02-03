@@ -5,9 +5,15 @@
     xmlns:ge="clr-namespace:GridExtra.Avalonia;assembly=GridExtra.Avalonia"
     xmlns:sys="clr-namespace:System;assembly=netstandard">
   <Design.PreviewWith>
-    <local:Ribbon>
-      <local:RibbonTab Header="Home">FileContent</local:RibbonTab>
-    </local:Ribbon>
+    <Panel Width="200" Height="150">
+      <local:Ribbon VerticalAlignment="Top">
+        <local:RibbonTab Header="Tab">
+          <local:RibbonTab.Groups>
+            <local:RibbonGroupBox Header="Group"/>
+          </local:RibbonTab.Groups>
+        </local:RibbonTab>
+      </local:Ribbon>
+    </Panel>
   </Design.PreviewWith>
 
   <Style Selector="local|Ribbon">
@@ -18,28 +24,28 @@
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
     <Setter Property="Template">
       <ControlTemplate>
-        <DockPanel Background="Transparent">
-          <DockPanel Background="{TemplateBinding HeaderBackground}" DockPanel.Dock="Top">
-            <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Left"/>
-            <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" DockPanel.Dock="Right">
-              <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="4"/>
-            </ToggleButton>
-            <ItemsPresenter Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}"/>
+          <DockPanel Background="Transparent">
+            <DockPanel Background="{TemplateBinding HeaderBackground}" DockPanel.Dock="Top">
+              <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Left"/>
+              <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Right">
+                <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="4"/>
+              </ToggleButton>
+              <ItemsPresenter Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}"/>
+            </DockPanel>
+            <Rectangle Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Stretch" Height="1" IsVisible="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" DockPanel.Dock="Top"/>
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1">
+              <Grid>
+                <ContentPresenter Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" IsVisible="False"/>
+                <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="5,0" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" Height="90">
+                  <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Horizontal" Margin="0" Spacing="0"/>
+                    </ItemsPanelTemplate>
+                  </ItemsControl.ItemsPanel>
+                </ItemsControl>
+              </Grid>
+            </Border>
           </DockPanel>
-          <Rectangle Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Stretch" Height="1" IsVisible="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}" DockPanel.Dock="Top"/>
-          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1">
-            <Grid>
-              <ContentPresenter Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" IsVisible="False"/>
-              <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="5,0" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" Height="90">
-                <ItemsControl.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Horizontal" Margin="0" Spacing="0"/>
-                  </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-              </ItemsControl>
-            </Grid>
-          </Border>
-        </DockPanel>
       </ControlTemplate>
     </Setter>
     <Setter Property="ItemsPanel">
@@ -58,7 +64,7 @@
         <Grid ColumnDefinitions="34,*">
           <DockPanel Background="{TemplateBinding HeaderBackground}" Grid.Column="0">
             <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Top"/>
-            <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" HorizontalAlignment="Stretch" Height="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" DockPanel.Dock="Bottom">
+            <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" HorizontalAlignment="Stretch" Height="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Bottom">
               <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="4" Height="8"/>
             </ToggleButton>
             <LayoutTransformControl VerticalAlignment="Top">

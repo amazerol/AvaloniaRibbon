@@ -50,8 +50,6 @@ namespace Avalonia.Controls.Ribbon
         public static readonly AttachedProperty<bool> ShowKeyTipKeysProperty = AvaloniaProperty.RegisterAttached<IRibbonControl, Control, bool>("ShowKeyTipKeys");
         public static bool GetShowKeyTipKeys(Control element) => element.GetValue(ShowKeyTipKeysProperty);
         public static void SetShowKeyTipKeys(Control element, bool value) => element.SetValue(ShowKeyTipKeysProperty, value);
-
-        //public static readonly RoutedEvent<RoutedEventArgs> KeyTipControlActivatedEvent = RoutedEvent.Register<IRibbonControl, RoutedEventArgs>("KeyTipControlActivated", RoutingStrategies.Bubble);
     }
 
     public enum RibbonControlSize

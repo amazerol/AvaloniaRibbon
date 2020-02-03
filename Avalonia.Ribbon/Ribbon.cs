@@ -52,8 +52,6 @@ namespace Avalonia.Controls.Ribbon
                 if (e.Source is Control ctrl)
                     (sender as Ribbon).HandleKeyTip(ctrl);
             });
-
-            //IRibbonControl.KeyTipControlActivatedEvent.AddClassHandler<Ribbon>((sender, e) => (sender as Ribbon).Close());
         }
 
         protected IMenuInteractionHandler InteractionHandler { get; }
@@ -149,6 +147,7 @@ namespace Avalonia.Controls.Ribbon
             if (!IsOpen)
                 return;
 
+            IRibbonControl.SetShowKeyTipKeys(this, false);
             IsOpen = false;
             FocusManager.Instance.Focus(_prevFocusedElement);
         }
@@ -162,6 +161,7 @@ namespace Avalonia.Controls.Ribbon
             IsOpen = true;
             _prevFocusedElement = FocusManager.Instance.Current;
             Focus();
+            IRibbonControl.SetShowKeyTipKeys(this, true);
 
             RaiseEvent(new RoutedEventArgs
             {
@@ -176,8 +176,13 @@ namespace Avalonia.Controls.Ribbon
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (IsFocused && ((e.Key != Key.LeftAlt) && (e.Key != Key.RightAlt) && (e.Key != Key.F10)))
-                HandleKeyTip(e.Key);
+            if (IsFocused)
+            {
+                if ((e.Key != Key.LeftAlt) && (e.Key != Key.RightAlt) && (e.Key != Key.F10))
+                    HandleKeyTip(e.Key);
+                else
+                    Close();
+            }
         }
 
         void HandleKeyTip(Control item)
