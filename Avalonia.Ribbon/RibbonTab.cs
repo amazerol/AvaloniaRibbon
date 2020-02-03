@@ -1,4 +1,5 @@
 ﻿using Avalonia.Collections;
+using Avalonia.Input;
 using Avalonia.Metadata;
 using Avalonia.Styling;
 using System;
@@ -6,7 +7,7 @@ using System.Collections;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class RibbonTab : TabItem, IStyleable
+    public class RibbonTab : TabItem, IStyleable, IKeyTipHandler
     {
         Type IStyleable.StyleKey => typeof(RibbonTab);
 
@@ -18,6 +19,40 @@ namespace Avalonia.Controls.Ribbon
         {
             get { return _groups; }
             set { SetAndRaise(GroupsProperty, ref _groups, value); }
+        }
+
+        public void ActivateKeyTips()
+        {
+            foreach (RibbonGroupBox g in Groups)
+                System.Diagnostics.Debug.WriteLine("GROUP KEYS: " + IRibbonControl.GetKeyTipKeys(g));
+            
+            Focus();
+            KeyDown += RibbonTab_KeyDown;
+        }
+
+        private void RibbonTab_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.Handled = HandleKeyTip(e.Key);
+            KeyDown -= RibbonTab_KeyDown;
+        }
+
+        public bool HandleKeyTip(Key key)
+        {
+            bool retVal = false;
+            foreach (RibbonGroupBox g in Groups)
+            {
+                if (IRibbonControl.HasKeyTipKey(g, key))
+                {
+                    g.ActivateKeyTips();
+                    retVal = true;
+                    break;
+                }
+                else
+                {
+                    //evaluate Group controls' keys
+                }
+            }
+            return retVal;
         }
     }
 }

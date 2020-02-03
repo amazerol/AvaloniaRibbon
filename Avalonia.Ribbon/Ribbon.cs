@@ -7,13 +7,15 @@ using Avalonia.Styling;
 using System;
 using System.Linq;
 using System.Collections;
+using Avalonia.Interactivity;
+using Avalonia.Controls.Platform;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class Ribbon : TabControl, IStyleable
+    public class Ribbon : TabControl, IStyleable, IMainMenu, IKeyTipHandler
     {
-        
-
         public Orientation Orientation
         {
             get { return GetValue(OrientationProperty); }
@@ -44,9 +46,22 @@ namespace Avalonia.Controls.Ribbon
                 else
                     x.SelectedGroups = new AvaloniaList<object>();
             });
+
+            AccessKeyHandler.AccessKeyPressedEvent.AddClassHandler<Ribbon>((sender, e) =>
+            {
+                if (e.Source is Control ctrl)
+                    (sender as Ribbon).HandleKeyTip(ctrl);
+            });
+
+            //IRibbonControl.KeyTipControlActivatedEvent.AddClassHandler<Ribbon>((sender, e) => (sender as Ribbon).Close());
         }
 
+        protected IMenuInteractionHandler InteractionHandler { get; }
+
         private IEnumerable _selectedGroups = new AvaloniaList<object>();
+
+        public event EventHandler<RoutedEventArgs> MenuClosed;
+
         public IEnumerable SelectedGroups
         {
             get { return _selectedGroups; }
@@ -85,6 +100,15 @@ namespace Avalonia.Controls.Ribbon
             set { SetValue(HeaderForegroundProperty, value); }
         }
 
+        public static readonly DirectProperty<Ribbon, bool> IsOpenProperty = MenuBase.IsOpenProperty.AddOwner<Ribbon>(o => o.IsOpen); //, (o, v) => o.IsOpen = v
+        
+        private bool _isOpen;
+        public bool IsOpen
+        {
+            get { return _isOpen; }
+            protected set { SetAndRaise(IsOpenProperty, ref _isOpen, value); }
+        }
+
         protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
         {
             int oldIndex = SelectedIndex;
@@ -106,6 +130,102 @@ namespace Avalonia.Controls.Ribbon
             if ((SelectedItem is RibbonTab tab) && (!tab.IsEnabled))
                 SelectedIndex = oldIndex;
             base.OnPointerWheelChanged(e);
+        }
+
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnAttachedToVisualTree(e);
+
+            var inputRoot = e.Root as IInputRoot;
+
+            if (inputRoot?.AccessKeyHandler != null)
+            {
+                inputRoot.AccessKeyHandler.MainMenu = this;
+            }
+        }
+
+        public void Close()
+        {
+            if (!IsOpen)
+                return;
+
+            IsOpen = false;
+            FocusManager.Instance.Focus(_prevFocusedElement);
+        }
+
+        IInputElement _prevFocusedElement = null;
+        public void Open()
+        {
+            if (IsOpen)
+                return;
+
+            IsOpen = true;
+            _prevFocusedElement = FocusManager.Instance.Current;
+            Focus();
+
+            RaiseEvent(new RoutedEventArgs
+            {
+                RoutedEvent = RibbonKeyTipsOpenedEvent,
+                Source = this,
+            });
+        }
+
+        public static readonly RoutedEvent<RoutedEventArgs> RibbonKeyTipsOpenedEvent = RoutedEvent.Register<MenuBase, RoutedEventArgs>("RibbonKeyTipsOpened", RoutingStrategies.Bubble);
+
+        public static readonly RoutedEvent<RoutedEventArgs> RibbonKeyTipsClosedEvent = RoutedEvent.Register<MenuBase, RoutedEventArgs>("RibbonKeyTipsClosed", RoutingStrategies.Bubble);
+
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (IsFocused && ((e.Key != Key.LeftAlt) && (e.Key != Key.RightAlt) && (e.Key != Key.F10)))
+                HandleKeyTip(e.Key);
+        }
+
+        void HandleKeyTip(Control item)
+        {
+            item.RaiseEvent(new RoutedEventArgs(PointerPressedEvent));
+            item.RaiseEvent(new RoutedEventArgs(PointerReleasedEvent));
+            Debug.WriteLine("AccessKey handled for " + item.ToString());
+        }
+
+        public void ActivateKeyTips()
+        {
+            foreach (RibbonTab t in Items)
+                Debug.WriteLine("TAB KEYS: " + IRibbonControl.GetKeyTipKeys(t));
+
+            if (Menu != null)
+                Debug.WriteLine("MENU KEYS: " + IRibbonControl.GetKeyTipKeys(Menu));
+        }
+
+        public bool HandleKeyTip(Key key)
+        {
+            bool retVal = false;
+            if (IsOpen)
+            {
+                Debug.WriteLine("Key pressed: " + key);
+                bool tabKeyMatched = false;
+                foreach (RibbonTab t in Items)
+                {
+                    if (IRibbonControl.HasKeyTipKey(t, key))
+                    {
+                        SelectedItem = t;
+                        tabKeyMatched = true;
+                        retVal = true;
+                        t.ActivateKeyTips();
+                        break;
+                    }
+                }
+                if ((!tabKeyMatched) && (Menu != null))
+                {
+                    string menuKeys = IRibbonControl.GetKeyTipKeys(Menu);
+
+                    if (IRibbonControl.HasKeyTipKey(Menu, key))
+                    {
+                        IsMenuOpen = true;
+                        retVal = true;
+                    }
+                }
+            }
+            return retVal;
         }
     }
 }
