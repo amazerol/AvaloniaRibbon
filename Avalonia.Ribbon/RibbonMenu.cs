@@ -1,5 +1,6 @@
 ﻿using Avalonia.Collections;
 using Avalonia.Controls.Primitives;
+using Avalonia.Styling;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,11 +8,13 @@ using System.Text;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class RibbonMenu : ToggleButton
+    public class RibbonMenu : ToggleButton, IStyleable
     {
+        Type IStyleable.StyleKey => typeof(RibbonMenu);
+
+
         private IEnumerable _menuItems = new AvaloniaList<object>();
         private IEnumerable _menuPlacesItems = new AvaloniaList<object>();
-
 
         public IEnumerable MenuItems
         {
