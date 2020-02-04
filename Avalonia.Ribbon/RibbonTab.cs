@@ -23,13 +23,44 @@ namespace Avalonia.Controls.Ribbon
             set { SetAndRaise(GroupsProperty, ref _groups, value); }
         }
 
+        static RibbonTab()
+        {
+            KeyTip.ShowKeyTipKeysProperty.Changed.AddClassHandler<RibbonTab>(new Action<RibbonTab, AvaloniaPropertyChangedEventArgs>((sender, args) =>
+            {
+                if ((bool)args.NewValue)
+                {
+                    foreach (RibbonGroupBox g in sender.Groups)
+                    {
+                        if (KeyTip.HasKeyTipKeys(g))
+                            KeyTip.GetKeyTip(g).IsOpen = true;
+
+                        foreach (Control c in g.Items)
+                        {
+                            if (KeyTip.HasKeyTipKeys(c))
+                                KeyTip.GetKeyTip(c).IsOpen = true;
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (RibbonGroupBox g in sender.Groups)
+                    {
+                        KeyTip.GetKeyTip(g).IsOpen = false;
+
+                        foreach (Control c in g.Items)
+                            KeyTip.GetKeyTip(c).IsOpen = false;
+                    }
+                }
+            }));
+        }
+
         public void ActivateKeyTips()
         {
             foreach (RibbonGroupBox g in Groups)
-                System.Diagnostics.Debug.WriteLine("GROUP KEYS: " + IRibbonControl.GetKeyTipKeys(g));
+                System.Diagnostics.Debug.WriteLine("GROUP KEYS: " + KeyTip.GetKeyTipKeys(g));
             
             Focus();
-            IRibbonControl.SetShowKeyTipKeys(this, true);
+            KeyTip.SetShowKeyTipKeys(this, true);
             KeyDown += RibbonTab_KeyDown;
         }
 
@@ -37,7 +68,7 @@ namespace Avalonia.Controls.Ribbon
         {
             e.Handled = HandleKeyTip(e.Key);
             KeyDown -= RibbonTab_KeyDown;
-            IRibbonControl.SetShowKeyTipKeys(this, false);
+            KeyTip.SetShowKeyTipKeys(this, false);
         }
 
         public bool HandleKeyTip(Key key)
@@ -45,7 +76,7 @@ namespace Avalonia.Controls.Ribbon
             bool retVal = false;
             foreach (RibbonGroupBox g in Groups)
             {
-                if (IRibbonControl.HasKeyTipKey(g, key))
+                if (KeyTip.HasKeyTipKey(g, key))
                 {
                     g.Command?.Execute(g.CommandParameter);
                     (Parent as Ribbon).Close();
@@ -56,7 +87,7 @@ namespace Avalonia.Controls.Ribbon
                 {
                     foreach (Control c in g.Items)
                     {
-                        if (IRibbonControl.HasKeyTipKey(c, key))
+                        if (KeyTip.HasKeyTipKey(c, key))
                         {
                             if (c is IKeyTipHandler hdlr)
                             {

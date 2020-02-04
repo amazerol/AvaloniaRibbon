@@ -1,0 +1,31 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon"
+    xmlns:ge="clr-namespace:GridExtra.Avalonia;assembly=GridExtra.Avalonia"
+    xmlns:sys="clr-namespace:System;assembly=netstandard">
+  <Style Selector="Popup.KeyTip">
+    <!--Setter Property="ContentTemplate">
+      <Template>
+        <ContentPresenter Name="PART_ContentPresenter"
+                          Background="{DynamicResource ThemeBackgroundBrush}"
+                          BorderBrush="{DynamicResource ThemeBorderMidBrush}"
+                          BorderThickness="{DynamicResource ThemeBorderThickness}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Content="{TemplateBinding Content}"
+                          Padding="4,2"/>
+      </Template>
+    </Setter-->
+    <!--Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter"
+                          Background="{DynamicResource ThemeBackgroundBrush}"
+                          BorderBrush="{DynamicResource ThemeBorderMidBrush}"
+                          BorderThickness="{DynamicResource ThemeBorderThickness}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Content="{TemplateBinding Content}"
+                          Padding="4,2"/>
+      </ControlTemplate>
+    </Setter-->
+  </Style>
+</Styles>

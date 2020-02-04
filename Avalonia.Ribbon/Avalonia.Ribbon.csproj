@@ -5,7 +5,7 @@
     <RootNamespace>Avalonia.Controls.Ribbon</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Version>1.0.2</Version>
-    <Authors>Alban Mazerolles, Rubal Walia</Authors>
+    <Authors>Alban Mazerolles, Rubal Walia, Splitwirez</Authors>
     <PackageId>AvaloniaRibbon</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -34,10 +34,5 @@
     <Reference Include="System">
       <HintPath>System</HintPath>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Update="Styles\RibbonMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </None>
   </ItemGroup>
 </Project>

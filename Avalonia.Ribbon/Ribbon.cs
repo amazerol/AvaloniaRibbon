@@ -52,6 +52,29 @@ namespace Avalonia.Controls.Ribbon
                 if (e.Source is Control ctrl)
                     (sender as Ribbon).HandleKeyTip(ctrl);
             });
+
+            KeyTip.ShowKeyTipKeysProperty.Changed.AddClassHandler<Ribbon>(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sender, args) =>
+            {
+                if ((bool)args.NewValue)
+                {
+                    foreach (RibbonTab t in sender.Items)
+                    {
+                        KeyTip.GetKeyTip(t).IsOpen = true;
+                    }
+                }
+                else
+                {
+                    foreach (RibbonTab t in sender.Items)
+                    {
+                        KeyTip.GetKeyTip(t).IsOpen = false;
+                    }
+                }
+            }));
+        }
+
+        public Ribbon()
+        {
+            LostFocus += (sneder, args) => KeyTip.SetShowKeyTipKeys(this, false);
         }
 
         protected IMenuInteractionHandler InteractionHandler { get; }
@@ -147,7 +170,7 @@ namespace Avalonia.Controls.Ribbon
             if (!IsOpen)
                 return;
 
-            IRibbonControl.SetShowKeyTipKeys(this, false);
+            KeyTip.SetShowKeyTipKeys(this, false);
             IsOpen = false;
             FocusManager.Instance.Focus(_prevFocusedElement);
         }
@@ -161,7 +184,7 @@ namespace Avalonia.Controls.Ribbon
             IsOpen = true;
             _prevFocusedElement = FocusManager.Instance.Current;
             Focus();
-            IRibbonControl.SetShowKeyTipKeys(this, true);
+            KeyTip.SetShowKeyTipKeys(this, true);
 
             RaiseEvent(new RoutedEventArgs
             {
@@ -195,10 +218,10 @@ namespace Avalonia.Controls.Ribbon
         public void ActivateKeyTips()
         {
             foreach (RibbonTab t in Items)
-                Debug.WriteLine("TAB KEYS: " + IRibbonControl.GetKeyTipKeys(t));
+                Debug.WriteLine("TAB KEYS: " + KeyTip.GetKeyTipKeys(t));
 
             if (Menu != null)
-                Debug.WriteLine("MENU KEYS: " + IRibbonControl.GetKeyTipKeys(Menu));
+                Debug.WriteLine("MENU KEYS: " + KeyTip.GetKeyTipKeys(Menu));
         }
 
         public bool HandleKeyTip(Key key)
@@ -210,7 +233,7 @@ namespace Avalonia.Controls.Ribbon
                 bool tabKeyMatched = false;
                 foreach (RibbonTab t in Items)
                 {
-                    if (IRibbonControl.HasKeyTipKey(t, key))
+                    if (KeyTip.HasKeyTipKey(t, key))
                     {
                         SelectedItem = t;
                         tabKeyMatched = true;
@@ -221,9 +244,9 @@ namespace Avalonia.Controls.Ribbon
                 }
                 if ((!tabKeyMatched) && (Menu != null))
                 {
-                    string menuKeys = IRibbonControl.GetKeyTipKeys(Menu);
+                    string menuKeys = KeyTip.GetKeyTipKeys(Menu);
 
-                    if (IRibbonControl.HasKeyTipKey(Menu, key))
+                    if (KeyTip.HasKeyTipKey(Menu, key))
                     {
                         IsMenuOpen = true;
                         retVal = true;

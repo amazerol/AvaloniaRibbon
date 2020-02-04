@@ -57,10 +57,10 @@
                     </ribbon:RibbonMenu.MenuPlacesItems>
                 </ribbon:RibbonMenu>
             </ribbon:Ribbon.Menu>
-            <ribbon:RibbonTab Header="Home" ribbon:IRibbonControl.KeyTipKeys="H">
+            <ribbon:RibbonTab Header="Home" ribbon:KeyTip.KeyTipKeys="H">
                 <ribbon:RibbonTab.Groups>
-                    <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:IRibbonControl.KeyTipKeys="D1">
-                        <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:IRibbonControl.KeyTipKeys="A">
+                    <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
+                        <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
                                     <Rectangle.OpacityMask>
@@ -76,7 +76,7 @@
                                 </Rectangle>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:IRibbonControl.KeyTipKeys="B">
+                        <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Grid Width="32" Height="32">
                                     <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
@@ -90,7 +90,7 @@
                                 </Grid>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:IRibbonControl.KeyTipKeys="C">
+                        <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Grid Width="32" Height="32">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
@@ -105,7 +105,7 @@
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Header="Test Group 2" ribbon:IRibbonControl.KeyTipKeys="D2">
+                    <ribbon:RibbonGroupBox Header="Test Group 2" ribbon:KeyTip.KeyTipKeys="D2">
                         <ribbon:RibbonButton MaxSize="Medium" Content="Button 1" ToolTip.Tip="Button 4">
                             <ribbon:RibbonButton.Icon>
                                 <Grid Width="16" Height="16">
@@ -145,7 +145,7 @@
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Header="Test Group 3" ribbon:IRibbonControl.KeyTipKeys="D3">
+                    <ribbon:RibbonGroupBox Header="Test Group 3" ribbon:KeyTip.KeyTipKeys="D3">
                         <ribbon:RibbonButton MaxSize="Medium" Content="Button 8" ToolTip.Tip="Button 8">
                             <ribbon:RibbonButton.Icon>
                                 <Grid Width="16" Height="16">
@@ -179,9 +179,9 @@
                     </ribbon:RibbonGroupBox>
                 </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
-            <ribbon:RibbonTab Header="Button Controls" ribbon:IRibbonControl.KeyTipKeys="B">
+            <ribbon:RibbonTab Header="Button Controls" ribbon:KeyTip.KeyTipKeys="B">
                 <ribbon:RibbonTab.Groups>
-                    <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:IRibbonControl.KeyTipKeys="B">
+                    <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
                         <ribbon:RibbonButton Content="Large" MinSize="Large" MaxSize="Large">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
@@ -206,7 +206,7 @@
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Header="RibbonToggleButtons" Command="{Binding OnClickCommand}" ribbon:IRibbonControl.KeyTipKeys="T">
+                    <ribbon:RibbonGroupBox Header="RibbonToggleButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="T">
                         <ribbon:RibbonToggleButton Content="Large" MinSize="Large" MaxSize="Large">
                             <ribbon:RibbonToggleButton.LargeIcon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
@@ -231,7 +231,7 @@
                             </ribbon:RibbonToggleButton.Icon>
                         </ribbon:RibbonToggleButton>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Header="RibbonSplitButtons" Command="{Binding OnClickCommand}" ribbon:IRibbonControl.KeyTipKeys="S">
+                    <ribbon:RibbonGroupBox Header="RibbonSplitButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
                         <ribbon:RibbonSplitButton Content="Large" MinSize="Large" MaxSize="Large">
                             <ribbon:RibbonSplitButton.LargeIcon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
@@ -264,9 +264,9 @@
                     </ribbon:RibbonGroupBox>
                 </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
-            <ribbon:RibbonTab Header="Galleries" ribbon:IRibbonControl.KeyTipKeys="G">
+            <ribbon:RibbonTab Header="Galleries" ribbon:KeyTip.KeyTipKeys="G">
                 <ribbon:RibbonTab.Groups>
-                    <ribbon:RibbonGroupBox Header="Large gallery" Command="{Binding OnClickCommand}" ribbon:IRibbonControl.KeyTipKeys="L">
+                    <ribbon:RibbonGroupBox Header="Large gallery" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="L">
                         <ribbon:Gallery>
                             <ListBoxItem Content="Item 1"/>
                             <ListBoxItem Content="Item 2"/>
@@ -285,7 +285,7 @@
                             <ListBoxItem Content="Item 15"/>
                         </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Header="Medium gallery" ribbon:IRibbonControl.KeyTipKeys="M">
+                    <ribbon:RibbonGroupBox Header="Medium gallery" ribbon:KeyTip.KeyTipKeys="M">
                         <ribbon:Gallery MaxSize="Medium">
                             <ListBoxItem Content="Item 1"/>
                             <ListBoxItem Content="Item 2"/>
@@ -304,7 +304,7 @@
                             <ListBoxItem Content="Item 15"/>
                         </ribbon:Gallery>
                     </ribbon:RibbonGroupBox>
-                    <ribbon:RibbonGroupBox Header="Small gallery" ribbon:IRibbonControl.KeyTipKeys="S">
+                    <ribbon:RibbonGroupBox Header="Small gallery" ribbon:KeyTip.KeyTipKeys="S">
                         <ribbon:Gallery MaxSize="Small">
                             <ListBoxItem Content="Item 1"/>
                             <ListBoxItem Content="Item 2"/>
