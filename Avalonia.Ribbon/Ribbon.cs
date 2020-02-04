@@ -160,9 +160,24 @@ namespace Avalonia.Controls.Ribbon
             var inputRoot = e.Root as IInputRoot;
 
             if (inputRoot?.AccessKeyHandler != null)
-            {
                 inputRoot.AccessKeyHandler.MainMenu = this;
-            }
+
+            if ((inputRoot != null) && (inputRoot is WindowBase wnd))
+                wnd.Deactivated += InputRoot_Deactivated;
+        }
+
+        protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnDetachedFromVisualTree(e);
+
+            var inputRoot = e.Root as IInputRoot;
+            if ((inputRoot != null) && (inputRoot is WindowBase wnd))
+                wnd.Deactivated -= InputRoot_Deactivated;
+        }
+
+        private void InputRoot_Deactivated(object sender, EventArgs e)
+        {
+            Close();
         }
 
         public void Close()
@@ -203,7 +218,7 @@ namespace Avalonia.Controls.Ribbon
             {
                 if ((e.Key != Key.LeftAlt) && (e.Key != Key.RightAlt) && (e.Key != Key.F10))
                     HandleKeyTip(e.Key);
-                else
+                else // if ((e.Key == Key.LeftAlt) || (e.Key == Key.RightAlt) || (e.Key == Key.F10))
                     Close();
             }
         }

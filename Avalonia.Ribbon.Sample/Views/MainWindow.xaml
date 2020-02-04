@@ -106,14 +106,14 @@
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Test Group 2" ribbon:KeyTip.KeyTipKeys="D2">
-                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 1" ToolTip.Tip="Button 4">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 1" ToolTip.Tip="Button 4" ribbon:KeyTip.KeyTipKeys="D">
                             <ribbon:RibbonButton.Icon>
                                 <Grid Width="16" Height="16">
                                     <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                                 </Grid>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 2" ToolTip.Tip="Button 5">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 2" ToolTip.Tip="Button 5" ribbon:KeyTip.KeyTipKeys="E">
                             <ribbon:RibbonButton.Icon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
                                     <Rectangle.OpacityMask>
@@ -122,7 +122,7 @@
                                 </Rectangle>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 6" ToolTip.Tip="Button 6">
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 6" ToolTip.Tip="Button 6" ribbon:KeyTip.KeyTipKeys="F">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Path Data="M 0 16 L 16 0 L 32 16 L 16 32 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                             </ribbon:RibbonButton.LargeIcon>
@@ -130,7 +130,7 @@
                                 <Path Data="M 0 8 L 8 0 L 16 8 L 8 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 7" ToolTip.Tip="Button 7">
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 7" ToolTip.Tip="Button 7" ribbon:KeyTip.KeyTipKeys="G">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Grid Width="32" Height="32">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
@@ -146,14 +146,14 @@
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Test Group 3" ribbon:KeyTip.KeyTipKeys="D3">
-                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 8" ToolTip.Tip="Button 8">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 8" ToolTip.Tip="Button 8" ribbon:KeyTip.KeyTipKeys="H">
                             <ribbon:RibbonButton.Icon>
                                 <Grid Width="16" Height="16">
                                     <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                                 </Grid>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 9" ToolTip.Tip="Button 9">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 9" ToolTip.Tip="Button 9" ribbon:KeyTip.KeyTipKeys="I">
                             <ribbon:RibbonButton.Icon>
                                 <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
                                     <Rectangle.OpacityMask>
@@ -162,7 +162,7 @@
                                 </Rectangle>
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
-                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 10" ToolTip.Tip="Button 10">
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 10" ToolTip.Tip="Button 10" ribbon:KeyTip.KeyTipKeys="J">
                             <ribbon:RibbonButton.LargeIcon>
                                 <Grid Width="32" Height="32">
                                     <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>

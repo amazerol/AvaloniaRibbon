@@ -31,7 +31,7 @@ namespace Avalonia.Controls.Ribbon
                 {
                     foreach (RibbonGroupBox g in sender.Groups)
                     {
-                        if (KeyTip.HasKeyTipKeys(g))
+                        if ((g.Command != null) && KeyTip.HasKeyTipKeys(g))
                             KeyTip.GetKeyTip(g).IsOpen = true;
 
                         foreach (Control c in g.Items)
@@ -111,6 +111,30 @@ namespace Avalonia.Controls.Ribbon
                 }
             }
             return retVal;
+        }
+
+        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnAttachedToVisualTree(e);
+
+            var inputRoot = e.Root as IInputRoot;
+            if ((inputRoot != null) && (inputRoot is WindowBase wnd))
+                wnd.Deactivated += InputRoot_Deactivated;
+        }
+
+        protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
+        {
+            base.OnDetachedFromVisualTree(e);
+
+            var inputRoot = e.Root as IInputRoot;
+            if ((inputRoot != null) && (inputRoot is WindowBase wnd))
+                wnd.Deactivated -= InputRoot_Deactivated;
+        }
+
+        private void InputRoot_Deactivated(object sender, EventArgs e)
+        {
+            KeyTip.SetShowKeyTipKeys(this, false);
+            (Parent as Ribbon).Close();
         }
     }
 }

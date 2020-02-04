@@ -1,8 +1,10 @@
 ﻿using Avalonia.Controls.Primitives;
+using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Media;
 using System;
 using System.Collections.Generic;
+using System.Reactive.Linq;
 using System.Text;
 
 namespace Avalonia.Controls.Ribbon
@@ -46,22 +48,37 @@ namespace Avalonia.Controls.Ribbon
                 return val;
             else
             {
+                //var tipText = 
+                /*tipText.Bind(TextBlock.TextProperty, new Binding()
+                {
+                    Source = element,
+                    Path = 
+                });*/
+
+                var tipContent = new Border()
+                {
+                    Child = new TextBlock()
+                    {
+                        [!TextBlock.TextProperty] = element[!KeyTip.KeyTipKeysProperty]
+                    }
+                };
+                System.Diagnostics.Debug.WriteLine("TEXT: " + (tipContent.Child as TextBlock).Text);
+                tipContent.Classes.Add("KeyTip");
+
                 var tip = new Popup()
                 {
                     PlacementTarget = element,
-                    PlacementMode = PlacementMode.Bottom,
+                    PlacementMode = PlacementMode.Right,
                     Width = 25,
                     Height = 20,
-                    VerticalOffset = -20,
-                    Child = new TextBlock()
-                    {
-                        Text = KeyTip.GetKeyTipKeys(element),
-                        Background = new SolidColorBrush(Colors.White),
-                        Foreground = new SolidColorBrush(Colors.Black),
-                        Width = 25,
-                        Height = 20
-                    }
+                    Child = tipContent
                 };
+                tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height - 20).ToBinding();
+                tip[!Popup.HorizontalOffsetProperty] = tip.GetObservable(Popup.WidthProperty).Select(x => x * -1).ToBinding();
+                    /*new Binding("Bounds.Height")
+                {
+                    Source = element
+                }*/
                 _keyTips.Add(element, tip);
                 return _keyTips[element];
             }
