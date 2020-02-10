@@ -57,6 +57,7 @@ namespace Avalonia.Controls.Ribbon
 
                 var tipContent = new Border()
                 {
+                    Background = new SolidColorBrush(Colors.White),
                     Child = new TextBlock()
                     {
                         [!TextBlock.TextProperty] = element[!KeyTip.KeyTipKeysProperty]
