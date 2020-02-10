@@ -48,12 +48,6 @@ namespace Avalonia.Controls.Ribbon
                 return val;
             else
             {
-                //var tipText = 
-                /*tipText.Bind(TextBlock.TextProperty, new Binding()
-                {
-                    Source = element,
-                    Path = 
-                });*/
 
                 var tipContent = new Border()
                 {
@@ -76,7 +70,7 @@ namespace Avalonia.Controls.Ribbon
                 };
                 tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height - 20).ToBinding();
                 tip[!Popup.HorizontalOffsetProperty] = tip.GetObservable(Popup.WidthProperty).Select(x => x * -1).ToBinding();
-                    /*new Binding("Bounds.Height")
+                /*new Binding("Bounds.Height")
                 {
                     Source = element
                 }*/
