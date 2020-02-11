@@ -4,7 +4,12 @@
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon"
     xmlns:ge="clr-namespace:GridExtra.Avalonia;assembly=GridExtra.Avalonia"
     xmlns:sys="clr-namespace:System;assembly=netstandard">
-  <Style Selector="Popup.KeyTip">
+  <Style Selector="Popup.KeyTip ContentControl">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Padding" Value="4,2"/>
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
     <!--Setter Property="ContentTemplate">
       <Template>
         <ContentPresenter Name="PART_ContentPresenter"

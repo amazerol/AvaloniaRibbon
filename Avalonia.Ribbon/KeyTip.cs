@@ -49,16 +49,21 @@ namespace Avalonia.Controls.Ribbon
             else
             {
 
-                var tipContent = new Border()
+                var tipContent = new ContentControl()
                 {
                     Background = new SolidColorBrush(Colors.White),
-                    Child = new TextBlock()
+                    /*Content = new TextBlock()
                     {
-                        [!TextBlock.TextProperty] = element[!KeyTip.KeyTipKeysProperty]
-                    }
+                        [!TextBlock.TextProperty] = element[!KeyTip.KeyTipKeysProperty],
+                        Foreground = new SolidColorBrush(Colors.Black),
+                        HorizontalAlignment = Layout.HorizontalAlignment.Center,
+                        TextAlignment = TextAlignment.Center,
+                        VerticalAlignment = Layout.VerticalAlignment.Center
+                    }*/
+                    [!ContentControl.ContentProperty] = element[!KeyTip.KeyTipKeysProperty]
                 };
-                System.Diagnostics.Debug.WriteLine("TEXT: " + (tipContent.Child as TextBlock).Text);
-                tipContent.Classes.Add("KeyTip");
+                System.Diagnostics.Debug.WriteLine("TEXT: " + tipContent.Content.ToString()/*(tipContent.Child as TextBlock).Text*/);
+                
 
                 var tip = new Popup()
                 {
@@ -68,8 +73,10 @@ namespace Avalonia.Controls.Ribbon
                     Height = 20,
                     Child = tipContent
                 };
+                tip.Classes.Add("KeyTip");
                 tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height - 20).ToBinding();
                 tip[!Popup.HorizontalOffsetProperty] = tip.GetObservable(Popup.WidthProperty).Select(x => x * -1).ToBinding();
+                ((ISetLogicalParent)tip).SetParent(element);
                 /*new Binding("Bounds.Height")
                 {
                     Source = element
