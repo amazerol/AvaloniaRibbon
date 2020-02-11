@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Media;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reactive.Linq;
 using System.Text;
 
@@ -60,23 +61,36 @@ namespace Avalonia.Controls.Ribbon
                         TextAlignment = TextAlignment.Center,
                         VerticalAlignment = Layout.VerticalAlignment.Center
                     }*/
+                    MinWidth = 20,
+                    //MinHeight = 20,
                     [!ContentControl.ContentProperty] = element[!KeyTip.KeyTipKeysProperty]
                 };
-                System.Diagnostics.Debug.WriteLine("TEXT: " + tipContent.Content.ToString()/*(tipContent.Child as TextBlock).Text*/);
+                if (tipContent.Content != null)
+                    Debug.WriteLine("TEXT: " + tipContent.Content.ToString()/*(tipContent.Child as TextBlock).Text*/);
+                //tipContent.Arrange(new Rect(0, 0, double.PositiveInfinity, double.PositiveInfinity));
                 
-
                 var tip = new Popup()
                 {
                     PlacementTarget = element,
                     PlacementMode = PlacementMode.Right,
-                    Width = 25,
-                    Height = 20,
+                    [!Popup.WidthProperty] = tipContent.GetObservable(Control.BoundsProperty).Select(x => x.Width).ToBinding(),
+                    [!Popup.HeightProperty] = tipContent.GetObservable(Control.BoundsProperty).Select(x => x.Height).ToBinding(), //tipContent[!Control.HeightProperty],
+                    VerticalAlignment = Layout.VerticalAlignment.Bottom,
                     Child = tipContent
                 };
                 tip.Classes.Add("KeyTip");
-                tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height - 20).ToBinding();
-                tip[!Popup.HorizontalOffsetProperty] = tip.GetObservable(Popup.WidthProperty).Select(x => x * -1).ToBinding();
+                ////tipContent.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                //tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height - tipContent.Bounds.Height).ToBinding();
+                tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height).CombineLatest  (tipContent.GetObservable(Control.BoundsProperty), (x, y) => x - y.Height).ToBinding();
+                //.CombineLatest(tipContent.GetObservable(Control.BoundsProperty), x => x).ToBinding(); //.CombineLatest().Select(y => y.
+                //.CombineLatest<double>(tipContent.GetObservable(Control.BoundsProperty), (x => x.Height) ).ToBinding();
+                //tip[!Popup.HorizontalOffsetProperty] = tip.GetObservable(Popup.WidthProperty).Select(x => x * -1).ToBinding();
+                //tip[!Popup.HorizontalOffsetProperty] = tipContent.GetObservable(Control.WidthProperty).Select(x => x * -1).ToBinding();
+                tip[!Popup.HorizontalOffsetProperty] = tipContent.GetObservable(Control.BoundsProperty).Select(x => x.Width * -1).ToBinding();
                 ((ISetLogicalParent)tip).SetParent(element);
+                ////tip.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                tip.IsOpen = true;
+                tip.IsOpen = false;
                 /*new Binding("Bounds.Height")
                 {
                     Source = element

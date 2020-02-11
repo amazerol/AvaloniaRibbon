@@ -10,6 +10,9 @@
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Padding" Value="4,2"/>
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Height" Value="20"/>
     <!--Setter Property="ContentTemplate">
       <Template>
         <ContentPresenter Name="PART_ContentPresenter"
