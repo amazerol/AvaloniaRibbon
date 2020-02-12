@@ -27,17 +27,9 @@ namespace Avalonia.Controls.Ribbon
         }
 
 
-        public static readonly AttachedProperty<bool> ShowKeyTipKeysProperty = AvaloniaProperty.RegisterAttached<KeyTip, Control, bool>("ShowKeyTipKeys");
-        public static bool GetShowKeyTipKeys(Control element) => element.GetValue(ShowKeyTipKeysProperty);
-        public static void SetShowKeyTipKeys(Control element, bool value) => element.SetValue(ShowKeyTipKeysProperty, value);
-
-        static KeyTip()
-        {       
-                /*.AddClassHandler<Ribbon>(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sender, args) =>
-            {
-            
-            }));*/
-        }
+        public static readonly AttachedProperty<bool> ShowChildKeyTipKeysProperty = AvaloniaProperty.RegisterAttached<KeyTip, Control, bool>("ShowChildKeyTipKeys");
+        public static bool GetShowChildKeyTipKeys(Control element) => element.GetValue(ShowChildKeyTipKeysProperty);
+        public static void SetShowChildKeyTipKeys(Control element, bool value) => element.SetValue(ShowChildKeyTipKeysProperty, value);
 
         private KeyTip() { }
 
@@ -53,21 +45,11 @@ namespace Avalonia.Controls.Ribbon
                 var tipContent = new ContentControl()
                 {
                     Background = new SolidColorBrush(Colors.White),
-                    /*Content = new TextBlock()
-                    {
-                        [!TextBlock.TextProperty] = element[!KeyTip.KeyTipKeysProperty],
-                        Foreground = new SolidColorBrush(Colors.Black),
-                        HorizontalAlignment = Layout.HorizontalAlignment.Center,
-                        TextAlignment = TextAlignment.Center,
-                        VerticalAlignment = Layout.VerticalAlignment.Center
-                    }*/
                     MinWidth = 20,
-                    //MinHeight = 20,
                     [!ContentControl.ContentProperty] = element[!KeyTip.KeyTipKeysProperty]
                 };
                 if (tipContent.Content != null)
-                    Debug.WriteLine("TEXT: " + tipContent.Content.ToString()/*(tipContent.Child as TextBlock).Text*/);
-                //tipContent.Arrange(new Rect(0, 0, double.PositiveInfinity, double.PositiveInfinity));
+                    Debug.WriteLine("TEXT: " + tipContent.Content.ToString());
                 
                 var tip = new Popup()
                 {
@@ -79,22 +61,11 @@ namespace Avalonia.Controls.Ribbon
                     Child = tipContent
                 };
                 tip.Classes.Add("KeyTip");
-                ////tipContent.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
-                //tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height - tipContent.Bounds.Height).ToBinding();
                 tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height).CombineLatest  (tipContent.GetObservable(Control.BoundsProperty), (x, y) => x - y.Height).ToBinding();
-                //.CombineLatest(tipContent.GetObservable(Control.BoundsProperty), x => x).ToBinding(); //.CombineLatest().Select(y => y.
-                //.CombineLatest<double>(tipContent.GetObservable(Control.BoundsProperty), (x => x.Height) ).ToBinding();
-                //tip[!Popup.HorizontalOffsetProperty] = tip.GetObservable(Popup.WidthProperty).Select(x => x * -1).ToBinding();
-                //tip[!Popup.HorizontalOffsetProperty] = tipContent.GetObservable(Control.WidthProperty).Select(x => x * -1).ToBinding();
                 tip[!Popup.HorizontalOffsetProperty] = tipContent.GetObservable(Control.BoundsProperty).Select(x => x.Width * -1).ToBinding();
                 ((ISetLogicalParent)tip).SetParent(element);
-                ////tip.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
                 tip.IsOpen = true;
                 tip.IsOpen = false;
-                /*new Binding("Bounds.Height")
-                {
-                    Source = element
-                }*/
                 _keyTips.Add(element, tip);
                 return _keyTips[element];
             }

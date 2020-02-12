@@ -2,7 +2,6 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon"
-    xmlns:ge="clr-namespace:GridExtra.Avalonia;assembly=GridExtra.Avalonia"
     xmlns:sys="clr-namespace:System;assembly=netstandard">
   <Style Selector="Popup.KeyTip ContentControl">
     <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>

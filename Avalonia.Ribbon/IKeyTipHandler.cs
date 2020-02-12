@@ -7,8 +7,8 @@ namespace Avalonia.Controls.Ribbon
 {
     public interface IKeyTipHandler
     {
-        void ActivateKeyTips();
+        void ActivateKeyTips(Ribbon ribbon, IKeyTipHandler prev);
 
-        bool HandleKeyTip(Key key);
+        bool HandleKeyTipKeyPress(Key key);
     }
 }

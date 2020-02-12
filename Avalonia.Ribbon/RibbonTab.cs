@@ -25,7 +25,7 @@ namespace Avalonia.Controls.Ribbon
 
         static RibbonTab()
         {
-            KeyTip.ShowKeyTipKeysProperty.Changed.AddClassHandler<RibbonTab>(new Action<RibbonTab, AvaloniaPropertyChangedEventArgs>((sender, args) =>
+            KeyTip.ShowChildKeyTipKeysProperty.Changed.AddClassHandler<RibbonTab>(new Action<RibbonTab, AvaloniaPropertyChangedEventArgs>((sender, args) =>
             {
                 if ((bool)args.NewValue)
                 {
@@ -54,24 +54,35 @@ namespace Avalonia.Controls.Ribbon
             }));
         }
 
-        public void ActivateKeyTips()
+        public RibbonTab()
         {
+            LostFocus += (sneder, args) => KeyTip.SetShowChildKeyTipKeys(this, false);
+        }
+
+        Ribbon _ribbon;
+        IKeyTipHandler _prev;
+        public void ActivateKeyTips(Ribbon ribbon, IKeyTipHandler prev)
+        {
+            _ribbon = ribbon;
+            _prev = prev;
             foreach (RibbonGroupBox g in Groups)
-                System.Diagnostics.Debug.WriteLine("GROUP KEYS: " + KeyTip.GetKeyTipKeys(g));
+                Debug.WriteLine("GROUP KEYS: " + KeyTip.GetKeyTipKeys(g));
             
             Focus();
-            KeyTip.SetShowKeyTipKeys(this, true);
+            KeyTip.SetShowChildKeyTipKeys(this, true);
             KeyDown += RibbonTab_KeyDown;
         }
 
         private void RibbonTab_KeyDown(object sender, KeyEventArgs e)
         {
-            e.Handled = HandleKeyTip(e.Key);
+            e.Handled = HandleKeyTipKeyPress(e.Key);
             KeyDown -= RibbonTab_KeyDown;
-            KeyTip.SetShowKeyTipKeys(this, false);
+            KeyTip.SetShowChildKeyTipKeys(this, false);
+            if (e.Handled)
+                _ribbon.IsCollapsedPopupOpen = false;
         }
 
-        public bool HandleKeyTip(Key key)
+        public bool HandleKeyTipKeyPress(Key key)
         {
             bool retVal = false;
             foreach (RibbonGroupBox g in Groups)
@@ -91,7 +102,7 @@ namespace Avalonia.Controls.Ribbon
                         {
                             if (c is IKeyTipHandler hdlr)
                             {
-                                hdlr.ActivateKeyTips();
+                                hdlr.ActivateKeyTips(_ribbon, this);
                                 Debug.WriteLine("Group handled " + key.ToString() + " for IKeyTipHandler");
                             }
                             else
@@ -100,9 +111,9 @@ namespace Avalonia.Controls.Ribbon
                                     btn.Command.Execute(btn.CommandParameter);
                                 else
                                     c.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
-                                (Parent as Ribbon).Close();
+                                _ribbon.Close();
+                                retVal = true;
                             }
-                            retVal = true;
                             break;
                         }
                     }
@@ -133,7 +144,7 @@ namespace Avalonia.Controls.Ribbon
 
         private void InputRoot_Deactivated(object sender, EventArgs e)
         {
-            KeyTip.SetShowKeyTipKeys(this, false);
+            KeyTip.SetShowChildKeyTipKeys(this, false);
             (Parent as Ribbon).Close();
         }
     }

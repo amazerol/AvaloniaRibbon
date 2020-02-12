@@ -11,6 +11,7 @@ using Avalonia.Interactivity;
 using Avalonia.Controls.Platform;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Avalonia.Controls.Presenters;
 
 namespace Avalonia.Controls.Ribbon
 {
@@ -26,6 +27,7 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<IBrush> HeaderBackgroundProperty;
         public static readonly StyledProperty<IBrush> HeaderForegroundProperty;
         public static readonly StyledProperty<bool> IsCollapsedProperty;
+        public static readonly StyledProperty<bool> IsCollapsedPopupOpenProperty;
         public static readonly StyledProperty<RibbonMenu> MenuProperty = AvaloniaProperty.Register<Ribbon, RibbonMenu>(nameof(Menu));
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
         public static readonly DirectProperty<Ribbon, IEnumerable> SelectedGroupsProperty = AvaloniaProperty.RegisterDirect<Ribbon, IEnumerable>(nameof(SelectedGroups), o => o.SelectedGroups, (o, v) => o.SelectedGroups = v);
@@ -37,6 +39,7 @@ namespace Avalonia.Controls.Ribbon
             HeaderBackgroundProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(HeaderBackground));
             HeaderForegroundProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(HeaderForeground));
             IsCollapsedProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsCollapsed));
+            IsCollapsedPopupOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsCollapsedPopupOpen));
             IsMenuOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsMenuOpen));
 
             SelectedIndexProperty.Changed.AddClassHandler<Ribbon>((x, e) =>
@@ -45,15 +48,27 @@ namespace Avalonia.Controls.Ribbon
                     x.SelectedGroups = tab.Groups;
                 else
                     x.SelectedGroups = new AvaloniaList<object>();
+
+
             });
+
+            /*SelectedItemProperty.Changed.AddClassHandler<Ribbon>((x, e) =>
+            {
+                
+            });*/
+
+            IsCollapsedProperty.Changed.AddClassHandler(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
+            {
+                sneder.UpdatePresenterLocation((bool)args.NewValue);
+            }));
 
             AccessKeyHandler.AccessKeyPressedEvent.AddClassHandler<Ribbon>((sender, e) =>
             {
                 if (e.Source is Control ctrl)
-                    (sender as Ribbon).HandleKeyTip(ctrl);
+                    (sender as Ribbon).HandleKeyTipControl(ctrl);
             });
 
-            KeyTip.ShowKeyTipKeysProperty.Changed.AddClassHandler<Ribbon>(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sender, args) =>
+            KeyTip.ShowChildKeyTipKeysProperty.Changed.AddClassHandler<Ribbon>(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sender, args) =>
             {
                 if ((bool)args.NewValue)
                 {
@@ -72,10 +87,35 @@ namespace Avalonia.Controls.Ribbon
             }));
         }
 
-        public Ribbon()
+        protected override void OnLostFocus(RoutedEventArgs e)
         {
-            LostFocus += (sneder, args) => KeyTip.SetShowKeyTipKeys(this, false);
+            base.OnLostFocus(e);
+            KeyTip.SetShowChildKeyTipKeys(this, false);
         }
+
+        /*bool _popupAlreadyOpen = false;
+        protected override void OnPointerPressed(PointerPressedEventArgs e)
+        {
+            if (IsCollapsed && _popup.IsOpen)
+                _popupAlreadyOpen = true;
+            base.OnPointerPressed(e);
+        }*/
+
+        /*protected override void OnPointerReleased(PointerReleasedEventArgs e)
+        {
+            base.OnPointerReleased(e);
+            if (IsCollapsed && _itemHeadersPresenter.IsPointerOver)
+            {
+                //if (!_popupAlreadyOpen)
+                    _popup.IsOpen = true;
+                /*else
+                    _popupAlreadyOpen = false;*/
+                /*foreach (RibbonTab tab in Items)
+                {
+                    if (tab.HeaderPresenter.IsPointerOver)
+                }*
+            }
+        }*/
 
         protected IMenuInteractionHandler InteractionHandler { get; }
 
@@ -95,6 +135,12 @@ namespace Avalonia.Controls.Ribbon
         {
             get => GetValue(IsCollapsedProperty);
             set => SetValue(IsCollapsedProperty, value);
+        }
+
+        public bool IsCollapsedPopupOpen
+        {
+            get => GetValue(IsCollapsedPopupOpenProperty);
+            set => SetValue(IsCollapsedPopupOpenProperty, value);
         }
 
         public RibbonMenu Menu
@@ -185,7 +231,7 @@ namespace Avalonia.Controls.Ribbon
             if (!IsOpen)
                 return;
 
-            KeyTip.SetShowKeyTipKeys(this, false);
+            KeyTip.SetShowChildKeyTipKeys(this, false);
             IsOpen = false;
             FocusManager.Instance.Focus(_prevFocusedElement);
         }
@@ -199,7 +245,7 @@ namespace Avalonia.Controls.Ribbon
             IsOpen = true;
             _prevFocusedElement = FocusManager.Instance.Current;
             Focus();
-            KeyTip.SetShowKeyTipKeys(this, true);
+            KeyTip.SetShowChildKeyTipKeys(this, true);
 
             RaiseEvent(new RoutedEventArgs
             {
@@ -217,20 +263,20 @@ namespace Avalonia.Controls.Ribbon
             if (IsFocused)
             {
                 if ((e.Key != Key.LeftAlt) && (e.Key != Key.RightAlt) && (e.Key != Key.F10))
-                    HandleKeyTip(e.Key);
+                    HandleKeyTipKeyPress(e.Key);
                 else // if ((e.Key == Key.LeftAlt) || (e.Key == Key.RightAlt) || (e.Key == Key.F10))
                     Close();
             }
         }
 
-        void HandleKeyTip(Control item)
+        void HandleKeyTipControl(Control item)
         {
             item.RaiseEvent(new RoutedEventArgs(PointerPressedEvent));
             item.RaiseEvent(new RoutedEventArgs(PointerReleasedEvent));
             Debug.WriteLine("AccessKey handled for " + item.ToString());
         }
 
-        public void ActivateKeyTips()
+        public void ActivateKeyTips(Ribbon ribbon, IKeyTipHandler prev)
         {
             foreach (RibbonTab t in Items)
                 Debug.WriteLine("TAB KEYS: " + KeyTip.GetKeyTipKeys(t));
@@ -239,7 +285,7 @@ namespace Avalonia.Controls.Ribbon
                 Debug.WriteLine("MENU KEYS: " + KeyTip.GetKeyTipKeys(Menu));
         }
 
-        public bool HandleKeyTip(Key key)
+        public bool HandleKeyTipKeyPress(Key key)
         {
             bool retVal = false;
             if (IsOpen)
@@ -253,7 +299,9 @@ namespace Avalonia.Controls.Ribbon
                         SelectedItem = t;
                         tabKeyMatched = true;
                         retVal = true;
-                        t.ActivateKeyTips();
+                        if (IsCollapsed)
+                            IsCollapsedPopupOpen = true;
+                        t.ActivateKeyTips(this, this);
                         break;
                     }
                 }
@@ -269,6 +317,74 @@ namespace Avalonia.Controls.Ribbon
                 }
             }
             return retVal;
+        }
+
+        Popup _popup;
+        ItemsControl _groupsHost;
+        ContentControl _mainPresenter;
+        ContentControl _flyoutPresenter;
+        ItemsPresenter _itemHeadersPresenter;
+
+        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        {
+            base.OnTemplateApplied(e);
+            _popup = e.NameScope.Find<Popup>("PART_CollapsedContentPopup");
+            /*_popup.Opened += (sneder, args) =>
+            {
+                Debug.WriteLine("Content is null: " + (((_popup.Child as Border).Child as ContentControl).Content == null).ToString());
+            };*/
+            _groupsHost = e.NameScope.Find<ItemsControl>("PART_SelectedGroupsHost");
+            _mainPresenter = e.NameScope.Find<ContentControl>("PART_GroupsPresenterHolder");
+            _flyoutPresenter = e.NameScope.Find<ContentControl>("PART_PopupGroupsPresenterHolder");
+            UpdatePresenterLocation(IsCollapsed);
+            _itemHeadersPresenter = e.NameScope.Find<ItemsPresenter>("PART_ItemsPresenter");
+            _itemHeadersPresenter.PointerReleased += (sneder, args) =>
+            {
+                if (IsCollapsed)
+                {
+                    RibbonTab mouseOverItem = null;
+                    foreach (RibbonTab tab in _itemHeadersPresenter.Items)
+                    {
+                        if (tab.IsPointerOver)
+                        {
+                            mouseOverItem = tab;
+                            break;
+                        }
+                    }
+                    if (mouseOverItem != null)
+                    {
+                        if (SelectedItem != mouseOverItem)
+                            SelectedItem = mouseOverItem;
+                        IsCollapsedPopupOpen = true; //_popup.IsOpen = true;
+                    }
+                }
+            };
+            _itemHeadersPresenter.DoubleTapped += (sneder, args) =>
+            {
+                if (IsCollapsedPopupOpen)
+                    IsCollapsedPopupOpen = false;
+                IsCollapsed = false;
+            };
+
+            /*_popup.LostFocus += (sneder, args) =>
+            {
+                _popup.StaysOpen = _itemHeadersPresenter.IsPointerOver;
+            };*/
+        }
+
+        private void UpdatePresenterLocation(bool intoFlyout)
+        {
+            if (_groupsHost.Parent is IContentPresenter presenter)
+                presenter.Content = null;
+            else if (_groupsHost.Parent is ContentControl control)
+                control.Content = null;
+            else if (_groupsHost.Parent is Panel panel)
+                panel.Children.Remove(_groupsHost);
+
+            if (intoFlyout)
+                _flyoutPresenter.Content = _groupsHost;
+            else
+                _mainPresenter.Content = _groupsHost;
         }
     }
 }
