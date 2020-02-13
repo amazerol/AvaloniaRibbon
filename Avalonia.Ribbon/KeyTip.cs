@@ -45,9 +45,9 @@ namespace Avalonia.Controls.Ribbon
                 var tipContent = new ContentControl()
                 {
                     Background = new SolidColorBrush(Colors.White),
-                    MinWidth = 20,
                     [!ContentControl.ContentProperty] = element[!KeyTip.KeyTipKeysProperty]
                 };
+                tipContent.Classes.Add("KeyTipContent");
                 if (tipContent.Content != null)
                     Debug.WriteLine("TEXT: " + tipContent.Content.ToString());
                 
@@ -61,14 +61,40 @@ namespace Avalonia.Controls.Ribbon
                     Child = tipContent
                 };
                 tip.Classes.Add("KeyTip");
-                tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height).CombineLatest  (tipContent.GetObservable(Control.BoundsProperty), (x, y) => x - y.Height).ToBinding();
+                //tipContent.Measure(element.DesiredSize);
+                tipContent.InvalidateArrange();
+                tipContent.InvalidateMeasure();
+                tipContent.InvalidateVisual();
+                
+                tip.InvalidateArrange();
+                tip.InvalidateMeasure();
+                tip.InvalidateVisual();
+
                 tip[!Popup.HorizontalOffsetProperty] = tipContent.GetObservable(Control.BoundsProperty).Select(x => x.Width * -1).ToBinding();
+                tip[!Popup.VerticalOffsetProperty] = element.GetObservable(Control.BoundsProperty).Select(x => x.Height).CombineLatest(tipContent.GetObservable(Control.BoundsProperty), (x, y) => x - y.Height).ToBinding();
+
                 ((ISetLogicalParent)tip).SetParent(element);
-                tip.IsOpen = true;
-                tip.IsOpen = false;
+
+                /*tip.IsOpen = true;
+                tip.IsOpen = false;*/
+                tip.Opened += KeyTip_Opened;
+                
                 _keyTips.Add(element, tip);
                 return _keyTips[element];
             }
+        }
+
+        private static void KeyTip_Opened(object sender, EventArgs e)
+        {
+            var sned = sender as Popup;
+            sned.Host?.ConfigurePosition(sned.PlacementTarget, sned.PlacementMode, new Point(sned.HorizontalOffset, sned.VerticalOffset));
+            //sned.InvalidateArrange();
+            //sned.InvalidateMeasure();
+            //sned.InvalidateVisual();
+            
+            //sned.Opened -= KeyTip_Opened;
+            /*sned.Close();
+            sned.Open();*/
         }
     }
 }

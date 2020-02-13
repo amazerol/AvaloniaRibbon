@@ -37,7 +37,7 @@
     <DockPanel>
         <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal">
             <ribbon:Ribbon.Menu>
-                <ribbon:RibbonMenu>
+                <ribbon:RibbonMenu ribbon:KeyTip.KeyTipKeys="F">
                     <ribbon:RibbonMenu.MenuItems>
                         <MenuItem Header="Item 1">
                             <MenuItem Header="SubItem 1"/>

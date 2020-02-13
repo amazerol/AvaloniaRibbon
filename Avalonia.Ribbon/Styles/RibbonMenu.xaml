@@ -78,6 +78,9 @@
   <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonMenu">
     <Setter Property="Padding" Value="0"/>
   </Style>
+  <Style Selector="local|Ribbon local|RibbonMenu">
+    <Setter Property="IsChecked" Value="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:Ribbon}}, Mode=TwoWay}"/>
+  </Style>
   <Style Selector="local|Ribbon local|RibbonMenu /template/ ContentPresenter">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>

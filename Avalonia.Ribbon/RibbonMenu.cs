@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public class RibbonMenu : ToggleButton, IStyleable
+    public class RibbonMenu : RibbonMenuBase, IStyleable
     {
         Type IStyleable.StyleKey => typeof(RibbonMenu);
 
@@ -26,6 +26,18 @@ namespace Avalonia.Controls.Ribbon
         {
             get { return _menuPlacesItems; }
             set { SetAndRaise(MenuPlacesItemsProperty, ref _menuPlacesItems, value); }
+        }
+
+        public override bool IsMenuOpen
+        {
+            get
+            {
+                if (IsChecked != null)
+                    return IsChecked.Value;
+                else
+                    return false;
+            }
+            set => IsChecked = value;
         }
 
         public static readonly DirectProperty<RibbonMenu, IEnumerable> MenuItemsProperty;
