@@ -124,10 +124,10 @@
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
   </Style>
-  <Style Selector="local|Ribbon /template/ Button.RibbonHelpButton:not(:pointerover):not(:pressed)">
+  <Style Selector="local|RibbonWindow local|Ribbon /template/ Button.RibbonHelpButton:not(:pointerover):not(:pressed)">
     <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
   </Style>
-  <Style Selector="local|RibbonWindow local|RibbonWindow[IsActive=False] local|Ribbon /template/ Button.RibbonHelpButton:not(:pointerover):not(:pressed)">
+  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon /template/ Button.RibbonHelpButton:not(:pointerover):not(:pressed)">
     <Setter Property="Opacity" Value="0.5"/>
   </Style>
   <Style Selector="local|Ribbon /template/ Button.RibbonHelpButton:pointerover">
