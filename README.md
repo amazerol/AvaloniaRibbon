@@ -14,50 +14,313 @@ Include ribbon styles to App.xaml as shown below.
 
 Use the below mentioned sample as an example to use the ribbon control. 
 ```xaml
-    <RibbonWindow>
-        <RibbonControl>
-            <RibbonTab Header="RibbonTab 1">
-                <StackPanel Orientation="Horizontal">
-                    <RibbonTabGroup Text="Un premier groupe">
-                        <StackPanel Orientation="Horizontal">
-                            <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test3" />
-                            <RibbonButton IconPath="/Assets/RibbonIcons/corner.png" Text="Test4" />
-                            <RibbonButton IconPath="/Assets/RibbonIcons/chevron.png" Text="Test5" />
-                            <RibbonButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test6" />
-                        </StackPanel>
-                    </RibbonTabGroup>
-                    <RibbonTabGroup Command="{Binding OnClickCommand}" Text="Paragraphe">
-                        <StackPanel Orientation="Horizontal">
-                            <StackPanel Orientation="Vertical">
-                                <!--  Maximum 3 buttons per vertical stackpanel  -->
-                                <RibbonLinearButton
-                                    Command="{Binding OnClickCommand}"
-                                    IconPath="/Assets/RibbonIcons/corner.png"
-                                    Text="Reproduire la mise en forme" />
-                                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test8" />
-                                <RibbonLinearButton IconPath="/Assets/RibbonIcons/settings.png" Text="Test9" />
-                            </StackPanel>
-                            <RibbonComboButton IconPath="/Assets/RibbonIcons/settings.png" Text="Coller">
-                                <ComboBoxItem>ksdlfml</ComboBoxItem>
-                                <ComboBoxItem>ksdnvbl</ComboBoxItem>
-                            </RibbonComboButton>
-                            <StackPanel>
-                                <RibbonSmallButtonHGroup>
-                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" ToolTip.Tip="A small tooltip" />
-                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
-                                    <RibbonSmallButton IconPath="/Assets/RibbonIcons/settings.png" />
-                                </RibbonSmallButtonHGroup>
-                            </StackPanel>
-                        </StackPanel>
-                    </RibbonTabGroup>
-                </StackPanel>
-            </RibbonTab>
-            <RibbonTab Header="RibbonTab 2">qsdfqsdf</RibbonTab>
-        </RibbonControl>
-    </RibbonWindow>
+        <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
+            <ribbon:Ribbon.Menu>
+                <ribbon:RibbonMenu ribbon:KeyTip.KeyTipKeys="F">
+                    <ribbon:RibbonMenu.MenuItems>
+                        <MenuItem Header="Item 1">
+                            <MenuItem Header="SubItem 1"/>
+                            <MenuItem Header="SubItem 2"/>
+                        </MenuItem>
+                        <MenuItem Header="Item 2">
+                            <MenuItem Header="SubItem 1"/>
+                            <MenuItem Header="SubItem 2"/>
+                            <MenuItem Header="SubItem 3"/>
+                        </MenuItem>
+                    </ribbon:RibbonMenu.MenuItems>
+                    <ribbon:RibbonMenu.MenuPlacesItems>
+                        <ListBoxItem Content="Place 1"/>
+                        <ListBoxItem Content="Place 2"/>
+                        <ListBoxItem Content="Place 3"/>
+                    </ribbon:RibbonMenu.MenuPlacesItems>
+                </ribbon:RibbonMenu>
+            </ribbon:Ribbon.Menu>
+            <ribbon:RibbonTab Header="Home" ribbon:KeyTip.KeyTipKeys="H">
+                <ribbon:RibbonTab.Groups>
+                    <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
+                        <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Test Group 2" ribbon:KeyTip.KeyTipKeys="D2">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 1" ToolTip.Tip="Button 4" ribbon:KeyTip.KeyTipKeys="D">
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 2" ToolTip.Tip="Button 5" ribbon:KeyTip.KeyTipKeys="E">
+                            <ribbon:RibbonButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 6" ToolTip.Tip="Button 6" ribbon:KeyTip.KeyTipKeys="F">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Path Data="M 0 16 L 16 0 L 32 16 L 16 32 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Path Data="M 0 8 L 8 0 L 16 8 L 8 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 7" ToolTip.Tip="Button 7" ribbon:KeyTip.KeyTipKeys="G">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Test Group 3" ribbon:KeyTip.KeyTipKeys="D3">
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 8" ToolTip.Tip="Button 8" ribbon:KeyTip.KeyTipKeys="H">
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton MaxSize="Medium" Content="Button 9" ToolTip.Tip="Button 9" ribbon:KeyTip.KeyTipKeys="I">
+                            <ribbon:RibbonButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 10" ToolTip.Tip="Button 10" ribbon:KeyTip.KeyTipKeys="J">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                </ribbon:RibbonTab.Groups>
+            </ribbon:RibbonTab>
+            <ribbon:RibbonTab Header="Button Controls" ribbon:KeyTip.KeyTipKeys="B">
+                <ribbon:RibbonTab.Groups>
+                    <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
+                        <ribbon:RibbonButton Content="Large" MinSize="Large" MaxSize="Large">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.LargeIcon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Content="Medium" MinSize="Medium" MaxSize="Medium">
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="RibbonToggleButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="T">
+                        <ribbon:RibbonToggleButton Content="Large" MinSize="Large" MaxSize="Large">
+                            <ribbon:RibbonToggleButton.LargeIcon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonToggleButton.LargeIcon>
+                        </ribbon:RibbonToggleButton>
+                        <ribbon:RibbonToggleButton Content="Medium" MinSize="Medium" MaxSize="Medium">
+                            <ribbon:RibbonToggleButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonToggleButton.Icon>
+                        </ribbon:RibbonToggleButton>
+                        <ribbon:RibbonToggleButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
+                            <ribbon:RibbonToggleButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonToggleButton.Icon>
+                        </ribbon:RibbonToggleButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="RibbonSplitButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
+                        <ribbon:RibbonSplitButton Content="Large" MinSize="Large" MaxSize="Large">
+                            <ribbon:RibbonSplitButton.LargeIcon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonSplitButton.LargeIcon>
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                        </ribbon:RibbonSplitButton>
+                        <ribbon:RibbonSplitButton Content="Medium" MinSize="Medium" MaxSize="Medium">
+                            <ribbon:RibbonSplitButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonSplitButton.Icon>
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                        </ribbon:RibbonSplitButton>
+                        <ribbon:RibbonSplitButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
+                            <ribbon:RibbonSplitButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                </Grid>
+                            </ribbon:RibbonSplitButton.Icon>
+                            <ComboBoxItem>Item 1</ComboBoxItem>
+                            <ComboBoxItem>Item 2</ComboBoxItem>
+                        </ribbon:RibbonSplitButton>
+                    </ribbon:RibbonGroupBox>
+                </ribbon:RibbonTab.Groups>
+            </ribbon:RibbonTab>
+            <ribbon:RibbonTab Header="Galleries" ribbon:KeyTip.KeyTipKeys="G">
+                <ribbon:RibbonTab.Groups>
+                    <ribbon:RibbonGroupBox Header="Large gallery" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="L">
+                        <ribbon:Gallery>
+                            <ListBoxItem Content="Item 1"/>
+                            <ListBoxItem Content="Item 2"/>
+                            <ListBoxItem Content="Item 3"/>
+                            <ListBoxItem Content="Item 4"/>
+                            <ListBoxItem Content="Item 5"/>
+                            <ListBoxItem Content="Item 6"/>
+                            <ListBoxItem Content="Item 7"/>
+                            <ListBoxItem Content="Item 8"/>
+                            <ListBoxItem Content="Item 9"/>
+                            <ListBoxItem Content="Item 10"/>
+                            <ListBoxItem Content="Item 11"/>
+                            <ListBoxItem Content="Item 12"/>
+                            <ListBoxItem Content="Item 13"/>
+                            <ListBoxItem Content="Item 14"/>
+                            <ListBoxItem Content="Item 15"/>
+                        </ribbon:Gallery>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Medium gallery" ribbon:KeyTip.KeyTipKeys="M">
+                        <ribbon:Gallery MaxSize="Medium">
+                            <ListBoxItem Content="Item 1"/>
+                            <ListBoxItem Content="Item 2"/>
+                            <ListBoxItem Content="Item 3"/>
+                            <ListBoxItem Content="Item 4"/>
+                            <ListBoxItem Content="Item 5"/>
+                            <ListBoxItem Content="Item 6"/>
+                            <ListBoxItem Content="Item 7"/>
+                            <ListBoxItem Content="Item 8"/>
+                            <ListBoxItem Content="Item 9"/>
+                            <ListBoxItem Content="Item 10"/>
+                            <ListBoxItem Content="Item 11"/>
+                            <ListBoxItem Content="Item 12"/>
+                            <ListBoxItem Content="Item 13"/>
+                            <ListBoxItem Content="Item 14"/>
+                            <ListBoxItem Content="Item 15"/>
+                        </ribbon:Gallery>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Small gallery" ribbon:KeyTip.KeyTipKeys="S">
+                        <ribbon:Gallery MaxSize="Small">
+                            <ListBoxItem Content="Item 1"/>
+                            <ListBoxItem Content="Item 2"/>
+                            <ListBoxItem Content="Item 3"/>
+                            <ListBoxItem Content="Item 4"/>
+                            <ListBoxItem Content="Item 5"/>
+                            <ListBoxItem Content="Item 6"/>
+                            <ListBoxItem Content="Item 7"/>
+                            <ListBoxItem Content="Item 8"/>
+                            <ListBoxItem Content="Item 9"/>
+                            <ListBoxItem Content="Item 10"/>
+                            <ListBoxItem Content="Item 11"/>
+                            <ListBoxItem Content="Item 12"/>
+                            <ListBoxItem Content="Item 13"/>
+                            <ListBoxItem Content="Item 14"/>
+                            <ListBoxItem Content="Item 15"/>
+                        </ribbon:Gallery>
+                    </ribbon:RibbonGroupBox>
+                </ribbon:RibbonTab.Groups>
+            </ribbon:RibbonTab>
+        </ribbon:Ribbon>
 ```
 
 ## Change Log
+
+### Update (06/03/2020)
+- Re-organized some stuff
+- `RibbonWindow` is now an actual Window in its own right
+- Control size variants are now properties of a control, rather than entirely separate controls
+- Added dynamic control size adjustment
+- Added `Gallery` control
+- Major XAML cleanup
+- Switched to using standard Avalonia colours/brushes
+- Added `RibbonMenu`
+- `Ribbon` can now be collapsed or expanded (shows selected groups temporarily in a `Popup` when a tab is clicked if the `Ribbon` is collapsed)
+- `Ribbon` can now be horizontally or vertically oriented (real-time value changes are not yet fully functional, but compile-time/startup-time changes should work without a hitch)
+- `KeyTip`s and Keyboard navigation via ALT are now mostly functional
+- Probably something else I forgot to mention lol
 
 ### Update (14/11/2019)
 - Added separate sample project to demonstrate the usage.
