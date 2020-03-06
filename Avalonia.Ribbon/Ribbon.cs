@@ -12,6 +12,7 @@ using Avalonia.Controls.Platform;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Avalonia.Controls.Presenters;
+using System.Windows.Input;
 
 namespace Avalonia.Controls.Ribbon
 {
@@ -31,6 +32,9 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<RibbonMenuBase> MenuProperty = AvaloniaProperty.Register<Ribbon, RibbonMenuBase>(nameof(Menu));
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
         public static readonly DirectProperty<Ribbon, IEnumerable> SelectedGroupsProperty = AvaloniaProperty.RegisterDirect<Ribbon, IEnumerable>(nameof(SelectedGroups), o => o.SelectedGroups, (o, v) => o.SelectedGroups = v);
+        
+        public static readonly DirectProperty<Ribbon, ICommand> HelpButtonCommandProperty;
+        ICommand _helpCommand;
 
         static Ribbon()
         {
@@ -48,14 +52,7 @@ namespace Avalonia.Controls.Ribbon
                     x.SelectedGroups = tab.Groups;
                 else
                     x.SelectedGroups = new AvaloniaList<object>();
-
-
             });
-
-            /*SelectedItemProperty.Changed.AddClassHandler<Ribbon>((x, e) =>
-            {
-                
-            });*/
 
             IsCollapsedProperty.Changed.AddClassHandler(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
             {
@@ -75,6 +72,14 @@ namespace Avalonia.Controls.Ribbon
                     sender.Focus();
                 sender.SetChildKeyTipsVisibility(isOpen);
             }));
+            
+            HelpButtonCommandProperty = AvaloniaProperty.RegisterDirect<Ribbon, ICommand>(nameof(HelpButtonCommand), o => o.HelpButtonCommand, (o, v) => o.HelpButtonCommand = v);
+        }
+
+        public ICommand HelpButtonCommand
+        {
+            get => _helpCommand;
+            set => SetAndRaise(HelpButtonCommandProperty, ref _helpCommand, value);
         }
 
         void SetChildKeyTipsVisibility(bool open)

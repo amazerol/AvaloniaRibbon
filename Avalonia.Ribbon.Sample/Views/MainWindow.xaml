@@ -35,7 +35,7 @@
         </Style>
     </ribbon:RibbonWindow.Styles>
     <DockPanel>
-        <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal">
+        <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
             <ribbon:Ribbon.Menu>
                 <ribbon:RibbonMenu ribbon:KeyTip.KeyTipKeys="F">
                     <ribbon:RibbonMenu.MenuItems>
