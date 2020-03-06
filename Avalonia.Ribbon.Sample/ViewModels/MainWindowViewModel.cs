@@ -44,5 +44,12 @@ namespace Avalonia.Ribbon.Samples.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        string _help = "Help requested!";
+        public void HelpCommand(object parameter)
+        {
+            Console.WriteLine(_help);
+            LastActionText = _help;
+        }
     }
 }

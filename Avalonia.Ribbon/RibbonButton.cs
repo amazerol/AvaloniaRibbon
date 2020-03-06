@@ -18,6 +18,7 @@ namespace Avalonia.Controls.Ribbon
         {
             //CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<RibbonButton, bool>(nameof(CanAddToQuickAccessToolbar), true);
             RibbonControlHelper<RibbonButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
+            Button.FocusableProperty.OverrideDefaultValue<RibbonButton>(false);
         }
 
         Type IStyleable.StyleKey => typeof(RibbonButton);

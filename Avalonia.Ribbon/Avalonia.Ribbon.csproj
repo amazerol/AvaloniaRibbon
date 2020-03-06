@@ -5,7 +5,7 @@
     <RootNamespace>Avalonia.Controls.Ribbon</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Version>1.0.2</Version>
-    <Authors>Alban Mazerolles, Rubal Walia</Authors>
+    <Authors>Alban Mazerolles, Rubal Walia, Splitwirez</Authors>
     <PackageId>AvaloniaRibbon</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -26,9 +26,9 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.1" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.1" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.1" />
+    <PackageReference Include="Avalonia" Version="0.9.3" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.3" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.3" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System">

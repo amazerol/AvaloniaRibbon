@@ -34,6 +34,7 @@ namespace Avalonia.Controls.Ribbon
             //AffectsArrange<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
             //RibbonControLHelper<RibbonComboButton>.AddHandlers(MinSizeProperty, MaxSizeProperty);
             RibbonControlHelper<RibbonSplitButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
+            Button.FocusableProperty.OverrideDefaultValue<RibbonSplitButton>(false);
         }
 
         Type IStyleable.StyleKey => typeof(RibbonSplitButton);

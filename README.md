@@ -3,9 +3,9 @@ Ribbon Control for Avalonia
 
 The purpose of this Avalonia component is to achieve something like Microsoft Ribbon UI found in Office and all around Windows operating system. The component can be used in its present state but is definitely not considered as complete. I had to implement ribbon interface for my project **[Jaya - Cross Plat](https://github.com/waliarubal/Jaya)** so had to tailor things accordingly. 
 
-The original piece of work is by [Alban Mazerolles](https://github.com/amazerol) which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
+The original work is by [Alban Mazerolles](https://github.com/amazerol) which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
 
-![Preview](https://i.imgur.com/r1LniW3.png)
+![Preview](https://i.imgur.com/IdD64Kr.png)
 
 Include ribbon styles to App.xaml as shown below.
 ```xaml
