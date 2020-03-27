@@ -197,10 +197,20 @@ namespace Avalonia.Controls.Ribbon
             var children = Children.Where(x => x is RibbonGroupBox).Cast<RibbonGroupBox>();
             double totalWidth = 0;
 
-            Arrange(new Rect(DesiredSize));
-            Measure(DesiredSize);
+            Size desiredSize = DesiredSize;
+            if (Orientation == Layout.Orientation.Vertical)
+                desiredSize = desiredSize.WithWidth(Bounds.Width);
+            else
+                desiredSize = desiredSize.WithHeight(Bounds.Height);
+
+            Arrange(new Rect(desiredSize));
+            Measure(desiredSize);
             for (int i = 0; i < children.Count(); i++)
-                totalWidth += children.ElementAt(i).Bounds.Width;
+            {
+                double newSize = children.ElementAt(i).Bounds.X - totalWidth;
+                if (newSize <= 0)
+                    totalWidth += children.ElementAt(i).Bounds.Width + newSize;
+            }
 
             return totalWidth;
         }
@@ -213,7 +223,11 @@ namespace Avalonia.Controls.Ribbon
             Arrange(new Rect(DesiredSize));
             Measure(DesiredSize);
             for (int i = 0; i < children.Count(); i++)
-                totalHeight += children.ElementAt(i).Bounds.Height;
+            {
+                double newSize = children.ElementAt(i).Bounds.Y - totalHeight;
+                if (newSize <= 0)
+                    totalHeight += children.ElementAt(i).Bounds.Height + newSize;
+            }
 
             return totalHeight;
         }
