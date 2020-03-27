@@ -4,7 +4,7 @@
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon"
     xmlns:sys="clr-namespace:System;assembly=netstandard">
   <Design.PreviewWith>
-    <Panel Width="200" Height="150">
+    <Panel Width="200">
       <local:Ribbon VerticalAlignment="Top">
         <local:RibbonTab Header="Tab">
           <local:RibbonTab.Groups>
@@ -72,11 +72,11 @@
       </ItemsPanelTemplate>
     </Setter>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal]">
+  <!--Style Selector="local|Ribbon[Orientation=Horizontal]">
     <Setter Property="Margin" Value="0,0,0,-4"/>
-  </Style>
+  </Style-->
   <Style Selector="local|Ribbon[Orientation=Vertical]">
-    <Setter Property="Margin" Value="0,0,-4,0"/>
+    <!--Setter Property="Margin" Value="0,0,-4,0"/-->
     <Setter Property="Template">
       <ControlTemplate>
         <Grid ColumnDefinitions="34,*">

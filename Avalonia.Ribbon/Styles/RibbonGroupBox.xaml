@@ -3,11 +3,31 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:Avalonia.Controls.Ribbon;assembly=Avalonia.Controls.Ribbon">
   <Design.PreviewWith>
-  <Grid Height="90" Width="90">
-    <local:RibbonGroupBox>
-      <local:RibbonButton Size="Large"/>
-    </local:RibbonGroupBox>
-  </Grid>
+    <Grid Width="200">
+      <local:Ribbon>
+        <local:RibbonTab>
+          <local:RibbonTab.Groups>
+            <local:RibbonGroupBox Header="Text or something" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}">
+              <local:RibbonButton MinSize="Medium" MaxSize="Medium" Content="Button">
+                <local:RibbonButton.Icon>
+                  <Rectangle Width="16" Height="16" Fill="Red"/>
+                </local:RibbonButton.Icon>
+              </local:RibbonButton>
+              <local:RibbonButton MinSize="Medium" MaxSize="Medium" Content="Button">
+                <local:RibbonButton.Icon>
+                  <Rectangle Width="16" Height="16" Fill="Red"/>
+                </local:RibbonButton.Icon>
+              </local:RibbonButton>
+              <local:RibbonButton MinSize="Medium" MaxSize="Medium" Content="Button">
+                <local:RibbonButton.Icon>
+                  <Rectangle Width="16" Height="16" Fill="Red"/>
+                </local:RibbonButton.Icon>
+              </local:RibbonButton>
+            </local:RibbonGroupBox>
+          </local:RibbonTab.Groups>
+        </local:RibbonTab>
+      </local:Ribbon>
+    </Grid>
   </Design.PreviewWith>
 
   <Style Selector="local|RibbonGroupBox">
@@ -20,50 +40,48 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border x:Name="EdgeBorder" BorderBrush="{TemplateBinding BorderBrush}">
-          <DockPanel HorizontalAlignment="Stretch">
-            <Grid Name="ContentsGrid"
+          <Grid Name="ContentsGrid"
                 ColumnDefinitions="*,14"
                 RowDefinitions="*,14">
-              <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" Grid.ColumnSpan="2">
-                <ItemsPresenter.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <local:RibbonGroupWrapPanel x:Name="PART_ItemsPanel" DisplayMode="{TemplateBinding DisplayMode}"/>
-                  </ItemsPanelTemplate>
-                </ItemsPresenter.ItemsPanel>
-              </ItemsPresenter>
-              <!--TextBlock Grid.Column="0" Grid.Row="1"
+            <ItemsPresenter Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
+              <ItemsPresenter.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <local:RibbonGroupWrapPanel x:Name="PART_ItemsPanel" DisplayMode="{TemplateBinding DisplayMode}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+              </ItemsPresenter.ItemsPanel>
+            </ItemsPresenter>
+            <!--TextBlock Grid.Column="0" Grid.Row="1"
                          TextAlignment="Center"
                   HorizontalAlignment="Stretch"
                   FontSize="11"
                   FontWeight="DemiBold"
                   Text="{TemplateBinding Text}" /-->
-              <ContentPresenter Name="PART_HeaderPresenter" TextBlock.FontSize="11" Grid.Column="0" Grid.Row="1"
-              HorizontalAlignment="Center"
-              VerticalAlignment="Center"
-              Content="{TemplateBinding Header}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
-              <Button Grid.Column="1" Grid.Row="1"
-                  Name="commandButton"
-                  Width="15"
-                  Height="15"
-                  HorizontalAlignment="Right"
-                  Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Focusable="False">
-                <Button.IsVisible>
-                  <Binding Path="!Command" Mode="OneWay" RelativeSource="{RelativeSource Mode=TemplatedParent}">
-                    <Binding.Converter>
-                      <local:IsNullConverter/>
-                    </Binding.Converter>
-                  </Binding>
-                </Button.IsVisible>
-                <Border>
-                  <Grid Width="9" Height="9">
-                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="2,2,0,0"/>
-                    <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="2"/>
-                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="0,0,2,2" Width="5" Height="5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                  </Grid>
-                </Border>
-              </Button>
-            </Grid>
-          </DockPanel>
+            <ContentPresenter Name="PART_HeaderPresenter" TextBlock.FontSize="11" Grid.Column="0" Grid.Row="1"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            Content="{TemplateBinding Header}" TextBlock.Foreground="{TemplateBinding Foreground}"/>
+            <Button Grid.Column="1" Grid.Row="1"
+                Name="commandButton"
+                Width="15"
+                Height="15"
+                HorizontalAlignment="Right"
+                Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Focusable="False">
+              <Button.IsVisible>
+                <Binding Path="!Command" Mode="OneWay" RelativeSource="{RelativeSource Mode=TemplatedParent}">
+                  <Binding.Converter>
+                    <local:IsNullConverter/>
+                  </Binding.Converter>
+                </Binding>
+              </Button.IsVisible>
+              <Border>
+                <Grid Width="9" Height="9">
+                  <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="2,2,0,0"/>
+                  <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="2"/>
+                  <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="0,0,2,2" Width="5" Height="5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                </Grid>
+              </Border>
+            </Button>
+          </Grid>
         </Border>
       </ControlTemplate>
     </Setter>
@@ -88,11 +106,11 @@
   </Style>
   <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
     <Setter Property="Orientation" Value="Vertical"/>
-    <Setter Property="Height" Value="71"/>
+    <Setter Property="Height" Value="72"/>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
     <Setter Property="Orientation" Value="Horizontal"/>
-    <Setter Property="Width" Value="132"/>
+    <Setter Property="Width" Value="124"/>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox">
     <Setter Property="Padding" Value="0,2"/>
