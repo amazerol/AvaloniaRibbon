@@ -13,11 +13,9 @@ namespace Avalonia.Controls.Ribbon
         public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty;
         public static readonly StyledProperty<object> IconProperty = RibbonButton.IconProperty.AddOwner<RibbonToggleButton>();
         public static readonly StyledProperty<object> LargeIconProperty = RibbonButton.LargeIconProperty.AddOwner<RibbonToggleButton>();
-        //public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
         static RibbonToggleButton()
         {
-            //CanAddToQuickAccessToolbarProperty = AvaloniaProperty.Register<RibbonButton, bool>(nameof(CanAddToQuickAccessToolbar), true);
             RibbonControlHelper<RibbonToggleButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
             ToggleButton.FocusableProperty.OverrideDefaultValue<RibbonToggleButton>(false);
         }
@@ -54,11 +52,5 @@ namespace Avalonia.Controls.Ribbon
             get => GetValue(MaxSizeProperty);
             set => SetValue(MaxSizeProperty, value);
         }
-
-        /*public bool CanAddToQuickAccessToolbar
-        {
-            get => GetValue(CanAddToQuickAccessToolbarProperty);
-            set => SetValue(CanAddToQuickAccessToolbarProperty, value);
-        }*/
     }
 }

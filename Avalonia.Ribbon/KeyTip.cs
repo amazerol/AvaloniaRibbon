@@ -61,7 +61,7 @@ namespace Avalonia.Controls.Ribbon
                     Child = tipContent
                 };
                 tip.Classes.Add("KeyTip");
-                //tipContent.Measure(element.DesiredSize);
+
                 tipContent.InvalidateArrange();
                 tipContent.InvalidateMeasure();
                 tipContent.InvalidateVisual();
@@ -75,8 +75,6 @@ namespace Avalonia.Controls.Ribbon
 
                 ((ISetLogicalParent)tip).SetParent(element);
 
-                /*tip.IsOpen = true;
-                tip.IsOpen = false;*/
                 tip.Opened += KeyTip_Opened;
                 
                 _keyTips.Add(element, tip);
@@ -88,13 +86,6 @@ namespace Avalonia.Controls.Ribbon
         {
             var sned = sender as Popup;
             sned.Host?.ConfigurePosition(sned.PlacementTarget, sned.PlacementMode, new Point(sned.HorizontalOffset, sned.VerticalOffset));
-            //sned.InvalidateArrange();
-            //sned.InvalidateMeasure();
-            //sned.InvalidateVisual();
-            
-            //sned.Opened -= KeyTip_Opened;
-            /*sned.Close();
-            sned.Open();*/
         }
     }
 }

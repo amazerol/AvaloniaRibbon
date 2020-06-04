@@ -13,7 +13,6 @@ namespace Avalonia.Controls.Ribbon
         public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MinSizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty;
-        //public static readonly StyledProperty<bool> CanAddToQuickAccessToolbarProperty;
 
         public static readonly DirectProperty<RibbonSplitButton, ICommand> CommandProperty;
         public static readonly StyledProperty<object> CommandParameterProperty;
@@ -23,16 +22,10 @@ namespace Avalonia.Controls.Ribbon
             ContentProperty = RibbonButton.ContentProperty.AddOwner<RibbonSplitButton>();
             IconProperty = RibbonButton.IconProperty.AddOwner<RibbonSplitButton>();
             LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon), null);
-            //SizeProperty = RibbonButton.SizeProperty.AddOwner<RibbonComboButton>();
-            //MinSizeProperty = RibbonButton.MinSizeProperty.AddOwner<RibbonComboButton>();
-            //MaxSizeProperty = RibbonButton.MaxSizeProperty.AddOwner<RibbonComboButton>();
-            //CanAddToQuickAccessToolbarProperty = RibbonButton.CanAddToQuickAccessToolbarProperty.AddOwner<RibbonComboButton>();
+
             CommandProperty = Button.CommandProperty.AddOwner<RibbonSplitButton>(button => button.Command, (button, command) => button.Command = command);
             CommandParameterProperty = Button.CommandParameterProperty.AddOwner<RibbonSplitButton>();
-            //AffectsRender<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            //AffectsMeasure<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            //AffectsArrange<RibbonComboButton>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            //RibbonControLHelper<RibbonComboButton>.AddHandlers(MinSizeProperty, MaxSizeProperty);
+
             RibbonControlHelper<RibbonSplitButton>.SetProperties(out SizeProperty, out MinSizeProperty, out MaxSizeProperty);
             Button.FocusableProperty.OverrideDefaultValue<RibbonSplitButton>(false);
         }
@@ -75,12 +68,6 @@ namespace Avalonia.Controls.Ribbon
             get => GetValue(MaxSizeProperty);
             set => SetValue(MaxSizeProperty, value);
         }
-
-        /*public bool CanAddToQuickAccessToolbar
-        {
-            get => GetValue(CanAddToQuickAccessToolbarProperty);
-            set => SetValue(CanAddToQuickAccessToolbarProperty, value);
-        }*/
 
         private ICommand _command = null;
         public ICommand Command

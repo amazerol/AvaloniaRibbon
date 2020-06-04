@@ -14,27 +14,10 @@ namespace Avalonia.Controls.Ribbon
         public static readonly StyledProperty<IBrush> TitleBarBackgroundProperty;
         public static readonly StyledProperty<IBrush> TitleBarForegroundProperty;
         
-        /*public static readonly StyledProperty<WindowState> WindowStateProperty;
-        public WindowState WindowState
-        {
-            get => GetValue(WindowStateProperty);
-            set => SetValue(WindowStateProperty, value);
-        }
-
-        public static readonly DirectProperty<RibbonWindow, bool> IsActiveProperty;
-        public bool IsActive
-        {
-            get => GetValue(IsActiveProperty);
-            set => SetValue(IsActiveProperty, value);
-        }*/
-
         static RibbonWindow()
         {
             TitleBarBackgroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarBackground));
             TitleBarForegroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarForeground));
-            /*WindowStateProperty = Window.WindowStateProperty.AddOwner<RibbonWindow>();
-            IsActiveProperty = Window.IsActiveProperty.AddOwner<RibbonWindow>(x => x.IsActive, (x, o) => x.IsActive = o);*/
-            //HasSystemDecorationsProperty.OverrideDefaultValue(typeof(RibbonWindow), false);
         }
 
         Type IStyleable.StyleKey => typeof(RibbonWindow);
@@ -69,7 +52,7 @@ namespace Avalonia.Controls.Ribbon
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
             base.OnTemplateApplied(e);
-            var window = this;// (Window)this.GetVisualRoot();
+            var window = this;
             try
             {
                 var titleBar = GetControl<Control>(e, "TitleBar");
@@ -81,26 +64,6 @@ namespace Avalonia.Controls.Ribbon
                     {
                         window.WindowState = ((Window)this.GetVisualRoot()).WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
                     };
-                    /*window.Activated += (sneder, args) => IsActive = true;
-                    window.Deactivated += (sneder, args) => IsActive = false;
-                    window.PositionChanged += (sneder, args) => WindowState = window.WindowState;*/
-                    /*window.PropertyChanged += (sender, propertyChnagedArgs) =>
-                    {
-                        if (propertyChnagedArgs.Property.Name.Equals(nameof(WindowState)))
-                        {
-                            /*if (window.WindowState.HasFlag(WindowState.Maximized))
-                                GetControl<Image>(e, "ImageMaximizeButton").Source = new Bitmap("./Assets/already_maximized.png");
-                            else
-                                GetControl<Image>(e, "ImageMaximizeButton").Source = new Bitmap("./Assets/maximize.png");*
-                            if (WindowState != window.WindowState)
-                                WindowState = window.WindowState;
-                        }
-                        else if (propertyChnagedArgs.Property.Name.Equals(nameof(IsActive)))
-                        {
-                            if (IsActive != window.IsActive)
-                                IsActive = window.IsActive;
-                        }
-                    };*/
                 }
 
                 titleBar.PointerPressed += (object sender, PointerPressedEventArgs ep) =>

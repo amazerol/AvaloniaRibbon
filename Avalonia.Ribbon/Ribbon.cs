@@ -98,30 +98,6 @@ namespace Avalonia.Controls.Ribbon
             KeyTip.SetShowChildKeyTipKeys(this, false);
         }
 
-        /*bool _popupAlreadyOpen = false;
-        protected override void OnPointerPressed(PointerPressedEventArgs e)
-        {
-            if (IsCollapsed && _popup.IsOpen)
-                _popupAlreadyOpen = true;
-            base.OnPointerPressed(e);
-        }*/
-
-        /*protected override void OnPointerReleased(PointerReleasedEventArgs e)
-        {
-            base.OnPointerReleased(e);
-            if (IsCollapsed && _itemHeadersPresenter.IsPointerOver)
-            {
-                //if (!_popupAlreadyOpen)
-                    _popup.IsOpen = true;
-                /*else
-                    _popupAlreadyOpen = false;*/
-                /*foreach (RibbonTab tab in Items)
-                {
-                    if (tab.HeaderPresenter.IsPointerOver)
-                }*
-            }
-        }*/
-
         protected IMenuInteractionHandler InteractionHandler { get; }
 
         private IEnumerable _selectedGroups = new AvaloniaList<object>();
@@ -278,7 +254,7 @@ namespace Avalonia.Controls.Ribbon
             {
                 if ((e.Key == Key.LeftAlt) || (e.Key == Key.RightAlt) || (e.Key == Key.F10) || (e.Key == Key.Escape))
                     Close();
-                else //if ((e.Key != Key.LeftAlt) && (e.Key != Key.RightAlt) && (e.Key != Key.F10))
+                else
                     HandleKeyTipKeyPress(e.Key);
             }
         }
@@ -321,8 +297,6 @@ namespace Avalonia.Controls.Ribbon
                 }
                 if ((!tabKeyMatched) && (Menu != null))
                 {
-                    //string menuKeys = KeyTip.GetKeyTipKeys(Menu);
-
                     if (KeyTip.HasKeyTipKey(Menu, key))
                     {
                         IsMenuOpen = true;
@@ -356,10 +330,7 @@ namespace Avalonia.Controls.Ribbon
 
 
             bool secondClick = false;
-            /*_popup.Opened += (sneder, args) =>
-            {
-                Debug.WriteLine("Content is null: " + (((_popup.Child as Border).Child as ContentControl).Content == null).ToString());
-            };*/
+            
             _itemHeadersPresenter.PointerReleased += (sneder, args) =>
             {
                 if (IsCollapsed)
@@ -378,7 +349,7 @@ namespace Avalonia.Controls.Ribbon
                         if (SelectedItem != mouseOverItem)
                             SelectedItem = mouseOverItem;
                         if (!secondClick)
-                            IsCollapsedPopupOpen = true; //_popup.IsOpen = true;
+                            IsCollapsedPopupOpen = true;
                         else
                             secondClick = false;
                     }
@@ -398,11 +369,6 @@ namespace Avalonia.Controls.Ribbon
                     secondClick = true;
                 }
             };
-
-            /*_popup.LostFocus += (sneder, args) =>
-            {
-                _popup.StaysOpen = _itemHeadersPresenter.IsPointerOver;
-            };*/
         }
 
         private void UpdatePresenterLocation(bool intoFlyout)

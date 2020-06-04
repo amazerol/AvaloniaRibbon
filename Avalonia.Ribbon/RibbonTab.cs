@@ -75,18 +75,10 @@ namespace Avalonia.Controls.Ribbon
 
         private void RibbonTab_KeyDown(object sender, KeyEventArgs e)
         {
-            /*if (e.Key == Key.Escape)
-            {
-                KeyTip.SetShowChildKeyTipKeys(_ribbon, true);
+            e.Handled = HandleKeyTipKeyPress(e.Key);
+            if (e.Handled)
                 _ribbon.IsCollapsedPopupOpen = false;
-                e.Handled = true;
-            }
-            else
-            {*/
-                e.Handled = HandleKeyTipKeyPress(e.Key);
-                if (e.Handled)
-                    _ribbon.IsCollapsedPopupOpen = false;
-            //}
+
             KeyTip.SetShowChildKeyTipKeys(this, false);
             KeyDown -= RibbonTab_KeyDown;
         }

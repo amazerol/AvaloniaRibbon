@@ -27,13 +27,6 @@ namespace Avalonia.Controls.Ribbon
                 throw new Exception("obj must be an IRibbonControl!");
         }
 
-        /*static RibbonControlHelper()
-        {
-            //var lyt = new Layoutable();
-            Layoutable.AffectsMeasure<T>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-            Layoutable.AffectsArrange<T>(SizeProperty, MinSizeProperty, MaxSizeProperty);
-        }*/
-
 
         public static void SetProperties(out AvaloniaProperty<RibbonControlSize> size, out AvaloniaProperty<RibbonControlSize> minSize, out AvaloniaProperty<RibbonControlSize> maxSize)
         {
