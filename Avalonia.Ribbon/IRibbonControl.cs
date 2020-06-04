@@ -6,6 +6,13 @@ using System.Text;
 
 namespace Avalonia.Controls.Ribbon
 {
+    public enum RibbonControlSize
+    {
+        Small,
+        Medium,
+        Large
+    }
+
     public interface IRibbonControl : IAvaloniaObject
     {
         RibbonControlSize Size
@@ -25,12 +32,5 @@ namespace Avalonia.Controls.Ribbon
             get;
             set;
         }
-    }
-
-    public enum RibbonControlSize
-    {
-        Small,
-        Medium,
-        Large
     }
 }
