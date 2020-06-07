@@ -1,0 +1,26 @@
+﻿<Style xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style.Resources>
+        <Color x:Key="HoveredBackgroundColor">#FF00FF</Color>
+        <Color x:Key="HoveredBorderBackgroundColor">#FF00FF</Color>
+        <Color x:Key="ClickedBackgroundColor">#FF00FF</Color>
+        <Color x:Key="ClickedBorderBackgroundColor">#FF00FF</Color>
+        <Color x:Key="TitleBarColor">#FF00FF</Color>
+        <Color x:Key="InactiveTitleBarColor">#FF00FF</Color>
+        <Color x:Key="ActiveRibbonBackgroundColor">#FF00FF</Color>
+      <!--Color x:Key="HoveredBackgroundColor">#c6c6c6</Color>
+      <Color x:Key="HoveredBorderBackgroundColor">#b5b5b5</Color>
+      <Color x:Key="ClickedBackgroundColor">#a4a4a4</Color>
+      <Color x:Key="ClickedBorderBackgroundColor">#939393</Color>
+      <Color x:Key="TitleBarColor">#2b579a</Color>
+      <Color x:Key="InactiveTitleBarColor">#466799</Color>
+      <Color x:Key="ActiveRibbonBackgroundColor">#f0f0f0</Color-->
+
+        <SolidColorBrush x:Key="HoveredBackgroundColorBrush" Color="{DynamicResource HoveredBackgroundColor}" />
+        <SolidColorBrush x:Key="HoveredBorderBackgroundColorBrush" Color="{DynamicResource HoveredBorderBackgroundColor}" />
+        <SolidColorBrush x:Key="ClickedBackgroundColorBrush" Color="{DynamicResource ClickedBackgroundColor}" />
+        <SolidColorBrush x:Key="ClickedBorderBackgroundColorBrush" Color="{DynamicResource ClickedBorderBackgroundColor}" />
+        <SolidColorBrush x:Key="TitleBarColorBrush" Color="{DynamicResource TitleBarColor}" />
+        <SolidColorBrush x:Key="InactiveTitleBarColorBrush" Color="{DynamicResource InactiveTitleBarColor}" />
+        <SolidColorBrush x:Key="ActiveRibbonBackgroundColorBrush" Color="{DynamicResource ActiveRibbonBackgroundColor}" />
+    </Style.Resources>
+</Style>

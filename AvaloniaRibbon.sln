@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.902
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Ribbon.Sample", "Avalonia.Ribbon.Sample\Avalonia.Ribbon.Sample.csproj", "{E700E867-E7B5-4B53-A1FE-C6B4C36AD217}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvaloniaUI.Ribbon.Sample", "AvaloniaUI.Ribbon.Sample\AvaloniaUI.Ribbon.Sample.csproj", "{E700E867-E7B5-4B53-A1FE-C6B4C36AD217}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Avalonia.Ribbon", "Avalonia.Ribbon\Avalonia.Ribbon.csproj", "{49D7DCC7-BD40-41D3-9F18-C653476E6AA2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaUI.Ribbon", "AvaloniaUI.Ribbon\AvaloniaUI.Ribbon.csproj", "{49D7DCC7-BD40-41D3-9F18-C653476E6AA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

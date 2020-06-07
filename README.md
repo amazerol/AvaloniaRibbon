@@ -9,7 +9,7 @@ The original work is by [Alban Mazerolles](https://github.com/amazerol) which ca
 
 Include ribbon styles to App.xaml as shown below.
 ```xaml
-    <StyleInclude Source="avares://Avalonia.Controls.Ribbon/Styles/RibbonStyles.xaml" />
+    <StyleInclude Source="avares://AvaloniaUI.Ribbon/Styles/RibbonStyles.xaml" />
 ```
 
 Use the below mentioned sample as an example to use the ribbon control. 

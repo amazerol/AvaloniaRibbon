@@ -1,0 +1,184 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon">
+  <Design.PreviewWith>
+    <Grid Height="90">
+      <local:Gallery>
+        <ListBoxItem Content="Item 1"/>
+        <ListBoxItem Content="Item 2"/>
+        <ListBoxItem Content="Item 3"/>
+        <ListBoxItem Content="Item 4"/>
+        <ListBoxItem Content="Item 5"/>
+        <ListBoxItem Content="Item 6"/>
+        <ListBoxItem Content="Item 7"/>
+        <ListBoxItem Content="Item 8"/>
+        <ListBoxItem Content="Item 9"/>
+        <ListBoxItem Content="Item 10"/>
+        <ListBoxItem Content="Item 11"/>
+        <ListBoxItem Content="Item 12"/>
+        <ListBoxItem Content="Item 13"/>
+        <ListBoxItem Content="Item 14"/>
+        <ListBoxItem Content="Item 15"/>
+      </local:Gallery>
+    </Grid>
+  </Design.PreviewWith>
+
+  <Style Selector="local|Gallery">
+    <Setter Property="Height" Value="62"/>
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Padding" Value="0"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Grid>
+          <Border x:Name="BodyBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="0,0,17,0">
+            <ScrollViewer Name="PART_ScrollViewer"
+                          Margin="-1,-1,-18,-1"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Visible">
+              <ScrollViewer.Template>
+                <ControlTemplate>
+                  <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
+                    <ScrollContentPresenter Name="PART_ContentPresenter"
+                                            Background="{TemplateBinding Background}"
+                                            CanHorizontallyScroll="{TemplateBinding CanHorizontallyScroll}"
+                                            CanVerticallyScroll="{TemplateBinding CanVerticallyScroll}"
+                                            Content="{TemplateBinding Content}"
+                                            Extent="{TemplateBinding Extent, Mode=TwoWay}"
+                                            Margin="{TemplateBinding Padding}"
+                                            Offset="{TemplateBinding Offset, Mode=TwoWay}"
+                                            Viewport="{TemplateBinding Viewport, Mode=TwoWay}">
+                      <ScrollContentPresenter.GestureRecognizers>
+                        <ScrollGestureRecognizer
+                          CanHorizontallyScroll="{TemplateBinding CanHorizontallyScroll}"
+                          CanVerticallyScroll="{TemplateBinding CanVerticallyScroll}" />
+                      </ScrollContentPresenter.GestureRecognizers>
+                    </ScrollContentPresenter>
+                    <ScrollBar Name="horizontalScrollBar"
+                               IsVisible="False"
+                               Focusable="False"/>
+                    <ScrollBar Name="verticalScrollBar"
+                               Width="18"
+                               Orientation="Vertical"
+                               Maximum="{TemplateBinding VerticalScrollBarMaximum}"
+                               Value="{TemplateBinding VerticalScrollBarValue, Mode=TwoWay}"
+                               ViewportSize="{TemplateBinding VerticalScrollBarViewportSize}"
+                               Visibility="{TemplateBinding VerticalScrollBarVisibility}"
+                               Grid.Column="1"
+                               Focusable="False">
+                      <ScrollBar.Template>
+                        <ControlTemplate>
+                          <Grid RowDefinitions="20,20">
+                            <RepeatButton Name="PART_LineUpButton"
+                                          Grid.Row="0"
+                                          Focusable="False">
+                              <Path Data="M 0 4 L 8 4 L 4 0 Z" />
+                            </RepeatButton>
+                            <RepeatButton Name="PART_LineDownButton"
+                                          Grid.Row="1"
+                                          Focusable="False">
+                              <Path Data="M 0 0 L 4 4 L 8 0 Z" />
+                            </RepeatButton>
+                            <Track IsVisible="False">
+                              <Track.DecreaseButton>
+                                <RepeatButton Name="PART_PageUpButton"
+                                              Classes="repeattrack"
+                                              Focusable="False"/>
+                              </Track.DecreaseButton>
+                              <Track.IncreaseButton>
+                                <RepeatButton Name="PART_PageDownButton"
+                                              Classes="repeattrack"
+                                              Focusable="False"/>
+                              </Track.IncreaseButton>
+                              <Thumb Name="thumb"/>
+                            </Track>
+                          </Grid>
+                        </ControlTemplate>
+                      </ScrollBar.Template>
+                    </ScrollBar>
+                    <Panel Grid.Row="1" Grid.Column="1" Background="{DynamicResource ThemeControlMidBrush}"/>
+                  </Grid>
+                </ControlTemplate>
+              </ScrollViewer.Template>
+              <ContentControl x:Name="PART_ItemsPresenterHolder" Margin="1,1,0,1"/>
+            </ScrollViewer>
+          </Border>
+          <ToggleButton x:Name="PART_FlyoutButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Width="18" Height="20">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
+              <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" Width="7" Height="2" Margin="0,0,0,2" HorizontalAlignment="Center"/>
+              <Path Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" Width="9" Height="4"/>
+            </StackPanel>
+          </ToggleButton>
+          <Popup IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" VerticalOffset="-62">
+            <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" Width="{Binding Bounds.Width, ElementName=BodyBorder, Mode=OneWay}">
+              <ScrollViewer>
+                <ContentControl x:Name="PART_FlyoutItemsPresenterHolder"/>
+              </ScrollViewer>
+            </Border>
+          </Popup>
+          <ItemsPresenter Name="PART_ItemsPresenter"
+                              Items="{TemplateBinding Items}"
+                              ItemsPanel="{TemplateBinding ItemsPanel}"
+                              ItemTemplate="{TemplateBinding ItemTemplate}"
+                              Margin="{TemplateBinding Padding}"
+                              VirtualizationMode="{TemplateBinding VirtualizationMode}"/>
+        </Grid>
+      </ControlTemplate>
+    </Setter>
+    <Setter Property="ItemsPanel">
+      <ItemsPanelTemplate>
+        <UniformGrid x:Name="ItemsUniformGrid"/>
+      </ItemsPanelTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Large]">
+    <Setter Property="Width" Value="345"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Medium]">
+    <Setter Property="Width" Value="230"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Small]">
+    <Setter Property="Width" Value="115"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Large] /template/ UniformGrid#ItemsUniformGrid">
+    <Setter Property="Columns" Value="3"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Medium] /template/ UniformGrid#ItemsUniformGrid">
+    <Setter Property="Columns" Value="2"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Small] /template/ UniformGrid#ItemsUniformGrid">
+    <Setter Property="Columns" Value="1"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Large]">
+    <Setter Property="Width" Value="345"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Medium]">
+    <Setter Property="Width" Value="230"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Small]">
+    <Setter Property="Width" Value="115"/>
+  </Style>
+
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery">
+    <Setter Property="Width" Value="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}}"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery /template/ UniformGrid#ItemsUniformGrid">
+    <Setter Property="Columns" Value="2"/>
+  </Style>
+
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery[Size=Small]">
+    <Setter Property="Height" Value="62"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery[Size=Medium]">
+    <Setter Property="Height" Value="122"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery[Size=Large]">
+    <Setter Property="Height" Value="182"/>
+  </Style>
+
+  <Style Selector="local|Gallery ListBoxItem">
+    <Setter Property="Height" Value="20"/>
+  </Style>
+</Styles>

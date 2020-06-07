@@ -1,0 +1,39 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon"
+    xmlns:sys="clr-namespace:System;assembly=netstandard">
+  <Style Selector="ContentControl.KeyTipContent">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Padding" Value="4,2"/>
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+    <Setter Property="VerticalContentAlignment" Value="Center"/>
+    <Setter Property="Height" Value="20"/>
+    <Setter Property="MinWidth" Value="20"/>
+    <!--Setter Property="ContentTemplate">
+      <Template>
+        <ContentPresenter Name="PART_ContentPresenter"
+                          Background="{DynamicResource ThemeBackgroundBrush}"
+                          BorderBrush="{DynamicResource ThemeBorderMidBrush}"
+                          BorderThickness="{DynamicResource ThemeBorderThickness}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Content="{TemplateBinding Content}"
+                          Padding="4,2"/>
+      </Template>
+    </Setter-->
+    <!--Setter Property="Template">
+      <ControlTemplate>
+        <ContentPresenter Name="PART_ContentPresenter"
+                          Background="{DynamicResource ThemeBackgroundBrush}"
+                          BorderBrush="{DynamicResource ThemeBorderMidBrush}"
+                          BorderThickness="{DynamicResource ThemeBorderThickness}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Content="{TemplateBinding Content}"
+                          Padding="4,2"/>
+      </ControlTemplate>
+    </Setter-->
+  </Style>
+</Styles>
