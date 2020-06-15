@@ -106,6 +106,98 @@
                             </ribbon:RibbonButton.Icon>
                         </ribbon:RibbonButton>
                     </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
+                        <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
+                    <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
+                        <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                                    <Rectangle.OpacityMask>
+                                        <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                                    </Rectangle.OpacityMask>
+                                </Rectangle>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                        <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C">
+                            <ribbon:RibbonButton.LargeIcon>
+                                <Grid Width="32" Height="32">
+                                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.LargeIcon>
+                            <ribbon:RibbonButton.Icon>
+                                <Grid Width="16" Height="16">
+                                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                                </Grid>
+                            </ribbon:RibbonButton.Icon>
+                        </ribbon:RibbonButton>
+                    </ribbon:RibbonGroupBox>
                     <ribbon:RibbonGroupBox Header="Test Group 2" ribbon:KeyTip.KeyTipKeys="D2">
                         <ribbon:RibbonButton MaxSize="Medium" Content="Button 1" ToolTip.Tip="Button 4" ribbon:KeyTip.KeyTipKeys="D">
                             <ribbon:RibbonButton.Icon>

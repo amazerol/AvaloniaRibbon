@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>AvaloniaUI.Ribbon</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Version>1.0.2</Version>
+    <Version>1.0.5</Version>
     <Authors>Alban Mazerolles, Rubal Walia, Splitwirez</Authors>
     <PackageId>AvaloniaRibbon</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

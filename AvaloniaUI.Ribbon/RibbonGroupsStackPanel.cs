@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
+using Avalonia.Threading;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -18,9 +19,61 @@ namespace AvaloniaUI.Ribbon
         double _lastTotalChildrenHeight = -1;
         bool _cycle2 = false;
 
+        static RibbonGroupsStackPanel()
+        {
+            ParentProperty.Changed.AddClassHandler<RibbonGroupsStackPanel>((sender, e) =>
+            {
+                Dispatcher.UIThread.Post(() => sender.UpdateLayoutState());
+            });
+
+            BoundsProperty.Changed.AddClassHandler<RibbonGroupsStackPanel>((sender, e) =>
+            {
+                Debug.WriteLine("New bounds: " + e.NewValue.ToString());
+                /*Dispatcher.UIThread.Post(() =>
+                {
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        sender.InvalidateArrange();
+                        sender.InvalidateMeasure();
+                    });
+                });*/
+                //Dispatcher.UIThread.Post(() => sender.UpdateLayoutState());
+            });
+        }
+
+        Control _visualRoot = null;
         public RibbonGroupsStackPanel()
         {
-            LayoutUpdated += RibbonGroupsStackPanel_LayoutUpdated;
+            LayoutUpdated += (sneder, args) => UpdateLayoutState();
+            AttachedToVisualTree += (sneder, args) =>
+            {
+                Dispatcher.UIThread.Post(() => UpdateLayoutState());
+
+                if (VisualRoot is Control vis)
+                {
+                    _visualRoot = vis;
+                    _visualRoot.LayoutUpdated += VisualRoot_LayoutUpdated;
+                }
+            };
+
+            DetachedFromVisualTree += (sneder, args) =>
+            {
+                if (_visualRoot != null)
+                    _visualRoot.LayoutUpdated -= VisualRoot_LayoutUpdated;
+            };
+        }
+
+        private void VisualRoot_LayoutUpdated(object sender, EventArgs e)
+        {
+            /*Dispatcher.UIThread.Post(() =>
+            {
+                InvalidateArrange();
+                InvalidateMeasure();
+            });
+            Dispatcher.UIThread.Post(() => UpdateLayoutState());*/
+            AdjustForChangedChildren();
+            UpdateLayoutState();
+            SizeControls(Bounds.Size, _lastTotalChildrenWidth, _lastTotalChildrenHeight);
         }
 
         protected override void ChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -44,19 +97,18 @@ namespace AvaloniaUI.Ribbon
                 box.InvalidateMeasure();
                 box.Measure(Bounds.Size);
             }
-            if (IsInitialized && (
-                ((Orientation == Orientation.Horizontal) && (_lastTotalChildrenWidth > 0))
-                || ((Orientation == Orientation.Vertical) && (_lastTotalChildrenHeight > 0))
-                ) && (Children.Count() > 0))
-            {
-                _cycle2 = false;
-                UpdateLayoutState();
-            }
-        }
 
-        private void RibbonGroupsStackPanel_LayoutUpdated(object sender, EventArgs e)
-        {
-            UpdateLayoutState();
+            Dispatcher.UIThread.Post(() =>
+            {
+                if (IsInitialized && (
+                    ((Orientation == Orientation.Horizontal) && (_lastTotalChildrenWidth > 0))
+                    || ((Orientation == Orientation.Vertical) && (_lastTotalChildrenHeight > 0))
+                    ) && (Children.Count() > 0))
+                {
+                    _cycle2 = false;
+                    UpdateLayoutState();
+                }
+            });
         }
 
         protected void UpdateLayoutState()
