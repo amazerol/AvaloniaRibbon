@@ -5,9 +5,9 @@ using System.Text;
 
 namespace AvaloniaUI.Ribbon
 {
-    public abstract class RibbonMenuBase : ToggleButton
+    public interface IRibbonMenu
     {
-        public abstract bool IsMenuOpen
+        public bool IsMenuOpen
         {
             get;
             set;

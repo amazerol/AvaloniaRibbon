@@ -284,5 +284,6 @@
   </Style>
   <Style Selector="local|RibbonWindow local|Ribbon">
     <Setter Property="HeaderBackground" Value="{Binding TitleBarBackground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RibbonWindow}}}" />
+    <Setter Property="HeaderForeground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RibbonWindow}}}" />
   </Style>
 </Styles>

@@ -31,7 +31,7 @@ namespace AvaloniaUI.Ribbon
         public static readonly StyledProperty<IBrush> HeaderForegroundProperty;
         public static readonly StyledProperty<bool> IsCollapsedProperty;
         public static readonly StyledProperty<bool> IsCollapsedPopupOpenProperty;
-        public static readonly StyledProperty<RibbonMenuBase> MenuProperty = AvaloniaProperty.Register<Ribbon, RibbonMenuBase>(nameof(Menu));
+        public static readonly StyledProperty<IRibbonMenu> MenuProperty = AvaloniaProperty.Register<Ribbon, IRibbonMenu>(nameof(Menu));
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
         public static readonly DirectProperty<Ribbon, IEnumerable> SelectedGroupsProperty = AvaloniaProperty.RegisterDirect<Ribbon, IEnumerable>(nameof(SelectedGroups), o => o.SelectedGroups, (o, v) => o.SelectedGroups = v);
         
@@ -91,7 +91,7 @@ namespace AvaloniaUI.Ribbon
                 KeyTip.GetKeyTip(t).IsOpen = open;
             }
             if (Menu != null)
-                KeyTip.GetKeyTip(Menu).IsOpen = open;
+                KeyTip.GetKeyTip(Menu as Control).IsOpen = open;
         }
 
         protected override void OnLostFocus(RoutedEventArgs e)
@@ -131,7 +131,7 @@ namespace AvaloniaUI.Ribbon
             set => SetValue(IsCollapsedPopupOpenProperty, value);
         }
 
-        public RibbonMenuBase Menu
+        public IRibbonMenu Menu
         {
             get => GetValue(MenuProperty);
             set => SetValue(MenuProperty, value);
@@ -274,7 +274,7 @@ namespace AvaloniaUI.Ribbon
                 Debug.WriteLine("TAB KEYS: " + KeyTip.GetKeyTipKeys(t));
 
             if (Menu != null)
-                Debug.WriteLine("MENU KEYS: " + KeyTip.GetKeyTipKeys(Menu));
+                Debug.WriteLine("MENU KEYS: " + KeyTip.GetKeyTipKeys(Menu as Control));
         }
 
         public bool HandleKeyTipKeyPress(Key key)
@@ -299,7 +299,7 @@ namespace AvaloniaUI.Ribbon
                 }
                 if ((!tabKeyMatched) && (Menu != null))
                 {
-                    if (KeyTip.HasKeyTipKey(Menu, key))
+                    if (KeyTip.HasKeyTipKey(Menu as Control, key))
                     {
                         IsMenuOpen = true;
                         if (Menu is IKeyTipHandler handler)

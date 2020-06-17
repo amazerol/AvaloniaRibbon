@@ -39,23 +39,57 @@
     <DockPanel>
         <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
             <ribbon:Ribbon.Menu>
-                <ribbon:RibbonMenu ribbon:KeyTip.KeyTipKeys="F">
-                    <ribbon:RibbonMenu.MenuItems>
-                        <MenuItem Header="Item 1">
-                            <MenuItem Header="SubItem 1"/>
-                            <MenuItem Header="SubItem 2"/>
-                        </MenuItem>
-                        <MenuItem Header="Item 2">
-                            <MenuItem Header="SubItem 1"/>
-                            <MenuItem Header="SubItem 2"/>
-                            <MenuItem Header="SubItem 3"/>
-                        </MenuItem>
-                    </ribbon:RibbonMenu.MenuItems>
-                    <ribbon:RibbonMenu.MenuPlacesItems>
+                <ribbon:RibbonMenu RightColumnHeader="Recent stuff" ribbon:KeyTip.KeyTipKeys="F">
+                    <ribbon:RibbonMenuItem Header="Item 1">
+                      <ribbon:RibbonMenuItem.Icon>
+                        <Rectangle Width="32" Height="32" Fill="Red"/>
+                      </ribbon:RibbonMenuItem.Icon>
+                      <ribbon:RibbonMenuItem Header="Orange red">
+                        <ribbon:RibbonMenuItem.Icon>
+                          <Rectangle Width="32" Height="32" Fill="OrangeRed"/>
+                        </ribbon:RibbonMenuItem.Icon>
+                      </ribbon:RibbonMenuItem>
+                      <ribbon:RibbonMenuItem Header="Orange">
+                        <ribbon:RibbonMenuItem.Icon>
+                          <Rectangle Width="32" Height="32" Fill="Orange"/>
+                        </ribbon:RibbonMenuItem.Icon>
+                      </ribbon:RibbonMenuItem>
+                      <ribbon:RibbonMenuItem Header="Yellow">
+                        <ribbon:RibbonMenuItem.Icon>
+                          <Rectangle Width="32" Height="32" Fill="Yellow"/>
+                        </ribbon:RibbonMenuItem.Icon>
+                      </ribbon:RibbonMenuItem>
+                    </ribbon:RibbonMenuItem>
+                    <ribbon:RibbonMenuItem Header="Item 2">
+                      <ribbon:RibbonMenuItem.Icon>
+                        <Rectangle Width="32" Height="32" Fill="Green"/>
+                      </ribbon:RibbonMenuItem.Icon>
+                      <ribbon:RibbonMenuItem Header="Cyan">
+                        <ribbon:RibbonMenuItem.Icon>
+                          <Rectangle Width="32" Height="32" Fill="Cyan"/>
+                        </ribbon:RibbonMenuItem.Icon>
+                      </ribbon:RibbonMenuItem>
+                      <ribbon:RibbonMenuItem Header="Green yellow">
+                        <ribbon:RibbonMenuItem.Icon>
+                          <Rectangle Width="32" Height="32" Fill="GreenYellow"/>
+                        </ribbon:RibbonMenuItem.Icon>
+                      </ribbon:RibbonMenuItem>
+                    </ribbon:RibbonMenuItem>
+                    <!--ribbon:RibbonMenu.MenuPlacesItems>
                         <ListBoxItem Content="Place 1"/>
                         <ListBoxItem Content="Place 2"/>
                         <ListBoxItem Content="Place 3"/>
-                    </ribbon:RibbonMenu.MenuPlacesItems>
+                    </ribbon:RibbonMenu.MenuPlacesItems-->
+                  <ribbon:RibbonMenuItem Header="Purple">
+                    <ribbon:RibbonMenuItem.Icon>
+                      <Rectangle Width="32" Height="32" Fill="Purple"/>
+                    </ribbon:RibbonMenuItem.Icon>
+                  </ribbon:RibbonMenuItem>
+                  <ribbon:RibbonMenuItem Header="Brown">
+                    <ribbon:RibbonMenuItem.Icon>
+                      <Rectangle Width="32" Height="32" Fill="Brown"/>
+                    </ribbon:RibbonMenuItem.Icon>
+                  </ribbon:RibbonMenuItem>
                 </ribbon:RibbonMenu>
             </ribbon:Ribbon.Menu>
             <ribbon:RibbonTab Header="Home" ribbon:KeyTip.KeyTipKeys="H">

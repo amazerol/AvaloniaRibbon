@@ -12,7 +12,7 @@
     <Setter Property="VerticalContentAlignment" Value="Center" />
     <Setter Property="VerticalAlignment" Value="Stretch"/>
     <Setter Property="Background" Value="Transparent" />
-    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
+    <Setter Property="Foreground" Value="{Binding $parent[local:Ribbon].HeaderForeground}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}"/>
     <Setter Property="Margin" Value="0" />
     <Setter Property="Padding" Value="10,0" />
@@ -31,18 +31,18 @@
                 Content="{TemplateBinding Header}"
                 TextBlock.Foreground="{TemplateBinding Foreground}"
                 ContentTemplate="{TemplateBinding HeaderTemplate}"/>
-            <Border Name="SelectedBorder" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,0,0,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Border Name="SelectedBorder" BorderBrush="{TemplateBinding Foreground}" BorderThickness="0,0,0,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
           </Grid>
         </Border>
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="local|RibbonTab:not(:selected) /template/ Border#SelectedBorder">
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
+  <!--Style Selector="local|RibbonTab:not(:selected) /template/ Border#SelectedBorder">
+    <Setter Property="BorderBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
   </Style>
   <Style Selector="local|Ribbon[IsCollapsed=true][IsCollapsedPopupOpen=false] local|RibbonTab /template/ Border#SelectedBorder">
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
-  </Style>
+    <Setter Property="BorderBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+  </Style-->
   <Style Selector="local|RibbonTab:not(:selected):not(:pointerover):not(:pressed) /template/ Border#SelectedBorder">
     <Setter Property="IsVisible" Value="False"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
@@ -57,10 +57,10 @@
   <Style Selector="local|RibbonTab:disabled">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
   </Style>
-  <Style Selector="local|RibbonWindow local|RibbonTab">
+  <!--Style Selector="local|RibbonWindow local|RibbonTab">
     <Setter Property="BorderBrush" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
     <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
-  </Style>
+  </Style-->
   <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonTab">
     <Setter Property="Opacity" Value="0.5"/>
   </Style>
