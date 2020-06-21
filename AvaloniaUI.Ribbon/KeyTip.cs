@@ -47,7 +47,7 @@ namespace AvaloniaUI.Ribbon
 
                 var tipContent = new ContentControl()
                 {
-                    Background = new SolidColorBrush(Colors.White),
+                    //Background = new SolidColorBrush(Colors.White),
                     [!ContentControl.ContentProperty] = element[!KeyTip.KeyTipKeysProperty]
                 };
                 tipContent.Classes.Add("KeyTipContent");
