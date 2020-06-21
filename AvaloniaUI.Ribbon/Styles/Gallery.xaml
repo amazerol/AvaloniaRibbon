@@ -5,21 +5,66 @@
   <Design.PreviewWith>
     <Grid Height="90">
       <local:Gallery>
-        <ListBoxItem Content="Item 1"/>
-        <ListBoxItem Content="Item 2"/>
-        <ListBoxItem Content="Item 3"/>
-        <ListBoxItem Content="Item 4"/>
-        <ListBoxItem Content="Item 5"/>
-        <ListBoxItem Content="Item 6"/>
-        <ListBoxItem Content="Item 7"/>
-        <ListBoxItem Content="Item 8"/>
-        <ListBoxItem Content="Item 9"/>
-        <ListBoxItem Content="Item 10"/>
-        <ListBoxItem Content="Item 11"/>
-        <ListBoxItem Content="Item 12"/>
-        <ListBoxItem Content="Item 13"/>
-        <ListBoxItem Content="Item 14"/>
-        <ListBoxItem Content="Item 15"/>
+        <local:GalleryItem Content="Item 1">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="Red"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 2">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="OrangeRed"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 3">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="Orange"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 4">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="Yellow"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 5">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="GreenYellow"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 6">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="YellowGreen"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 7">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="Green"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 8">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="Turquoise"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 9">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="Cyan"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 10">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="SkyBlue"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 11">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="Blue"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
+        <local:GalleryItem Content="Item 12">
+          <local:GalleryItem.Icon>
+            <Rectangle Width="16" Height="16" Fill="BlueViolet"/>
+          </local:GalleryItem.Icon>
+        </local:GalleryItem>
       </local:Gallery>
     </Grid>
   </Design.PreviewWith>
@@ -30,18 +75,16 @@
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Padding" Value="0"/>
+    <Setter Property="ItemHeight" Value="20"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Grid>
+        <Panel>
           <Border x:Name="BodyBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="0,0,17,0">
-            <ScrollViewer Name="PART_ScrollViewer"
-                          Margin="-1,-1,-18,-1"
-                          HorizontalScrollBarVisibility="Disabled"
-                          VerticalScrollBarVisibility="Visible">
+            <!--ScrollViewer Name="PART_ScrollViewer" Margin="-1,-1,-18,-1">
               <ScrollViewer.Template>
                 <ControlTemplate>
                   <Grid ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
-                    <ScrollContentPresenter Name="PART_ContentPresenter"
+                    <local:GalleryScrollContentPresenter Name="PART_ContentPresenter"
                                             Background="{TemplateBinding Background}"
                                             CanHorizontallyScroll="{TemplateBinding CanHorizontallyScroll}"
                                             CanVerticallyScroll="{TemplateBinding CanVerticallyScroll}"
@@ -55,7 +98,7 @@
                           CanHorizontallyScroll="{TemplateBinding CanHorizontallyScroll}"
                           CanVerticallyScroll="{TemplateBinding CanVerticallyScroll}" />
                       </ScrollContentPresenter.GestureRecognizers>
-                    </ScrollContentPresenter>
+                    </local:GalleryScrollContentPresenter>
                     <ScrollBar Name="horizontalScrollBar"
                                IsVisible="False"
                                Focusable="False"/>
@@ -101,19 +144,41 @@
                     <Panel Grid.Row="1" Grid.Column="1" Background="{DynamicResource ThemeControlMidBrush}"/>
                   </Grid>
                 </ControlTemplate>
-              </ScrollViewer.Template>
-              <ContentControl x:Name="PART_ItemsPresenterHolder" Margin="1,1,0,1"/>
-            </ScrollViewer>
+              </ScrollViewer.Template-->
+            <DockPanel>
+              <!--/ScrollViewer-->
+              <UniformGrid Width="18" Columns="1" DockPanel.Dock="Right">
+                <UniformGrid.Styles>
+                  <Style Selector="RepeatButton">
+                    <Setter Property="BorderThickness" Value="1,0,0,1"/>
+                  </Style>
+                  <Style Selector="ToggleButton">
+                    <Setter Property="BorderThickness" Value="1,0,0,0"/>
+                  </Style>
+                </UniformGrid.Styles>
+                <RepeatButton Name="PART_UpButton" Focusable="False" Grid.Row="0">
+                  <Path Data="M 0 4 L 8 4 L 4 0 Z" Fill="{Binding $parent[RepeatButton].Foreground}"/>
+                </RepeatButton>
+                <RepeatButton Name="PART_DownButton" Focusable="False" Grid.Row="1">
+                  <Path Data="M 0 0 L 4 4 L 8 0 Z" Fill="{Binding $parent[RepeatButton].Foreground}"/>
+                </RepeatButton>
+                <ToggleButton x:Name="PART_FlyoutButton" HorizontalAlignment="Right" IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                  <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" Width="7" Height="2" Margin="0,0,0,2" HorizontalAlignment="Center"/>
+                    <Path Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" Width="9" Height="4"/>
+                  </StackPanel>
+                </ToggleButton>
+              </UniformGrid>
+              <local:GalleryScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanVerticallyScroll="True">
+                <local:GalleryScrollContentPresenter.Content>
+                  <ContentControl x:Name="PART_ItemsPresenterHolder"/>
+                </local:GalleryScrollContentPresenter.Content>
+              </local:GalleryScrollContentPresenter>
+            </DockPanel>
           </Border>
-          <ToggleButton x:Name="PART_FlyoutButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Width="18" Height="20">
-            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" >
-              <Rectangle Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" Width="7" Height="2" Margin="0,0,0,2" HorizontalAlignment="Center"/>
-              <Path Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" Width="9" Height="4"/>
-            </StackPanel>
-          </ToggleButton>
           <Popup IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" VerticalOffset="-62">
             <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" Width="{Binding Bounds.Width, ElementName=BodyBorder, Mode=OneWay}">
-              <ScrollViewer>
+              <ScrollViewer x:Name="PART_FlyoutScrollViewer">
                 <ContentControl x:Name="PART_FlyoutItemsPresenterHolder"/>
               </ScrollViewer>
             </Border>
@@ -124,7 +189,7 @@
                               ItemTemplate="{TemplateBinding ItemTemplate}"
                               Margin="{TemplateBinding Padding}"
                               VirtualizationMode="{TemplateBinding VirtualizationMode}"/>
-        </Grid>
+        </Panel>
       </ControlTemplate>
     </Setter>
     <Setter Property="ItemsPanel">
@@ -178,7 +243,43 @@
     <Setter Property="Height" Value="182"/>
   </Style>
 
-  <Style Selector="local|Gallery ListBoxItem">
-    <Setter Property="Height" Value="20"/>
+  <Style Selector="local|GalleryItem">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Padding" Value="2,0"/>
+    <Setter Property="Height" Value="{Binding $parent[local:Gallery].ItemHeight}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+          <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="{TemplateBinding Padding}">
+            <ContentPresenter x:Name="PART_ContentPresenter" DockPanel.Dock="Left" VerticalAlignment="Center" Content="{TemplateBinding Icon}" Margin="0,0,4,0" Background="Transparent"/>
+            <ContentPresenter VerticalAlignment="Center" VerticalContentAlignment="Center" Content="{TemplateBinding Content}" HorizontalContentAlignment="Left" Background="Transparent"/>
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+
+  <Style Selector="local|GalleryItem:pointerover /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}"/>
+  </Style>
+
+  <Style Selector="local|GalleryItem:selected /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}"/>
+  </Style>
+
+  <Style Selector="local|GalleryItem:selected:focus /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush3}"/>
+  </Style>
+
+  <Style Selector="local|GalleryItem:selected:pointerover /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush3}"/>
+  </Style>
+
+  <Style Selector="local|GalleryItem:selected:focus:pointerover /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush2}"/>
   </Style>
 </Styles>

@@ -76,6 +76,9 @@
       </ControlTemplate>
     </Setter>
   </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonMenu /template/ ToggleButton#ContentButton:not(:pointerover):not(:pressed):not(:checked)">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
   <Style Selector="local|Ribbon local|RibbonMenu /template/ ToggleButton#ContentButton:not(:pointerover):not(:pressed):not(:checked)">
     <Setter Property="Foreground" Value="{Binding $parent[local:Ribbon].HeaderForeground}"/>
     <Setter Property="Background" Value="Transparent"/>
@@ -99,9 +102,9 @@
             <Path Data="M0,0 L0,3 1.5,4.5 0,6 0,9 4.5,4.5 z" Fill="{Binding $parent[ToggleButton].Foreground}"/>
           </ToggleButton>
           <Button x:Name="PART_ContentButton" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalContentAlignment="Stretch" VerticalAlignment="Center">
-            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center">
-              <ContentPresenter DockPanel.Dock="Left" Content="{TemplateBinding Icon}" Margin="0,0,4,0"/>
-              <ContentPresenter VerticalAlignment="Center" VerticalContentAlignment="Center" Content="{TemplateBinding Header}" HorizontalContentAlignment="Left"/>
+            <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="{TemplateBinding Padding}">
+              <ContentPresenter DockPanel.Dock="Left" Content="{TemplateBinding Icon}" Margin="0,0,4,0" Background="Transparent"/>
+              <ContentPresenter VerticalAlignment="Center" VerticalContentAlignment="Center" Content="{TemplateBinding Header}" HorizontalContentAlignment="Left" Background="Transparent"/>
             </DockPanel>
           </Button>
         </DockPanel>

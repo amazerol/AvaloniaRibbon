@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Styling;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,14 @@ namespace AvaloniaUI.Ribbon
         public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MinSizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty;
+        
+        public static readonly StyledProperty<double> ItemHeightProperty = AvaloniaProperty.Register<Gallery, double>(nameof(ItemHeight));
+
+        public double ItemHeight
+        {
+            get => GetValue(ItemHeightProperty);
+            set => SetValue(ItemHeightProperty, value);
+        }
 
         public static readonly DirectProperty<Gallery, bool> IsDropDownOpenProperty;
 
@@ -63,9 +72,46 @@ namespace AvaloniaUI.Ribbon
         protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
         {
             base.OnTemplateApplied(e);
+            /*ScrollViewer vwr = e.NameScope.Find<ScrollViewer>("PART_ScrollViewer");
+            vwr.PointerWheelChanged += (sneder, args) =>
+            {
+                if (args.Delta.X > 0)
+                    vwr.Offset = vwr.Offset.WithX(vwr.Offset.X + 20);
+                else if(args.Delta.X < 0)
+                    vwr.Offset = vwr.Offset.WithX(vwr.Offset.X - 20);
+
+                if (args.Delta.Y > 0)
+                    vwr.Offset = vwr.Offset.WithY(vwr.Offset.Y + 20);
+                else if (args.Delta.Y < 0)
+                    vwr.Offset = vwr.Offset.WithY(vwr.Offset.Y - 20);
+
+                args.Handled = false;
+            };*/
+
             _itemsPresenter = e.NameScope.Find<ItemsPresenter>("PART_ItemsPresenter");
             _mainPresenter = e.NameScope.Find<ContentControl>("PART_ItemsPresenterHolder");
+            /*this.PointerWheelChanged += (sneder, args) =>
+            {
+                e.Handled = true;
+                if ((Parent != null) && (Parent is InputElement el))
+                    el.RaiseEvent(args);
+            };*/
+            GalleryScrollContentPresenter pres = e.NameScope.Find<GalleryScrollContentPresenter>("PART_ScrollContentPresenter");
+            /*vwr.PointerWheelChanged += (sneder, args) =>
+            {
+                e.Handled = true;
+                this.RaiseEvent(args);
+            };*/
+            //e.NameScope.Find<ScrollViewer>("PART_FlyoutScrollViewer").PointerWheelChanged += (s, a) => a.Handled = true;
+            //GalleryScrollContentPresenter.property
+
+
+            e.NameScope.Find<RepeatButton>("PART_UpButton").Click += (sneder, args) => pres.Offset = pres.Offset.WithY(Math.Max(0, pres.Offset.Y - ItemHeight));
+            e.NameScope.Find<RepeatButton>("PART_DownButton").Click += (sneder, args) => pres.Offset = pres.Offset.WithY(Math.Min(pres.Offset.Y + ItemHeight, _mainPresenter.Bounds.Height - pres.Bounds.Height));
+
             _flyoutPresenter = e.NameScope.Find<ContentControl>("PART_FlyoutItemsPresenterHolder");
+            _flyoutPresenter.PointerWheelChanged += (s, a) => a.Handled = true;
+
             UpdatePresenterLocation(IsDropDownOpen);
         }
 
@@ -82,6 +128,14 @@ namespace AvaloniaUI.Ribbon
                 _flyoutPresenter.Content = _itemsPresenter;
             else
                 _mainPresenter.Content = _itemsPresenter;
+        }
+    }
+
+    public class GalleryScrollContentPresenter : ScrollContentPresenter
+    {
+        protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
+        {
+            //base.OnPointerWheelChanged(e);
         }
     }
 }
