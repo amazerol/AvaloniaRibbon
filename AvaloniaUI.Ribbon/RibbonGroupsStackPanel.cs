@@ -25,42 +25,33 @@ namespace AvaloniaUI.Ribbon
             {
                 Dispatcher.UIThread.Post(() => sender.UpdateLayoutState());
             });
-
-            BoundsProperty.Changed.AddClassHandler<RibbonGroupsStackPanel>((sender, e) =>
-            {
-                Debug.WriteLine("New bounds: " + e.NewValue.ToString());
-                /*Dispatcher.UIThread.Post(() =>
-                {
-                    Dispatcher.UIThread.Post(() =>
-                    {
-                        sender.InvalidateArrange();
-                        sender.InvalidateMeasure();
-                    });
-                });*/
-                //Dispatcher.UIThread.Post(() => sender.UpdateLayoutState());
-            });
         }
 
         Control _visualRoot = null;
         public RibbonGroupsStackPanel()
         {
             LayoutUpdated += (sneder, args) => UpdateLayoutState();
+
             AttachedToVisualTree += (sneder, args) =>
             {
-                Dispatcher.UIThread.Post(() => UpdateLayoutState());
+                /*Dispatcher.UIThread.Post(() =>
+                {*/
+                    AdjustForChangedChildren();
+                    UpdateLayoutState();
+                //});
 
-                if (VisualRoot is Control vis)
+                /*if (VisualRoot is Control vis)
                 {
                     _visualRoot = vis;
                     _visualRoot.LayoutUpdated += VisualRoot_LayoutUpdated;
-                }
+                }*/
             };
 
-            DetachedFromVisualTree += (sneder, args) =>
+            /*DetachedFromVisualTree += (sneder, args) =>
             {
                 if (_visualRoot != null)
                     _visualRoot.LayoutUpdated -= VisualRoot_LayoutUpdated;
-            };
+            };*/
         }
 
         private void VisualRoot_LayoutUpdated(object sender, EventArgs e)
@@ -72,7 +63,8 @@ namespace AvaloniaUI.Ribbon
             });
             Dispatcher.UIThread.Post(() => UpdateLayoutState());*/
             AdjustForChangedChildren();
-            UpdateLayoutState();
+            if (!_cycle2)
+                UpdateLayoutState();
             SizeControls(Bounds.Size, _lastTotalChildrenWidth, _lastTotalChildrenHeight);
         }
 
