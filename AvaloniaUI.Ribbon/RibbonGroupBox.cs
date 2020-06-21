@@ -13,8 +13,8 @@ namespace AvaloniaUI.Ribbon
     public enum GroupDisplayMode
     {
         Large,
-        Small,
-        Flyout
+        Small/*,
+        Flyout*/
     }
 
     public class RibbonGroupBox : HeaderedItemsControl, IStyleable

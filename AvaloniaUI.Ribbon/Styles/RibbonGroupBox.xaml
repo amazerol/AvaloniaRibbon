@@ -97,12 +97,12 @@
   <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ ItemsPresenter#PART_ItemsPresenter">
     <Setter Property="Margin" Value="3,5"/>
   </Style>
-  <Style Selector="local|RibbonGroupBox:not(local|RibbonGroupBox[DisplayMode=Flyout])">
+  <Style Selector="local|RibbonGroupBox"><!--:not(local|RibbonGroupBox[DisplayMode=Flyout])-->
     <Setter Property="MinWidth" Value="50"/>
   </Style>
-  <Style Selector="local|RibbonGroupBox[DisplayMode=Flyout]">
+  <!--Style Selector="local|RibbonGroupBox[DisplayMode=Flyout]">
     <Setter Property="MinWidth" Value="32"/>
-  </Style>
+  </Style-->
   <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
     <Setter Property="Orientation" Value="Vertical"/>
     <Setter Property="Height" Value="72"/>

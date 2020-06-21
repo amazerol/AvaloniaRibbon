@@ -77,11 +77,7 @@ namespace AvaloniaUI.Ribbon
             
             HelpButtonCommandProperty = AvaloniaProperty.RegisterDirect<Ribbon, ICommand>(nameof(HelpButtonCommand), o => o.HelpButtonCommand, (o, v) => o.HelpButtonCommand = v);
 
-            BoundsProperty.Changed.AddClassHandler<RibbonGroupsStackPanel>((sender, e) =>
-            {
-                sender.InvalidateMeasure();
-                //sender.InvalidateArrange();
-            });
+            BoundsProperty.Changed.AddClassHandler<RibbonGroupsStackPanel>((sender, e) => sender.InvalidateMeasure());
         }
 
         public ICommand HelpButtonCommand

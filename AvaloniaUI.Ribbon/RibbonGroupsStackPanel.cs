@@ -27,45 +27,15 @@ namespace AvaloniaUI.Ribbon
             });
         }
 
-        Control _visualRoot = null;
         public RibbonGroupsStackPanel()
         {
             LayoutUpdated += (sneder, args) => UpdateLayoutState();
 
             AttachedToVisualTree += (sneder, args) =>
             {
-                /*Dispatcher.UIThread.Post(() =>
-                {*/
                     AdjustForChangedChildren();
                     UpdateLayoutState();
-                //});
-
-                /*if (VisualRoot is Control vis)
-                {
-                    _visualRoot = vis;
-                    _visualRoot.LayoutUpdated += VisualRoot_LayoutUpdated;
-                }*/
             };
-
-            /*DetachedFromVisualTree += (sneder, args) =>
-            {
-                if (_visualRoot != null)
-                    _visualRoot.LayoutUpdated -= VisualRoot_LayoutUpdated;
-            };*/
-        }
-
-        private void VisualRoot_LayoutUpdated(object sender, EventArgs e)
-        {
-            /*Dispatcher.UIThread.Post(() =>
-            {
-                InvalidateArrange();
-                InvalidateMeasure();
-            });
-            Dispatcher.UIThread.Post(() => UpdateLayoutState());*/
-            AdjustForChangedChildren();
-            if (!_cycle2)
-                UpdateLayoutState();
-            SizeControls(Bounds.Size, _lastTotalChildrenWidth, _lastTotalChildrenHeight);
         }
 
         protected override void ChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
