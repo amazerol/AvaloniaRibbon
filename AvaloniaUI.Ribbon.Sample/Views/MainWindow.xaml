@@ -306,6 +306,7 @@
                     </ribbon:RibbonGroupBox>
                 </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
+            <ribbon:RibbonTab Header="Disabled tab" IsEnabled="False"/>
             <ribbon:RibbonTab Header="Button Controls" ribbon:KeyTip.KeyTipKeys="B">
                 <ribbon:RibbonTab.Groups>
                     <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
@@ -420,6 +421,7 @@
                     </ribbon:RibbonGroupBox>
                 </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
+            <ribbon:RibbonTab Header="Invisible tab" IsVisible="False"/>
             <ribbon:RibbonTab Header="Galleries" ribbon:KeyTip.KeyTipKeys="G">
                 <ribbon:RibbonTab.Groups>
                     <ribbon:RibbonGroupBox Header="Large gallery" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="L">
@@ -616,6 +618,7 @@
                     </ribbon:RibbonGroupBox>
                 </ribbon:RibbonTab.Groups>
             </ribbon:RibbonTab>
+            <ribbon:RibbonTab Header="Invisible tab" IsVisible="False"/>
         </ribbon:Ribbon>
         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel Orientation="Horizontal">

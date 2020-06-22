@@ -168,24 +168,40 @@ namespace AvaloniaUI.Ribbon
 
         protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
         {
-            int oldIndex = SelectedIndex;
             int newIndex = SelectedIndex;
+            bool switchTabs = false; 
             if (ItemCount > 1)
             {
                 if (((Orientation == Orientation.Horizontal) && (e.Delta.Y > 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y < 0)))
                 {
-                    if (newIndex > 0)
+                    while (newIndex > 0)
+                    {
                         newIndex--;
+                        var newTab = Items.OfType<RibbonTab>().ElementAt(newIndex);
+                        if (newTab.IsVisible && newTab.IsEnabled)
+                        {
+                            switchTabs = true;
+                            break;
+                        }
+                    }
                 }
                 else if (((Orientation == Orientation.Horizontal) && (e.Delta.Y < 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y > 0)))
                 {
-                    if (newIndex < (ItemCount - 1))
+                    while (newIndex < (ItemCount - 1))
+                    {
                         newIndex++;
+                        var newTab = Items.OfType<RibbonTab>().ElementAt(newIndex);
+                        if (newTab.IsVisible && newTab.IsEnabled)
+                        {
+                            switchTabs = true;
+                            break;
+                        }
+                    }
                 }
             }
-            SelectedIndex = newIndex;
-            if ((SelectedItem is RibbonTab tab) && (!tab.IsEnabled))
-                SelectedIndex = oldIndex;
+            if (switchTabs)
+                SelectedIndex = newIndex;
+
             base.OnPointerWheelChanged(e);
         }
 
