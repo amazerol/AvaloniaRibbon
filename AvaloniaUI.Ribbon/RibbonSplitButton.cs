@@ -7,7 +7,36 @@ using System.Windows.Input;
 
 namespace AvaloniaUI.Ribbon
 {
-    public class RibbonSplitButton : ComboBox, IStyleable, IRibbonControl
+    public class RibbonSplitButton : RibbonDropDownButton, IStyleable
+    {
+        public static readonly DirectProperty<RibbonSplitButton, ICommand> CommandProperty;
+        public static readonly StyledProperty<object> CommandParameterProperty;
+
+        static RibbonSplitButton()
+        {
+            CommandProperty = Button.CommandProperty.AddOwner<RibbonSplitButton>(button => button.Command, (button, command) => button.Command = command);
+            CommandParameterProperty = Button.CommandParameterProperty.AddOwner<RibbonSplitButton>();
+
+            Button.FocusableProperty.OverrideDefaultValue<RibbonSplitButton>(false);
+        }
+
+        Type IStyleable.StyleKey => typeof(RibbonSplitButton);
+
+        private ICommand _command = null;
+        public ICommand Command
+        {
+            get => _command;
+            set => SetAndRaise(CommandProperty, ref _command, value);
+        }
+
+        public object CommandParameter
+        {
+            get => GetValue(CommandParameterProperty);
+            set => SetValue(CommandParameterProperty, value);
+        }
+    }
+    
+    /*public class RibbonSplitButton : ComboBox, IStyleable, IRibbonControl
     {
         public static readonly StyledProperty<object> ContentProperty;
         public static readonly StyledProperty<object> IconProperty;
@@ -83,5 +112,5 @@ namespace AvaloniaUI.Ribbon
             get => GetValue(CommandParameterProperty);
             set => SetValue(CommandParameterProperty, value);
         }
-    }
+    }*/
 }

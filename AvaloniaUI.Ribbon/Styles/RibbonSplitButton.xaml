@@ -8,7 +8,7 @@
     <Setter Property="Padding" Value="3"/>
   </Style>
   <Style Selector="local|RibbonSplitButton[Size=Large]">
-    <Setter Property="Padding" Value="9"/>
+    <Setter Property="Padding" Value="9,9,9,3"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
@@ -22,7 +22,7 @@
                 BorderThickness="0"
                 ClickMode="Press"
                 Focusable="False"
-                Padding="{TemplateBinding Padding}"
+                Padding="9,0,9,9"
                 IsChecked="{TemplateBinding IsDropDownOpen,
                                                         Mode=TwoWay}">
               <WrapPanel>
@@ -39,22 +39,19 @@
                 <Popup
                   Name="PART_Popup"
                   MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
-                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
                   IsOpen="{TemplateBinding IsDropDownOpen,
                                                      Mode=TwoWay}"
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
-                  StaysOpen="False"
-                  VerticalOffset="-1">
+                  StaysOpen="False" VerticalOffset="-1">
                   <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
-                    <VisualLayerManager Margin="-1,-1,0,0">
+                    <VisualLayerManager>
                       <ScrollViewer>
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"
                             ItemTemplate="{TemplateBinding ItemTemplate}"
                             Items="{TemplateBinding Items}"
-                            ItemsPanel="{TemplateBinding ItemsPanel}"
-                            VirtualizationMode="{TemplateBinding VirtualizationMode}" />
+                            ItemsPanel="{TemplateBinding ItemsPanel}"/>
                       </ScrollViewer>
                     </VisualLayerManager>
                   </Border>
@@ -92,22 +89,19 @@
                 <Popup
                   Name="PART_Popup"
                   MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
-                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
                   IsOpen="{TemplateBinding IsDropDownOpen,
                                                      Mode=TwoWay}"
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
-                  StaysOpen="False"
-                  VerticalOffset="-1">
+                  StaysOpen="False" VerticalOffset="-1">
                   <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
-                    <VisualLayerManager Margin="-1,-1,0,0">
+                    <VisualLayerManager>
                       <ScrollViewer>
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"
                             ItemTemplate="{TemplateBinding ItemTemplate}"
                             Items="{TemplateBinding Items}"
-                            ItemsPanel="{TemplateBinding ItemsPanel}"
-                            VirtualizationMode="{TemplateBinding VirtualizationMode}" />
+                            ItemsPanel="{TemplateBinding ItemsPanel}"/>
                       </ScrollViewer>
                     </VisualLayerManager>
                   </Border>
@@ -152,22 +146,19 @@
                 <Popup
                   Name="PART_Popup"
                   MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
-                  MaxHeight="{TemplateBinding MaxDropDownHeight}"
                   IsOpen="{TemplateBinding IsDropDownOpen,
                                                      Mode=TwoWay}"
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
-                  StaysOpen="False"
-                  VerticalOffset="-1">
+                  StaysOpen="False" VerticalOffset="-1">
                   <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
-                    <VisualLayerManager Margin="-1,-1,0,0">
+                    <VisualLayerManager>
                       <ScrollViewer>
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"
                             ItemTemplate="{TemplateBinding ItemTemplate}"
                             Items="{TemplateBinding Items}"
-                            ItemsPanel="{TemplateBinding ItemsPanel}"
-                            VirtualizationMode="{TemplateBinding VirtualizationMode}" />
+                            ItemsPanel="{TemplateBinding ItemsPanel}"/>
                       </ScrollViewer>
                     </VisualLayerManager>
                   </Border>

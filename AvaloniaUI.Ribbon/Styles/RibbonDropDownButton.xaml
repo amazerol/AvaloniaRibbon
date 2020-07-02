@@ -42,10 +42,9 @@
                                                      Mode=TwoWay}"
                 ObeyScreenEdges="True"
                 PlacementTarget="{Binding #toggle}"
-                StaysOpen="False"
-                VerticalOffset="-1">
+                StaysOpen="False" HorizontalOffset="-1">
                 <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
-                  <VisualLayerManager Margin="-1,-1,0,0">
+                  <VisualLayerManager>
                     <ScrollViewer>
                       <ItemsPresenter
                           Name="PART_ItemsPresenter"
@@ -94,10 +93,9 @@
                                                      Mode=TwoWay}"
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
-                  StaysOpen="False"
-                  VerticalOffset="-1">
+                  StaysOpen="False">
                   <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
-                    <VisualLayerManager Margin="-1,-1,0,0">
+                    <VisualLayerManager>
                       <ScrollViewer>
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"
@@ -147,10 +145,9 @@
                                                      Mode=TwoWay}"
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
-                  StaysOpen="False"
-                  VerticalOffset="-1">
+                  StaysOpen="False">
                   <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
-                    <VisualLayerManager Margin="-1,-1,0,0">
+                    <VisualLayerManager>
                       <ScrollViewer>
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"

@@ -29,6 +29,13 @@
     <Style Selector="ribbon|RibbonButton[Size=Small],ribbon|RibbonToggleButton[Size=Small]"><!--,ribbon|RibbonSplitButton[Size=Small]-->
       <Setter Property="CommandParameter" Value="{Binding Path=(ToolTip.Tip), RelativeSource={RelativeSource Mode=Self}}"/>
     </Style>
+    <Style Selector="ribbon|RibbonSplitButton">
+      <Setter Property="Command" Value="{Binding OnClickCommand}"/>
+      <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Mode=Self}}"/>
+    </Style>
+    <Style Selector="ribbon|RibbonSplitButton[Size=Small]">
+      <Setter Property="CommandParameter" Value="{Binding Path=(ToolTip.Tip), RelativeSource={RelativeSource Mode=Self}}"/>
+    </Style>
   </ribbon:RibbonWindow.Styles>
   <DockPanel>
     <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
@@ -270,8 +277,8 @@
                   </Rectangle.OpacityMask>
                 </Rectangle>
               </ribbon:RibbonSplitButton.LargeIcon>
-              <ComboBoxItem>Item 1</ComboBoxItem>
-              <ComboBoxItem>Item 2</ComboBoxItem>
+              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
             </ribbon:RibbonSplitButton>
             <ribbon:RibbonSplitButton Content="Medium" MinSize="Medium" MaxSize="Medium">
               <ribbon:RibbonSplitButton.Icon>
@@ -279,8 +286,8 @@
                   <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                 </Grid>
               </ribbon:RibbonSplitButton.Icon>
-              <ComboBoxItem>Item 1</ComboBoxItem>
-              <ComboBoxItem>Item 2</ComboBoxItem>
+              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
             </ribbon:RibbonSplitButton>
             <ribbon:RibbonSplitButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
               <ribbon:RibbonSplitButton.Icon>
@@ -288,8 +295,8 @@
                   <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                 </Grid>
               </ribbon:RibbonSplitButton.Icon>
-              <ComboBoxItem>Item 1</ComboBoxItem>
-              <ComboBoxItem>Item 2</ComboBoxItem>
+              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
             </ribbon:RibbonSplitButton>
           </ribbon:RibbonGroupBox>
           <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
@@ -330,8 +337,8 @@
                   </Rectangle.OpacityMask>
                 </Rectangle>
               </ribbon:RibbonDropDownButton.LargeIcon>
-              <RibbonDropDownItem>Item 1</RibbonDropDownItem>
-              <RibbonDropDownItem>Item 2</RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
             </ribbon:RibbonDropDownButton>
             <ribbon:RibbonDropDownButton Content="Medium" MinSize="Medium" MaxSize="Medium">
               <ribbon:RibbonDropDownButton.Icon>
@@ -339,8 +346,8 @@
                   <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                 </Grid>
               </ribbon:RibbonDropDownButton.Icon>
-              <RibbonDropDownItem>Item 1</RibbonDropDownItem>
-              <RibbonDropDownItem>Item 2</RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
             </ribbon:RibbonDropDownButton>
             <ribbon:RibbonDropDownButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
               <ribbon:RibbonDropDownButton.Icon>
@@ -348,8 +355,8 @@
                   <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
                 </Grid>
               </ribbon:RibbonDropDownButton.Icon>
-              <RibbonDropDownItem>Item 1</RibbonDropDownItem>
-              <RibbonDropDownItem>Item 2</RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
             </ribbon:RibbonDropDownButton>
           </ribbon:RibbonGroupBox>
           <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
