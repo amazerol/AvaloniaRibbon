@@ -1,9 +1,13 @@
-# Avalonia Ribbon
+# AvaloniaRibbon
 Ribbon Control for Avalonia
 
-The purpose of this Avalonia component is to achieve something like Microsoft Ribbon UI found in Office and all around Windows operating system. The component can be used in its present state but is definitely not considered as complete. I had to implement ribbon interface for my project **[Jaya - Cross Plat](https://github.com/waliarubal/Jaya)** so had to tailor things accordingly. 
+The purpose of this Avalonia component is to replicate Microsoft's Ribbon UI, as seen in Windows 8+'s File Explorer, Microsoft Office 2007+, and in various other places, for Avalonia. In its present state, it is fairly usable, but some features are still missing, so it should not considered complete.
 
-The original work is by [Alban Mazerolles](https://github.com/amazerol) which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
+It is available on NuGet, and can be found here: https://www.nuget.org/packages/AvaloniaUIRibbon
+
+It is presently used in **[Jaya File Manager]https://github.com/JayaFM/Jaya)**, but other projects are welcome to use it as well.
+
+AvaloniaRibbon in its current form is developed and maintained by [Splitwirez](https://github.com/Splitwirez) at the [AvaloniaRibbon repo](https://github.com/Splitwirez/AvaloniaRibbon). It is is based on an earlier repo by [Alban Mazerolles](https://github.com/amazerol), which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
 
 ![Preview](https://i.imgur.com/IdD64Kr.png)
 
