@@ -16,6 +16,7 @@
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}"/>
     <Setter Property="Margin" Value="0" />
     <Setter Property="Padding" Value="10,0" />
+    <Setter Property="Content" Value=" "/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border Background="{TemplateBinding Background}"
@@ -39,7 +40,14 @@
   <Style Selector="local|RibbonTab:not(:selected) /template/ Border#SelectedBorder">
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
   </Style>
+  <Style Selector="local|Ribbon[IsCollapsed=true][IsCollapsedPopupOpen=false] local|RibbonTab /template/ Border#SelectedBorder">
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
+  </Style>
   <Style Selector="local|RibbonTab:not(:selected):not(:pointerover):not(:pressed) /template/ Border#SelectedBorder">
+    <Setter Property="IsVisible" Value="False"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+  </Style>
+  <Style Selector="local|Ribbon[IsCollapsed=true][IsCollapsedPopupOpen=false] local|RibbonTab:not(:pointerover):not(:pressed) /template/ Border#SelectedBorder">
     <Setter Property="IsVisible" Value="False"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
   </Style>

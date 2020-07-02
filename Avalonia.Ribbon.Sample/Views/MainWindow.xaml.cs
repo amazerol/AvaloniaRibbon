@@ -20,16 +20,20 @@ namespace Avalonia.Ribbon.Samples.Views
             //this.FindName<CheckBox>("VerticalRibbonCheckBox").
             Controls.Ribbon.Ribbon ribbon = this.Find<Controls.Ribbon.Ribbon>("RibbonControl");
             Button verticalRibbonButton = this.Find<Button>("VerticalRibbonButton");
+            Button horizontalRibbonButton = this.Find<Button>("HorizontalRibbonButton");
             verticalRibbonButton.Click += (sneder, args) =>
             {
                 ribbon.Orientation = Orientation.Vertical;
                 DockPanel.SetDock(ribbon, Dock.Left);
+                verticalRibbonButton.IsVisible = false;
+                horizontalRibbonButton.IsVisible = true;
             };
-            Button horizontalRibbonButton = this.Find<Button>("HorizontalRibbonButton");
             horizontalRibbonButton.Click += (sneder, args) =>
             {
                 ribbon.Orientation = Orientation.Horizontal;
                 DockPanel.SetDock(ribbon, Dock.Top);
+                horizontalRibbonButton.IsVisible = false;
+                verticalRibbonButton.IsVisible = true;
             };
         }
 

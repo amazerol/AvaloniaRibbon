@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Avalonia.Input;
+using Avalonia.Interactivity;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Avalonia.Controls.Ribbon
 {
-    public interface IRibbonControl
+    public interface IRibbonControl : IAvaloniaObject
     {
         RibbonControlSize Size
         {
@@ -12,11 +14,23 @@ namespace Avalonia.Controls.Ribbon
             set;
         }
 
-        bool CanAddToQuickAccessToolbar
+        RibbonControlSize MinSize
         {
             get;
             set;
         }
+
+        RibbonControlSize MaxSize
+        {
+            get;
+            set;
+        }
+
+        /*bool CanAddToQuickAccessToolbar
+        {
+            get;
+            set;
+        }*/
     }
 
     public enum RibbonControlSize
