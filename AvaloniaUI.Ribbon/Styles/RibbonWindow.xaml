@@ -2,6 +2,9 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon">
+  <Styles.Resources>
+    <local:WindowIconToImageConverter x:Key="WindowIconToImageConverter"/>
+  </Styles.Resources>
   <Style Selector="local|RibbonWindow">
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
     <Setter Property="TitleBarBackground" Value="{DynamicResource ThemeBackgroundBrush}" />
@@ -20,10 +23,12 @@
                 Background="{TemplateBinding TitleBarBackground}"
                 ColumnDefinitions="Auto,*,Auto"
                 DockPanel.Dock="Top">
-                <TextBlock Name="TitleTextBlock"
-                    Margin="5,0,0,0"
-                    VerticalAlignment="Center"
-                    Foreground="{TemplateBinding TitleBarForeground}" Text="{TemplateBinding Title}"/>
+                <StackPanel Orientation="Horizontal" Margin="5,0,0,0">
+                  <Image Classes="IconImage" Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource WindowIconToImageConverter}}" MaxWidth="16" MaxHeight="16"/>
+                  <TextBlock Name="TitleTextBlock"
+                      VerticalAlignment="Center"
+                      Foreground="{TemplateBinding TitleBarForeground}" Text="{TemplateBinding Title}"/>
+                </StackPanel>
                 <StackPanel
                     Grid.Column="2"
                     Orientation="Horizontal">
@@ -163,6 +168,9 @@
         </Grid>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="local|RibbonWindow /template/ Image.IconImage:not(Image[Width=0])">
+    <Setter Property="Margin" Value="0,0,5,0"/>
   </Style>
   <Style Selector="local|RibbonWindow[HasSystemDecorations=False] /template/ Border.OuterBorder">
     <Setter Property="BorderBrush" Value="{TemplateBinding BorderBrush}"/>
