@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>AvaloniaUI.Ribbon</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <Version>1.0.5</Version>
+    <Authors>Alban Mazerolles, Rubal Walia, Splitwirez</Authors>
+    <PackageId>AvaloniaRibbon</PackageId>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/waliarubal/AvaloniaRibbon</PackageProjectUrl>
+    <Description></Description>
+    <RepositoryType>Git</RepositoryType>
+    <RepositoryUrl>https://github.com/waliarubal/AvaloniaRibbon.git</RepositoryUrl>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <AssemblyName>AvaloniaUI.Ribbon</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <AvaloniaResource Include="**\*.xaml">
+      <SubType>Designer</SubType>
+    </AvaloniaResource>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.9.10" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.10" />
+  </ItemGroup>
+</Project>
