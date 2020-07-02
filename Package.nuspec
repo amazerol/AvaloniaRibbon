@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
 	<metadata>
 		<id>AvaloniaUIRibbon</id>
-		<version>1.0.4-beta</version>
+		<version>1.0.5-beta</version>
 		<authors>Splitwirez, Alban Mazerolles</authors>
 		<owners>Splitwirez, Alban Mazerolles</owners>
 		<requireLicenseAcceptance>false</requireLicenseAcceptance>
