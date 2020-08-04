@@ -8,7 +8,6 @@
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
-    <Setter Property="Padding" Value="16,4"/>
     <Setter Property="Height" Value="34"/>
     <Setter Property="Content" Value="File"/>
     <Setter Property="RightColumnHeader" Value="Recent"/>
@@ -75,6 +74,12 @@
         </Panel>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonMenu">
+    <Setter Property="Padding" Value="16,4"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonMenu">
+    <Setter Property="Padding" Value="4"/>
   </Style>
   <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonMenu /template/ ToggleButton#ContentButton:not(:pointerover):not(:pressed):not(:checked)">
     <Setter Property="Opacity" Value="0.5"/>
