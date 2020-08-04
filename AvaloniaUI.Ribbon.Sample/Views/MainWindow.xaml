@@ -38,7 +38,7 @@
     </Style>
   </ribbon:RibbonWindow.Styles>
   <DockPanel>
-    <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
+    <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Left" Orientation="Vertical" HelpButtonCommand="{Binding HelpCommand}">
       <ribbon:Ribbon.Menu>
         <ribbon:RibbonMenu RightColumnHeader="Recent stuff" ribbon:KeyTip.KeyTipKeys="F">
           <ribbon:RibbonMenuItem Header="Item 1">
@@ -596,8 +596,8 @@
       </StackPanel>
       <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
       <!--CheckBox x:Name="LightsOnCheckBox" Content="Lights" IsChecked="True"/-->
-      <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation" IsVisible="False"/>
-      <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
+      <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation"/>
+      <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation" IsVisible="False"/>
     </StackPanel>
   </DockPanel>
 </ribbon:RibbonWindow>

@@ -40,7 +40,7 @@
     </Setter>
   </Style>
   <Style Selector="local|RibbonButton[Size=Large]">
-    <Setter Property="Padding" Value="9" />
+    <Setter Property="Padding" Value="7,9" />
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
