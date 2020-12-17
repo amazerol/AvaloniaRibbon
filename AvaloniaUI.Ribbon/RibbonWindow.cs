@@ -56,9 +56,9 @@ namespace AvaloniaUI.Ribbon
             return e.NameScope.Get<T>(name);
         }
 
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
-            base.OnTemplateApplied(e);
+            base.OnApplyTemplate(e);
             var window = this;
             try
             {
@@ -93,10 +93,7 @@ namespace AvaloniaUI.Ribbon
                     SetupSide("BottomLeft", StandardCursorType.BottomLeftCorner, WindowEdge.SouthWest, ref e);
                     SetupSide("BottomRight", StandardCursorType.BottomRightCorner, WindowEdge.SouthEast, ref e);
                 }
-                catch (Exception x)
-                {
-
-                }
+                catch { }
 
                 GetControl<Button>(e, "MinimizeButton").Click += delegate
                 {
@@ -111,10 +108,7 @@ namespace AvaloniaUI.Ribbon
                     window.Close();
                 };
             }
-            catch (KeyNotFoundException ex)
-            {
-
-            }
+            catch (KeyNotFoundException) { }
         }
     }
 

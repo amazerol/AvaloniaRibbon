@@ -14,9 +14,6 @@ namespace AvaloniaUI.Ribbon.Samples.Views
         public MainWindow()
         {
             InitializeComponent();
-#if DEBUG
-            this.AttachDevTools();
-#endif
             //this.FindName<CheckBox>("VerticalRibbonCheckBox").
             Ribbon ribbon = this.Find<Ribbon>("RibbonControl");
             Button verticalRibbonButton = this.Find<Button>("VerticalRibbonButton");

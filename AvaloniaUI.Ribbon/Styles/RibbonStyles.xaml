@@ -7,7 +7,6 @@
     <StyleInclude Source="/Styles/RibbonMenu.xaml" />
     <StyleInclude Source="/Styles/RibbonWindow.xaml" />
     <StyleInclude Source="/Styles/RibbonButton.xaml" />
-    <StyleInclude Source="/Styles/RibbonSmallButtonHGroup.xaml" />
     <StyleInclude Source="/Styles/RibbonSplitButton.xaml" />
     <StyleInclude Source="/Styles/RibbonDropDownButton.xaml" />
     <StyleInclude Source="/Styles/RibbonToggleButton.xaml" />

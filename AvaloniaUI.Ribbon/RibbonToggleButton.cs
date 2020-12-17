@@ -39,19 +39,19 @@ namespace AvaloniaUI.Ribbon
 
         public RibbonControlSize Size
         {
-            get => GetValue(SizeProperty);
+            get => (RibbonControlSize)GetValue(SizeProperty);
             set => SetValue(SizeProperty, value);
         }
 
         public RibbonControlSize MinSize
         {
-            get => GetValue(MinSizeProperty);
+            get => (RibbonControlSize)GetValue(MinSizeProperty);
             set => SetValue(MinSizeProperty, value);
         }
 
         public RibbonControlSize MaxSize
         {
-            get => GetValue(MaxSizeProperty);
+            get => (RibbonControlSize)GetValue(MaxSizeProperty);
             set => SetValue(MaxSizeProperty, value);
         }
     }

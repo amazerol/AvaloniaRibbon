@@ -21,7 +21,7 @@ namespace AvaloniaUI.Ribbon
     {
         public static readonly DirectProperty<RibbonGroupBox, ICommand> CommandProperty;
         public static readonly StyledProperty<object> CommandParameterProperty = AvaloniaProperty.Register<RibbonGroupBox, object>(nameof(CommandParameter));
-        public static readonly StyledProperty<GroupDisplayMode> DisplayModeProperty = StyledProperty<RibbonGroupBox>.Register<RibbonGroupBox, GroupDisplayMode>(nameof(DisplayMode), defaultValue: GroupDisplayMode.Large);
+        public static readonly StyledProperty<GroupDisplayMode> DisplayModeProperty = StyledProperty<RibbonGroupBox>.Register<RibbonGroupBox, GroupDisplayMode>(nameof(DisplayMode), GroupDisplayMode.Large);
         
         public GroupDisplayMode DisplayMode
         {
@@ -35,6 +35,8 @@ namespace AvaloniaUI.Ribbon
         {
             AffectsArrange<RibbonGroupBox>(DisplayModeProperty);
             AffectsMeasure<RibbonGroupBox>(DisplayModeProperty);
+            AffectsRender<RibbonGroupBox>(DisplayModeProperty);
+
             CommandProperty = AvaloniaProperty.RegisterDirect<RibbonGroupBox, ICommand>(nameof(Command), button => button.Command, (button, command) => button.Command = command, enableDataValidation: true);
         }
 

@@ -49,19 +49,19 @@ namespace AvaloniaUI.Ribbon
 
         public RibbonControlSize Size
         {
-            get => GetValue(SizeProperty);
+            get => (RibbonControlSize)GetValue(SizeProperty);
             set => SetValue(SizeProperty, value);
         }
 
         public RibbonControlSize MinSize
         {
-            get => GetValue(MinSizeProperty);
+            get => (RibbonControlSize)GetValue(MinSizeProperty);
             set => SetValue(MinSizeProperty, value);
         }
 
         public RibbonControlSize MaxSize
         {
-            get => GetValue(MaxSizeProperty);
+            get => (RibbonControlSize)GetValue(MaxSizeProperty);
             set => SetValue(MaxSizeProperty, value);
         }
 
@@ -69,9 +69,9 @@ namespace AvaloniaUI.Ribbon
         ContentControl _mainPresenter;
         ContentControl _flyoutPresenter;
 
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
-            base.OnTemplateApplied(e);
+            base.OnApplyTemplate(e);
             
             _itemsPresenter = e.NameScope.Find<ItemsPresenter>("PART_ItemsPresenter");
             _mainPresenter = e.NameScope.Find<ContentControl>("PART_ItemsPresenterHolder");

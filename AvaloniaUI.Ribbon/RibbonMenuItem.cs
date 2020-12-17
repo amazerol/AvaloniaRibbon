@@ -87,9 +87,9 @@ namespace AvaloniaUI.Ribbon
             remove => RemoveHandler(ClickEvent, value);
         }
 
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
-            base.OnTemplateApplied(e);
+            base.OnApplyTemplate(e);
 
             e.NameScope.Get<Button>("PART_ContentButton").Click += (sneder, args) =>
             {

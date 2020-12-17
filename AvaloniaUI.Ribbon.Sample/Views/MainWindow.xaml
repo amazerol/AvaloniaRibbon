@@ -38,7 +38,7 @@
     </Style>
   </ribbon:RibbonWindow.Styles>
   <DockPanel>
-    <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Left" Orientation="Vertical" HelpButtonCommand="{Binding HelpCommand}">
+    <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
       <ribbon:Ribbon.Menu>
         <ribbon:RibbonMenu RightColumnHeader="Recent stuff" ribbon:KeyTip.KeyTipKeys="F">
           <ribbon:RibbonMenuItem Header="Item 1">
@@ -268,66 +268,6 @@
               </ribbon:RibbonToggleButton.Icon>
             </ribbon:RibbonToggleButton>
           </ribbon:RibbonGroupBox>
-          <ribbon:RibbonGroupBox Header="RibbonSplitButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
-            <ribbon:RibbonSplitButton Content="Large" MinSize="Large" MaxSize="Large">
-              <ribbon:RibbonSplitButton.LargeIcon>
-                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
-                  <Rectangle.OpacityMask>
-                    <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
-                  </Rectangle.OpacityMask>
-                </Rectangle>
-              </ribbon:RibbonSplitButton.LargeIcon>
-              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
-              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
-            </ribbon:RibbonSplitButton>
-            <ribbon:RibbonSplitButton Content="Medium" MinSize="Medium" MaxSize="Medium">
-              <ribbon:RibbonSplitButton.Icon>
-                <Grid Width="16" Height="16">
-                  <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                </Grid>
-              </ribbon:RibbonSplitButton.Icon>
-              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
-              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
-            </ribbon:RibbonSplitButton>
-            <ribbon:RibbonSplitButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
-              <ribbon:RibbonSplitButton.Icon>
-                <Grid Width="16" Height="16">
-                  <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                </Grid>
-              </ribbon:RibbonSplitButton.Icon>
-              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
-              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
-            </ribbon:RibbonSplitButton>
-          </ribbon:RibbonGroupBox>
-          <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
-            <ribbon:RibbonButton Content="One" MinSize="Medium" MaxSize="Medium">
-              <ribbon:RibbonButton.Icon>
-                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
-                  <Rectangle.OpacityMask>
-                    <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
-                  </Rectangle.OpacityMask>
-                </Rectangle>
-              </ribbon:RibbonButton.Icon>
-            </ribbon:RibbonButton>
-            <ribbon:RibbonButton Content="Two" MinSize="Medium" MaxSize="Medium">
-              <ribbon:RibbonButton.Icon>
-                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
-                  <Rectangle.OpacityMask>
-                    <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
-                  </Rectangle.OpacityMask>
-                </Rectangle>
-              </ribbon:RibbonButton.Icon>
-            </ribbon:RibbonButton>
-            <ribbon:RibbonButton Content="Three" MinSize="Medium" MaxSize="Medium">
-              <ribbon:RibbonButton.Icon>
-                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
-                  <Rectangle.OpacityMask>
-                    <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
-                  </Rectangle.OpacityMask>
-                </Rectangle>
-              </ribbon:RibbonButton.Icon>
-            </ribbon:RibbonButton>
-          </ribbon:RibbonGroupBox>
           <ribbon:RibbonGroupBox Header="RibbonDropDownButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
             <ribbon:RibbonDropDownButton Content="Large" MinSize="Large" MaxSize="Large">
               <ribbon:RibbonDropDownButton.LargeIcon>
@@ -359,34 +299,36 @@
               <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
             </ribbon:RibbonDropDownButton>
           </ribbon:RibbonGroupBox>
-          <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
-            <ribbon:RibbonButton Content="One" MinSize="Medium" MaxSize="Medium">
-              <ribbon:RibbonButton.Icon>
-                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+          <ribbon:RibbonGroupBox Header="RibbonSplitButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
+            <ribbon:RibbonSplitButton Content="Large" MinSize="Large" MaxSize="Large">
+              <ribbon:RibbonSplitButton.LargeIcon>
+                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
                   <Rectangle.OpacityMask>
                     <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                   </Rectangle.OpacityMask>
                 </Rectangle>
-              </ribbon:RibbonButton.Icon>
-            </ribbon:RibbonButton>
-            <ribbon:RibbonButton Content="Two" MinSize="Medium" MaxSize="Medium">
-              <ribbon:RibbonButton.Icon>
-                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
-                  <Rectangle.OpacityMask>
-                    <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
-                  </Rectangle.OpacityMask>
-                </Rectangle>
-              </ribbon:RibbonButton.Icon>
-            </ribbon:RibbonButton>
-            <ribbon:RibbonButton Content="Three" MinSize="Medium" MaxSize="Medium">
-              <ribbon:RibbonButton.Icon>
-                <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
-                  <Rectangle.OpacityMask>
-                    <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
-                  </Rectangle.OpacityMask>
-                </Rectangle>
-              </ribbon:RibbonButton.Icon>
-            </ribbon:RibbonButton>
+              </ribbon:RibbonSplitButton.LargeIcon>
+              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
+            </ribbon:RibbonSplitButton>
+            <ribbon:RibbonSplitButton Content="Medium" MinSize="Medium" MaxSize="Medium">
+              <ribbon:RibbonSplitButton.Icon>
+                <Grid Width="16" Height="16">
+                  <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                </Grid>
+              </ribbon:RibbonSplitButton.Icon>
+              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
+            </ribbon:RibbonSplitButton>
+            <ribbon:RibbonSplitButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
+              <ribbon:RibbonSplitButton.Icon>
+                <Grid Width="16" Height="16">
+                  <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                </Grid>
+              </ribbon:RibbonSplitButton.Icon>
+              <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
+            </ribbon:RibbonSplitButton>
           </ribbon:RibbonGroupBox>
         </ribbon:RibbonTab.Groups>
       </ribbon:RibbonTab>
@@ -596,8 +538,8 @@
       </StackPanel>
       <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
       <!--CheckBox x:Name="LightsOnCheckBox" Content="Lights" IsChecked="True"/-->
-      <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation"/>
-      <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation" IsVisible="False"/>
+      <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation" IsVisible="False"/>
+      <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
     </StackPanel>
   </DockPanel>
 </ribbon:RibbonWindow>

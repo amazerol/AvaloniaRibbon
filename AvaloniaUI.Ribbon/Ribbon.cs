@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Avalonia.Controls.Presenters;
 using System.Windows.Input;
+using System.Collections.ObjectModel;
 
 namespace AvaloniaUI.Ribbon
 {
@@ -33,7 +34,7 @@ namespace AvaloniaUI.Ribbon
         public static readonly StyledProperty<bool> IsCollapsedPopupOpenProperty;
         public static readonly StyledProperty<IRibbonMenu> MenuProperty = AvaloniaProperty.Register<Ribbon, IRibbonMenu>(nameof(Menu));
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
-        public static readonly DirectProperty<Ribbon, IEnumerable> SelectedGroupsProperty = AvaloniaProperty.RegisterDirect<Ribbon, IEnumerable>(nameof(SelectedGroups), o => o.SelectedGroups, (o, v) => o.SelectedGroups = v);
+        public static readonly DirectProperty<Ribbon, ObservableCollection<RibbonGroupBox>> SelectedGroupsProperty = AvaloniaProperty.RegisterDirect<Ribbon, ObservableCollection<RibbonGroupBox>>(nameof(SelectedGroups), o => o.SelectedGroups, (o, v) => o.SelectedGroups = v);
         
         public static readonly DirectProperty<Ribbon, ICommand> HelpButtonCommandProperty;
         ICommand _helpCommand;
@@ -48,13 +49,7 @@ namespace AvaloniaUI.Ribbon
             IsCollapsedPopupOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsCollapsedPopupOpen));
             IsMenuOpenProperty = AvaloniaProperty.Register<Ribbon, bool>(nameof(IsMenuOpen));
 
-            SelectedIndexProperty.Changed.AddClassHandler<Ribbon>((x, e) =>
-            {
-                if (((int)e.NewValue >= 0) && (x.SelectedItem != null) && (x.SelectedItem is RibbonTab tab))
-                    x.SelectedGroups = tab.Groups;
-                else
-                    x.SelectedGroups = new AvaloniaList<object>();
-            });
+            SelectedIndexProperty.Changed.AddClassHandler<Ribbon>((x, e) => x.RefreshSelectedGroups());
 
             IsCollapsedProperty.Changed.AddClassHandler(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
             {
@@ -78,6 +73,16 @@ namespace AvaloniaUI.Ribbon
             HelpButtonCommandProperty = AvaloniaProperty.RegisterDirect<Ribbon, ICommand>(nameof(HelpButtonCommand), o => o.HelpButtonCommand, (o, v) => o.HelpButtonCommand = v);
 
             BoundsProperty.Changed.AddClassHandler<RibbonGroupsStackPanel>((sender, e) => sender.InvalidateMeasure());
+        }
+
+        void RefreshSelectedGroups()
+        {
+            SelectedGroups.Clear();
+            if ((SelectedItem != null) && (SelectedItem is RibbonTab tab))
+            {
+                foreach (RibbonGroupBox box in tab.Groups)
+                    SelectedGroups.Add(box);
+            }
         }
 
         public ICommand HelpButtonCommand
@@ -104,7 +109,7 @@ namespace AvaloniaUI.Ribbon
 
         protected IMenuInteractionHandler InteractionHandler { get; }
 
-        private IEnumerable _selectedGroups = new AvaloniaList<object>();
+        private ObservableCollection<RibbonGroupBox> _selectedGroups = new ObservableCollection<RibbonGroupBox>();
 
         public static readonly RoutedEvent<RoutedEventArgs> MenuClosedEvent = RoutedEvent.Register<Ribbon, RoutedEventArgs>(nameof(MenuClosed), RoutingStrategies.Bubble);
         public event EventHandler<RoutedEventArgs> MenuClosed
@@ -113,10 +118,10 @@ namespace AvaloniaUI.Ribbon
             remove { RemoveHandler(MenuClosedEvent, value); }
         }
 
-        public IEnumerable SelectedGroups
+        public ObservableCollection<RibbonGroupBox> SelectedGroups
         {
-            get { return _selectedGroups; }
-            set { SetAndRaise(SelectedGroupsProperty, ref _selectedGroups, value); }
+            get => _selectedGroups;
+            set => SetAndRaise(SelectedGroupsProperty, ref _selectedGroups, value);
         }
 
         Type IStyleable.StyleKey => typeof(Ribbon);
@@ -216,6 +221,8 @@ namespace AvaloniaUI.Ribbon
 
             if ((inputRoot != null) && (inputRoot is WindowBase wnd))
                 wnd.Deactivated += InputRoot_Deactivated;
+            
+            RefreshSelectedGroups();
         }
 
         protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -337,9 +344,9 @@ namespace AvaloniaUI.Ribbon
         ContentControl _flyoutPresenter;
         ItemsPresenter _itemHeadersPresenter;
 
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
-            base.OnTemplateApplied(e);
+            base.OnApplyTemplate(e);
             _popup = e.NameScope.Find<Popup>("PART_CollapsedContentPopup");
             
             _groupsHost = e.NameScope.Find<ItemsControl>("PART_SelectedGroupsHost");
