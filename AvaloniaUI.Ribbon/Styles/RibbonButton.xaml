@@ -38,6 +38,11 @@
         </Border>
       </ControlTemplate>
     </Setter>
+    <Setter Property="QuickAccessTemplate">
+      <ControlTemplate>
+        <Button Background="Transparent" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" MinWidth="30" MinHeight="30" Content="{Binding QuickAccessIcon}" IsFocusable="False"/>
+      </ControlTemplate>
+    </Setter>
   </Style>
   <Style Selector="local|RibbonButton[Size=Large]">
     <Setter Property="Padding" Value="7,9" />

@@ -1,0 +1,34 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon"
+    xmlns:col="clr-namespace:System.Collections">
+  <Styles.Resources>
+    <local:ItemsToControlsConverter x:Key="ItemsToControlsConverter"/>
+  </Styles.Resources>
+  <Style Selector="local|QuickAccessToolbar">
+    <Setter Property="Height" Value="30"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <ItemsPresenter Items="{TemplateBinding Items}">
+          <ItemsPresenter.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+          </ItemsPresenter.ItemsPanel>
+        </ItemsPresenter>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|QuickAccessItem">
+    <Setter Property="Template">
+      <ControlTemplate>
+        <TemplatedControl Template="{Binding Item.QuickAccessTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}" DataContext="{TemplateBinding Item}"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonWindow[HasSystemDecorations=False] local|QuickAccessToolbar">
+    <Setter Property="Margin" Value="26,-30,0,0"/>
+    <Setter Property="ZIndex" Value="2"/>
+  </Style>
+</Styles>

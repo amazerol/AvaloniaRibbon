@@ -70,6 +70,9 @@
       <Setter Property="Command" Value="{Binding OnClickCommand}"/>
       <Setter Property="CommandParameter" Value="{Binding Path=Header, RelativeSource={RelativeSource Mode=Self}}"/>
     </Style>
+    <Style Selector="ribbon|RibbonButton">
+      <Setter Property="CanAddToQuickAccess" Value="False"/>
+    </Style>
     <Style Selector="ribbon|RibbonButton,ribbon|RibbonToggleButton"><!--,ribbon|RibbonSplitButton-->
       <Setter Property="Command" Value="{Binding OnClickCommand}"/>
       <Setter Property="CommandParameter" Value="{Binding Path=Content, RelativeSource={RelativeSource Mode=Self}}"/>
@@ -86,7 +89,8 @@
     </Style>
   </ribbon:RibbonWindow.Styles>
   <DockPanel>
-    <ribbon:Ribbon Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
+    <ribbon:QuickAccessToolbar x:Name="QAT" Ribbon="{Binding #RibbonControl}" DockPanel.Dock="Top"/>
+    <ribbon:Ribbon x:Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
       <ribbon:Ribbon.Menu>
         <ribbon:RibbonMenu RightColumnHeader="Recent stuff" ribbon:KeyTip.KeyTipKeys="F">
           <ribbon:RibbonMenuItem Header="Item 1">
@@ -145,7 +149,7 @@
         <ribbon:RibbonTab Header="Home" ribbon:KeyTip.KeyTipKeys="H">
           <ribbon:RibbonTab.Groups>
             <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
-              <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A">
+              <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A" CanAddToQuickAccess="True">
                 <ribbon:RibbonButton.LargeIcon>
                   <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
                     <Rectangle.OpacityMask>
@@ -160,6 +164,13 @@
                     </Rectangle.OpacityMask>
                   </Rectangle>
                 </ribbon:RibbonButton.Icon>
+                <ribbon:RibbonButton.QuickAccessIcon>
+                  <Rectangle Fill="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ribbon:RibbonWindow}}}" Width="16" Height="16">
+                    <Rectangle.OpacityMask>
+                      <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+                    </Rectangle.OpacityMask>
+                  </Rectangle>
+                </ribbon:RibbonButton.QuickAccessIcon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B">
                 <ribbon:RibbonButton.LargeIcon>
@@ -848,6 +859,7 @@
       <CheckBox IsChecked="{Binding ShowContextualGroup1}" Content="Show Contextual tab group 1"/>
       <CheckBox IsChecked="{Binding ShowContextualGroup2}" Content="Show Contextual tab group 2"/>
       <CheckBox IsChecked="{Binding ShowContextualGroup3}" Content="Show Contextual tab group 3, which has a very long name so you can easily see that its only tab's width does not prohibit the group from getting wider as needed"/>
+      <Button x:Name="TestItemsButton" Content="Test"/>
     </StackPanel>
   </DockPanel>
 </ribbon:RibbonWindow>

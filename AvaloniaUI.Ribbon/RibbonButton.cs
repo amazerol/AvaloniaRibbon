@@ -1,12 +1,13 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Templates;
 using Avalonia.Media.Imaging;
 using Avalonia.Styling;
 using System;
 
 namespace AvaloniaUI.Ribbon
 {
-    public class RibbonButton : Button, IStyleable, IRibbonControl
+    public class RibbonButton : Button, IStyleable, IRibbonControl, ICanAddToQuickAccess
     {
 
         public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty;
@@ -14,6 +15,9 @@ namespace AvaloniaUI.Ribbon
         public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty;
         public static readonly StyledProperty<object> IconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(Icon));
         public static readonly StyledProperty<object> LargeIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(LargeIcon));
+        public static readonly StyledProperty<object> QuickAccessIconProperty = AvaloniaProperty.Register<RibbonButton, object>(nameof(QuickAccessIcon));
+
+        public static readonly StyledProperty<bool> CanAddToQuickAccessProperty = AvaloniaProperty.Register<RibbonButton, bool>(nameof(QuickAccessIcon), true);
 
         static RibbonButton()
         {
@@ -34,6 +38,18 @@ namespace AvaloniaUI.Ribbon
             get => GetValue(LargeIconProperty);
             set => SetValue(LargeIconProperty, value);
         }
+        
+        public object QuickAccessIcon
+        {
+            get => GetValue(QuickAccessIconProperty);
+            set => SetValue(QuickAccessIconProperty, value);
+        }
+
+        public bool CanAddToQuickAccess
+        {
+            get => GetValue(CanAddToQuickAccessProperty);
+            set => SetValue(CanAddToQuickAccessProperty, value);
+        }
 
 
         public RibbonControlSize Size
@@ -52,6 +68,14 @@ namespace AvaloniaUI.Ribbon
         {
             get => (RibbonControlSize)GetValue(MaxSizeProperty);
             set => SetValue(MaxSizeProperty, value);
+        }
+
+        public static readonly StyledProperty<IControlTemplate> QuickAccessTemplateProperty = AvaloniaProperty.Register<RibbonButton, IControlTemplate>(nameof(Template));
+
+        public IControlTemplate QuickAccessTemplate
+        {
+            get => GetValue(QuickAccessTemplateProperty);
+            set => SetValue(QuickAccessTemplateProperty, value);
         }
     }
 

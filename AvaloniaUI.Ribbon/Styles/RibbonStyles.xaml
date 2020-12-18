@@ -11,4 +11,5 @@
     <StyleInclude Source="/Styles/RibbonGroupBox.xaml" />
     <StyleInclude Source="/Styles/KeyTip.xaml" />
     <StyleInclude Source="/Styles/RibbonContextualTabGroup.xaml" />
+    <StyleInclude Source="/Styles/QuickAccessToolbar.xaml" />
 </Styles>

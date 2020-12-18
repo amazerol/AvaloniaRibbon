@@ -32,6 +32,7 @@ namespace AvaloniaUI.Ribbon.Samples.Views
                 horizontalRibbonButton.IsVisible = false;
                 verticalRibbonButton.IsVisible = true;
             };
+            this.Find<Button>("TestItemsButton").Click += (sneder, args) => this.Find<QuickAccessToolbar>("QAT").TestItems();
         }
 
         private void InitializeComponent()
