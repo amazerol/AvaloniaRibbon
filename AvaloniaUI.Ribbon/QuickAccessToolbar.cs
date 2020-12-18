@@ -25,12 +25,7 @@ namespace AvaloniaUI.Ribbon
 {
     public class QuickAccessToolbar : ItemsControl, IStyleable//, IKeyTipHandler
     {
-        public static readonly StyledProperty<Ribbon> RibbonProperty = AvaloniaProperty.Register<QuickAccessToolbar, Ribbon>(nameof(Ribbon));
-        public Ribbon Ribbon
-        {
-            get => GetValue(RibbonProperty);
-            set => SetValue(RibbonProperty, value);
-        }
+        
 
         static QuickAccessToolbar()
         {
@@ -39,14 +34,14 @@ namespace AvaloniaUI.Ribbon
             });*/
         }
 
-        public void TestItems()
+        /*public void TestItems()
         {
             if (Ribbon != null)
             {
                 foreach (object obj in ((Ribbon.Tabs[0] as RibbonTab).Groups[0]).Items.OfType<ICanAddToQuickAccess>().Where(x => x.CanAddToQuickAccess))
                     ((AvaloniaList<object>)Items).Add(obj);
             }
-        }
+        }*/
 
         Type IStyleable.StyleKey => typeof(QuickAccessToolbar);
 
@@ -83,6 +78,34 @@ namespace AvaloniaUI.Ribbon
         {
             return new ItemContainerGenerator<QuickAccessItem>(this, QuickAccessItem.ItemProperty, QuickAccessItem.ContentTemplateProperty);
         }
+
+        public bool ContainsItem(ICanAddToQuickAccess item) => Items.OfType<ICanAddToQuickAccess>().Contains(item);
+
+        public bool AddItem(ICanAddToQuickAccess item)
+        {
+            if ((item == null) || ContainsItem(item))
+                return false;
+            else if (item.CanAddToQuickAccess)
+            {
+                Items = Items.OfType<ICanAddToQuickAccess>().Append(item);
+                return true;
+            }
+            else
+                return false;
+        }
+
+        public bool RemoveItem(ICanAddToQuickAccess item)
+        {
+            if ((item == null) || (!ContainsItem(item)))
+                return false;
+            else
+            {
+                var items = Items.OfType<ICanAddToQuickAccess>().ToList();
+                items.Remove(item);
+                Items = items;
+                return true;
+            }
+        }
     }
 
     
@@ -96,6 +119,12 @@ namespace AvaloniaUI.Ribbon
         }
 
         Type IStyleable.StyleKey => typeof(QuickAccessItem);
+
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
+        {
+            base.OnApplyTemplate(e);
+            e.NameScope.Find<MenuItem>("PART_RemoveFromQuickAccessToolbar").Click += (sneder, args) => Avalonia.VisualTree.VisualExtensions.FindAncestorOfType<QuickAccessToolbar>(this)?.RemoveItem(Item);
+        }
     }
 
 

@@ -35,64 +35,56 @@
                 <LineSegment Point="{Binding #TabHeadersClipBorder.Bounds, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='0,30,TR'}"/>
                 <LineSegment Point="{Binding #TabHeadersClipBorder.Bounds, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='0,0,BR'}"/>
                 <LineSegment Point="{Binding #TabHeadersClipBorder.Bounds, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='0,0,BL'}"/>
-                <!--LineSegment Point="{Binding #TabHeadersClipBorder.Bounds.TopRight, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='-135,-60,TR'}"/>
-                <LineSegment Point="{Binding #TabHeadersClipBorder.Bounds.TopRight, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='-135,-30,TR'}"/>
-                <LineSegment Point="{Binding #TabHeadersClipBorder.Bounds.TopRight, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='0,-30,TR'}"/>
-                <LineSegment Point="{Binding #TabHeadersClipBorder.Bounds.BottomRight, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='0,0,BR'}"/>
-                <LineSegment Point="{Binding #TabHeadersClipBorder.Bounds.BottomLeft, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='0,0,BL'}"/-->
               </PathFigure>
             </PathGeometry>
           </DockPanel.Resources>
           <Panel DockPanel.Dock="Top">
-          <Rectangle Fill="{TemplateBinding HeaderBackground}" Margin="0,-30,0,0" IsHitTestVisible="False"/>
-            <DockPanel x:Name="HeaderDockPanel">
-              <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Left"/>
-              <Button Name="HelpButton" Classes="RibbonHelpButton" Width="34" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Right">
-                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="?" FontWeight="Black" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
-              </Button>
-              <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Right">
-                <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="4"/>
-              </ToggleButton>
-              <Border x:Name="TabHeadersClipBorder" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,-30,0,0">
-                <ItemsPresenter x:Name="PART_ItemsPresenter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Items="{TemplateBinding Tabs}" Margin="0,30,0,0">
-                  <ItemsPresenter.ItemsPanel>
-                    <ItemsPanelTemplate>
-                      <StackPanel x:Name="PART_TabsPanel" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                    </ItemsPanelTemplate>
-                  </ItemsPresenter.ItemsPanel>
-                </ItemsPresenter>
-              </Border>
-            </DockPanel>
-          </Panel>
-          <Panel DockPanel.Dock="Top">
-            <Rectangle x:Name="SeparatorRectangle" Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Stretch" Height="1" IsVisible="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
-            <Popup x:Name="PART_CollapsedContentPopup" PlacementTarget="{Binding ElementName=SeparatorRectangle}" Width="{Binding Path=Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}" Height="92" PlacementMode="Bottom" StaysOpen="False" VerticalOffset="-1" IsOpen="{Binding IsCollapsedPopupOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
-              <!--Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"-->
-                <ContentControl x:Name="PART_PopupGroupsPresenterHolder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1"/>
-              <!--/Border-->
-              <!--ItemsControl Name="PART_PopupSelectedGroupsHost" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="5,0" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" Height="90">
-                <ItemsControl.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Orientation="Horizontal" Margin="0" Spacing="0"/>
-                  </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-              </ItemsControl-->
-            </Popup>
-          </Panel>
-          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1">
-            <Panel>
-              <ContentPresenter Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" IsVisible="False"/>
-              <ContentControl Name="PART_GroupsPresenterHolder" HorizontalAlignment="Stretch">
-                <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" MinWidth="100" Height="90">
-                  <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                      <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" HorizontalAlignment="Left" Width="{Binding $parent[ItemsControl].Bounds.Width}" VerticalAlignment="Stretch" Orientation="Horizontal" Margin="0"/>
-                    </ItemsPanelTemplate>
-                  </ItemsControl.ItemsPanel>
-                </ItemsControl>
-              </ContentControl>
+            <Rectangle Fill="{TemplateBinding HeaderBackground}" Margin="0,-30,0,0" IsHitTestVisible="False"/>
+              <DockPanel x:Name="HeaderDockPanel">
+                <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Left"/>
+                <Button Name="HelpButton" Classes="RibbonHelpButton" Width="34" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Right">
+                  <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="?" FontWeight="Black" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                </Button>
+                <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Right">
+                  <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="4"/>
+                </ToggleButton>
+                <Border x:Name="TabHeadersClipBorder" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,-30,0,0">
+                  <ItemsPresenter x:Name="PART_ItemsPresenter" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Items="{TemplateBinding Tabs}" Margin="0,30,0,0">
+                    <ItemsPresenter.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <StackPanel x:Name="PART_TabsPanel" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                      </ItemsPanelTemplate>
+                    </ItemsPresenter.ItemsPanel>
+                  </ItemsPresenter>
+                </Border>
+              </DockPanel>
             </Panel>
-          </Border>
+            <Panel DockPanel.Dock="Top">
+              <Rectangle x:Name="SeparatorRectangle" Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Stretch" Height="1" IsVisible="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
+              <Popup x:Name="PART_CollapsedContentPopup" PlacementTarget="{Binding ElementName=SeparatorRectangle}" Width="{Binding Path=Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}" Height="92" PlacementMode="Bottom" StaysOpen="False" VerticalOffset="-1" IsOpen="{Binding IsCollapsedPopupOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                <ContentControl x:Name="PART_PopupGroupsPresenterHolder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1"/>
+              </Popup>
+            </Panel>
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0,1">
+              <Panel>
+                <ContentPresenter Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" IsVisible="False"/>
+                <ContentControl Name="PART_GroupsPresenterHolder" HorizontalAlignment="Stretch">
+                  <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" MinWidth="100" Height="90">
+                    <ItemsControl.ContextMenu>
+                      <ContextMenu x:Name="PART_ContentAreaContextMenu">
+                        <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="Add to quick access toolbar"/>
+                        <MenuItem x:Name="PART_CollapseRibbon" Header="Minimize/Restore the ribbon"/>
+                      </ContextMenu>
+                    </ItemsControl.ContextMenu>
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" HorizontalAlignment="Left" Width="{Binding $parent[ItemsControl].Bounds.Width}" VerticalAlignment="Stretch" Orientation="Horizontal" Margin="0"/>
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                  </ItemsControl>
+                </ContentControl>
+              </Panel>
+            </Border>
         </DockPanel>
       </ControlTemplate>
     </Setter>
@@ -141,6 +133,12 @@
               <ContentPresenter Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" IsVisible="False"/>
               <ContentControl Name="PART_GroupsPresenterHolder" VerticalAlignment="Stretch">
                 <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="Stretch" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Width="138">
+                  <ItemsControl.ContextMenu>
+                    <ContextMenu x:Name="PART_ContentAreaContextMenu">
+                      <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="Add to quick access toolbar"/>
+                      <MenuItem x:Name="PART_CollapseRibbon" Header="Minimize/Restore the ribbon"/>
+                    </ContextMenu>
+                  </ItemsControl.ContextMenu>
                   <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                       <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="{Binding $parent[ItemsControl].Bounds.Height}" Orientation="Vertical" Margin="0"/>

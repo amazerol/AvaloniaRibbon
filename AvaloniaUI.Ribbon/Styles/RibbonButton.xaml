@@ -40,9 +40,16 @@
     </Setter>
     <Setter Property="QuickAccessTemplate">
       <ControlTemplate>
-        <Button Background="Transparent" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" MinWidth="30" MinHeight="30" Content="{Binding QuickAccessIcon}" IsFocusable="False"/>
+        <Button Classes="quickAccessButton" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" MinWidth="45" Height="30" Content="{Binding QuickAccessIcon}" Focusable="False"/>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="Button.quickAccessButton:not(:pointerover):not(:pressed)">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+  </Style>
+  <Style Selector="local|RibbonWindow Button.quickAccessButton:not(:pointerover):not(:pressed)">
+    <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RibbonWindow}}}"/>
   </Style>
   <Style Selector="local|RibbonButton[Size=Large]">
     <Setter Property="Padding" Value="7,9" />

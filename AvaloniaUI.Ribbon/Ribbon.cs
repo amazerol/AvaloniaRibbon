@@ -42,6 +42,14 @@ namespace AvaloniaUI.Ribbon
         public static readonly DirectProperty<Ribbon, ICommand> HelpButtonCommandProperty;
         ICommand _helpCommand;
 
+
+        public static readonly StyledProperty<QuickAccessToolbar> QuickAccessToolbarProperty = AvaloniaProperty.Register<Ribbon, QuickAccessToolbar>(nameof(QuickAccessToolbar));
+        public QuickAccessToolbar QuickAccessToolbar
+        {
+            get => GetValue(QuickAccessToolbarProperty);
+            set => SetValue(QuickAccessToolbarProperty, value);
+        }
+
         static Ribbon()
         {
             OrientationProperty = StackLayout.OrientationProperty.AddOwner<Ribbon>();
@@ -54,10 +62,8 @@ namespace AvaloniaUI.Ribbon
 
             SelectedIndexProperty.Changed.AddClassHandler<Ribbon>((x, e) => x.RefreshSelectedGroups());
 
-            IsCollapsedProperty.Changed.AddClassHandler(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sneder, args) =>
-            {
-                sneder.UpdatePresenterLocation((bool)args.NewValue);
-            }));
+            IsCollapsedProperty.Changed.AddClassHandler(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sneder, args) => sneder.UpdatePresenterLocation((bool)args.NewValue)));
+            //IsCollapsedPopupOpenProperty.Changed.AddClassHandler(new Action<Ribbon, AvaloniaPropertyChangedEventArgs>((sneder, args) => sneder.UpdatePresenterLocation(sneder.IsCollapsed)));
 
             AccessKeyHandler.AccessKeyPressedEvent.AddClassHandler<Ribbon>((sender, e) =>
             {
@@ -120,6 +126,20 @@ namespace AvaloniaUI.Ribbon
                 else if (ctrl is RibbonTab tab)
                     ((AvaloniaList<object>)Items).Add(tab);
             }
+        }
+
+        ICanAddToQuickAccess _lastHoveredControl = null;
+        public ICanAddToQuickAccess LastHoveredControl
+        {
+            get => _lastHoveredControl;
+            protected set => _lastHoveredControl = value;
+        }
+        
+        protected override void OnPointerMoved(PointerEventArgs e)
+        {
+            base.OnPointerMoved(e);
+            var srcParent = e.Source.InteractiveParent;
+            _lastHoveredControl = Avalonia.VisualTree.VisualExtensions.FindAncestorOfType<ICanAddToQuickAccess>(e.Source as Visual, true);            
         }
 
         public ICommand HelpButtonCommand
@@ -327,8 +347,16 @@ namespace AvaloniaUI.Ribbon
             if ((inputRoot != null) && (inputRoot is WindowBase wnd))
                 wnd.Deactivated += InputRoot_Deactivated;
             
+            inputRoot.AddHandler<PointerPressedEventArgs>(PointerPressedEvent, InputRoot_PointerPressed, handledEventsToo: true);
+            
             RefreshTabs();
             RefreshSelectedGroups();
+        }
+
+        void InputRoot_PointerPressed(object sender, PointerPressedEventArgs e)
+        {
+            if (IsCollapsedPopupOpen && (!IsPointerOver))
+                IsCollapsedPopupOpen = false;
         }
 
         protected override void OnDetachedFromVisualTree(VisualTreeAttachmentEventArgs e)
@@ -338,6 +366,8 @@ namespace AvaloniaUI.Ribbon
             var inputRoot = e.Root as IInputRoot;
             if ((inputRoot != null) && (inputRoot is WindowBase wnd))
                 wnd.Deactivated -= InputRoot_Deactivated;
+            
+            inputRoot.RemoveHandler<PointerPressedEventArgs>(PointerPressedEvent, InputRoot_PointerPressed);
         }
 
         private void InputRoot_Deactivated(object sender, EventArgs e)
@@ -458,8 +488,10 @@ namespace AvaloniaUI.Ribbon
             _groupsHost = e.NameScope.Find<ItemsControl>("PART_SelectedGroupsHost");
             _mainPresenter = e.NameScope.Find<ContentControl>("PART_GroupsPresenterHolder");
             _flyoutPresenter = e.NameScope.Find<ContentControl>("PART_PopupGroupsPresenterHolder");
-            UpdatePresenterLocation(IsCollapsed);
+            
             _itemHeadersPresenter = e.NameScope.Find<ItemsPresenter>("PART_ItemsPresenter");
+
+            UpdatePresenterLocation(IsCollapsed);
 
 
             bool secondClick = false;
@@ -513,6 +545,29 @@ namespace AvaloniaUI.Ribbon
                     IsCollapsed = true;
                     secondClick = true;
                 }
+            };
+            
+            var pinToQat = e.NameScope.Find<MenuItem>("PART_PinLastHoveredControlToQuickAccess");
+            pinToQat.Click += (sneder, args) =>
+            {
+                if (_lastHoveredControl != null)
+                    QuickAccessToolbar?.AddItem(_lastHoveredControl);
+            };
+            
+            e.NameScope.Find<ContextMenu>("PART_ContentAreaContextMenu").MenuOpened += (sneder, args) =>
+            {
+                if (QuickAccessToolbar != null)
+                    pinToQat.IsEnabled = (_lastHoveredControl != null) && _lastHoveredControl.CanAddToQuickAccess && (!QuickAccessToolbar.ContainsItem(_lastHoveredControl));
+                else
+                    pinToQat.IsEnabled = false;
+            };
+
+            e.NameScope.Find<MenuItem>("PART_CollapseRibbon").Click += (sneder, args) =>
+            {
+                if (IsCollapsed)
+                    IsCollapsedPopupOpen = false;
+                
+                IsCollapsed = !IsCollapsed;
             };
         }
 

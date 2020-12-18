@@ -23,7 +23,13 @@
   <Style Selector="local|QuickAccessItem">
     <Setter Property="Template">
       <ControlTemplate>
-        <TemplatedControl Template="{Binding Item.QuickAccessTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}" DataContext="{TemplateBinding Item}"/>
+        <TemplatedControl Template="{Binding Item.QuickAccessTemplate, RelativeSource={RelativeSource Mode=TemplatedParent}}" DataContext="{TemplateBinding Item}">
+          <TemplatedControl.ContextMenu>
+            <ContextMenu>
+              <MenuItem x:Name="PART_RemoveFromQuickAccessToolbar" Header="Remove from quick access toolbar"/>
+            </ContextMenu>
+          </TemplatedControl.ContextMenu>
+        </TemplatedControl>
       </ControlTemplate>
     </Setter>
   </Style>

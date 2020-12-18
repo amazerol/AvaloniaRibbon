@@ -89,8 +89,8 @@
     </Style>
   </ribbon:RibbonWindow.Styles>
   <DockPanel>
-    <ribbon:QuickAccessToolbar x:Name="QAT" Ribbon="{Binding #RibbonControl}" DockPanel.Dock="Top"/>
-    <ribbon:Ribbon x:Name="RibbonControl" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
+    <ribbon:QuickAccessToolbar x:Name="QAT" DockPanel.Dock="Top"/>
+    <ribbon:Ribbon x:Name="RibbonControl" QuickAccessToolbar="{Binding #QAT}" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
       <ribbon:Ribbon.Menu>
         <ribbon:RibbonMenu RightColumnHeader="Recent stuff" ribbon:KeyTip.KeyTipKeys="F">
           <ribbon:RibbonMenuItem Header="Item 1">
@@ -151,21 +151,21 @@
             <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
               <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A" CanAddToQuickAccess="True">
                 <ribbon:RibbonButton.LargeIcon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
                   </Rectangle>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
                   </Rectangle>
                 </ribbon:RibbonButton.Icon>
                 <ribbon:RibbonButton.QuickAccessIcon>
-                  <Rectangle Fill="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ribbon:RibbonWindow}}}" Width="16" Height="16">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -175,28 +175,28 @@
               <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B">
                 <ribbon:RibbonButton.LargeIcon>
                   <Grid Width="32" Height="32">
-                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                    <Rectangle Width="24" Height="24" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2,0"/>
                   </Grid>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                    <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2,0"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C">
                 <ribbon:RibbonButton.LargeIcon>
                   <Grid Width="32" Height="32">
-                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="20" Height="20" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
@@ -205,13 +205,13 @@
               <ribbon:RibbonButton MaxSize="Medium" Content="Button 4" ToolTip.Tip="Button 4" ribbon:KeyTip.KeyTipKeys="D">
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton MaxSize="Medium" Content="Button 5" ToolTip.Tip="Button 5" ribbon:KeyTip.KeyTipKeys="E">
                 <ribbon:RibbonButton.Icon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -220,23 +220,23 @@
               </ribbon:RibbonButton>
               <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 6" ToolTip.Tip="Button 6" ribbon:KeyTip.KeyTipKeys="F">
                 <ribbon:RibbonButton.LargeIcon>
-                  <Path Data="M 0 16 L 16 0 L 32 16 L 16 32 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                  <Path Data="M 0 16 L 16 0 L 32 16 L 16 32 Z" Fill="{Binding $parent[Button].Foreground}"/>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
-                  <Path Data="M 0 8 L 8 0 L 16 8 L 8 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                  <Path Data="M 0 8 L 8 0 L 16 8 L 8 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 7" ToolTip.Tip="Button 7" ribbon:KeyTip.KeyTipKeys="G">
                 <ribbon:RibbonButton.LargeIcon>
                   <Grid Width="32" Height="32">
-                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="20" Height="20" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
@@ -245,13 +245,13 @@
               <ribbon:RibbonButton MaxSize="Medium" Content="Button 8" ToolTip.Tip="Button 8" ribbon:KeyTip.KeyTipKeys="H">
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton MaxSize="Medium" Content="Button 9" ToolTip.Tip="Button 9" ribbon:KeyTip.KeyTipKeys="I">
                 <ribbon:RibbonButton.Icon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -261,14 +261,14 @@
               <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 10" ToolTip.Tip="Button 10" ribbon:KeyTip.KeyTipKeys="J">
                 <ribbon:RibbonButton.LargeIcon>
                   <Grid Width="32" Height="32">
-                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="20" Height="20" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
@@ -279,14 +279,14 @@
             <ribbon:RibbonGroupBox Header="Test Group 4" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
               <ribbon:RibbonButton Content="Button 11" MinSize="Medium" ToolTip.Tip="Button 11" ribbon:KeyTip.KeyTipKeys="A">
                 <ribbon:RibbonButton.LargeIcon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
                   </Rectangle>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -296,28 +296,28 @@
               <ribbon:RibbonButton Content="Button 12" MinSize="Medium" ToolTip.Tip="Button 12" ribbon:KeyTip.KeyTipKeys="B">
                 <ribbon:RibbonButton.LargeIcon>
                   <Grid Width="32" Height="32">
-                    <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                    <Rectangle Width="24" Height="24" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2,0"/>
                   </Grid>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                    <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2,0"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton Content="Button 13" MinSize="Medium" ToolTip.Tip="Button 13" ribbon:KeyTip.KeyTipKeys="C">
                 <ribbon:RibbonButton.LargeIcon>
                   <Grid Width="32" Height="32">
-                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="20" Height="20" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
@@ -326,13 +326,13 @@
               <ribbon:RibbonButton MaxSize="Medium" Content="Button 14" ToolTip.Tip="Button 14" ribbon:KeyTip.KeyTipKeys="D">
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton MaxSize="Medium" Content="Button 15" ToolTip.Tip="Button 15" ribbon:KeyTip.KeyTipKeys="E">
                 <ribbon:RibbonButton.Icon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -341,23 +341,23 @@
               </ribbon:RibbonButton>
               <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 16" ToolTip.Tip="Button 16" ribbon:KeyTip.KeyTipKeys="F">
                 <ribbon:RibbonButton.LargeIcon>
-                  <Path Data="M 0 16 L 16 0 L 32 16 L 16 32 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                  <Path Data="M 0 16 L 16 0 L 32 16 L 16 32 Z" Fill="{Binding $parent[Button].Foreground}"/>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
-                  <Path Data="M 0 8 L 8 0 L 16 8 L 8 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                  <Path Data="M 0 8 L 8 0 L 16 8 L 8 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 17" ToolTip.Tip="Button 17" ribbon:KeyTip.KeyTipKeys="G">
                 <ribbon:RibbonButton.LargeIcon>
                   <Grid Width="32" Height="32">
-                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="20" Height="20" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
@@ -366,13 +366,13 @@
               <ribbon:RibbonButton MaxSize="Medium" Content="Button 18" ToolTip.Tip="Button 18" ribbon:KeyTip.KeyTipKeys="H">
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton MaxSize="Medium" Content="Button 19" ToolTip.Tip="Button 19" ribbon:KeyTip.KeyTipKeys="I">
                 <ribbon:RibbonButton.Icon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -382,14 +382,14 @@
               <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 20" ToolTip.Tip="Button 20" ribbon:KeyTip.KeyTipKeys="J">
                 <ribbon:RibbonButton.LargeIcon>
                   <Grid Width="32" Height="32">
-                    <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="20" Height="20" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.LargeIcon>
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                    <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                    <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                    <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
@@ -401,7 +401,7 @@
             <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
               <ribbon:RibbonButton Content="Large" MinSize="Large" MaxSize="Large">
                 <ribbon:RibbonButton.LargeIcon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -411,14 +411,14 @@
               <ribbon:RibbonButton Content="Medium" MinSize="Medium" MaxSize="Medium">
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
               <ribbon:RibbonButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
                 <ribbon:RibbonButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonButton.Icon>
               </ribbon:RibbonButton>
@@ -426,7 +426,7 @@
             <ribbon:RibbonGroupBox Header="RibbonToggleButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="T">
               <ribbon:RibbonToggleButton Content="Large" MinSize="Large" MaxSize="Large">
                 <ribbon:RibbonToggleButton.LargeIcon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -436,14 +436,14 @@
               <ribbon:RibbonToggleButton Content="Medium" MinSize="Medium" MaxSize="Medium">
                 <ribbon:RibbonToggleButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonToggleButton.Icon>
               </ribbon:RibbonToggleButton>
               <ribbon:RibbonToggleButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
                 <ribbon:RibbonToggleButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonToggleButton.Icon>
               </ribbon:RibbonToggleButton>
@@ -451,7 +451,7 @@
             <ribbon:RibbonGroupBox Header="RibbonDropDownButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
               <ribbon:RibbonDropDownButton Content="Large" MinSize="Large" MaxSize="Large">
                 <ribbon:RibbonDropDownButton.LargeIcon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -463,7 +463,7 @@
               <ribbon:RibbonDropDownButton Content="Medium" MinSize="Medium" MaxSize="Medium">
                 <ribbon:RibbonDropDownButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonDropDownButton.Icon>
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
@@ -472,7 +472,7 @@
               <ribbon:RibbonDropDownButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
                 <ribbon:RibbonDropDownButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonDropDownButton.Icon>
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
@@ -482,7 +482,7 @@
             <ribbon:RibbonGroupBox Header="RibbonSplitButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
               <ribbon:RibbonSplitButton Content="Large" MinSize="Large" MaxSize="Large">
                 <ribbon:RibbonSplitButton.LargeIcon>
-                  <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                  <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
                     <Rectangle.OpacityMask>
                       <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                     </Rectangle.OpacityMask>
@@ -494,7 +494,7 @@
               <ribbon:RibbonSplitButton Content="Medium" MinSize="Medium" MaxSize="Medium">
                 <ribbon:RibbonSplitButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 16 0 L 8 8 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonSplitButton.Icon>
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
@@ -503,7 +503,7 @@
               <ribbon:RibbonSplitButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small">
                 <ribbon:RibbonSplitButton.Icon>
                   <Grid Width="16" Height="16">
-                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                    <Path Data="M 0 0 L 8 8 L 16 0 L 16 16 L 0 16 Z" Fill="{Binding $parent[Button].Foreground}"/>
                   </Grid>
                 </ribbon:RibbonSplitButton.Icon>
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
@@ -716,7 +716,7 @@
                 <ribbon:RibbonButton Content="On" MinSize="Large" ToolTip.Tip="On" ribbon:KeyTip.KeyTipKeys="A">
                   <ribbon:RibbonButton.LargeIcon>
                     <Panel Width="32" Height="32">
-                      <Ellipse Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="4" Margin="2,4,2,0">
+                      <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="4" Margin="2,4,2,0">
                         <Ellipse.Clip>
                           <PathGeometry>
                             <PathFigure StartPoint="0,0" IsClosed="True">
@@ -731,15 +731,15 @@
                           </PathGeometry>
                         </Ellipse.Clip>
                       </Ellipse>
-                      <Rectangle Width="4" Margin="0,0,0,9" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                      <Rectangle Width="4" Margin="0,0,0,9" Fill="{Binding $parent[Button].Foreground}"/>
                     </Panel>
                   </ribbon:RibbonButton.LargeIcon>
                 </ribbon:RibbonButton>
                 <ribbon:RibbonButton Content="Off" MinSize="Large" ToolTip.Tip="Off" ribbon:KeyTip.KeyTipKeys="B">
                   <ribbon:RibbonButton.LargeIcon>
                     <Panel Width="32" Height="32">
-                      <Ellipse Stroke="{DynamicResource ThemeForegroundBrush}" StrokeThickness="4"/>
-                      <Rectangle Width="4" Margin="0,9" Fill="{DynamicResource ThemeForegroundBrush}"/>
+                      <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="4"/>
+                      <Rectangle Width="4" Margin="0,9" Fill="{Binding $parent[Button].Foreground}"/>
                     </Panel>
                   </ribbon:RibbonButton.LargeIcon>
                 </ribbon:RibbonButton>
@@ -751,18 +751,18 @@
               <ribbon:RibbonGroupBox Header="Group" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
                 <ribbon:RibbonButton Content="Yes" MinSize="Large" ToolTip.Tip="Yes" ribbon:KeyTip.KeyTipKeys="A">
                   <ribbon:RibbonButton.LargeIcon>
-                    <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32"/>
+                    <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32"/>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.Icon>
-                    <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16"/>
+                    <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16"/>
                   </ribbon:RibbonButton.Icon>
                 </ribbon:RibbonButton>
                 <ribbon:RibbonButton Content="No" MinSize="Large" ToolTip.Tip="No" ribbon:KeyTip.KeyTipKeys="B">
                   <ribbon:RibbonButton.LargeIcon>
-                    <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32"/>
+                    <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32"/>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.Icon>
-                    <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16"/>
+                    <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16"/>
                   </ribbon:RibbonButton.Icon>
                 </ribbon:RibbonButton>
               </ribbon:RibbonGroupBox>
@@ -775,14 +775,14 @@
               <ribbon:RibbonGroupBox Header="Another bloody group" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
                 <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A">
                   <ribbon:RibbonButton.LargeIcon>
-                    <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                    <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
                       <Rectangle.OpacityMask>
                         <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                       </Rectangle.OpacityMask>
                     </Rectangle>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.Icon>
-                    <Rectangle Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                    <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
                       <Rectangle.OpacityMask>
                         <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                       </Rectangle.OpacityMask>
@@ -792,28 +792,28 @@
                 <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B">
                   <ribbon:RibbonButton.LargeIcon>
                     <Grid Width="32" Height="32">
-                      <Rectangle Width="24" Height="24" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                      <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                      <Rectangle Width="24" Height="24" Fill="{Binding $parent[Button].Foreground}"/>
+                      <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2,0"/>
                     </Grid>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.Icon>
                     <Grid Width="16" Height="16">
-                      <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                      <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2,0"/>
+                      <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                      <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2,0"/>
                     </Grid>
                   </ribbon:RibbonButton.Icon>
                 </ribbon:RibbonButton>
                 <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C">
                   <ribbon:RibbonButton.LargeIcon>
                     <Grid Width="32" Height="32">
-                      <Rectangle Width="20" Height="20" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                      <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                      <Rectangle Width="20" Height="20" Fill="{Binding $parent[Button].Foreground}"/>
+                      <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                     </Grid>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.Icon>
                     <Grid Width="16" Height="16">
-                      <Rectangle Width="8" Height="8" Fill="{DynamicResource ThemeForegroundBrush}"/>
-                      <Border BorderBrush="{DynamicResource ThemeForegroundBrush}" BorderThickness="2"/>
+                      <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
+                      <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2"/>
                     </Grid>
                   </ribbon:RibbonButton.Icon>
                 </ribbon:RibbonButton>
@@ -827,14 +827,14 @@
               <ribbon:RibbonGroupBox Header="lmao" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
                 <ribbon:RibbonButton Content="no u" MinSize="Small" ToolTip.Tip="no u" ribbon:KeyTip.KeyTipKeys="N">
                   <ribbon:RibbonButton.LargeIcon>
-                    <Ellipse Fill="{DynamicResource ThemeForegroundBrush}" Width="32" Height="32">
+                    <Ellipse Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
                       <Ellipse.OpacityMask>
                         <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                       </Ellipse.OpacityMask>
                     </Ellipse>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.Icon>
-                    <Ellipse Fill="{DynamicResource ThemeForegroundBrush}" Width="16" Height="16">
+                    <Ellipse Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
                       <Ellipse.OpacityMask>
                         <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
                       </Ellipse.OpacityMask>
@@ -859,7 +859,7 @@
       <CheckBox IsChecked="{Binding ShowContextualGroup1}" Content="Show Contextual tab group 1"/>
       <CheckBox IsChecked="{Binding ShowContextualGroup2}" Content="Show Contextual tab group 2"/>
       <CheckBox IsChecked="{Binding ShowContextualGroup3}" Content="Show Contextual tab group 3, which has a very long name so you can easily see that its only tab's width does not prohibit the group from getting wider as needed"/>
-      <Button x:Name="TestItemsButton" Content="Test"/>
+      <!--Button x:Name="TestItemsButton" Content="Test"/-->
     </StackPanel>
   </DockPanel>
 </ribbon:RibbonWindow>
