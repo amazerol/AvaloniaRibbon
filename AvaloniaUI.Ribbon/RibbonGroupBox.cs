@@ -21,7 +21,7 @@ namespace AvaloniaUI.Ribbon
     {
         public static readonly DirectProperty<RibbonGroupBox, ICommand> CommandProperty;
         public static readonly StyledProperty<object> CommandParameterProperty = AvaloniaProperty.Register<RibbonGroupBox, object>(nameof(CommandParameter));
-        public static readonly StyledProperty<GroupDisplayMode> DisplayModeProperty = StyledProperty<RibbonGroupBox>.Register<RibbonGroupBox, GroupDisplayMode>(nameof(DisplayMode), GroupDisplayMode.Large);
+        public static readonly StyledProperty<GroupDisplayMode> DisplayModeProperty = StyledProperty<RibbonGroupBox>.Register<RibbonGroupBox, GroupDisplayMode>(nameof(DisplayMode), GroupDisplayMode.Small);
         
         public GroupDisplayMode DisplayMode
         {

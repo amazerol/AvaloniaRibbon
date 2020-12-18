@@ -62,20 +62,18 @@ namespace AvaloniaUI.Ribbon
             var window = this;
             try
             {
-                var titleBar = GetControl<Control>(e, "TitleBar");
+                var titleBar = GetControl<Control>(e, "PART_TitleBar");
 
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {
-
-                    titleBar.DoubleTapped += delegate
-                    {
-                        window.WindowState = ((Window)this.GetVisualRoot()).WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-                    };
-                }
+                /*if (Environment.OSVersion.Platform == PlatformID.Win32NT)
+                {*/
+                //}
 
                 titleBar.PointerPressed += (object sender, PointerPressedEventArgs ep) =>
                 {
-                    window.PlatformImpl?.BeginMoveDrag(ep);
+                    if (ep.ClickCount > 1)
+                        window.WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+                    else
+                        window.PlatformImpl?.BeginMoveDrag(ep);
                 };
 
                 try
@@ -126,7 +124,7 @@ namespace AvaloniaUI.Ribbon
                 {
                     return new Bitmap(stream);
                 }
-                catch (ArgumentNullException ex)
+                catch (ArgumentNullException)
                 {
                     try
                     {
@@ -136,7 +134,7 @@ namespace AvaloniaUI.Ribbon
                         bmp.Save(stream, ImageFormat.Png);
                         return new Bitmap(stream);
                     }
-                    catch (ArgumentException e)
+                    catch (ArgumentException)
                     {
                         Icon icon = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
                         System.Drawing.Bitmap bmp = icon.ToBitmap();

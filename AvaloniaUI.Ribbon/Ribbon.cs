@@ -16,6 +16,7 @@ using System.Diagnostics;
 using Avalonia.Controls.Presenters;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
+using Avalonia.Controls.Generators;
 
 namespace AvaloniaUI.Ribbon
 {
@@ -35,6 +36,8 @@ namespace AvaloniaUI.Ribbon
         public static readonly StyledProperty<IRibbonMenu> MenuProperty = AvaloniaProperty.Register<Ribbon, IRibbonMenu>(nameof(Menu));
         public static readonly StyledProperty<bool> IsMenuOpenProperty;
         public static readonly DirectProperty<Ribbon, ObservableCollection<RibbonGroupBox>> SelectedGroupsProperty = AvaloniaProperty.RegisterDirect<Ribbon, ObservableCollection<RibbonGroupBox>>(nameof(SelectedGroups), o => o.SelectedGroups, (o, v) => o.SelectedGroups = v);
+
+        public static readonly DirectProperty<Ribbon, ObservableCollection<Control>> TabsProperty = AvaloniaProperty.RegisterDirect<Ribbon, ObservableCollection<Control>>(nameof(Tabs), o => o.Tabs, (o, v) => o.Tabs = v);
         
         public static readonly DirectProperty<Ribbon, ICommand> HelpButtonCommandProperty;
         ICommand _helpCommand;
@@ -72,16 +75,50 @@ namespace AvaloniaUI.Ribbon
             
             HelpButtonCommandProperty = AvaloniaProperty.RegisterDirect<Ribbon, ICommand>(nameof(HelpButtonCommand), o => o.HelpButtonCommand, (o, v) => o.HelpButtonCommand = v);
 
-            BoundsProperty.Changed.AddClassHandler<RibbonGroupsStackPanel>((sender, e) => sender.InvalidateMeasure());
+            //BoundsProperty.Changed.AddClassHandler<RibbonGroupsStackPanel>((sender, e) => sender.InvalidateMeasure());
+
+            TabsProperty.Changed.AddClassHandler<Ribbon>((sender, e) => sender.RefreshTabs());
         }
 
+        RibbonTab _prevSelectedTab = null;
         void RefreshSelectedGroups()
         {
             SelectedGroups.Clear();
+            if (_prevSelectedTab != null)
+            {
+                _prevSelectedTab.IsSelected = false;
+                _prevSelectedTab = null;
+            }
+            
             if ((SelectedItem != null) && (SelectedItem is RibbonTab tab))
             {
                 foreach (RibbonGroupBox box in tab.Groups)
                     SelectedGroups.Add(box);
+                
+                var last = SelectedGroups.Last();
+                SelectedGroups.Remove(last);
+                SelectedGroups.Add(last);
+                
+                if (tab.IsContextual)
+                {
+                    tab.IsSelected = true;
+                    _prevSelectedTab = tab;
+                }
+            }
+        }
+
+        void RefreshTabs()
+        {
+            ((AvaloniaList<object>)Items).Clear();
+            foreach (Control ctrl in Tabs)
+            {
+                if (ctrl is RibbonContextualTabGroup ctx)
+                {
+                    foreach (RibbonTab tb in ctx.Items)
+                        ((AvaloniaList<object>)Items).Add(tb);
+                }
+                else if (ctrl is RibbonTab tab)
+                    ((AvaloniaList<object>)Items).Add(tab);
             }
         }
 
@@ -109,8 +146,6 @@ namespace AvaloniaUI.Ribbon
 
         protected IMenuInteractionHandler InteractionHandler { get; }
 
-        private ObservableCollection<RibbonGroupBox> _selectedGroups = new ObservableCollection<RibbonGroupBox>();
-
         public static readonly RoutedEvent<RoutedEventArgs> MenuClosedEvent = RoutedEvent.Register<Ribbon, RoutedEventArgs>(nameof(MenuClosed), RoutingStrategies.Bubble);
         public event EventHandler<RoutedEventArgs> MenuClosed
         {
@@ -118,11 +153,21 @@ namespace AvaloniaUI.Ribbon
             remove { RemoveHandler(MenuClosedEvent, value); }
         }
 
+        private ObservableCollection<RibbonGroupBox> _selectedGroups = new ObservableCollection<RibbonGroupBox>();
         public ObservableCollection<RibbonGroupBox> SelectedGroups
         {
             get => _selectedGroups;
             set => SetAndRaise(SelectedGroupsProperty, ref _selectedGroups, value);
         }
+
+        
+        private ObservableCollection<Control> _tabs = new ObservableCollection<Control>();
+        public ObservableCollection<Control> Tabs
+        {
+            get => _tabs;
+            set => SetAndRaise(TabsProperty, ref _tabs, value);
+        }
+
 
         Type IStyleable.StyleKey => typeof(Ribbon);
 
@@ -222,6 +267,7 @@ namespace AvaloniaUI.Ribbon
             if ((inputRoot != null) && (inputRoot is WindowBase wnd))
                 wnd.Deactivated += InputRoot_Deactivated;
             
+            RefreshTabs();
             RefreshSelectedGroups();
         }
 
@@ -363,7 +409,7 @@ namespace AvaloniaUI.Ribbon
                 if (IsCollapsed)
                 {
                     RibbonTab mouseOverItem = null;
-                    foreach (RibbonTab tab in _itemHeadersPresenter.Items)
+                    foreach (RibbonTab tab in Items)
                     {
                         if (tab.IsPointerOver)
                         {
@@ -371,6 +417,7 @@ namespace AvaloniaUI.Ribbon
                             break;
                         }
                     }
+                    
                     if (mouseOverItem != null)
                     {
                         if (SelectedItem != mouseOverItem)
@@ -379,6 +426,17 @@ namespace AvaloniaUI.Ribbon
                             IsCollapsedPopupOpen = true;
                         else
                             secondClick = false;
+                    }
+                }
+                else
+                {
+                    foreach (RibbonTab tab in Items)
+                    {
+                        if (tab.IsPointerOver && tab.IsContextual)
+                        {
+                            SelectedItem = tab;
+                            break;
+                        }
                     }
                 }
             };
@@ -411,6 +469,11 @@ namespace AvaloniaUI.Ribbon
                 _flyoutPresenter.Content = _groupsHost;
             else
                 _mainPresenter.Content = _groupsHost;
+        }
+        
+        protected override IItemContainerGenerator CreateItemContainerGenerator()
+        {
+            return new ItemContainerGenerator(this);
         }
     }
 }

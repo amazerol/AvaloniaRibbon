@@ -23,17 +23,26 @@
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
     <Setter Property="Template">
       <ControlTemplate>
-          <DockPanel Background="Transparent">
-            <DockPanel Background="{TemplateBinding HeaderBackground}" DockPanel.Dock="Top">
-              <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Left"/>
-              <Button Name="HelpButton" Classes="RibbonHelpButton" Width="34" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Right">
-                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="?" FontWeight="Black" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
-              </Button>
-              <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Right">
-                <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="4"/>
-              </ToggleButton>
-              <ItemsPresenter Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}"/>
-            </DockPanel>
+          <DockPanel Background="Transparent" Margin="0,30,0,0">
+            <Panel DockPanel.Dock="Top">
+            <Rectangle Fill="{TemplateBinding HeaderBackground}" Margin="0,-30,0,0" IsHitTestVisible="False"/>
+              <DockPanel x:Name="HeaderDockPanel">
+                <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Left"/>
+                <Button Name="HelpButton" Classes="RibbonHelpButton" Width="34" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Right">
+                  <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="?" FontWeight="Black" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
+                </Button>
+                <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Right">
+                  <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="4"/>
+                </ToggleButton>
+                <ItemsPresenter x:Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Items="{TemplateBinding Tabs}">
+                  <ItemsPresenter.ItemsPanel>
+                    <ItemsPanelTemplate>
+                      <StackPanel x:Name="PART_TabsPanel" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                    </ItemsPanelTemplate>
+                  </ItemsPresenter.ItemsPanel>
+                </ItemsPresenter>
+              </DockPanel>
+            </Panel>
             <Panel DockPanel.Dock="Top">
               <Rectangle x:Name="SeparatorRectangle" Fill="{TemplateBinding BorderBrush}" HorizontalAlignment="Stretch" Height="1" IsVisible="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=OneWay}"/>
               <Popup x:Name="PART_CollapsedContentPopup" PlacementTarget="{Binding ElementName=SeparatorRectangle}" Width="{Binding Path=Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}" Height="92" PlacementMode="Bottom" StaysOpen="False" VerticalOffset="-1" IsOpen="{Binding IsCollapsedPopupOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
@@ -80,7 +89,7 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Grid ColumnDefinitions="34,*">
-          <DockPanel Background="{TemplateBinding HeaderBackground}" Grid.Column="0">
+          <DockPanel Grid.Column="0" Background="{TemplateBinding HeaderBackground}">
             <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Top"/>
             <Button Name="HelpButton" Classes="RibbonHelpButton" HorizontalAlignment="Stretch" Height="34" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Bottom">
               <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="?" FontWeight="Black" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
@@ -92,7 +101,14 @@
               <LayoutTransformControl.LayoutTransform>
                 <RotateTransform Angle="-90"/>
               </LayoutTransformControl.LayoutTransform>
-              <ItemsPresenter Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Items="{TemplateBinding Items}" ItemsPanel="{TemplateBinding ItemsPanel}" ItemTemplate="{TemplateBinding ItemTemplate}"/>
+              
+              <ItemsPresenter Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Items="{TemplateBinding Tabs}">
+                <ItemsPresenter.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel x:Name="PART_TabsPanel" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                  </ItemsPanelTemplate>
+                </ItemsPresenter.ItemsPanel>
+              </ItemsPresenter>
             </LayoutTransformControl>
             <Popup x:Name="PART_CollapsedContentPopup" Height="{Binding Path=Bounds.Height, RelativeSource={RelativeSource Mode=TemplatedParent}}" Width="138" PlacementMode="Right" StaysOpen="False" IsOpen="{Binding IsCollapsedPopupOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
               <!--PlacementTarget="{Binding ElementName=SeparatorRectangle}"-->
@@ -123,6 +139,13 @@
   <Style Selector="local|Ribbon[IsCollapsed=True] /template/ Popup[IsOpen=True] ItemsPresenter#PART_PopupSelectedGroupsHost">
     <Setter Property="Items" Value="{Binding Path=SelectedGroups, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
   </Style-->
+  <!--Style Selector="local|Ribbon[Orientation=Horizontal] /template/ DockPanel#HeaderDockPanel :is(Control),
+                  local|Ribbon[Orientation=Horizontal] /template/ ItemsPresenter#PART_ItemsPresenter /template/ :is(Panel)#PART_TabsPanel :is(Control)">
+    <Setter Property="VerticalAlignment" Value="Bottom"/>
+  </Style-->
+  <Style Selector="local|RibbonWindow[HasSystemDecorations=False] local|Ribbon[Orientation=Horizontal]">
+    <Setter Property="Margin" Value="0,-30,0,0"/>
+  </Style>
   <Style Selector="local|Ribbon /template/ Button.RibbonHelpButton">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>

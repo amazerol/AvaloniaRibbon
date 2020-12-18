@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Layout;
+using Avalonia.LogicalTree;
 using Avalonia.Threading;
 using System;
 using System.Collections.Generic;
@@ -32,21 +33,31 @@ namespace AvaloniaUI.Ribbon
             LayoutUpdated += (sneder, args) => UpdateLayoutState();
         }*/
 
-        protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
-        {
-            base.OnAttachedToVisualTree(e);
-            SizeControls();
-        }
-
-        protected override void ChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
+        /*protected override void ChildrenChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             base.ChildrenChanged(sender, e);
+            SizeControls();
+        }*/
+
+        protected override void OnAttachedToLogicalTree(LogicalTreeAttachmentEventArgs e)
+        {
+            base.OnAttachedToLogicalTree(e);
+            /*Measure(Bounds.Size);
+            Arrange(Bounds);*/
+            
             SizeControls();
         }
 
         protected override void LogicalChildrenCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             base.LogicalChildrenCollectionChanged(sender, e);
+            
+            /*foreach (RibbonGroupBox box in Children.OfType<RibbonGroupBox>())
+                box.DisplayMode = GroupDisplayMode.Small;*/
+            
+            Size size = new Size(double.PositiveInfinity, double.PositiveInfinity);
+            //Measure(size);
+            SizeControls(size);
             SizeControls();
         }
         

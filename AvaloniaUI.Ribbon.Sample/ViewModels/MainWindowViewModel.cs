@@ -28,8 +28,6 @@ namespace AvaloniaUI.Ribbon.Samples.ViewModels
 
         string _lastActionText = "none";
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public string LastActionText
         {
             get => _lastActionText;
@@ -39,6 +37,45 @@ namespace AvaloniaUI.Ribbon.Samples.ViewModels
                 NotifyPropertyChanged();
             }
         }
+
+        bool _showContextualGroup1 = true;
+
+        public bool ShowContextualGroup1
+        {
+            get => _showContextualGroup1;
+            set
+            {
+                _showContextualGroup1 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        bool _showContextualGroup2 = false;
+
+        public bool ShowContextualGroup2
+        {
+            get => _showContextualGroup2;
+            set
+            {
+                _showContextualGroup2 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        bool _showContextualGroup3 = false;
+
+        public bool ShowContextualGroup3
+        {
+            get => _showContextualGroup3;
+            set
+            {
+                _showContextualGroup3 = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public void NotifyPropertyChanged([CallerMemberName]string propertyName = "")
         {

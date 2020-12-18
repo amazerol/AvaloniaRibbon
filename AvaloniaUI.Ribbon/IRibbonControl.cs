@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using System;
@@ -32,6 +33,22 @@ namespace AvaloniaUI.Ribbon
         {
             get;
             set;
+        }
+
+        public static Ribbon GetParentRibbon(IControl control)
+        {
+            IControl parentRbn = control.Parent;
+            while (!(parentRbn is Ribbon))
+            {
+                parentRbn = parentRbn.Parent;
+                if (parentRbn == null)
+                    break;
+            }
+            
+            if (parentRbn is Ribbon ribbon)
+                return ribbon;
+            else
+                return null;
         }
     }
 }
