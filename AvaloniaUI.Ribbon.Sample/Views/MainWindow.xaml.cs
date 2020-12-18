@@ -6,6 +6,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Markup.Xaml.Styling;
 using System;
+using Avalonia.Media;
 
 namespace AvaloniaUI.Ribbon.Samples.Views
 {
@@ -14,7 +15,6 @@ namespace AvaloniaUI.Ribbon.Samples.Views
         public MainWindow()
         {
             InitializeComponent();
-            //this.FindName<CheckBox>("VerticalRibbonCheckBox").
             Ribbon ribbon = this.Find<Ribbon>("RibbonControl");
             Button verticalRibbonButton = this.Find<Button>("VerticalRibbonButton");
             Button horizontalRibbonButton = this.Find<Button>("HorizontalRibbonButton");

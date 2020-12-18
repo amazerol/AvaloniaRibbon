@@ -1,5 +1,6 @@
 ﻿<ribbon:RibbonWindow
     x:Class="AvaloniaUI.Ribbon.Samples.Views.MainWindow"
+    x:Name="MainWindow"
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -11,9 +12,56 @@
     Height="640"
     MinWidth="500"
     MinHeight="500"
-    HasSystemDecorations="false" BorderBrush="#2b579a" TitleBarBackground="#2b579a" TitleBarForeground="#ffffff"
+    HasSystemDecorations="false" BorderBrush="#FF2B579A"  TitleBarForeground="White"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
+  <ribbon:RibbonWindow.TitleBarBackground>
+    <VisualBrush Stretch="None" AlignmentX="Left" AlignmentY="Top">
+      <VisualBrush.Visual>
+        <Panel Background="{DynamicResource FillBrush}" Width="{Binding #MainWindow.Bounds.Width}" Height="{Binding #MainWindow.Bounds.Height}">
+          <Panel.Resources>
+            <SolidColorBrush x:Key="FillBrush">#FF2B579A</SolidColorBrush>
+            <SolidColorBrush x:Key="LineBrush">#FF274F8C</SolidColorBrush>
+            <!--16000000-->
+          </Panel.Resources>
+          <Panel.Styles>
+            <Style Selector="Path">
+              <Setter Property="Stroke" Value="{DynamicResource LineBrush}"/>
+              <Setter Property="StrokeThickness" Value="4"/>
+              <Setter Property="StrokeJoin" Value="Round"/>
+            </Style>
+
+            <Style Selector="Ellipse">
+              <Setter Property="Fill" Value="{DynamicResource FillBrush}"/>
+              <Setter Property="Stroke" Value="{DynamicResource LineBrush}"/>
+              <Setter Property="StrokeThickness" Value="3"/>
+              <Setter Property="Width" Value="10"/>
+              <Setter Property="Height" Value="10"/>
+            </Style>
+          </Panel.Styles>
+          <Canvas Width="456" Height="60" HorizontalAlignment="Right" VerticalAlignment="Top" ClipToBounds="True">
+            <Path Data="M 14 6 L 194 6 L 249 45 L 340 45 L 362 21 L 480 21"/>
+            <Ellipse Canvas.Left="9" Canvas.Top="1"/>
+            <Ellipse Canvas.Left="168" Canvas.Top="1"/>
+
+            <Path Data="M 5 50 L 93 50 L 117 33 L 208 33 L 233 50 L 394 50 L 436 -1"/>
+            <Ellipse Canvas.Left="0" Canvas.Top="45"/>
+            <Ellipse Canvas.Left="194" Canvas.Top="28"/>
+
+
+            <Ellipse Width="36" Height="36" StrokeThickness="6" Canvas.Left="13" Canvas.Top="11"/>
+            <Path Data="M 26 36 L 26 24 L 38 24" StrokeThickness="5" StrokeJoin="Miter"/>
+            <Path Data="M 26 24 L 38 36" StrokeThickness="5" StrokeJoin="Miter"/>
+            
+            <Ellipse Width="55" Height="55" StrokeThickness="6" Canvas.Left="232" Canvas.Top="-19"/>
+            <Path Data="M 249 -4 L 269 -4 L 269 16" StrokeThickness="6" StrokeJoin="Miter"/>
+            <Path Data="M 269 -4 L 249 16" StrokeThickness="6" StrokeJoin="Miter"/>
+          </Canvas>
+        </Panel>
+      </VisualBrush.Visual>
+    </VisualBrush>
+  </ribbon:RibbonWindow.TitleBarBackground>
+  <!--TitleBarBackground="#2B579A"-->
   <ribbon:RibbonWindow.DataContext>
     <vm:MainWindowViewModel />
   </ribbon:RibbonWindow.DataContext>
@@ -662,12 +710,12 @@
                           <PathGeometry>
                             <PathFigure StartPoint="0,0" IsClosed="True">
                                 <LineSegment Point="8,0"/>
-                                <LineSegment Point="8,10"/>
-                                <LineSegment Point="18,10"/>
-                                <LineSegment Point="18,0"/>
-                                <LineSegment Point="26,0"/>
-                                <LineSegment Point="26,26"/>
-                                <LineSegment Point="0,26"/>
+                                <LineSegment Point="8,11"/>
+                                <LineSegment Point="19,11"/>
+                                <LineSegment Point="19,0"/>
+                                <LineSegment Point="28,0"/>
+                                <LineSegment Point="28,28"/>
+                                <LineSegment Point="0,28"/>
                             </PathFigure>
                           </PathGeometry>
                         </Ellipse.Clip>

@@ -219,40 +219,100 @@ namespace AvaloniaUI.Ribbon
         protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
         {
             int newIndex = SelectedIndex;
-            bool switchTabs = false; 
+            bool switchTabs = false;
             if (ItemCount > 1)
             {
                 if (((Orientation == Orientation.Horizontal) && (e.Delta.Y > 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y < 0)))
                 {
-                    while (newIndex > 0)
+                    /*while (newIndex > 0)
                     {
                         newIndex--;
                         var newTab = Items.OfType<RibbonTab>().ElementAt(newIndex);
-                        if (newTab.IsVisible && newTab.IsEnabled)
+                        if (newTab.IsEffectivelyVisible && newTab.IsEnabled)
                         {
                             switchTabs = true;
                             break;
                         }
-                    }
+                    }*/
+                    CycleTabs(false);
                 }
                 else if (((Orientation == Orientation.Horizontal) && (e.Delta.Y < 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y > 0)))
                 {
-                    while (newIndex < (ItemCount - 1))
+                    /*while (newIndex < (ItemCount - 1))
                     {
                         newIndex++;
                         var newTab = Items.OfType<RibbonTab>().ElementAt(newIndex);
-                        if (newTab.IsVisible && newTab.IsEnabled)
+                        if (newTab.IsEffectivelyVisible && newTab.IsEnabled)
                         {
                             switchTabs = true;
                             break;
                         }
-                    }
+                    }*/
+                    CycleTabs(true);
                 }
             }
-            if (switchTabs)
-                SelectedIndex = newIndex;
+            /*if (switchTabs)
+                SelectedIndex = newIndex;*/
 
             base.OnPointerWheelChanged(e);
+        }
+
+        public void CycleTabs(bool forward)
+        {
+            bool switchTabs = false; 
+            //var tabs = ((AvaloniaList<object>)Items).OfType<RibbonTab>().Where(x => x.IsEffectivelyVisible && x.IsEnabled);
+            int newIndex = SelectedIndex;
+            Action stepIndex;
+            Func<bool> verifyIndex;
+            
+            if (forward)
+            {
+                stepIndex = () => newIndex++;
+                verifyIndex = () => newIndex < (ItemCount - 1);
+            }
+            else
+            {
+                stepIndex = () => newIndex--;
+                verifyIndex = () => newIndex > 0;
+            }
+            
+            
+            
+            /*while (newIndex < ((AvaloniaList<object>)Items).Count)
+            {
+                step();
+                RibbonTab newSel = (RibbonTab)(((AvaloniaList<object>)Items).ElementAt(newIndex));
+                bool contextualVisible = true;
+                if (newSel.IsContextual)
+                    contextualVisible = (newSel.Parent as RibbonContextualTabGroup).IsVisible;
+                if (newSel.IsVisible && newSel.IsEnabled && contextualVisible)
+                {
+                    SelectedIndex = newIndex;
+                    break;
+                }
+            }*/
+            while (verifyIndex())
+            {
+                stepIndex();
+                var newTab = Items.OfType<RibbonTab>().ElementAt(newIndex);
+
+                bool contextualVisible = true;
+                if (newTab.IsContextual)
+                    contextualVisible = (newTab.Parent as RibbonContextualTabGroup).IsVisible;
+                if (newTab.IsEffectivelyVisible && newTab.IsEnabled && contextualVisible)
+                {
+                    switchTabs = true;
+                    break;
+                }
+            }
+
+            if (switchTabs)
+                SelectedIndex = newIndex;
+        }
+
+        public void GoToPreviousTab()
+        {
+            var tabs = ((AvaloniaList<object>)Items).OfType<RibbonTab>().Where(x => x.IsEffectivelyVisible && x.IsEnabled);   
         }
 
         protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)

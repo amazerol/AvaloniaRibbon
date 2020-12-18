@@ -33,7 +33,10 @@
                 Content="{TemplateBinding Header}"
                 TextBlock.Foreground="{TemplateBinding Foreground}"
                 ContentTemplate="{TemplateBinding HeaderTemplate}"/>
-            <Border Name="SelectedBorder" BorderBrush="{TemplateBinding Foreground}" BorderThickness="0,0,0,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Border x:Name="SelectedBorder" BorderBrush="{TemplateBinding Foreground}" BorderThickness="0,0,0,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Panel IsVisible="{TemplateBinding IsContextual}" Opacity="0.25">
+              <Border x:Name="ContextualSelectedBorder" BorderThickness="{Binding #SelectedBorder.BorderThickness}" HorizontalAlignment="{Binding #SelectedBorder.HorizontalAlignment}" VerticalAlignment="{Binding #SelectedBorder.VerticalAlignment}" IsVisible="{Binding #SelectedBorder.IsVisible}" Opacity="{Binding #SelectedBorder.Opacity}"/>
+            </Panel>
           </Grid>
         </Border>
       </ControlTemplate>
@@ -45,11 +48,8 @@
   <Style Selector="local|Ribbon[IsCollapsed=true][IsCollapsedPopupOpen=false] local|RibbonTab /template/ Border#SelectedBorder">
     <Setter Property="BorderBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
   </Style-->
-  <Style Selector="local|RibbonTab:not(:selected):not(:pointerover):not(:pressed) /template/ Border#SelectedBorder">
-    <Setter Property="IsVisible" Value="False"/>
-    <Setter Property="BorderBrush" Value="Transparent"/>
-  </Style>
-  <Style Selector="local|Ribbon[IsCollapsed=true][IsCollapsedPopupOpen=false] local|RibbonTab:not(:pointerover):not(:pressed) /template/ Border#SelectedBorder">
+  <Style Selector="local|RibbonTab:not(:selected):not(:pointerover):not(:pressed) /template/ Border#SelectedBorder,
+                   local|Ribbon[IsCollapsed=true][IsCollapsedPopupOpen=false] local|RibbonTab:not(:pointerover):not(:pressed) /template/ Border#SelectedBorder">
     <Setter Property="IsVisible" Value="False"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
   </Style>
@@ -58,6 +58,10 @@
   </Style>
   <Style Selector="local|RibbonTab:disabled">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+
+  <Style Selector="local|RibbonTab[IsContextual=True] /template/ Border#ContextualSelectedBorder">
+    <Setter Property="BorderBrush" Value="{Binding $parent[local:RibbonContextualTabGroup].Background}"/>
   </Style>
   <!--Style Selector="local|RibbonWindow local|RibbonTab">
     <Setter Property="BorderBrush" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>

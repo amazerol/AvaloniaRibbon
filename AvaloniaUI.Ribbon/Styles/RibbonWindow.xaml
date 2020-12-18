@@ -1,9 +1,12 @@
 ﻿<Styles
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon">
+    xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon"
+    xmlns:col="clr-namespace:System.Collections">
   <Styles.Resources>
     <local:WindowIconToImageConverter x:Key="WindowIconToImageConverter"/>
+    <!--local:DoubleBindingsToPointConverter x:Key="DoubleBindingsToPointConverter"/>
+    <local:DoubleArithmeticConverter x:Key="DoubleArithmeticConverter"/-->
   </Styles.Resources>
   <Style Selector="local|RibbonWindow">
     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}"/>
@@ -16,16 +19,33 @@
       <ControlTemplate>
         <Grid>
           <Border Classes="OuterBorder">
-            <Grid RowDefinitions="30,*">
+            <Grid x:Name="WindowGrid">
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+              </Grid.RowDefinitions>
+              <Rectangle x:Name="RowDefinitionsHelper" IsHitTestVisible="False" Grid.Row="0"/>
               <Panel x:Name="PART_TitleBar" Grid.Row="0" Background="#01000000">
                 <Rectangle Fill="{TemplateBinding TitleBarBackground}"/>
               </Panel>
-              <ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Background="{TemplateBinding Background}" Grid.Row="1"/>
-              <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Margin="5,0,0,0" Spacing="5" Grid.Row="0">
+              <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Background="{TemplateBinding Background}" Grid.Row="1">
+                <!--ContentPresenter.Clip>
+                  <PathGeometry>
+                    <PathFigure StartPoint="{Binding #PART_ContentPresenter.Bounds.TopLeft, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='0,-60'}" IsClosed="True">
+                      <LineSegment Point="{Binding #PART_ContentPresenter.Bounds.TopRight, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='-135,-60'}"/>
+                      <LineSegment Point="{Binding #PART_ContentPresenter.Bounds.TopRight, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='-135,-30'}"/>
+                      <LineSegment Point="{Binding #PART_ContentPresenter.Bounds.TopRight, Converter={StaticResource BoundsPointToAdjustedPointConverter}, ConverterParameter='0,-30'}"/>
+                      <LineSegment Point="{Binding #PART_ContentPresenter.Bounds.BottomRight, Converter={StaticResource BoundsPointToAdjustedPointConverter}}"/>
+                      <LineSegment Point="{Binding #PART_ContentPresenter.Bounds.BottomLeft, Converter={StaticResource BoundsPointToAdjustedPointConverter}}"/>
+                    </PathFigure>
+                  </PathGeometry>
+                </ContentPresenter.Clip-->
+              </ContentPresenter>
+              <StackPanel x:Name="TitleContent" HorizontalAlignment="Left" Orientation="Horizontal" Margin="5,0,0,0" Spacing="5" Grid.Row="0">
                 <Image Classes="IconImage" Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource WindowIconToImageConverter}}" MaxWidth="16" MaxHeight="16"/>
                 <TextBlock Name="TitleTextBlock" VerticalAlignment="Center" Foreground="{TemplateBinding TitleBarForeground}" Text="{TemplateBinding Title}"/>
               </StackPanel>
-              <StackPanel Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal">
+              <StackPanel x:Name="CaptionButtons" Grid.Row="0" HorizontalAlignment="Right" Orientation="Horizontal">
                 <StackPanel.Styles>
                   <Style Selector="Button">
                     <!--Setter Property="BorderThickness" Value="0" /-->
@@ -39,11 +59,11 @@
                   <Style Selector="Button:not(:pointerover):not(:pressed)">
                     <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
                   </Style>
-                  <Style Selector="Button:pointerover /template/ ContentPresenter">
+                  <Style Selector="Button:pointerover /template/ ContentPresenter#PART_ContentPresenter">
                     <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
                     <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
                   </Style>
-                  <Style Selector="Button:pressed  /template/ ContentPresenter">
+                  <Style Selector="Button:pressed  /template/ ContentPresenter#PART_ContentPresenter">
                     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
                   </Style>
                   <Style Selector="Button > Path">
@@ -171,7 +191,15 @@
   <Style Selector="local|RibbonWindow[WindowState=Maximized] /template/ Border.OuterBorder">
     <Setter Property="BorderThickness" Value="0"/>
   </Style>
-  <Style Selector="local|RibbonWindow[HasSystemDecorations=True] /template/ Grid#TitleBar">
+  <Style Selector="local|RibbonWindow[HasSystemDecorations=False] /template/ Rectangle#RowDefinitionsHelper">
+    <Setter Property="Height" Value="30"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[HasSystemDecorations=True] /template/ Rectangle#RowDefinitionsHelper">
+    <Setter Property="Height" Value="0"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[HasSystemDecorations=True] /template/ Panel#PART_TitleBar,
+                   local|RibbonWindow[HasSystemDecorations=True] /template/ StackPanel#TitleContent,
+                   local|RibbonWindow[HasSystemDecorations=True] /template/ StackPanel#CaptionButtons">
     <Setter Property="IsVisible" Value="False"/>
   </Style>
   <Style Selector="local|RibbonWindow /template/ Grid#ResizeGrid Border">

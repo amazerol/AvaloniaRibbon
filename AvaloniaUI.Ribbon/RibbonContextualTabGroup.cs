@@ -27,11 +27,16 @@ namespace AvaloniaUI.Ribbon
         void SwitchToNextVisibleTab()
         {
             Ribbon rbn = IRibbonControl.GetParentRibbon(this);
-            if (rbn != null)
+            if ((rbn != null) && ((IAvaloniaList<object>)Items).Contains(rbn.SelectedItem))
             {
-                if (((IAvaloniaList<object>)Items).Contains(rbn.SelectedItem))
-                {
-                    var selectableItems = ((IAvaloniaList<object>)rbn.Items).OfType<RibbonTab>().Where(x => x.IsVisible && x.IsEnabled);
+                int selIndex = rbn.SelectedIndex;
+                
+                rbn.CycleTabs(false);
+                
+                if (selIndex == rbn.SelectedIndex)
+                    rbn.CycleTabs(true);
+            }
+                    /*var selectableItems = ((IAvaloniaList<object>)rbn.Items).OfType<RibbonTab>().Where(x => x.IsVisible && x.IsEnabled);
                     RibbonTab targetTab = null;
                     foreach (RibbonTab tab in selectableItems)
                     {
@@ -56,8 +61,7 @@ namespace AvaloniaUI.Ribbon
                     int index = ((IAvaloniaList<object>)rbn.Items).IndexOf(targetTab);
                     rbn.SelectedIndex = index;
                     //if (index > 0)
-                }
-            }
+                    */
         }
 
         protected override void ItemsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
