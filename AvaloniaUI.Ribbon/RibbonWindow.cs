@@ -1,8 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Styling;
@@ -12,34 +14,98 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Runtime.InteropServices;
 using Icon = System.Drawing.Icon;
 
 namespace AvaloniaUI.Ribbon
 {
     public class RibbonWindow : Window, IStyleable
     {
-        public static readonly StyledProperty<IBrush> TitleBarBackgroundProperty;
-        public static readonly StyledProperty<IBrush> TitleBarForegroundProperty;
-        
-        static RibbonWindow()
-        {
-            TitleBarBackgroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarBackground));
-            TitleBarForegroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarForeground));
-        }
-
-        Type IStyleable.StyleKey => typeof(RibbonWindow);
-
+        public static readonly StyledProperty<IBrush> TitleBarBackgroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarBackground));
         public IBrush TitleBarBackground
         {
-            get { return GetValue(TitleBarBackgroundProperty); }
-            set { SetValue(TitleBarBackgroundProperty, value); }
+            get => GetValue(TitleBarBackgroundProperty);
+            set => SetValue(TitleBarBackgroundProperty, value);
         }
 
+        public static readonly StyledProperty<IBrush> TitleBarForegroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarForeground));
         public IBrush TitleBarForeground
         {
-            get { return GetValue(TitleBarForegroundProperty); }
-            set { SetValue(TitleBarForegroundProperty, value); }
+            get => GetValue(TitleBarForegroundProperty);
+            set => SetValue(TitleBarForegroundProperty, value);
         }
+
+        public static readonly StyledProperty<Orientation> OrientationProperty = StackLayout.OrientationProperty.AddOwner<RibbonWindow>();
+        public Orientation Orientation
+        {
+            get => GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
+        }
+
+        static bool UseLeftSideCaptionButtons()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                return true;
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                //TODO: See if there's any sane way of getting  the user's Window manager/decorator/etc and its configuration, and deciding or guessing based on that
+                return false;
+            }
+            else //on Windows
+                return false;
+        }
+        public static readonly StyledProperty<bool> LeftSideCaptionButtonsProperty = AvaloniaProperty.Register<RibbonWindow, bool>(nameof(LeftSideCaptionButtons), UseLeftSideCaptionButtons());
+        public bool LeftSideCaptionButtons
+        {
+            get => GetValue(LeftSideCaptionButtonsProperty);
+            set => SetValue(LeftSideCaptionButtonsProperty, value);
+        }
+
+        public static readonly StyledProperty<Ribbon> RibbonProperty = AvaloniaProperty.Register<RibbonWindow, Ribbon>(nameof(Ribbon), null);
+        public Ribbon Ribbon
+        {
+            get => GetValue(RibbonProperty);
+            set => SetValue(RibbonProperty, value);
+        }
+
+        public static readonly StyledProperty<QuickAccessToolbar> QuickAccessToolbarProperty = Ribbon.QuickAccessToolbarProperty.AddOwner<RibbonWindow>();
+        public QuickAccessToolbar QuickAccessToolbar
+        {
+            get => GetValue(QuickAccessToolbarProperty);
+            set => SetValue(QuickAccessToolbarProperty, value);
+        }
+
+
+        static RibbonWindow()
+        {
+            OrientationProperty.OverrideDefaultValue<RibbonWindow>(Orientation.Horizontal);
+
+            RibbonProperty.Changed.AddClassHandler<RibbonWindow>((sender, e) => sender.RefreshRibbonAndQat(e.NewValue as Ribbon, sender.QuickAccessToolbar));
+            QuickAccessToolbarProperty.Changed.AddClassHandler<RibbonWindow>((sender, e) => sender.RefreshRibbonAndQat(sender.Ribbon, e.NewValue as QuickAccessToolbar));
+        }
+        
+        protected Ribbon _prevRibbon = null;
+        IBinding _prevRibbonBinding = null;
+        protected virtual void RefreshRibbonAndQat(Ribbon newRibbon, QuickAccessToolbar newQat)
+        {
+            if (_prevRibbon != null)
+            {
+                _prevRibbon.QuickAccessToolbar = null;
+                //_prevRibbon[!Ribbon.OrientationProperty] = Binding;
+                
+                _prevRibbon.ClearValue(Ribbon.OrientationProperty);
+            }
+            
+            if (newRibbon != null)
+            {
+                newRibbon.QuickAccessToolbar = newQat;
+                _prevRibbonBinding = newRibbon[!Ribbon.OrientationProperty] = this[!OrientationProperty];
+            }
+            
+
+            _prevRibbon = newRibbon;
+        }
+        
 
         void SetupSide(string name, StandardCursorType cursor, WindowEdge edge, ref TemplateAppliedEventArgs e)
         {
@@ -56,6 +122,7 @@ namespace AvaloniaUI.Ribbon
             return e.NameScope.Get<T>(name);
         }
 
+        
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
@@ -93,21 +160,23 @@ namespace AvaloniaUI.Ribbon
                 }
                 catch { }
 
-                GetControl<Button>(e, "MinimizeButton").Click += delegate
+                GetControl<Button>(e, "PART_MinimizeButton").Click += delegate
                 {
                     window.WindowState = WindowState.Minimized;
                 };
-                GetControl<Button>(e, "MaximizeButton").Click += delegate
+                GetControl<Button>(e, "PART_MaximizeButton").Click += delegate
                 {
                     window.WindowState = window.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
                 };
-                GetControl<Button>(e, "CloseButton").Click += delegate
+                GetControl<Button>(e, "PART_CloseButton").Click += delegate
                 {
                     window.Close();
                 };
             }
             catch (KeyNotFoundException) { }
         }
+
+        Type IStyleable.StyleKey => typeof(RibbonWindow);
     }
 
     public class WindowIconToImageConverter : IValueConverter

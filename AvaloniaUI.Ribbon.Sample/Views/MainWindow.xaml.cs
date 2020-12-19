@@ -15,20 +15,22 @@ namespace AvaloniaUI.Ribbon.Samples.Views
         public MainWindow()
         {
             InitializeComponent();
-            Ribbon ribbon = this.Find<Ribbon>("RibbonControl");
+            //Ribbon ribbon = this.Find<Ribbon>("RibbonControl");
             Button verticalRibbonButton = this.Find<Button>("VerticalRibbonButton");
             Button horizontalRibbonButton = this.Find<Button>("HorizontalRibbonButton");
             verticalRibbonButton.Click += (sneder, args) =>
             {
-                ribbon.Orientation = Orientation.Vertical;
-                DockPanel.SetDock(ribbon, Dock.Left);
+                /*ribbon.Orientation = Orientation.Vertical;
+                DockPanel.SetDock(ribbon, Dock.Left);*/
+                Orientation = Orientation.Vertical;
                 verticalRibbonButton.IsVisible = false;
                 horizontalRibbonButton.IsVisible = true;
             };
             horizontalRibbonButton.Click += (sneder, args) =>
             {
-                ribbon.Orientation = Orientation.Horizontal;
-                DockPanel.SetDock(ribbon, Dock.Top);
+                /*ribbon.Orientation = Orientation.Horizontal;
+                DockPanel.SetDock(ribbon, Dock.Top);*/
+                Orientation = Orientation.Horizontal;
                 horizontalRibbonButton.IsVisible = false;
                 verticalRibbonButton.IsVisible = true;
             };

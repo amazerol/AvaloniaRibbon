@@ -34,7 +34,7 @@
     </Setter>
   </Style>
   <Style Selector="local|RibbonWindow[HasSystemDecorations=False] local|QuickAccessToolbar">
-    <Setter Property="Margin" Value="26,-30,0,0"/>
+    <!--Setter Property="Margin" Value="34,-30,0,0"/-->
     <Setter Property="ZIndex" Value="2"/>
   </Style>
 </Styles>

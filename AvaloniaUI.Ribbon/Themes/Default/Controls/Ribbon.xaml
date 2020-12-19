@@ -152,19 +152,6 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <!--Style Selector="local|Ribbon[IsCollapsed=False] /template/ ItemsPresenter#PART_SelectedGroupsHost">
-    <Setter Property="Items" Value="{Binding Path=SelectedGroups, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style>
-  <Style Selector="local|Ribbon[IsCollapsed=True] /template/ Popup[IsOpen=True] ItemsPresenter#PART_PopupSelectedGroupsHost">
-    <Setter Property="Items" Value="{Binding Path=SelectedGroups, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-  </Style-->
-  <!--Style Selector="local|Ribbon[Orientation=Horizontal] /template/ DockPanel#HeaderDockPanel :is(Control),
-                  local|Ribbon[Orientation=Horizontal] /template/ ItemsPresenter#PART_ItemsPresenter /template/ :is(Panel)#PART_TabsPanel :is(Control)">
-    <Setter Property="VerticalAlignment" Value="Bottom"/>
-  </Style-->
-  <Style Selector="local|RibbonWindow[HasSystemDecorations=False] local|Ribbon[Orientation=Horizontal]">
-    <Setter Property="Margin" Value="0,-30,0,0"/>
-  </Style>
 
   <Style Selector="local|RibbonWindow[HasSystemDecorations=False] local|Ribbon[Orientation=Horizontal] /template/ Border#TabHeadersClipBorder">
     <Setter Property="Clip" Value="{DynamicResource TabHeadersClipBorderClip}"/>

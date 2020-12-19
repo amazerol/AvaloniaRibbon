@@ -22,13 +22,13 @@ namespace AvaloniaUI.Ribbon
 {
     public class Ribbon : TabControl, IStyleable, IMainMenu, IKeyTipHandler
     {
+        public static readonly StyledProperty<Orientation> OrientationProperty = StackLayout.OrientationProperty.AddOwner<Ribbon>();
         public Orientation Orientation
         {
-            get { return GetValue(OrientationProperty); }
-            set { SetValue(OrientationProperty, value); }
+            get => GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
         }
 
-        public static readonly StyledProperty<Orientation> OrientationProperty;
         public static readonly StyledProperty<IBrush> HeaderBackgroundProperty;
         public static readonly StyledProperty<IBrush> HeaderForegroundProperty;
         public static readonly StyledProperty<bool> IsCollapsedProperty;
@@ -52,7 +52,6 @@ namespace AvaloniaUI.Ribbon
 
         static Ribbon()
         {
-            OrientationProperty = StackLayout.OrientationProperty.AddOwner<Ribbon>();
             OrientationProperty.OverrideDefaultValue<Ribbon>(Orientation.Horizontal);
             HeaderBackgroundProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(HeaderBackground));
             HeaderForegroundProperty = AvaloniaProperty.Register<Ribbon, IBrush>(nameof(HeaderForeground));

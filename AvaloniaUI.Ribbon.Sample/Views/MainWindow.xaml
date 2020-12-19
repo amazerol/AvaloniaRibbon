@@ -12,7 +12,7 @@
     Height="640"
     MinWidth="500"
     MinHeight="500"
-    HasSystemDecorations="false" BorderBrush="#FF2B579A"  TitleBarForeground="White"
+    BorderBrush="#FF2B579A"  TitleBarForeground="White"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
   <ribbon:RibbonWindow.Resources>
@@ -115,9 +115,8 @@
       <Setter Property="CommandParameter" Value="{Binding Path=(ToolTip.Tip), RelativeSource={RelativeSource Mode=Self}}"/>
     </Style>
   </ribbon:RibbonWindow.Styles>
-  <DockPanel>
-    <ribbon:QuickAccessToolbar x:Name="QAT" DockPanel.Dock="Top"/>
-    <ribbon:Ribbon x:Name="RibbonControl" QuickAccessToolbar="{Binding #QAT}" DockPanel.Dock="Top" Orientation="Horizontal" HelpButtonCommand="{Binding HelpCommand}">
+  <ribbon:RibbonWindow.Ribbon>
+    <ribbon:Ribbon HelpButtonCommand="{Binding HelpCommand}">
       <ribbon:Ribbon.Menu>
         <ribbon:RibbonMenu RightColumnHeader="Recent stuff" ribbon:KeyTip.KeyTipKeys="F">
           <ribbon:RibbonMenuItem Header="Item 1">
@@ -575,19 +574,22 @@
         </ribbon:RibbonContextualTabGroup>
       </ribbon:Ribbon.Tabs>
     </ribbon:Ribbon>
-    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
-      <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation" IsVisible="False"/>
-      <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
-      <StackPanel Orientation="Horizontal">
-        <TextBlock Text="LAST ACTION: "/>
-        <TextBlock Text="{Binding LastActionText}"/>
-      </StackPanel>
-      <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
-      <!--CheckBox x:Name="LightsOnCheckBox" Content="Lights" IsChecked="True"/-->
-      <CheckBox IsChecked="{Binding ShowContextualGroup1}" Content="Show Contextual tab group 1"/>
-      <CheckBox IsChecked="{Binding ShowContextualGroup2}" Content="Show Contextual tab group 2"/>
-      <CheckBox IsChecked="{Binding ShowContextualGroup3}" Content="Show Contextual tab group 3, which has a very long name so you can easily see that its only tab's width does not prohibit the group from getting wider as needed"/>
-      <!--Button x:Name="TestItemsButton" Content="Test"/-->
+  </ribbon:RibbonWindow.Ribbon>
+  <ribbon:RibbonWindow.QuickAccessToolbar>
+    <ribbon:QuickAccessToolbar/>
+  </ribbon:RibbonWindow.QuickAccessToolbar>
+  <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
+    <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation" IsVisible="False"/>
+    <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
+    <StackPanel Orientation="Horizontal">
+      <TextBlock Text="LAST ACTION: "/>
+      <TextBlock Text="{Binding LastActionText}"/>
     </StackPanel>
-  </DockPanel>
+    <CheckBox IsChecked="{Binding HasSystemDecorations, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Mode=TwoWay}" Content="Use System Decorations"/>
+    <!--CheckBox x:Name="LightsOnCheckBox" Content="Lights" IsChecked="True"/-->
+    <CheckBox IsChecked="{Binding ShowContextualGroup1}" Content="Show Contextual tab group 1"/>
+    <CheckBox IsChecked="{Binding ShowContextualGroup2}" Content="Show Contextual tab group 2"/>
+    <CheckBox IsChecked="{Binding ShowContextualGroup3}" Content="Show Contextual tab group 3, which has a very long name so you can easily see that its only tab's width does not prohibit the group from getting wider as needed"/>
+    <!--Button x:Name="TestItemsButton" Content="Test"/-->
+  </StackPanel>
 </ribbon:RibbonWindow>

@@ -1,0 +1,15 @@
+﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StyleInclude Source="/Themes/Default/Controls/Gallery.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/Ribbon.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/RibbonTab.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/RibbonMenu.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/RibbonWindow.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/RibbonButton.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/RibbonSplitButton.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/RibbonDropDownButton.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/RibbonToggleButton.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/RibbonGroupBox.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/KeyTip.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/RibbonContextualTabGroup.xaml" />
+    <StyleInclude Source="/Themes/Default/Controls/QuickAccessToolbar.xaml" />
+</Styles>
