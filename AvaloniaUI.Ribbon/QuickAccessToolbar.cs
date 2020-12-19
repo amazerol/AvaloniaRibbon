@@ -20,12 +20,20 @@ using Avalonia.Controls.Generators;
 using Avalonia.Data.Converters;
 using System.Globalization;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace AvaloniaUI.Ribbon
 {
     public class QuickAccessToolbar : ItemsControl, IStyleable//, IKeyTipHandler
     {
-        
+        public static readonly DirectProperty<QuickAccessToolbar, ObservableCollection<QuickAccessRecommendation>> RecommendedItemsProperty = AvaloniaProperty.RegisterDirect<QuickAccessToolbar, ObservableCollection<QuickAccessRecommendation>>(nameof(RecommendedItems), o => o.RecommendedItems, (o, v) => o.RecommendedItems = v);
+        private ObservableCollection<QuickAccessRecommendation> _recommendedItems = new ObservableCollection<QuickAccessRecommendation>();
+        public ObservableCollection<QuickAccessRecommendation> RecommendedItems
+        {
+            get => _recommendedItems;
+            set => SetAndRaise(RecommendedItemsProperty, ref _recommendedItems, value);
+        }
 
         static QuickAccessToolbar()
         {
@@ -45,16 +53,34 @@ namespace AvaloniaUI.Ribbon
 
         Type IStyleable.StyleKey => typeof(QuickAccessToolbar);
 
-        /*Panel panel = null;
+        //Panel panel = null;
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
-            panel = e.NameScope.Find<Panel>("PART_ControlsPanel");
+            var more = e.NameScope.Find<ToggleButton>("PART_MoreButton");
+            var morCtx = more.ContextMenu;
+            morCtx.MenuOpened += (sneder, e) => 
+            {
+                if (more.IsChecked != true)
+                    more.IsChecked = true;
 
-            RefreshItems();
+                foreach (QuickAccessRecommendation rcm in RecommendedItems)
+                    rcm.IsChecked = ContainsItem(rcm.Item);
+                
+                morCtx.Items = RecommendedItems;
+            };
+
+            morCtx.MenuClosed += (sneder, e) =>
+            {
+                if (more.IsChecked == true)
+                    more.IsChecked = false;
+            };
+
+            more.Checked += (sneder, e) => morCtx.Open(more);
+            more.Unchecked += (sneder, e) => morCtx.Close();
         }
 
-        protected override void ItemsChanged(AvaloniaPropertyChangedEventArgs e)
+        /*protected override void ItemsChanged(AvaloniaPropertyChangedEventArgs e)
         {
             base.ItemsChanged(e);
             RefreshItems();
@@ -141,6 +167,15 @@ namespace AvaloniaUI.Ribbon
                 return true;
             }
         }
+
+        public void AddRemoveItemCommand(object parameter)
+        {
+            if (parameter is ICanAddToQuickAccess item)
+            {
+                if (!AddItem(item))
+                    RemoveItem(item);
+            }
+        }
     }
 
     
@@ -162,21 +197,23 @@ namespace AvaloniaUI.Ribbon
         }
     }
 
-
-    public class ItemsToControlsConverter : IValueConverter
+    public class QuickAccessRecommendation : AvaloniaObject//INotifyPropertyChanged
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public static readonly StyledProperty<ICanAddToQuickAccess> ItemProperty = QuickAccessItem.ItemProperty.AddOwner<QuickAccessRecommendation>();
+        public ICanAddToQuickAccess Item
         {
-            Controls retVal = new Controls();
-            foreach (Control itm in ((AvaloniaList<object>)value).OfType<Control>())
-                retVal.Add(itm);
-            
-            return retVal;
+            get => GetValue(ItemProperty);
+            set => SetValue(ItemProperty, value);
+        }
+        public static readonly DirectProperty<QuickAccessRecommendation, bool?> IsCheckedProperty = ToggleButton.IsCheckedProperty.AddOwner<QuickAccessRecommendation>(o => o.IsChecked, (o, v) => o.IsChecked = v);
+        private bool? _isChecked = false;
+        public bool? IsChecked
+        {
+            get => _isChecked;
+            set => SetAndRaise(IsCheckedProperty, ref _isChecked, value);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
+        /*void NotifyPropertyChanged([CallerMemberName]string propertyName = "") => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        public event PropertyChangedEventHandler PropertyChanged;*/
     }
 }

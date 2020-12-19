@@ -415,16 +415,15 @@ namespace AvaloniaUI.Ribbon
         {
             item.RaiseEvent(new RoutedEventArgs(PointerPressedEvent));
             item.RaiseEvent(new RoutedEventArgs(PointerReleasedEvent));
-            Debug.WriteLine("AccessKey handled for " + item.ToString());
         }
 
         public void ActivateKeyTips(Ribbon ribbon, IKeyTipHandler prev)
         {
             foreach (RibbonTab t in Items)
-                Debug.WriteLine("TAB KEYS: " + KeyTip.GetKeyTipKeys(t));
+                KeyTip.GetKeyTipKeys(t);
 
             if (Menu != null)
-                Debug.WriteLine("MENU KEYS: " + KeyTip.GetKeyTipKeys(Menu as Control));
+                KeyTip.GetKeyTipKeys(Menu as Control);
         }
 
         public bool HandleKeyTipKeyPress(Key key)
@@ -432,7 +431,6 @@ namespace AvaloniaUI.Ribbon
             bool retVal = false;
             if (IsOpen)
             {
-                Debug.WriteLine("Key pressed: " + key);
                 bool tabKeyMatched = false;
                 foreach (RibbonTab t in Items)
                 {
@@ -553,15 +551,6 @@ namespace AvaloniaUI.Ribbon
                 
                 IsCollapsed = !IsCollapsed;
             };
-
-            /*_groupsHost.PointerMoved += (sneder, args) =>
-            {
-                if (!_ctxMenu.IsOpen)
-                {
-                    var srcParent = e.Source.InteractiveParent;
-                    _lastHoveredControl = Avalonia.VisualTree.VisualExtensions.FindAncestorOfType<ICanAddToQuickAccess>(e.Source as Visual, true);
-                }
-            };*/
             
             _groupsHost.PointerLeave += (sneder, args) => 
             {
@@ -575,17 +564,8 @@ namespace AvaloniaUI.Ribbon
                 if (args.Source != null)
                 {
                     var ctrl = Avalonia.VisualTree.VisualExtensions.FindAncestorOfType<ICanAddToQuickAccess>(args.Source as IVisual);
-                    if (ctrl != null)
-                        Console.WriteLine("ctrl: " + ctrl.GetType().FullName);
-                    else
-                        Console.WriteLine("ctrl == null");
+                    
                     _rightClicked = ctrl;
-                    /*if (args.MouseButton == MouseButton.Right)
-                    {
-
-                    }*/
-                    //args.GetCurrentPoint(_groupsHost)
-                    //args.Source
 
                     if (QuickAccessToolbar != null)
                         pinToQat.IsEnabled = (_rightClicked != null) && _rightClicked.CanAddToQuickAccess && (!QuickAccessToolbar.ContainsItem(_rightClicked));

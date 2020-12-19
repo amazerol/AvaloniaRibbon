@@ -176,8 +176,8 @@
           <ribbon:RibbonTab.Groups>
             <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
               <ribbon:RibbonButton x:Name="RibbonButton1" Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A" CanAddToQuickAccess="True" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-              <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonButton x:Name="RibbonButton2" Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonButton x:Name="RibbonButton3" Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="Test Group 2" ribbon:KeyTip.KeyTipKeys="D2">
               <ribbon:RibbonButton MaxSize="Medium" Content="Button 4" ToolTip.Tip="Button 4" ribbon:KeyTip.KeyTipKeys="D" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
@@ -577,6 +577,11 @@
   </ribbon:RibbonWindow.Ribbon>
   <ribbon:RibbonWindow.QuickAccessToolbar>
     <ribbon:QuickAccessToolbar>
+      <ribbon:QuickAccessToolbar.RecommendedItems>
+        <ribbon:QuickAccessRecommendation Item="{Binding #RibbonButton1}"/>
+        <ribbon:QuickAccessRecommendation Item="{Binding #RibbonButton2}"/>
+        <ribbon:QuickAccessRecommendation Item="{Binding #RibbonButton3}"/>
+      </ribbon:QuickAccessToolbar.RecommendedItems>
       <ribbon:QuickAccessItem Item="{Binding #RibbonButton1}"/>
     </ribbon:QuickAccessToolbar>
   </ribbon:RibbonWindow.QuickAccessToolbar>
