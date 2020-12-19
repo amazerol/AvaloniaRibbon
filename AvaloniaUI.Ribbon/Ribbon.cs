@@ -17,6 +17,8 @@ using Avalonia.Controls.Presenters;
 using System.Windows.Input;
 using System.Collections.ObjectModel;
 using Avalonia.Controls.Generators;
+using Avalonia.LogicalTree;
+using Avalonia.VisualTree;
 
 namespace AvaloniaUI.Ribbon
 {
@@ -127,19 +129,7 @@ namespace AvaloniaUI.Ribbon
             }
         }
 
-        ICanAddToQuickAccess _lastHoveredControl = null;
-        public ICanAddToQuickAccess LastHoveredControl
-        {
-            get => _lastHoveredControl;
-            protected set => _lastHoveredControl = value;
-        }
-        
-        protected override void OnPointerMoved(PointerEventArgs e)
-        {
-            base.OnPointerMoved(e);
-            var srcParent = e.Source.InteractiveParent;
-            _lastHoveredControl = Avalonia.VisualTree.VisualExtensions.FindAncestorOfType<ICanAddToQuickAccess>(e.Source as Visual, true);            
-        }
+        ICanAddToQuickAccess _rightClicked = null;
 
         public ICommand HelpButtonCommand
         {
@@ -478,6 +468,7 @@ namespace AvaloniaUI.Ribbon
         ContentControl _mainPresenter;
         ContentControl _flyoutPresenter;
         ItemsPresenter _itemHeadersPresenter;
+        ContextMenu _ctxMenu;
 
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
@@ -549,18 +540,12 @@ namespace AvaloniaUI.Ribbon
             var pinToQat = e.NameScope.Find<MenuItem>("PART_PinLastHoveredControlToQuickAccess");
             pinToQat.Click += (sneder, args) =>
             {
-                if (_lastHoveredControl != null)
-                    QuickAccessToolbar?.AddItem(_lastHoveredControl);
+                if (_rightClicked != null)
+                    QuickAccessToolbar?.AddItem(_rightClicked);
             };
             
-            e.NameScope.Find<ContextMenu>("PART_ContentAreaContextMenu").MenuOpened += (sneder, args) =>
-            {
-                if (QuickAccessToolbar != null)
-                    pinToQat.IsEnabled = (_lastHoveredControl != null) && _lastHoveredControl.CanAddToQuickAccess && (!QuickAccessToolbar.ContainsItem(_lastHoveredControl));
-                else
-                    pinToQat.IsEnabled = false;
-            };
-
+            _ctxMenu = e.NameScope.Find<ContextMenu>("PART_ContentAreaContextMenu");
+            
             e.NameScope.Find<MenuItem>("PART_CollapseRibbon").Click += (sneder, args) =>
             {
                 if (IsCollapsed)
@@ -568,6 +553,46 @@ namespace AvaloniaUI.Ribbon
                 
                 IsCollapsed = !IsCollapsed;
             };
+
+            /*_groupsHost.PointerMoved += (sneder, args) =>
+            {
+                if (!_ctxMenu.IsOpen)
+                {
+                    var srcParent = e.Source.InteractiveParent;
+                    _lastHoveredControl = Avalonia.VisualTree.VisualExtensions.FindAncestorOfType<ICanAddToQuickAccess>(e.Source as Visual, true);
+                }
+            };*/
+            
+            _groupsHost.PointerLeave += (sneder, args) => 
+            {
+                if (!_ctxMenu.IsOpen)
+                    _rightClicked = null;
+            };
+
+            _groupsHost.AddHandler<PointerReleasedEventArgs>(PointerReleasedEvent, 
+            (sneder, args) =>
+            {
+                if (args.Source != null)
+                {
+                    var ctrl = Avalonia.VisualTree.VisualExtensions.FindAncestorOfType<ICanAddToQuickAccess>(args.Source as IVisual);
+                    if (ctrl != null)
+                        Console.WriteLine("ctrl: " + ctrl.GetType().FullName);
+                    else
+                        Console.WriteLine("ctrl == null");
+                    _rightClicked = ctrl;
+                    /*if (args.MouseButton == MouseButton.Right)
+                    {
+
+                    }*/
+                    //args.GetCurrentPoint(_groupsHost)
+                    //args.Source
+
+                    if (QuickAccessToolbar != null)
+                        pinToQat.IsEnabled = (_rightClicked != null) && _rightClicked.CanAddToQuickAccess && (!QuickAccessToolbar.ContainsItem(_rightClicked));
+                    else
+                        pinToQat.IsEnabled = false;
+                }
+            }, handledEventsToo: true);
         }
 
         private void UpdatePresenterLocation(bool intoFlyout)

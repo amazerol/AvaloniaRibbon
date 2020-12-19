@@ -79,29 +79,64 @@ namespace AvaloniaUI.Ribbon
             return new ItemContainerGenerator<QuickAccessItem>(this, QuickAccessItem.ItemProperty, QuickAccessItem.ContentTemplateProperty);
         }
 
-        public bool ContainsItem(ICanAddToQuickAccess item) => Items.OfType<ICanAddToQuickAccess>().Contains(item);
-
-        public bool AddItem(ICanAddToQuickAccess item)
+        public bool ContainsItem(ICanAddToQuickAccess item) => ContainsItem(item, out object result);
+        public bool ContainsItem(ICanAddToQuickAccess item, out object result)
         {
-            if ((item == null) || ContainsItem(item))
-                return false;
-            else if (item.CanAddToQuickAccess)
+            if (Items.OfType<ICanAddToQuickAccess>().Contains(item))
             {
-                Items = Items.OfType<ICanAddToQuickAccess>().Append(item);
+                result = Items.OfType<ICanAddToQuickAccess>().First();
+                return true;
+            }
+            else if (Items.OfType<QuickAccessItem>().Any(x => x.Item == item))
+            {
+                result = Items.OfType<QuickAccessItem>().First(x => x.Item == item);
                 return true;
             }
             else
+            {
+                result = null;
                 return false;
+            }
+        }
+
+        public bool AddItem(ICanAddToQuickAccess item)
+        {
+            bool contains = ContainsItem(item, out object obj);
+            if ((item == null) || contains)
+                return false;
+            else
+            {
+                ICanAddToQuickAccess itm = item;
+                if (obj is QuickAccessItem qai)
+                    itm = qai.Item;
+                
+                if (itm.CanAddToQuickAccess)
+                {
+                    Items = Items.OfType<object>().Append(item);
+                    return true;
+                }
+            }
+            
+            return false;
         }
 
         public bool RemoveItem(ICanAddToQuickAccess item)
         {
-            if ((item == null) || (!ContainsItem(item)))
+            bool contains = ContainsItem(item, out object obj);
+            if ((item == null) || (!contains))
                 return false;
             else
             {
-                var items = Items.OfType<ICanAddToQuickAccess>().ToList();
-                items.Remove(item);
+                var items = Items.OfType<object>().ToList();
+                items.Remove(items.First(x => 
+                {
+                    if (x == item)
+                        return true;
+                    else if ((x is QuickAccessItem itm) && (itm.Item == item))
+                        return true;
+                    
+                    return false;
+                }));
                 Items = items;
                 return true;
             }
@@ -111,7 +146,7 @@ namespace AvaloniaUI.Ribbon
     
     public class QuickAccessItem : ContentControl, IStyleable
     {
-        public static readonly StyledProperty<ICanAddToQuickAccess> ItemProperty = AvaloniaProperty.Register<QuickAccessItem, ICanAddToQuickAccess>(nameof(Item));
+        public static readonly StyledProperty<ICanAddToQuickAccess> ItemProperty = AvaloniaProperty.Register<QuickAccessItem, ICanAddToQuickAccess>(nameof(Item), null);
         public ICanAddToQuickAccess Item
         {
             get => GetValue(ItemProperty);

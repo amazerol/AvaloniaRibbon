@@ -175,7 +175,7 @@
         <ribbon:RibbonTab Header="Home" ribbon:KeyTip.KeyTipKeys="H">
           <ribbon:RibbonTab.Groups>
             <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
-              <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A" CanAddToQuickAccess="True" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
+              <ribbon:RibbonButton x:Name="RibbonButton1" Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A" CanAddToQuickAccess="True" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
               <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
               <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
             </ribbon:RibbonGroupBox>
@@ -576,7 +576,9 @@
     </ribbon:Ribbon>
   </ribbon:RibbonWindow.Ribbon>
   <ribbon:RibbonWindow.QuickAccessToolbar>
-    <ribbon:QuickAccessToolbar/>
+    <ribbon:QuickAccessToolbar>
+      <ribbon:QuickAccessItem Item="{Binding #RibbonButton1}"/>
+    </ribbon:QuickAccessToolbar>
   </ribbon:RibbonWindow.QuickAccessToolbar>
   <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
     <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation" IsVisible="False"/>
