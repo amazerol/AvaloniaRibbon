@@ -32,7 +32,7 @@
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
           <DockPanel>
-            <ContentPresenter Content="{TemplateBinding Icon}" DockPanel.Dock="Left" />
+            <TemplatedControl Template="{TemplateBinding Icon}" DockPanel.Dock="Left" />
             <ContentPresenter Classes="MediumContentPresenter" Content="{TemplateBinding Content}" Margin="3,0,0,0" />
           </DockPanel>
         </Border>
@@ -40,7 +40,9 @@
     </Setter>
     <Setter Property="QuickAccessTemplate">
       <ControlTemplate>
-        <Button Classes="quickAccessButton" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" MinWidth="45" Height="30" Content="{Binding QuickAccessIcon}" Focusable="False"/>
+        <Button Classes="quickAccessButton" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" MinWidth="45" Height="30" Focusable="False">
+          <TemplatedControl Template="{Binding QuickAccessIcon}"/>
+        </Button>
       </ControlTemplate>
     </Setter>
   </Style>
@@ -57,7 +59,7 @@
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
           <StackPanel Orientation="Vertical">
-            <ContentPresenter Content="{TemplateBinding LargeIcon}" />
+            <TemplatedControl Template="{TemplateBinding LargeIcon}" />
             <ContentPresenter Content="{TemplateBinding Content}" Margin="0,3,0,2"/>
           </StackPanel>
         </Border>
@@ -73,7 +75,7 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
-          <ContentPresenter Content="{TemplateBinding Icon}"/>
+          <TemplatedControl Template="{TemplateBinding Icon}"/>
         </Border>
       </ControlTemplate>
     </Setter>

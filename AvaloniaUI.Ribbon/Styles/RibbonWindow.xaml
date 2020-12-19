@@ -41,7 +41,7 @@
                   </PathGeometry>
                 </ContentPresenter.Clip-->
               </ContentPresenter>
-              <StackPanel x:Name="TitleContent" HorizontalAlignment="Left" Orientation="Horizontal" Margin="5,0,0,0" Spacing="5" Grid.Row="0" IsHitTestVisible="False">
+              <StackPanel x:Name="TitleContent" HorizontalAlignment="Left" Orientation="Horizontal" Margin="9,0,0,0" Spacing="9" Grid.Row="0" IsHitTestVisible="False">
                 <Image Classes="IconImage" Source="{Binding Icon, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource WindowIconToImageConverter}}" MaxWidth="16" MaxHeight="16"/>
                 <TextBlock Name="TitleTextBlock" VerticalAlignment="Center" Foreground="{TemplateBinding TitleBarForeground}" Text="{TemplateBinding Title}" IsVisible="False"/>
               </StackPanel>

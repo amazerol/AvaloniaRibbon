@@ -1,13 +1,14 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Generators;
+using Avalonia.Controls.Templates;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace AvaloniaUI.Ribbon
 {
-    public class RibbonDropDownButton : ItemsControl, IRibbonControl
+    public class RibbonDropDownButton : ItemsControl, IRibbonControl, ICanAddToQuickAccess
     {
         private bool _isDropDownOpen;
 
@@ -15,23 +16,48 @@ namespace AvaloniaUI.Ribbon
         public static readonly AvaloniaProperty<RibbonControlSize> SizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MinSizeProperty;
         public static readonly AvaloniaProperty<RibbonControlSize> MaxSizeProperty;
-        public static readonly StyledProperty<object> IconProperty = AvaloniaProperty.Register<RibbonDropDownButton, object>(nameof(Icon));
-        public static readonly StyledProperty<object> LargeIconProperty = AvaloniaProperty.Register<RibbonDropDownButton, object>(nameof(LargeIcon));
+        public static readonly StyledProperty<bool> CanAddToQuickAccessProperty = RibbonButton.CanAddToQuickAccessProperty.AddOwner<RibbonDropDownButton>();
+        public bool CanAddToQuickAccess
+        {
+            get => GetValue(CanAddToQuickAccessProperty);
+            set => SetValue(CanAddToQuickAccessProperty, value);
+        }
 
-        public static readonly StyledProperty<object> ContentProperty = ContentControl.ContentProperty.AddOwner<RibbonDropDownButton>();
-        public static readonly DirectProperty<RibbonDropDownButton, bool> IsDropDownOpenProperty = ComboBox.IsDropDownOpenProperty.AddOwner<RibbonDropDownButton>(o => o.IsDropDownOpen, (o, v) => o.IsDropDownOpen = v);
 
-        public object Icon
+        public static readonly StyledProperty<IControlTemplate> IconProperty = RibbonButton.IconProperty.AddOwner<RibbonDropDownButton>();
+        public IControlTemplate Icon
         {
             get => GetValue(IconProperty);
             set => SetValue(IconProperty, value);
         }
 
-        public object LargeIcon
+
+        public static readonly StyledProperty<IControlTemplate> LargeIconProperty = RibbonButton.LargeIconProperty.AddOwner<RibbonDropDownButton>();
+        public IControlTemplate LargeIcon
         {
             get => GetValue(LargeIconProperty);
             set => SetValue(LargeIconProperty, value);
         }
+
+
+        public static readonly StyledProperty<IControlTemplate> QuickAccessIconProperty = RibbonButton.QuickAccessIconProperty.AddOwner<RibbonToggleButton>();
+        public IControlTemplate QuickAccessIcon
+        {
+            get => GetValue(QuickAccessIconProperty);
+            set => SetValue(QuickAccessIconProperty, value);
+        }
+
+
+        public static readonly StyledProperty<IControlTemplate> QuickAccessTemplateProperty = RibbonButton.QuickAccessTemplateProperty.AddOwner<RibbonDropDownButton>();
+        public IControlTemplate QuickAccessTemplate
+        {
+            get => GetValue(QuickAccessTemplateProperty);
+            set => SetValue(QuickAccessTemplateProperty, value);
+        }
+
+
+        public static readonly StyledProperty<object> ContentProperty = ContentControl.ContentProperty.AddOwner<RibbonDropDownButton>();
+        public static readonly DirectProperty<RibbonDropDownButton, bool> IsDropDownOpenProperty = ComboBox.IsDropDownOpenProperty.AddOwner<RibbonDropDownButton>(o => o.IsDropDownOpen, (o, v) => o.IsDropDownOpen = v);
 
 
         public RibbonControlSize Size

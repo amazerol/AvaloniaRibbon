@@ -22,7 +22,7 @@
               IsChecked="{TemplateBinding IsDropDownOpen,
                                                         Mode=TwoWay}">
             <StackPanel Orientation="Vertical">
-              <ContentPresenter Content="{TemplateBinding LargeIcon}" Margin="0,0,0,4"/>
+              <TemplatedControl Template="{TemplateBinding LargeIcon}" Margin="0,0,0,4"/>
               <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <ContentPresenter Content="{TemplateBinding Content}"/>
                 <Path
@@ -75,7 +75,7 @@
                 IsChecked="{TemplateBinding IsDropDownOpen,
                                                         Mode=TwoWay}">
               <StackPanel Orientation="Horizontal">
-                <ContentPresenter Content="{TemplateBinding Icon}" />
+                <TemplatedControl Template="{TemplateBinding Icon}" />
                 <ContentPresenter Content="{TemplateBinding Content}" Margin="3,0,0,0" />
                 <Path
                     Width="8"
@@ -128,7 +128,7 @@
                 IsChecked="{TemplateBinding IsDropDownOpen,
                                                         Mode=TwoWay}">
               <StackPanel Orientation="Horizontal">
-                <ContentPresenter Content="{TemplateBinding Icon}" Margin="0,0,4,0"/>
+                <TemplatedControl Template="{TemplateBinding Icon}" Margin="0,0,4,0"/>
                 <Path
                     Width="8"
                     Height="4"

@@ -32,7 +32,7 @@
       <ControlTemplate>
         <Border Classes="RibbonToggleButtonBackgroundBorder">
           <DockPanel>
-            <ContentPresenter Content="{TemplateBinding Icon}" DockPanel.Dock="Left" />
+            <TemplatedControl Template="{TemplateBinding Icon}" DockPanel.Dock="Left" />
             <ContentPresenter Classes="MediumContentPresenter" Content="{TemplateBinding Content}" Margin="3,0,0,0" />
           </DockPanel>
         </Border>
@@ -45,7 +45,7 @@
       <ControlTemplate>
         <Border Classes="RibbonToggleButtonBackgroundBorder">
           <StackPanel Orientation="Vertical">
-            <ContentPresenter Content="{TemplateBinding LargeIcon}" />
+            <TemplatedControl Template="{TemplateBinding LargeIcon}" />
             <ContentPresenter Content="{TemplateBinding Content}" Margin="0,3,0,2"/>
           </StackPanel>
         </Border>
@@ -61,7 +61,7 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonToggleButtonBackgroundBorder">
-          <ContentPresenter Content="{TemplateBinding Icon}"/>
+          <TemplatedControl Template="{TemplateBinding Icon}"/>
         </Border>
       </ControlTemplate>
     </Setter>

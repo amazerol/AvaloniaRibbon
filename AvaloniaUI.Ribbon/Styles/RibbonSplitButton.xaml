@@ -14,7 +14,7 @@
         <Border Classes="RibbonButtonBackgroundBorder">
           <StackPanel Orientation="Vertical">
             <Button Name="RibbonSplitButtonTopButton" Padding="{TemplateBinding Padding}" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-              <ContentPresenter Content="{TemplateBinding LargeIcon}" />
+              <TemplatedControl Template="{TemplateBinding LargeIcon}" />
             </Button>
             <ToggleButton
                 Name="toggle"
@@ -110,7 +110,7 @@
             </ToggleButton>
             <Button Name="RibbonSplitButtonTopButton" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
               <StackPanel Orientation="Horizontal">
-                <ContentPresenter Content="{TemplateBinding Icon}" />
+                <TemplatedControl Template="{TemplateBinding Icon}" />
                 <ContentPresenter Content="{TemplateBinding Content}" Margin="3,0,0,0" />
               </StackPanel>
             </Button>
@@ -166,7 +166,7 @@
               </Grid>
             </ToggleButton>
             <Button Name="RibbonSplitButtonTopButton" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-              <ContentPresenter Content="{TemplateBinding Icon}" />
+              <TemplatedControl Template="{TemplateBinding Icon}" />
             </Button>
           </DockPanel>
         </Border>
