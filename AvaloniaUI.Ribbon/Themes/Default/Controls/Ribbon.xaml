@@ -72,8 +72,13 @@
                   <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="Stretch" MinWidth="100" Height="90">
                     <ItemsControl.ContextMenu>
                       <ContextMenu x:Name="PART_ContentAreaContextMenu">
+                        <ContextMenu.Styles>
+                          <Style Selector="MenuItem">
+                            <Setter Property="Template" Value="{DynamicResource CheckableMenuItemControlTemplate}"/>
+                          </Style>
+                        </ContextMenu.Styles>
                         <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="Add to quick access toolbar"/>
-                        <MenuItem x:Name="PART_CollapseRibbon" Header="Minimize/Restore the ribbon"/>
+                        <MenuItem x:Name="PART_CollapseRibbon" Header="Minimize the Ribbon" local:QuickAccessToolbar.IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                       </ContextMenu>
                     </ItemsControl.ContextMenu>
                     <ItemsControl.ItemsPanel>
@@ -135,8 +140,13 @@
                 <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="Stretch" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Width="138">
                   <ItemsControl.ContextMenu>
                     <ContextMenu x:Name="PART_ContentAreaContextMenu">
+                      <ContextMenu.Styles>
+                        <Style Selector="MenuItem">
+                          <Setter Property="Template" Value="{DynamicResource CheckableMenuItemControlTemplate}"/>
+                        </Style>
+                      </ContextMenu.Styles>
                       <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="Add to quick access toolbar"/>
-                      <MenuItem x:Name="PART_CollapseRibbon" Header="Minimize/Restore the ribbon"/>
+                      <MenuItem x:Name="PART_CollapseRibbon" Header="Minimize the Ribbon" local:QuickAccessToolbar.IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                     </ContextMenu>
                   </ItemsControl.ContextMenu>
                   <ItemsControl.ItemsPanel>

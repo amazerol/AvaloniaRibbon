@@ -8,6 +8,7 @@ using Avalonia.Media;
 using Avalonia.Styling;
 using System;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Collections;
 using Avalonia.Interactivity;
 using Avalonia.Controls.Platform;
@@ -22,11 +23,21 @@ using System.Globalization;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using ReactiveUI;
+using Avalonia.Threading;
+using Avalonia.Data;
 
 namespace AvaloniaUI.Ribbon
 {
     public class QuickAccessToolbar : ItemsControl, IStyleable//, IKeyTipHandler
     {
+        public static readonly StyledProperty<Ribbon> RibbonProperty = AvaloniaProperty.Register<QuickAccessToolbar, Ribbon>(nameof(Ribbon));
+        public Ribbon Ribbon
+        {
+            get => GetValue(RibbonProperty);
+            set => SetValue(RibbonProperty, value);
+        }
+        
         public static readonly DirectProperty<QuickAccessToolbar, ObservableCollection<QuickAccessRecommendation>> RecommendedItemsProperty = AvaloniaProperty.RegisterDirect<QuickAccessToolbar, ObservableCollection<QuickAccessRecommendation>>(nameof(RecommendedItems), o => o.RecommendedItems, (o, v) => o.RecommendedItems = v);
         private ObservableCollection<QuickAccessRecommendation> _recommendedItems = new ObservableCollection<QuickAccessRecommendation>();
         public ObservableCollection<QuickAccessRecommendation> RecommendedItems
@@ -35,39 +46,80 @@ namespace AvaloniaUI.Ribbon
             set => SetAndRaise(RecommendedItemsProperty, ref _recommendedItems, value);
         }
 
-        static QuickAccessToolbar()
+
+        public static readonly AttachedProperty<bool> IsCheckedProperty = AvaloniaProperty.RegisterAttached<QuickAccessToolbar, MenuItem, bool>("IsChecked");
+
+        public static bool GetIsChecked(MenuItem element)
         {
-            /*RibbonProperty.Changed.AddClassHandler<QuickAccessToolbar>((sender, e) => {
-                
-            });*/
+            return element.GetValue(IsCheckedProperty);
         }
 
-        /*public void TestItems()
+        public static void SetIsChecked(MenuItem element, bool value)
         {
-            if (Ribbon != null)
+            element.SetValue(IsCheckedProperty, value);
+        }
+
+        static readonly string FIXED_ITEM_CLASS = "quickAccessFixedItem";
+        
+        static QuickAccessToolbar()
+        {
+            RibbonProperty.Changed.AddClassHandler<QuickAccessToolbar>((sender, e) => {
+                if (sender.Ribbon != null)
+                    sender._collapseRibbonItem[!IsCheckedProperty] = sender.Ribbon[!Ribbon.IsCollapsedProperty];
+                else
+                    SetIsChecked(sender._collapseRibbonItem, false);
+            });
+        }
+
+        
+        MenuItem _collapseRibbonItem = new MenuItem()
+        {
+            Classes = new Classes(FIXED_ITEM_CLASS)
+        };
+        public QuickAccessToolbar() : base()
+        {
+            _collapseRibbonItem.Header = "Minimize the Ribbon";
+            _collapseRibbonItem[!IsEnabledProperty] = this.GetObservable(RibbonProperty).Select(x => x != null).ToBinding();
+            _collapseRibbonItem.Click += (sneder, e) =>
             {
-                foreach (object obj in ((Ribbon.Tabs[0] as RibbonTab).Groups[0]).Items.OfType<ICanAddToQuickAccess>().Where(x => x.CanAddToQuickAccess))
-                    ((AvaloniaList<object>)Items).Add(obj);
-            }
-        }*/
+                if (Ribbon != null)
+                        Ribbon.IsCollapsed = !Ribbon.IsCollapsed;
+            };
+        }
 
         Type IStyleable.StyleKey => typeof(QuickAccessToolbar);
-
-        //Panel panel = null;
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
             var more = e.NameScope.Find<ToggleButton>("PART_MoreButton");
             var morCtx = more.ContextMenu;
+
+            MenuItem moreCmdItem = new MenuItem()
+            {
+                Header = "More commands...",
+                IsEnabled = false, //[!IsEnabledProperty] = this.GetObservable(RibbonProperty).Select(x => x != null).ToBinding(),
+                Classes = new Classes(FIXED_ITEM_CLASS)
+            };
+
+            
+
+
             morCtx.MenuOpened += (sneder, e) => 
             {
                 if (more.IsChecked != true)
                     more.IsChecked = true;
 
+                ObservableCollection<object> morCtxItems = new ObservableCollection<object>();
                 foreach (QuickAccessRecommendation rcm in RecommendedItems)
+                {
                     rcm.IsChecked = ContainsItem(rcm.Item);
-                
-                morCtx.Items = RecommendedItems;
+                    morCtxItems.Add(rcm);
+                }
+
+                morCtxItems.Add(new Separator());
+                morCtxItems.Add(moreCmdItem);
+                morCtxItems.Add(_collapseRibbonItem);
+                morCtx.Items = morCtxItems;
             };
 
             morCtx.MenuClosed += (sneder, e) =>
@@ -168,13 +220,15 @@ namespace AvaloniaUI.Ribbon
             }
         }
 
-        public void AddRemoveItemCommand(object parameter)
+        public void MoreFlyoutMenuItemCommand(object parameter)
         {
             if (parameter is ICanAddToQuickAccess item)
             {
                 if (!AddItem(item))
                     RemoveItem(item);
             }
+            else if (parameter is Action cmd)
+                cmd();
         }
     }
 

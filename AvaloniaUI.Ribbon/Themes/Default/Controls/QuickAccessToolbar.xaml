@@ -2,7 +2,8 @@
     xmlns="https://github.com/avaloniaui"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon"
-    xmlns:col="clr-namespace:System.Collections">
+    xmlns:col="clr-namespace:System.Collections"
+    xmlns:sys="clr-namespace:System;assembly=netstandard">
   <Style Selector="local|QuickAccessToolbar">
     <Setter Property="Height" Value="30"/>
     <Setter Property="Template">
@@ -12,17 +13,18 @@
             <ToggleButton.ContextMenu>
               <ContextMenu PlacementMode="Bottom">
                 <ContextMenu.Styles>
-                  <Style Selector="MenuItem">
-                    <Setter Property="Command" Value="{Binding $parent[local:QuickAccessToolbar].AddRemoveItemCommand}"/>
+                  <Style Selector="MenuItem:not(.quickAccessFixedItem)">
+                    <Setter Property="Command" Value="{Binding $parent[local:QuickAccessToolbar].MoreFlyoutMenuItemCommand}"/>
                     <Setter Property="CommandParameter" Value="{Binding Item}"/>
+                    <Setter Property="local:QuickAccessToolbar.IsChecked" Value="{Binding IsChecked}"/>
+                  </Style>
+                  <Style Selector="MenuItem">
+                    <Setter Property="Template" Value="{DynamicResource CheckableMenuItemControlTemplate}"/>
                   </Style>
                 </ContextMenu.Styles>
                 <ContextMenu.DataTemplates>
                   <DataTemplate DataType="{x:Type local:QuickAccessRecommendation}">
-                    <Grid ColumnDefinitions="16,Auto" Margin="-28,0,0,0">
-                      <Path Margin="0,0,8,0" Width="11" Height="10" Stretch="Uniform" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="0" Fill="{Binding $parent[MenuItem].Foreground}" IsVisible="{Binding IsChecked}" Data="M 1145.607177734375,430 C1145.607177734375,430 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1141.449951171875,435.0772705078125 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1139.232177734375,433.0999755859375 1138,434.5538330078125 1138,434.5538330078125 1138,434.5538330078125 1141.482177734375,438 1141.482177734375,438 1141.482177734375,438 1141.96875,437.9375 1141.96875,437.9375 1141.96875,437.9375 1147,431.34619140625 1147,431.34619140625 1147,431.34619140625 1145.607177734375,430 1145.607177734375,430 z"/>
-                      <TextBlock Text="{Binding Item.Content}" Grid.Column="1"/>
-                    </Grid>
+                    <TextBlock Text="{Binding Item.Content}"/>
                   </DataTemplate>
                 </ContextMenu.DataTemplates>
               </ContextMenu>

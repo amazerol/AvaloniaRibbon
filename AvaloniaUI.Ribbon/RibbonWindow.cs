@@ -80,30 +80,52 @@ namespace AvaloniaUI.Ribbon
         {
             OrientationProperty.OverrideDefaultValue<RibbonWindow>(Orientation.Horizontal);
 
-            RibbonProperty.Changed.AddClassHandler<RibbonWindow>((sender, e) => sender.RefreshRibbonAndQat(e.NewValue as Ribbon, sender.QuickAccessToolbar));
-            QuickAccessToolbarProperty.Changed.AddClassHandler<RibbonWindow>((sender, e) => sender.RefreshRibbonAndQat(sender.Ribbon, e.NewValue as QuickAccessToolbar));
+            RibbonProperty.Changed.AddClassHandler<RibbonWindow>((sender, e) => sender.RefreshRibbon(e.OldValue, e.NewValue));
+            QuickAccessToolbarProperty.Changed.AddClassHandler<RibbonWindow>((sender, e) => sender.RefreshQat(e.OldValue, e.NewValue));
         }
-        
-        protected Ribbon _prevRibbon = null;
-        IBinding _prevRibbonBinding = null;
-        protected virtual void RefreshRibbonAndQat(Ribbon newRibbon, QuickAccessToolbar newQat)
-        {
-            if (_prevRibbon != null)
-            {
-                _prevRibbon.QuickAccessToolbar = null;
-                //_prevRibbon[!Ribbon.OrientationProperty] = Binding;
-                
-                _prevRibbon.ClearValue(Ribbon.OrientationProperty);
-            }
-            
-            if (newRibbon != null)
-            {
-                newRibbon.QuickAccessToolbar = newQat;
-                _prevRibbonBinding = newRibbon[!Ribbon.OrientationProperty] = this[!OrientationProperty];
-            }
-            
 
-            _prevRibbon = newRibbon;
+        public RibbonWindow() : base()
+        {
+            RefreshRibbon(null, Ribbon);
+            RefreshQat(null, QuickAccessToolbar);
+        }
+
+        void RefreshRibbon(object oldValue, object newValue)
+        {
+            if ((oldValue != null) && (oldValue is Ribbon oldRibbon))
+            {
+                oldRibbon.QuickAccessToolbar = null;
+                oldRibbon.ClearValue(Ribbon.OrientationProperty); 
+            }
+
+
+            if ((newValue != null) && (newValue is Ribbon newRibbon))
+            {
+                newRibbon.QuickAccessToolbar = QuickAccessToolbar;
+                newRibbon[!Ribbon.OrientationProperty] = this[!OrientationProperty];
+
+                if (QuickAccessToolbar != null)
+                    QuickAccessToolbar.Ribbon = newRibbon;
+            }
+            else if (QuickAccessToolbar != null)
+                QuickAccessToolbar.Ribbon = null;
+        }
+
+        void RefreshQat(object oldValue, object newValue)
+        {
+            if ((oldValue != null) && (oldValue is QuickAccessToolbar oldQat))
+                oldQat.Ribbon = null;
+
+
+            if ((newValue != null) && (newValue is QuickAccessToolbar newQat))
+            {
+                newQat.Ribbon = Ribbon;
+
+                if (Ribbon != null)
+                    Ribbon.QuickAccessToolbar = newQat;
+            }
+            else if (Ribbon != null)
+                Ribbon.QuickAccessToolbar = null;
         }
         
 

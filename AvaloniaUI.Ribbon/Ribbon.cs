@@ -344,7 +344,7 @@ namespace AvaloniaUI.Ribbon
 
         void InputRoot_PointerPressed(object sender, PointerPressedEventArgs e)
         {
-            if (IsCollapsedPopupOpen && (!IsPointerOver))
+            if (IsCollapsedPopupOpen && (!_groupsHost.IsPointerOver))
                 IsCollapsedPopupOpen = false;
         }
 
