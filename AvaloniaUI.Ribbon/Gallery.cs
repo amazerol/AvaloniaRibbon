@@ -82,7 +82,11 @@ namespace AvaloniaUI.Ribbon
             e.NameScope.Find<RepeatButton>("PART_DownButton").Click += (sneder, args) => pres.Offset = pres.Offset.WithY(Math.Min(pres.Offset.Y + ItemHeight, _mainPresenter.Bounds.Height - pres.Bounds.Height));
 
             _flyoutPresenter = e.NameScope.Find<ContentControl>("PART_FlyoutItemsPresenterHolder");
-            _flyoutPresenter.PointerWheelChanged += (s, a) => a.Handled = true;
+            /*_flyoutPresenter.PointerWheelChanged += (s, a) => 
+            {
+                a.Handled = true;
+            };*/
+            e.NameScope.Find<Control>("PART_FlyoutRoot").PointerLeave += (sneder, e) => IsDropDownOpen = false;
 
             UpdatePresenterLocation(IsDropDownOpen);
         }

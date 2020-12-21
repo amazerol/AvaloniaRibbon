@@ -17,12 +17,12 @@
     mc:Ignorable="d">
   <ribbon:RibbonWindow.Resources>
     <ControlTemplate x:Key="Icon1">
-      <!--Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
+      <!--Rectangle Fill="{Binding $parent[TemplatedControl].Foreground}" Width="16" Height="16">
         <Rectangle.OpacityMask>
           <ImageBrush Source="/Assets/boxIconSmall.png"/>
         </Rectangle.OpacityMask>
       </Rectangle-->
-      <!--Path Data="M 1 8 L 8 1 L 15 8 L 8 15 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/-->
+      <!--Path Data="M 1 8 L 8 1 L 15 8 L 8 15 Z" Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="1"/-->
       <Panel Width="14" Height="15">
         <!--Path Data="M 5 13 L 0 13 L 0 2 L 1 2 M 9 2 L 10 2 L 10 4" Stroke="#FFFB983B" StrokeThickness="1"/-->
         <!--Path Data="M 11 26 L 1 26 L 1 5 L 3 5 M 16 5 L 19 5 L 19 10" Stroke="#FFF8DB8F" StrokeThickness="1"/-->
@@ -45,23 +45,23 @@
           <Border BorderBrush="#FFF8DB8F" BorderThickness="1"/>
         </Border>
         <!--M 2 3 L 2 1 L 3 1 L 4 0 L 6 0 L 7 1 L 8 1 L 8 3 Z-->
-        <Path Data="M 2.5 3.5 L 2.5 1.5 L 3.5 1.5 L 4.5 0.5 L 6.5 0.5 L 7.5 1.5 L 8.5 1.5 L 8.5 3.5 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1" Opacity="0.625"/>
-        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="7" Height="9" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1">
+        <Path Data="M 2.5 3.5 L 2.5 1.5 L 3.5 1.5 L 4.5 0.5 L 6.5 0.5 L 7.5 1.5 L 8.5 1.5 L 8.5 3.5 Z" Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="1" Opacity="0.625"/>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="7" Height="9" BorderBrush="{Binding $parent[TemplatedControl].Foreground}" BorderThickness="1">
           <StackPanel Orientation="Vertical" Opacity="0.75" Spacing="1" VerticalAlignment="Center">
-            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
-            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
-            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
           </StackPanel>
         </Border>
       </Panel>
     </ControlTemplate>
     <ControlTemplate x:Key="Icon1Large">
-      <!--Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
+      <!--Rectangle Fill="{Binding $parent[TemplatedControl].Foreground}" Width="32" Height="32">
         <Rectangle.OpacityMask>
           <ImageBrush Source="/Assets/boxIconLarge.png"/>
         </Rectangle.OpacityMask>
       </Rectangle-->
-      <!--Path Data="M 1 16 L 16 1 L 31 16 L 16 31 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/-->
+      <!--Path Data="M 1 16 L 16 1 L 31 16 L 16 31 Z" Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="1"/-->
       <Panel Width="27" Height="30" Margin="0,0,1,0">
         <!--Path Data="M 11 27 L 0 27 L 0 4 L 3 4 M 16 4 L 20 4 L 20 10" Stroke="#FFFB983B" StrokeThickness="1" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0.5,0.5,0,0"/>
         <Path Data="M 11 26 L 1 26 L 1 5 L 3 5 M 16 5 L 19 5 L 19 10" Stroke="#FFF8DB8F" StrokeThickness="1" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0.5,0.5,0,0"/-->
@@ -83,19 +83,19 @@
           </Border.Clip>
           <Border BorderBrush="#FFF8DB8F" BorderThickness="1"/>
         </Border>
-        <Path Data="M 4.5 3.5 L 7.5 3.5 L 9.5 0.5 L 11.5 0.5 L 13.5 3.5 L 16.5 3.5 L 16.5 7.5 L 4.5 7.5 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1" Opacity="0.625"/>
-        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="14" Height="18" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1">
+        <Path Data="M 4.5 3.5 L 7.5 3.5 L 9.5 0.5 L 11.5 0.5 L 13.5 3.5 L 16.5 3.5 L 16.5 7.5 L 4.5 7.5 Z" Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="1" Opacity="0.625"/>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="14" Height="18" BorderBrush="{Binding $parent[TemplatedControl].Foreground}" BorderThickness="1">
           <StackPanel Orientation="Vertical" Opacity="0.75" Spacing="3" VerticalAlignment="Center">
-            <Rectangle Width="6" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
-            <Rectangle Width="6" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
-            <Rectangle Width="6" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+            <Rectangle Width="6" Height="1" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
+            <Rectangle Width="6" Height="1" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
+            <Rectangle Width="6" Height="1" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
           </StackPanel>
         </Border>
       </Panel>
     </ControlTemplate>
     <ControlTemplate x:Key="Icon1QuickAccess">
       <Panel Width="14" Height="15">
-        <Border Width="11" Height="12" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0">
+        <Border Width="11" Height="12" BorderBrush="{Binding $parent[TemplatedControl].Foreground}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0">
           <Border.Clip>
             <PathGeometry>
               <PathFigure StartPoint="0,0" IsClosed="True">
@@ -112,12 +112,12 @@
             </PathGeometry>
           </Border.Clip>
         </Border>
-        <Path Data="M 2.5 3.5 L 2.5 1.5 L 3.5 1.5 L 4.5 0.5 L 6.5 0.5 L 7.5 1.5 L 8.5 1.5 L 8.5 3.5 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
-        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="7" Height="9" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1">
+        <Path Data="M 2.5 3.5 L 2.5 1.5 L 3.5 1.5 L 4.5 0.5 L 6.5 0.5 L 7.5 1.5 L 8.5 1.5 L 8.5 3.5 Z" Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="1"/>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="7" Height="9" BorderBrush="{Binding $parent[TemplatedControl].Foreground}" BorderThickness="1">
           <StackPanel Orientation="Vertical" Spacing="1" VerticalAlignment="Center">
-            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
-            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
-            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
           </StackPanel>
         </Border>
       </Panel>
@@ -126,8 +126,8 @@
 
     <ControlTemplate x:Key="Icon2">
       <Panel Width="16" Height="16">
-        <!--Rectangle Width="8" Height="8" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
-        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1,0"/-->
+        <!--Rectangle Width="8" Height="8" Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="1"/>
+        <Border BorderBrush="{Binding $parent[TemplatedControl].Foreground}" BorderThickness="1,0"/-->
         <Path Data="M 0.5 0.5 L 15.5 0.5 L 15.5 15.5 L 2.5 15.5 L 0.5 13.5 Z" Fill="#FFD998DD" Stroke="#FF563457" StrokeThickness="1"/>
         <Border Background="White" BorderBrush="#7F563457" BorderThickness="1,0,1,1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="10" Height="6"/>
         <Border Background="White" BorderBrush="#7F563457" BorderThickness="1,1,1,0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="8" Height="5"/>
@@ -135,8 +135,8 @@
     </ControlTemplate>
     <ControlTemplate x:Key="Icon2Large">
       <Panel Width="27" Height="27">
-        <!--Rectangle Width="24" Height="24" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
-        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1,0"/-->
+        <!--Rectangle Width="24" Height="24" Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="1"/>
+        <Border BorderBrush="{Binding $parent[TemplatedControl].Foreground}" BorderThickness="1,0"/-->
         <Path Data="M 0.5 0.5 L 26.5 0.5 L 26.5 26.5 L 3.5 26.5 L 0.5 23.5 Z" Fill="#FFD998DD" Stroke="#FF563457" StrokeThickness="1"/>
         <Border Background="White" BorderBrush="#7F563457" BorderThickness="1,0,1,1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="19" Height="12"/>
         <Border Background="White" BorderBrush="#7F563457" BorderThickness="1,1,1,0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="11" Height="7"/>
@@ -145,8 +145,8 @@
     <ControlTemplate x:Key="Icon2QuickAccess">
       <Panel Width="16" Height="16">
         <Path Data="M 0.5 0.5 L 15.5 0.5 L 15.5 15.5 L 2.5 15.5 L 0.5 13.5 Z" Stroke="{Binding $parent[Button ].Foreground}" StrokeThickness="1"/>
-        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1,0,1,1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="10" Height="6"/>
-        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1,1,1,0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="8" Height="5"/>
+        <Border BorderBrush="{Binding $parent[TemplatedControl].Foreground}" BorderThickness="1,0,1,1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="10" Height="6"/>
+        <Border BorderBrush="{Binding $parent[TemplatedControl].Foreground}" BorderThickness="1,1,1,0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="8" Height="5"/>
       </Panel>
     </ControlTemplate>
   </ribbon:RibbonWindow.Resources>
@@ -329,32 +329,29 @@
               <ribbon:RibbonToggleButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="RibbonDropDownButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
-              <ribbon:RibbonDropDownButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}">
-                <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
-                <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
+              <ribbon:RibbonDropDownButton x:Name="LargeRibbonDropDownButton" Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}">
+                <ribbon:RibbonDropDownItem Text="Item 1" Command="{Binding OnClickCommand}" CommandParameter="RibbonDropDownButton Item 1">
+                  <ribbon:RibbonDropDownItem.Icon>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Red"/>
+                    </ControlTemplate>
+                  </ribbon:RibbonDropDownItem.Icon>
+                </ribbon:RibbonDropDownItem>
+                <ribbon:RibbonDropDownItem Text="Item 2" Command="{Binding OnClickCommand}" CommandParameter="RibbonDropDownButton Item 2">
+                  <ribbon:RibbonDropDownItem.Icon>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Green"/>
+                    </ControlTemplate>
+                  </ribbon:RibbonDropDownItem.Icon>
+                </ribbon:RibbonDropDownItem>
               </ribbon:RibbonDropDownButton>
-              <ribbon:RibbonDropDownButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}">
-                <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
-                <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
-              </ribbon:RibbonDropDownButton>
-              <ribbon:RibbonDropDownButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}">
-                <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
-                <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
-              </ribbon:RibbonDropDownButton>
+              <ribbon:RibbonDropDownButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}" Items="{Binding #LargeRibbonDropDownButton.Items}"/>
+              <ribbon:RibbonDropDownButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}" Items="{Binding #LargeRibbonDropDownButton.Items}"/>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="RibbonSplitButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
-              <ribbon:RibbonSplitButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}">
-                <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
-                <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
-              </ribbon:RibbonSplitButton>
-              <ribbon:RibbonSplitButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}">
-                <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
-                <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
-              </ribbon:RibbonSplitButton>
-              <ribbon:RibbonSplitButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}">
-                <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
-                <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
-              </ribbon:RibbonSplitButton>
+              <ribbon:RibbonSplitButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}" Items="{Binding #LargeRibbonDropDownButton.Items}"/>
+              <ribbon:RibbonSplitButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}" Items="{Binding #LargeRibbonDropDownButton.Items}"/>
+              <ribbon:RibbonSplitButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}" Items="{Binding #LargeRibbonDropDownButton.Items}"/>
             </ribbon:RibbonGroupBox>
           </ribbon:RibbonTab.Groups>
         </ribbon:RibbonTab>
@@ -364,62 +361,86 @@
               <ribbon:Gallery>
                 <ribbon:GalleryItem Content="Item 1">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Red"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Red"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 2">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="OrangeRed"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="OrangeRed"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 3">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Orange"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Orange"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 4">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 5">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="GreenYellow"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="GreenYellow"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 6">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="YellowGreen"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="YellowGreen"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 7">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Green"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Green"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 8">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Turquoise"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Turquoise"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 9">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Cyan"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Cyan"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 10">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="SkyBlue"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="SkyBlue"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 11">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Blue"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Blue"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 12">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="BlueViolet"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="BlueViolet"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
               </ribbon:Gallery>
@@ -428,62 +449,86 @@
               <ribbon:Gallery MaxSize="Medium">
                 <ribbon:GalleryItem Content="Item 1">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Red"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Red"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 2">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="OrangeRed"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="OrangeRed"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 3">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Orange"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Orange"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 4">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 5">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="GreenYellow"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="GreenYellow"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 6">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="YellowGreen"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="YellowGreen"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 7">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Green"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Green"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 8">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Turquoise"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Turquoise"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 9">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Cyan"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Cyan"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 10">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="SkyBlue"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="SkyBlue"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 11">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Blue"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Blue"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 12">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="BlueViolet"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="BlueViolet"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
               </ribbon:Gallery>
@@ -492,75 +537,92 @@
               <ribbon:Gallery MaxSize="Small">
                 <ribbon:GalleryItem Content="Item 1">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Red"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Red"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 2">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="OrangeRed"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="OrangeRed"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 3">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Orange"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Orange"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 4">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 5">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="GreenYellow"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="GreenYellow"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 6">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="YellowGreen"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="YellowGreen"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 7">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Green"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Green"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 8">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Turquoise"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Turquoise"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 9">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Cyan"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Cyan"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 10">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="SkyBlue"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="SkyBlue"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 11">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="Blue"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="Blue"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
                 <ribbon:GalleryItem Content="Item 12">
                   <ribbon:GalleryItem.Icon>
-                    <Rectangle Width="16" Height="16" Fill="BlueViolet"/>
+                    <ControlTemplate>
+                      <Rectangle Width="16" Height="16" Fill="BlueViolet"/>
+                    </ControlTemplate>
                   </ribbon:GalleryItem.Icon>
                 </ribbon:GalleryItem>
               </ribbon:Gallery>
             </ribbon:RibbonGroupBox>
           </ribbon:RibbonTab.Groups>
         </ribbon:RibbonTab>
-        <!--ribbon:RibbonTab Header="@acaly">
-          <ribbon:RibbonTab.Groups>
-            <ribbon:RibbonGroupBox Header="Test" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
-              <ribbon:RibbonToggleButton Content="Sync On/Off" LargeIcon="{DynamicResource Icon1Large}" MinSize="Large" MaxSize="Large"/>
-            </ribbon:RibbonGroupBox>
-          </ribbon:RibbonTab.Groups>
-        </ribbon:RibbonTab-->
         <ribbon:RibbonTab Header="Invisible tab" IsVisible="False"/>
         <ribbon:RibbonContextualTabGroup Header="Contextual Group 1" Background="Red" IsVisible="{Binding ShowContextualGroup1}">
           <ribbon:RibbonTab Header="Test A" ribbon:KeyTip.KeyTipKeys="T">
@@ -570,7 +632,7 @@
                   <ribbon:RibbonButton.LargeIcon>
                     <ControlTemplate>
                       <Panel Width="32" Height="32">
-                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="4" Margin="2,4,2,0">
+                        <Ellipse Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="4" Margin="2,4,2,0">
                           <Ellipse.Clip>
                             <PathGeometry>
                               <PathFigure StartPoint="0,0" IsClosed="True">
@@ -585,14 +647,14 @@
                             </PathGeometry>
                           </Ellipse.Clip>
                         </Ellipse>
-                        <Rectangle Width="4" Margin="0,0,0,9" Fill="{Binding $parent[Button].Foreground}"/>
+                        <Rectangle Width="4" Margin="0,0,0,9" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
                       </Panel>
                     </ControlTemplate>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.QuickAccessIcon>
                     <ControlTemplate>
                       <Panel Width="16" Height="16">
-                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Margin="1,2,1,0">
+                        <Ellipse Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="2" Margin="1,2,1,0">
                           <Ellipse.Clip>
                             <PathGeometry>
                               <PathFigure StartPoint="0,0" IsClosed="True">
@@ -607,7 +669,7 @@
                             </PathGeometry>
                           </Ellipse.Clip>
                         </Ellipse>
-                        <Rectangle Width="2" Margin="0,1,0,5" Fill="{Binding $parent[Button].Foreground}"/>
+                        <Rectangle Width="2" Margin="0,1,0,5" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
                       </Panel>
                     </ControlTemplate>
                   </ribbon:RibbonButton.QuickAccessIcon>
@@ -616,16 +678,16 @@
                   <ribbon:RibbonButton.LargeIcon>
                     <ControlTemplate>
                       <Panel Width="32" Height="32">
-                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="4"/>
-                        <Rectangle Width="4" Margin="0,9" Fill="{Binding $parent[Button].Foreground}"/>
+                        <Ellipse Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="4"/>
+                        <Rectangle Width="4" Margin="0,9" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
                       </Panel>
                     </ControlTemplate>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.QuickAccessIcon>
                     <ControlTemplate>
                       <Panel Width="16" Height="16">
-                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2"/>
-                        <Rectangle Width="2" Margin="0,4" Fill="{Binding $parent[Button].Foreground}"/>
+                        <Ellipse Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="2"/>
+                        <Rectangle Width="2" Margin="0,4" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
                       </Panel>
                     </ControlTemplate>
                   </ribbon:RibbonButton.QuickAccessIcon>
@@ -639,24 +701,24 @@
                 <ribbon:RibbonButton Content="Yes" MinSize="Large" ToolTip.Tip="Yes" ribbon:KeyTip.KeyTipKeys="Y" QuickAccessIcon="{Binding Icon, RelativeSource={RelativeSource Mode=Self}}">
                   <ribbon:RibbonButton.LargeIcon>
                     <ControlTemplate>
-                      <Path Data="M 1 15 L 10 24 L 30 4" Width="32" Height="32" StrokeThickness="4" Stroke="{Binding $parent[Button].Foreground}"/>
+                      <Path Data="M 1 15 L 10 24 L 30 4" Width="32" Height="32" StrokeThickness="4" Stroke="{Binding $parent[TemplatedControl].Foreground}"/>
                     </ControlTemplate>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.Icon>
                     <ControlTemplate>
-                      <Path Data="M 0.5 7 L 5 11.5 L 15 1.5" Width="16" Height="16" StrokeThickness="2" Stroke="{Binding $parent[Button].Foreground}"/>
+                      <Path Data="M 0.5 7 L 5 11.5 L 15 1.5" Width="16" Height="16" StrokeThickness="2" Stroke="{Binding $parent[TemplatedControl].Foreground}"/>
                     </ControlTemplate>
                   </ribbon:RibbonButton.Icon>
                 </ribbon:RibbonButton>
                 <ribbon:RibbonButton Content="No" MinSize="Large" ToolTip.Tip="No" ribbon:KeyTip.KeyTipKeys="N" QuickAccessIcon="{Binding Icon, RelativeSource={RelativeSource Mode=Self}}">
                   <ribbon:RibbonButton.LargeIcon>
                     <ControlTemplate>
-                      <Path Data="M 2 2 L 30 30 M 30 2 L 2 30" Width="32" Height="32" StrokeThickness="4" Stroke="{Binding $parent[Button].Foreground}"/>
+                      <Path Data="M 2 2 L 30 30 M 30 2 L 2 30" Width="32" Height="32" StrokeThickness="4" Stroke="{Binding $parent[TemplatedControl].Foreground}"/>
                     </ControlTemplate>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.Icon>
                     <ControlTemplate>
-                      <Path Data="M 1 1 L 15 15 M 15 1 L 1 15" Width="16" Height="16" StrokeThickness="2" Stroke="{Binding $parent[Button].Foreground}"/>
+                      <Path Data="M 1 1 L 15 15 M 15 1 L 1 15" Width="16" Height="16" StrokeThickness="2" Stroke="{Binding $parent[TemplatedControl].Foreground}"/>
                     </ControlTemplate>
                   </ribbon:RibbonButton.Icon>
                 </ribbon:RibbonButton>
@@ -670,7 +732,7 @@
                   <ribbon:RibbonButton.LargeIcon>
                     <ControlTemplate>
                       <Panel Width="32" Height="32">
-                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="4" Margin="2,4,2,0">
+                        <Ellipse Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="4" Margin="2,4,2,0">
                           <Ellipse.Clip>
                             <PathGeometry>
                               <PathFigure StartPoint="0,0" IsClosed="True">
@@ -685,14 +747,14 @@
                             </PathGeometry>
                           </Ellipse.Clip>
                         </Ellipse>
-                        <Rectangle Width="4" Margin="0,0,0,9" Fill="{Binding $parent[Button].Foreground}"/>
+                        <Rectangle Width="4" Margin="0,0,0,9" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
                       </Panel>
                     </ControlTemplate>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.QuickAccessIcon>
                     <ControlTemplate>
                       <Panel Width="16" Height="16">
-                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Margin="1,2,1,0">
+                        <Ellipse Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="2" Margin="1,2,1,0">
                           <Ellipse.Clip>
                             <PathGeometry>
                               <PathFigure StartPoint="0,0" IsClosed="True">
@@ -707,7 +769,7 @@
                             </PathGeometry>
                           </Ellipse.Clip>
                         </Ellipse>
-                        <Rectangle Width="2" Margin="0,1,0,5" Fill="{Binding $parent[Button].Foreground}"/>
+                        <Rectangle Width="2" Margin="0,1,0,5" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
                       </Panel>
                     </ControlTemplate>
                   </ribbon:RibbonButton.QuickAccessIcon>
@@ -716,16 +778,16 @@
                   <ribbon:RibbonButton.LargeIcon>
                     <ControlTemplate>
                       <Panel Width="32" Height="32">
-                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="4"/>
-                        <Rectangle Width="4" Margin="0,9" Fill="{Binding $parent[Button].Foreground}"/>
+                        <Ellipse Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="4"/>
+                        <Rectangle Width="4" Margin="0,9" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
                       </Panel>
                     </ControlTemplate>
                   </ribbon:RibbonButton.LargeIcon>
                   <ribbon:RibbonButton.QuickAccessIcon>
                     <ControlTemplate>
                       <Panel Width="16" Height="16">
-                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2"/>
-                        <Rectangle Width="2" Margin="0,4" Fill="{Binding $parent[Button].Foreground}"/>
+                        <Ellipse Stroke="{Binding $parent[TemplatedControl].Foreground}" StrokeThickness="2"/>
+                        <Rectangle Width="2" Margin="0,4" Fill="{Binding $parent[TemplatedControl].Foreground}"/>
                       </Panel>
                     </ControlTemplate>
                   </ribbon:RibbonButton.QuickAccessIcon>

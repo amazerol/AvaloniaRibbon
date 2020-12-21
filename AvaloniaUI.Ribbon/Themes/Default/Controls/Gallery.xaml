@@ -79,7 +79,7 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>
-          <Border x:Name="BodyBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Margin="0,0,17,0">
+          <Border x:Name="BodyBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
             <!--ScrollViewer Name="PART_ScrollViewer" Margin="-1,-1,-18,-1">
               <ScrollViewer.Template>
                 <ControlTemplate>
@@ -169,16 +169,16 @@
                   </StackPanel>
                 </ToggleButton>
               </UniformGrid>
-              <local:GalleryScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanVerticallyScroll="True">
+              <local:GalleryScrollContentPresenter x:Name="PART_ScrollContentPresenter" CanVerticallyScroll="True" Margin="{TemplateBinding Padding}">
                 <local:GalleryScrollContentPresenter.Content>
                   <ContentControl x:Name="PART_ItemsPresenterHolder"/>
                 </local:GalleryScrollContentPresenter.Content>
               </local:GalleryScrollContentPresenter>
             </DockPanel>
           </Border>
-          <Popup IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" VerticalOffset="-62">
-            <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" Width="{Binding Bounds.Width, ElementName=BodyBorder, Mode=OneWay}">
-              <ScrollViewer x:Name="PART_FlyoutScrollViewer">
+          <Popup IsOpen="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" StaysOpen="False" PlacementMode="Top" VerticalOffset="{Binding Bounds.Height, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+            <Border x:Name="PART_FlyoutRoot" Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" Width="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=TemplatedParent}}">
+              <ScrollViewer x:Name="PART_FlyoutScrollViewer" Height="{Binding Bounds.Height, RelativeSource={RelativeSource Mode=TemplatedParent}}" Padding="{TemplateBinding Padding}">
                 <ContentControl x:Name="PART_FlyoutItemsPresenterHolder"/>
               </ScrollViewer>
             </Border>
@@ -187,14 +187,13 @@
                               Items="{TemplateBinding Items}"
                               ItemsPanel="{TemplateBinding ItemsPanel}"
                               ItemTemplate="{TemplateBinding ItemTemplate}"
-                              Margin="{TemplateBinding Padding}"
                               VirtualizationMode="{TemplateBinding VirtualizationMode}"/>
         </Panel>
       </ControlTemplate>
     </Setter>
     <Setter Property="ItemsPanel">
       <ItemsPanelTemplate>
-        <UniformGrid x:Name="ItemsUniformGrid"/>
+        <UniformGrid x:Name="GalleryItemsUniformGrid"/>
       </ItemsPanelTemplate>
     </Setter>
   </Style>
@@ -207,13 +206,13 @@
   <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Small]">
     <Setter Property="Width" Value="115"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Large] /template/ UniformGrid#ItemsUniformGrid">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Large] /template/ UniformGrid#GalleryItemsUniformGrid">
     <Setter Property="Columns" Value="3"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Medium] /template/ UniformGrid#ItemsUniformGrid">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Medium] /template/ UniformGrid#GalleryItemsUniformGrid">
     <Setter Property="Columns" Value="2"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Small] /template/ UniformGrid#ItemsUniformGrid">
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Small] /template/ UniformGrid#GalleryItemsUniformGrid">
     <Setter Property="Columns" Value="1"/>
   </Style>
   <Style Selector="local|Ribbon[Orientation=Horizontal] local|Gallery[Size=Large]">
@@ -229,7 +228,7 @@
   <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery">
     <Setter Property="Width" Value="{Binding Bounds.Width, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}}"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery /template/ UniformGrid#ItemsUniformGrid">
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|Gallery /template/ UniformGrid#GalleryItemsUniformGrid">
     <Setter Property="Columns" Value="2"/>
   </Style>
 
@@ -247,7 +246,7 @@
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="0"/>
-    <Setter Property="Padding" Value="2,0"/>
+    <Setter Property="Padding" Value="2,1"/>
     <Setter Property="Height" Value="{Binding $parent[local:Gallery].ItemHeight}"/>
     <Setter Property="Template">
       <ControlTemplate>
@@ -255,8 +254,8 @@
                           BorderBrush="{TemplateBinding BorderBrush}"
                           BorderThickness="{TemplateBinding BorderThickness}">
           <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="{TemplateBinding Padding}">
-            <ContentPresenter x:Name="PART_ContentPresenter" DockPanel.Dock="Left" VerticalAlignment="Center" Content="{TemplateBinding Icon}" Margin="0,0,4,0" Background="Transparent"/>
-            <ContentPresenter VerticalAlignment="Center" VerticalContentAlignment="Center" Content="{TemplateBinding Content}" HorizontalContentAlignment="Left" Background="Transparent"/>
+            <TemplatedControl Width="16" Height="16" DockPanel.Dock="Left" VerticalAlignment="Center" Template="{TemplateBinding Icon}" Margin="0,0,4,0" Background="Transparent"/>
+            <ContentPresenter x:Name="PART_ContentPresenter" VerticalAlignment="Center" VerticalContentAlignment="Center" Content="{TemplateBinding Content}" HorizontalContentAlignment="Left" Background="Transparent"/>
           </DockPanel>
         </Border>
       </ControlTemplate>

@@ -6,6 +6,22 @@
   <Style Selector="local|RibbonSplitButton">
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Padding" Value="3"/>
+    <Setter Property="QuickAccessTemplate">
+      <ControlTemplate>
+        <local:RibbonSplitButton Classes="quickAccessButton" DataContext="{Binding}" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" Height="30" Focusable="False" Icon="{Binding QuickAccessIcon}" Size="Small" MinSize="Small" MaxSize="Small" Items="{Binding Items}"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonSplitButton.quickAccessButton:not(:pointerover):not(:pressed)">
+    <Setter Property="Background" Value="#01000000"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+  </Style>
+  <Style Selector="local|RibbonWindow local|RibbonSplitButton.quickAccessButton /template/ ToggleButton#toggle:not(:pointerover):not(:pressed):not(:checked),
+                   local|RibbonWindow local|RibbonSplitButton.quickAccessButton /template/ Button#RibbonSplitButtonTopButton:not(:pointerover):not(:pressed)">
+    <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RibbonWindow}}}"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonSplitButton.quickAccessButton:not(:pointerover):not(:pressed)">
+    <Setter Property="Opacity" Value="0.5"/>
   </Style>
   <Style Selector="local|RibbonSplitButton[Size=Large]">
     <Setter Property="Padding" Value="9,9,9,3"/>
@@ -141,7 +157,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
                     Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
-                    Fill="{TemplateBinding Foreground}"
+                    Fill="{Binding $parent[ToggleButton].Foreground}"
                     Stretch="Uniform" />
                 <Popup
                   Name="PART_Popup"

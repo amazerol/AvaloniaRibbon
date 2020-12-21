@@ -38,6 +38,23 @@
         </Border>
       </ControlTemplate>
     </Setter>
+    <Setter Property="QuickAccessTemplate">
+      <ControlTemplate>
+        <ToggleButton Classes="quickAccessButton" Command="{Binding Command}" IsChecked="{Binding IsChecked}" CommandParameter="{Binding CommandParameter}" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" MinWidth="45" Height="30" Focusable="False">
+          <TemplatedControl Template="{Binding QuickAccessIcon}" Width="16" Height="16"/>
+        </ToggleButton>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="ToggleButton.quickAccessButton:not(:pointerover):not(:pressed):not(:checked)">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+  </Style>
+  <Style Selector="local|RibbonWindow ToggleButton.quickAccessButton:not(:pointerover):not(:pressed):not(:checked)">
+    <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RibbonWindow}}}"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] ToggleButton.quickAccessButton:not(:pointerover):not(:pressed):not(:checked) > TemplatedControl">
+    <Setter Property="Opacity" Value="0.5"/>
   </Style>
   <Style Selector="local|RibbonToggleButton[Size=Large]">
     <Setter Property="Padding" Value="9,4" />

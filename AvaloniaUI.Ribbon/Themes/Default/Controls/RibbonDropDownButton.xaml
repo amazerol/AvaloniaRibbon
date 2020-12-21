@@ -6,6 +6,53 @@
   <Style Selector="local|RibbonDropDownButton">
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Padding" Value="3" />
+    <Setter Property="QuickAccessTemplate">
+      <ControlTemplate>
+        <!--Panel>
+          <ToggleButton x:Name="QuickAccessToggle" Classes="quickAccessButton" ClickMode="Press" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" Height="30" Focusable="False">
+            <StackPanel Orientation="Horizontal">
+              <TemplatedControl Template="{Binding QuickAccessIcon}" Width="16" Height="16" Margin="0,0,4,0"/>
+              <Path
+                  Width="8"
+                  Height="4"
+                  Margin="0,3,0,2"
+                  HorizontalAlignment="Center"
+                  VerticalAlignment="Center"
+                  Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
+                  Fill="{Binding $parent[ToggleButton].Foreground}"
+                  Stretch="Uniform" />
+            </StackPanel>
+          </ToggleButton>
+          <Popup
+                MinWidth="{Binding #QuickAccessToggle.Bounds.Width}"
+                MinHeight="10"
+                ObeyScreenEdges="True"
+                PlacementTarget="{Binding #QuickAccessToggle}"
+                PlacementMode="Bottom"
+                IsOpen="{Binding #QuickAccessToggle.IsChecked, Mode=TwoWay}"
+                StaysOpen="False">
+                <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                  <ItemsPresenter
+                      ItemTemplate="{Binding ItemTemplate}"
+                      Items="{Binding Items}"
+                      ItemsPanel="{Binding ItemsPanel}"/>
+                </Border>
+              </Popup>
+        </Panel-->
+        <local:RibbonDropDownButton Classes="quickAccessButton" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" Height="30" Focusable="False" Icon="{Binding QuickAccessIcon}" Size="Small" MinSize="Small" MaxSize="Small" Items="{Binding Items}"/>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonDropDownButton.quickAccessButton:not(:pointerover):not(:pressed)">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+  </Style>
+  <Style Selector="local|RibbonWindow local|RibbonDropDownButton.quickAccessButton[IsDropDownOpen=False]:not(:pointerover):not(:pressed),
+                   local|RibbonWindow local|RibbonDropDownButton.quickAccessButton[IsDropDownOpen=False]:not(:pointerover):not(:pressed) /template/ TemplatedControl">
+    <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RibbonWindow}}}"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonDropDownButton.quickAccessButton:not(:pointerover):not(:pressed)">
+    <Setter Property="Opacity" Value="0.5"/>
   </Style>
   <Style Selector="local|RibbonDropDownButton[Size=Large]">
     <Setter Property="Padding" Value="9" />
@@ -43,7 +90,7 @@
                 ObeyScreenEdges="True"
                 PlacementTarget="{Binding #toggle}"
                 StaysOpen="False" HorizontalOffset="-1">
-                <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
                   <VisualLayerManager>
                     <ScrollViewer>
                       <ItemsPresenter
@@ -94,7 +141,7 @@
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
                   StaysOpen="False">
-                  <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                  <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
                     <VisualLayerManager>
                       <ScrollViewer>
                         <ItemsPresenter
@@ -146,7 +193,7 @@
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
                   StaysOpen="False">
-                  <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                  <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
                     <VisualLayerManager>
                       <ScrollViewer>
                         <ItemsPresenter
@@ -212,41 +259,33 @@
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
   </Style>
 
-  <Style Selector="local|RibbonDropDownItem">
+  <Style Selector=":is(local|RibbonDropDownButton) local|RibbonDropDownItemPresenter">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="BorderThickness" Value="0"/>
-    <Setter Property="Padding" Value="2"/>
+    <Setter Property="Padding" Value="6,0"/>
     <Setter Property="Height" Value="20"/>
+    <Setter Property="Command" Value="{Binding Command}"/>
+    <Setter Property="CommandParameter" Value="{Binding CommandParameter}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
           <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="{TemplateBinding Padding}">
-            <ContentPresenter x:Name="PART_ContentPresenter" DockPanel.Dock="Left" VerticalAlignment="Center" Content="{TemplateBinding Icon}" Margin="0,0,4,0" Background="Transparent"/>
-            <ContentPresenter VerticalAlignment="Center" VerticalContentAlignment="Center" Content="{TemplateBinding Content}" HorizontalContentAlignment="Left" Background="Transparent"/>
+            <ContentPresenter x:Name="PART_ContentPresenter" IsVisible="False" IsHitTestVisible="False"/>
+            <Panel DockPanel.Dock="Left" VerticalAlignment="Center" Width="16" Height="16" Margin="0,3,4,3">
+              <TemplatedControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Template="{Binding Icon}" IsVisible="{Binding !IsChecked}"/>
+              <Path x:Name="check" Fill="{TemplateBinding Foreground}" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" IsVisible="{Binding IsChecked}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Panel>
+            <TextBlock VerticalAlignment="Center" Text="{Binding Text}" TextAlignment="Left" Background="Transparent"/>
           </DockPanel>
         </Border>
       </ControlTemplate>
     </Setter>
   </Style>
-
-  <Style Selector="local|RibbonDropDownItem:pointerover /template/ Border#BackgroundBorder">
+  <Style Selector=":is(local|RibbonDropDownButton) local|RibbonDropDownItemPresenter:pointerover /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}"/>
   </Style>
-
-  <Style Selector="local|RibbonDropDownItem:selected /template/ Border#BackgroundBorder">
+  <Style Selector=":is(local|RibbonDropDownButton) local|RibbonDropDownItemPresenter:pressed /template/ Border#BackgroundBorder">
     <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush4}"/>
-  </Style>
-
-  <Style Selector="local|RibbonDropDownItem:selected:focus /template/ Border#BackgroundBorder">
-    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush3}"/>
-  </Style>
-
-  <Style Selector="local|RibbonDropDownItem:selected:pointerover /template/ Border#BackgroundBorder">
-    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush3}"/>
-  </Style>
-
-  <Style Selector="local|RibbonDropDownItem:selected:focus:pointerover /template/ Border#BackgroundBorder">
-    <Setter Property="Background" Value="{DynamicResource ThemeAccentBrush2}"/>
   </Style>
 </Styles>

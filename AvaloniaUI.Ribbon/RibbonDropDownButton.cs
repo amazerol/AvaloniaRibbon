@@ -1,7 +1,9 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Generators;
+using Avalonia.Controls.Presenters;
 using Avalonia.Controls.Templates;
+using Avalonia.Styling;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -97,9 +99,18 @@ namespace AvaloniaUI.Ribbon
 
         protected override IItemContainerGenerator CreateItemContainerGenerator()
         {
-            return new ItemContainerGenerator<RibbonDropDownItem>(this, RibbonDropDownItem.ContentProperty, RibbonDropDownItem.ContentTemplateProperty);
+            return new ItemContainerGenerator<RibbonDropDownItemPresenter>(this, RibbonDropDownItemPresenter.ContentProperty, RibbonDropDownItemPresenter.ContentTemplateProperty);
         }
     }
 
-    public class RibbonDropDownItem : GalleryItem { }
+    //public class RibbonDropDownItem : GalleryItem { }
+    public class RibbonDropDownButtonItemsPresenter : ItemsPresenter, IStyleable
+    {
+        protected override IItemContainerGenerator CreateItemContainerGenerator()
+        {
+            return new ItemContainerGenerator<RibbonDropDownItemPresenter>(this, RibbonDropDownItemPresenter.ContentProperty, RibbonDropDownItemPresenter.ContentTemplateProperty);
+        }
+
+        Type IStyleable.StyleKey => typeof(ItemsPresenter);
+    }
 }
