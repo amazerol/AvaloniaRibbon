@@ -8,7 +8,7 @@
     xmlns:vm="clr-namespace:AvaloniaUI.Ribbon.Samples.ViewModels;assembly=AvaloniaUI.Ribbon.Sample"
     xmlns:ribbon="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon"
     Title="Avalonia Ribbon"
-    Width="950"
+    Width="980"
     Height="640"
     MinWidth="500"
     MinHeight="500"
@@ -16,32 +16,137 @@
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
   <ribbon:RibbonWindow.Resources>
-    <ControlTemplate x:Key="SlidersIcon">
-      <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
+    <ControlTemplate x:Key="Icon1">
+      <!--Rectangle Fill="{Binding $parent[Button].Foreground}" Width="16" Height="16">
         <Rectangle.OpacityMask>
-          <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
+          <ImageBrush Source="/Assets/boxIconSmall.png"/>
         </Rectangle.OpacityMask>
-      </Rectangle>
-    </ControlTemplate>
-    <ControlTemplate x:Key="SlidersIconLarge">
-      <Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
-        <Rectangle.OpacityMask>
-          <ImageBrush Source="/Assets/RibbonIcons/settings.png"/>
-        </Rectangle.OpacityMask>
-      </Rectangle>
-    </ControlTemplate>
-
-
-    <ControlTemplate x:Key="Icon2Large">
-      <Panel Width="32" Height="32">
-        <Rectangle Width="24" Height="24" Fill="{Binding $parent[Button].Foreground}"/>
-        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2,0"/>
+      </Rectangle-->
+      <!--Path Data="M 1 8 L 8 1 L 15 8 L 8 15 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/-->
+      <Panel Width="14" Height="15">
+        <!--Path Data="M 5 13 L 0 13 L 0 2 L 1 2 M 9 2 L 10 2 L 10 4" Stroke="#FFFB983B" StrokeThickness="1"/-->
+        <!--Path Data="M 11 26 L 1 26 L 1 5 L 3 5 M 16 5 L 19 5 L 19 10" Stroke="#FFF8DB8F" StrokeThickness="1"/-->
+        <Border Width="11" Height="12" BorderBrush="#FFFB983B" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0">
+          <Border.Clip>
+            <PathGeometry>
+              <PathFigure StartPoint="0,0" IsClosed="True">
+                  <LineSegment Point="2,0"/>
+                  <LineSegment Point="2,3"/>
+                  <LineSegment Point="9,3"/>
+                  <LineSegment Point="9,0"/>
+                  <LineSegment Point="11,0"/>
+                  <LineSegment Point="11,4"/>
+                  <LineSegment Point="6,4"/>
+                  <LineSegment Point="6,12"/>
+                  <LineSegment Point="0,12"/>
+              </PathFigure>
+            </PathGeometry>
+          </Border.Clip>
+          <Border BorderBrush="#FFF8DB8F" BorderThickness="1"/>
+        </Border>
+        <!--M 2 3 L 2 1 L 3 1 L 4 0 L 6 0 L 7 1 L 8 1 L 8 3 Z-->
+        <Path Data="M 2.5 3.5 L 2.5 1.5 L 3.5 1.5 L 4.5 0.5 L 6.5 0.5 L 7.5 1.5 L 8.5 1.5 L 8.5 3.5 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1" Opacity="0.625"/>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="7" Height="9" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1">
+          <StackPanel Orientation="Vertical" Opacity="0.75" Spacing="1" VerticalAlignment="Center">
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+          </StackPanel>
+        </Border>
       </Panel>
     </ControlTemplate>
+    <ControlTemplate x:Key="Icon1Large">
+      <!--Rectangle Fill="{Binding $parent[Button].Foreground}" Width="32" Height="32">
+        <Rectangle.OpacityMask>
+          <ImageBrush Source="/Assets/boxIconLarge.png"/>
+        </Rectangle.OpacityMask>
+      </Rectangle-->
+      <!--Path Data="M 1 16 L 16 1 L 31 16 L 16 31 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/-->
+      <Panel Width="27" Height="30" Margin="0,0,1,0">
+        <!--Path Data="M 11 27 L 0 27 L 0 4 L 3 4 M 16 4 L 20 4 L 20 10" Stroke="#FFFB983B" StrokeThickness="1" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0.5,0.5,0,0"/>
+        <Path Data="M 11 26 L 1 26 L 1 5 L 3 5 M 16 5 L 19 5 L 19 10" Stroke="#FFF8DB8F" StrokeThickness="1" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0.5,0.5,0,0"/-->
+        <Border Width="21" Height="24" BorderBrush="#FFFB983B" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,4,0,0">
+          <Border.Clip>
+            <PathGeometry>
+              <PathFigure StartPoint="0,0" IsClosed="True">
+                  <LineSegment Point="4,0"/>
+                  <LineSegment Point="4,3"/>
+                  <LineSegment Point="17,3"/>
+                  <LineSegment Point="17,0"/>
+                  <LineSegment Point="21,0"/>
+                  <LineSegment Point="21,7"/>
+                  <LineSegment Point="12,7"/>
+                  <LineSegment Point="12,24"/>
+                  <LineSegment Point="0,24"/>
+              </PathFigure>
+            </PathGeometry>
+          </Border.Clip>
+          <Border BorderBrush="#FFF8DB8F" BorderThickness="1"/>
+        </Border>
+        <Path Data="M 4.5 3.5 L 7.5 3.5 L 9.5 0.5 L 11.5 0.5 L 13.5 3.5 L 16.5 3.5 L 16.5 7.5 L 4.5 7.5 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1" Opacity="0.625"/>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="14" Height="18" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1">
+          <StackPanel Orientation="Vertical" Opacity="0.75" Spacing="3" VerticalAlignment="Center">
+            <Rectangle Width="6" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+            <Rectangle Width="6" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+            <Rectangle Width="6" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+          </StackPanel>
+        </Border>
+      </Panel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Icon1QuickAccess">
+      <Panel Width="14" Height="15">
+        <Border Width="11" Height="12" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,2,0,0">
+          <Border.Clip>
+            <PathGeometry>
+              <PathFigure StartPoint="0,0" IsClosed="True">
+                  <LineSegment Point="2,0"/>
+                  <LineSegment Point="2,3"/>
+                  <LineSegment Point="9,3"/>
+                  <LineSegment Point="9,0"/>
+                  <LineSegment Point="11,0"/>
+                  <LineSegment Point="11,4"/>
+                  <LineSegment Point="6,4"/>
+                  <LineSegment Point="6,12"/>
+                  <LineSegment Point="0,12"/>
+              </PathFigure>
+            </PathGeometry>
+          </Border.Clip>
+        </Border>
+        <Path Data="M 2.5 3.5 L 2.5 1.5 L 3.5 1.5 L 4.5 0.5 L 6.5 0.5 L 7.5 1.5 L 8.5 1.5 L 8.5 3.5 Z" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
+        <Border HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="7" Height="9" BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1">
+          <StackPanel Orientation="Vertical" Spacing="1" VerticalAlignment="Center">
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+            <Rectangle Width="3" Height="1" Fill="{Binding $parent[Button].Foreground}"/>
+          </StackPanel>
+        </Border>
+      </Panel>
+    </ControlTemplate>
+
+
     <ControlTemplate x:Key="Icon2">
       <Panel Width="16" Height="16">
-        <Rectangle Width="8" Height="8" Fill="{Binding $parent[Button].Foreground}"/>
-        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="2,0"/>
+        <!--Rectangle Width="8" Height="8" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
+        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1,0"/-->
+        <Path Data="M 0.5 0.5 L 15.5 0.5 L 15.5 15.5 L 2.5 15.5 L 0.5 13.5 Z" Fill="#FFD998DD" Stroke="#FF563457" StrokeThickness="1"/>
+        <Border Background="White" BorderBrush="#7F563457" BorderThickness="1,0,1,1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="10" Height="6"/>
+        <Border Background="White" BorderBrush="#7F563457" BorderThickness="1,1,1,0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="8" Height="5"/>
+      </Panel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Icon2Large">
+      <Panel Width="27" Height="27">
+        <!--Rectangle Width="24" Height="24" Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="1"/>
+        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1,0"/-->
+        <Path Data="M 0.5 0.5 L 26.5 0.5 L 26.5 26.5 L 3.5 26.5 L 0.5 23.5 Z" Fill="#FFD998DD" Stroke="#FF563457" StrokeThickness="1"/>
+        <Border Background="White" BorderBrush="#7F563457" BorderThickness="1,0,1,1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="19" Height="12"/>
+        <Border Background="White" BorderBrush="#7F563457" BorderThickness="1,1,1,0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="11" Height="7"/>
+      </Panel>
+    </ControlTemplate>
+    <ControlTemplate x:Key="Icon2QuickAccess">
+      <Panel Width="16" Height="16">
+        <Path Data="M 0.5 0.5 L 15.5 0.5 L 15.5 15.5 L 2.5 15.5 L 0.5 13.5 Z" Stroke="{Binding $parent[Button ].Foreground}" StrokeThickness="1"/>
+        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1,0,1,1" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Top" Width="10" Height="6"/>
+        <Border BorderBrush="{Binding $parent[Button].Foreground}" BorderThickness="1,1,1,0" Margin="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="8" Height="5"/>
       </Panel>
     </ControlTemplate>
   </ribbon:RibbonWindow.Resources>
@@ -175,78 +280,78 @@
         <ribbon:RibbonTab Header="Home" ribbon:KeyTip.KeyTipKeys="H">
           <ribbon:RibbonTab.Groups>
             <ribbon:RibbonGroupBox Header="Test Group 1" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
-              <ribbon:RibbonButton x:Name="RibbonButton1" Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A" CanAddToQuickAccess="True" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-              <ribbon:RibbonButton x:Name="RibbonButton2" Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton x:Name="RibbonButton3" Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonButton x:Name="RibbonButton1" Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A" CanAddToQuickAccess="True" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
+              <ribbon:RibbonButton x:Name="RibbonButton2" Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonButton x:Name="RibbonButton3" Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="Test Group 2" ribbon:KeyTip.KeyTipKeys="D2">
-              <ribbon:RibbonButton MaxSize="Medium" Content="Button 4" ToolTip.Tip="Button 4" ribbon:KeyTip.KeyTipKeys="D" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton MaxSize="Medium" Content="Button 5" ToolTip.Tip="Button 5" ribbon:KeyTip.KeyTipKeys="E" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-              <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 6" ToolTip.Tip="Button 6" ribbon:KeyTip.KeyTipKeys="F" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 7" ToolTip.Tip="Button 7" ribbon:KeyTip.KeyTipKeys="G" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonButton MaxSize="Medium" Content="Button 4" ToolTip.Tip="Button 4" ribbon:KeyTip.KeyTipKeys="D" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Medium" Content="Button 5" ToolTip.Tip="Button 5" ribbon:KeyTip.KeyTipKeys="E" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 6" ToolTip.Tip="Button 6" ribbon:KeyTip.KeyTipKeys="F" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 7" ToolTip.Tip="Button 7" ribbon:KeyTip.KeyTipKeys="G" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="Test Group 3" ribbon:KeyTip.KeyTipKeys="D3">
-              <ribbon:RibbonButton MaxSize="Medium" Content="Button 8" ToolTip.Tip="Button 8" ribbon:KeyTip.KeyTipKeys="H" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton MaxSize="Medium" Content="Button 9" ToolTip.Tip="Button 9" ribbon:KeyTip.KeyTipKeys="I" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-              <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 10" ToolTip.Tip="Button 10" ribbon:KeyTip.KeyTipKeys="J" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonButton MaxSize="Medium" Content="Button 8" ToolTip.Tip="Button 8" ribbon:KeyTip.KeyTipKeys="H" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Medium" Content="Button 9" ToolTip.Tip="Button 9" ribbon:KeyTip.KeyTipKeys="I" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 10" ToolTip.Tip="Button 10" ribbon:KeyTip.KeyTipKeys="J" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
             </ribbon:RibbonGroupBox>
 
 
 
             <ribbon:RibbonGroupBox Header="Test Group 4" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
-              <ribbon:RibbonButton Content="Button 11" MinSize="Medium" ToolTip.Tip="Button 11" ribbon:KeyTip.KeyTipKeys="A" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-              <ribbon:RibbonButton Content="Button 12" MinSize="Medium" ToolTip.Tip="Button 12" ribbon:KeyTip.KeyTipKeys="B" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton Content="Button 13" MinSize="Medium" ToolTip.Tip="Button 13" ribbon:KeyTip.KeyTipKeys="C" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonButton Content="Button 11" MinSize="Medium" ToolTip.Tip="Button 11" ribbon:KeyTip.KeyTipKeys="A" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
+              <ribbon:RibbonButton Content="Button 12" MinSize="Medium" ToolTip.Tip="Button 12" ribbon:KeyTip.KeyTipKeys="B" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonButton Content="Button 13" MinSize="Medium" ToolTip.Tip="Button 13" ribbon:KeyTip.KeyTipKeys="C" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="Test Group 5" ribbon:KeyTip.KeyTipKeys="D2">
-              <ribbon:RibbonButton MaxSize="Medium" Content="Button 14" ToolTip.Tip="Button 14" ribbon:KeyTip.KeyTipKeys="D" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton MaxSize="Medium" Content="Button 15" ToolTip.Tip="Button 15" ribbon:KeyTip.KeyTipKeys="E" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-              <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 16" ToolTip.Tip="Button 16" ribbon:KeyTip.KeyTipKeys="F" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 17" ToolTip.Tip="Button 17" ribbon:KeyTip.KeyTipKeys="G" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonButton MaxSize="Medium" Content="Button 14" ToolTip.Tip="Button 14" ribbon:KeyTip.KeyTipKeys="D" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Medium" Content="Button 15" ToolTip.Tip="Button 15" ribbon:KeyTip.KeyTipKeys="E" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 16" ToolTip.Tip="Button 16" ribbon:KeyTip.KeyTipKeys="F" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Large" MinSize="Medium" Content="Button 17" ToolTip.Tip="Button 17" ribbon:KeyTip.KeyTipKeys="G" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="Test Group 6" ribbon:KeyTip.KeyTipKeys="D3">
-              <ribbon:RibbonButton MaxSize="Medium" Content="Button 18" ToolTip.Tip="Button 18" ribbon:KeyTip.KeyTipKeys="H" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton MaxSize="Medium" Content="Button 19" ToolTip.Tip="Button 19" ribbon:KeyTip.KeyTipKeys="I" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-              <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 20" ToolTip.Tip="Button 20" ribbon:KeyTip.KeyTipKeys="J" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonButton MaxSize="Medium" Content="Button 18" ToolTip.Tip="Button 18" ribbon:KeyTip.KeyTipKeys="H" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Medium" Content="Button 19" ToolTip.Tip="Button 19" ribbon:KeyTip.KeyTipKeys="I" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
+              <ribbon:RibbonButton MaxSize="Large" MinSize="Small" Content="Button 20" ToolTip.Tip="Button 20" ribbon:KeyTip.KeyTipKeys="J" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
             </ribbon:RibbonGroupBox>
           </ribbon:RibbonTab.Groups>
         </ribbon:RibbonTab>
         <ribbon:RibbonTab Header="Button Controls" ribbon:KeyTip.KeyTipKeys="B">
           <ribbon:RibbonTab.Groups>
             <ribbon:RibbonGroupBox Header="RibbonButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
-              <ribbon:RibbonButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-              <ribbon:RibbonButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
+              <ribbon:RibbonButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="RibbonToggleButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="T">
-              <ribbon:RibbonToggleButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-              <ribbon:RibbonToggleButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-              <ribbon:RibbonToggleButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+              <ribbon:RibbonToggleButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
+              <ribbon:RibbonToggleButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+              <ribbon:RibbonToggleButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="RibbonDropDownButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
-              <ribbon:RibbonDropDownButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}">
+              <ribbon:RibbonDropDownButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}">
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
                 <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
               </ribbon:RibbonDropDownButton>
-              <ribbon:RibbonDropDownButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}">
+              <ribbon:RibbonDropDownButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}">
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
                 <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
               </ribbon:RibbonDropDownButton>
-              <ribbon:RibbonDropDownButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}">
+              <ribbon:RibbonDropDownButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}">
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
                 <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
               </ribbon:RibbonDropDownButton>
             </ribbon:RibbonGroupBox>
             <ribbon:RibbonGroupBox Header="RibbonSplitButtons" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="S">
-              <ribbon:RibbonSplitButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}">
+              <ribbon:RibbonSplitButton Content="Large" MinSize="Large" MaxSize="Large" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}">
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
                 <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
               </ribbon:RibbonSplitButton>
-              <ribbon:RibbonSplitButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}">
+              <ribbon:RibbonSplitButton Content="Medium" MinSize="Medium" MaxSize="Medium" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}">
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
                 <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
               </ribbon:RibbonSplitButton>
-              <ribbon:RibbonSplitButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}">
+              <ribbon:RibbonSplitButton ToolTip.Tip="Small" MinSize="Small" MaxSize="Small" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}">
                 <ribbon:RibbonDropDownItem>Item 1</ribbon:RibbonDropDownItem>
                 <ribbon:RibbonDropDownItem>Item 2</ribbon:RibbonDropDownItem>
               </ribbon:RibbonSplitButton>
@@ -452,7 +557,7 @@
         <!--ribbon:RibbonTab Header="@acaly">
           <ribbon:RibbonTab.Groups>
             <ribbon:RibbonGroupBox Header="Test" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
-              <ribbon:RibbonToggleButton Content="Sync On/Off" LargeIcon="{DynamicResource SlidersIconLarge}" MinSize="Large" MaxSize="Large"/>
+              <ribbon:RibbonToggleButton Content="Sync On/Off" LargeIcon="{DynamicResource Icon1Large}" MinSize="Large" MaxSize="Large"/>
             </ribbon:RibbonGroupBox>
           </ribbon:RibbonTab.Groups>
         </ribbon:RibbonTab-->
@@ -558,14 +663,84 @@
               </ribbon:RibbonGroupBox>
             </ribbon:RibbonTab.Groups>
           </ribbon:RibbonTab>
+          <ribbon:RibbonTab Header="Test C" ribbon:KeyTip.KeyTipKeys="N">
+            <ribbon:RibbonTab.Groups>
+              <ribbon:RibbonGroupBox Header="Test Group lel" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
+                <ribbon:RibbonButton Content="Non't" MinSize="Large" ToolTip.Tip="Non't" ribbon:KeyTip.KeyTipKeys="A">
+                  <ribbon:RibbonButton.LargeIcon>
+                    <ControlTemplate>
+                      <Panel Width="32" Height="32">
+                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="4" Margin="2,4,2,0">
+                          <Ellipse.Clip>
+                            <PathGeometry>
+                              <PathFigure StartPoint="0,0" IsClosed="True">
+                                  <LineSegment Point="8,0"/>
+                                  <LineSegment Point="8,11"/>
+                                  <LineSegment Point="19,11"/>
+                                  <LineSegment Point="19,0"/>
+                                  <LineSegment Point="28,0"/>
+                                  <LineSegment Point="28,28"/>
+                                  <LineSegment Point="0,28"/>
+                              </PathFigure>
+                            </PathGeometry>
+                          </Ellipse.Clip>
+                        </Ellipse>
+                        <Rectangle Width="4" Margin="0,0,0,9" Fill="{Binding $parent[Button].Foreground}"/>
+                      </Panel>
+                    </ControlTemplate>
+                  </ribbon:RibbonButton.LargeIcon>
+                  <ribbon:RibbonButton.QuickAccessIcon>
+                    <ControlTemplate>
+                      <Panel Width="16" Height="16">
+                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2" Margin="1,2,1,0">
+                          <Ellipse.Clip>
+                            <PathGeometry>
+                              <PathFigure StartPoint="0,0" IsClosed="True">
+                                  <LineSegment Point="4,0"/>
+                                  <LineSegment Point="4,6"/>
+                                  <LineSegment Point="10,6"/>
+                                  <LineSegment Point="10,0"/>
+                                  <LineSegment Point="14,0"/>
+                                  <LineSegment Point="14,14"/>
+                                  <LineSegment Point="0,14"/>
+                              </PathFigure>
+                            </PathGeometry>
+                          </Ellipse.Clip>
+                        </Ellipse>
+                        <Rectangle Width="2" Margin="0,1,0,5" Fill="{Binding $parent[Button].Foreground}"/>
+                      </Panel>
+                    </ControlTemplate>
+                  </ribbon:RibbonButton.QuickAccessIcon>
+                </ribbon:RibbonButton>
+                <ribbon:RibbonButton Content="Yesn't" MinSize="Large" ToolTip.Tip="Yesn't" ribbon:KeyTip.KeyTipKeys="B">
+                  <ribbon:RibbonButton.LargeIcon>
+                    <ControlTemplate>
+                      <Panel Width="32" Height="32">
+                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="4"/>
+                        <Rectangle Width="4" Margin="0,9" Fill="{Binding $parent[Button].Foreground}"/>
+                      </Panel>
+                    </ControlTemplate>
+                  </ribbon:RibbonButton.LargeIcon>
+                  <ribbon:RibbonButton.QuickAccessIcon>
+                    <ControlTemplate>
+                      <Panel Width="16" Height="16">
+                        <Ellipse Stroke="{Binding $parent[Button].Foreground}" StrokeThickness="2"/>
+                        <Rectangle Width="2" Margin="0,4" Fill="{Binding $parent[Button].Foreground}"/>
+                      </Panel>
+                    </ControlTemplate>
+                  </ribbon:RibbonButton.QuickAccessIcon>
+                </ribbon:RibbonButton>
+              </ribbon:RibbonGroupBox>
+            </ribbon:RibbonTab.Groups>
+          </ribbon:RibbonTab>
         </ribbon:RibbonContextualTabGroup>
         <ribbon:RibbonContextualTabGroup Header="Contextual Group 2" Background="Green" IsVisible="{Binding ShowContextualGroup2}">
-          <ribbon:RibbonTab Header="Test" ribbon:KeyTip.KeyTipKeys="T">
+          <ribbon:RibbonTab Header="This tab's name is really long" ribbon:KeyTip.KeyTipKeys="T">
             <ribbon:RibbonTab.Groups>
               <ribbon:RibbonGroupBox Header="Another bloody group" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
-                <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
-                <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
-                <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2}"/>
+                <ribbon:RibbonButton Content="Button 1" MinSize="Medium" ToolTip.Tip="Button 1" ribbon:KeyTip.KeyTipKeys="A" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
+                <ribbon:RibbonButton Content="Button 2" MinSize="Medium" ToolTip.Tip="Button 2" ribbon:KeyTip.KeyTipKeys="B" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
+                <ribbon:RibbonButton Content="Button 3" MinSize="Medium" ToolTip.Tip="Button 3" ribbon:KeyTip.KeyTipKeys="C" LargeIcon="{DynamicResource Icon2Large}" Icon="{DynamicResource Icon2}" QuickAccessIcon="{DynamicResource Icon2QuickAccess}"/>
               </ribbon:RibbonGroupBox>
             </ribbon:RibbonTab.Groups>
           </ribbon:RibbonTab>
@@ -574,7 +749,7 @@
           <ribbon:RibbonTab Header="lol" ribbon:KeyTip.KeyTipKeys="T">
             <ribbon:RibbonTab.Groups>
               <ribbon:RibbonGroupBox Header="lmao" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="D1">
-                <ribbon:RibbonButton Content="no u" MinSize="Small" ToolTip.Tip="no u" ribbon:KeyTip.KeyTipKeys="N" LargeIcon="{DynamicResource SlidersIconLarge}" Icon="{DynamicResource SlidersIcon}" QuickAccessIcon="{DynamicResource SlidersIcon}"/>
+                <ribbon:RibbonButton Content="no u" MinSize="Small" ToolTip.Tip="no u" ribbon:KeyTip.KeyTipKeys="N" LargeIcon="{DynamicResource Icon1Large}" Icon="{DynamicResource Icon1}" QuickAccessIcon="{DynamicResource Icon1QuickAccess}"/>
               </ribbon:RibbonGroupBox>
             </ribbon:RibbonTab.Groups>
           </ribbon:RibbonTab>

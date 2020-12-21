@@ -52,6 +52,9 @@
   <Style Selector="local|RibbonWindow local|QuickAccessToolbar /template/ ToggleButton#PART_MoreButton:not(:pointerover):not(:pressed):not(:checked)">
     <Setter Property="Foreground" Value="{Binding $parent[local:RibbonWindow].TitleBarForeground}"/>
   </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] local|QuickAccessToolbar /template/ ToggleButton#PART_MoreButton:not(:pointerover):not(:pressed):not(:checked) > StackPanel">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
 
 
 
@@ -67,9 +70,5 @@
         </TemplatedControl>
       </ControlTemplate>
     </Setter>
-  </Style>
-  <Style Selector="local|RibbonWindow[HasSystemDecorations=False] local|QuickAccessToolbar">
-    <!--Setter Property="Margin" Value="34,-30,0,0"/-->
-    <Setter Property="ZIndex" Value="2"/>
   </Style>
 </Styles>

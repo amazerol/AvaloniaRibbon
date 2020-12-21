@@ -32,7 +32,7 @@
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
           <DockPanel>
-            <TemplatedControl Template="{TemplateBinding Icon}" DockPanel.Dock="Left" />
+            <TemplatedControl Template="{TemplateBinding Icon}" DockPanel.Dock="Left" Width="16" Height="16"/>
             <ContentPresenter Classes="MediumContentPresenter" Content="{TemplateBinding Content}" Margin="3,0,0,0" />
           </DockPanel>
         </Border>
@@ -41,7 +41,7 @@
     <Setter Property="QuickAccessTemplate">
       <ControlTemplate>
         <Button Classes="quickAccessButton" Command="{Binding Command}" CommandParameter="{Binding CommandParameter}" ToolTip.Tip="{Binding ToolTip.Tip}" local:KeyTip.KeyTipKeys="{Binding KeyTip.Tip}" MinWidth="45" Height="30" Focusable="False">
-          <TemplatedControl Template="{Binding QuickAccessIcon}"/>
+          <TemplatedControl Template="{Binding QuickAccessIcon}" Width="16" Height="16"/>
         </Button>
       </ControlTemplate>
     </Setter>
@@ -53,6 +53,9 @@
   <Style Selector="local|RibbonWindow Button.quickAccessButton:not(:pointerover):not(:pressed)">
     <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type local:RibbonWindow}}}"/>
   </Style>
+  <Style Selector="local|RibbonWindow[IsActive=False] Button.quickAccessButton:not(:pointerover):not(:pressed) > TemplatedControl">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
   <Style Selector="local|RibbonButton[Size=Large]">
     <Setter Property="Padding" Value="9,4" />
     <Setter Property="MaxWidth" Value="75"/>
@@ -61,7 +64,7 @@
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
           <DockPanel VerticalAlignment="Stretch">
-            <TemplatedControl Template="{TemplateBinding LargeIcon}" DockPanel.Dock="Top"/>
+            <TemplatedControl Template="{TemplateBinding LargeIcon}" DockPanel.Dock="Top" Width="32" Height="32"/>
             <ContentPresenter Content="{TemplateBinding Content}" Margin="0,3,0,0" VerticalAlignment="Stretch"/>
           </DockPanel>
         </Border>
@@ -83,7 +86,7 @@
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
-          <TemplatedControl Template="{TemplateBinding Icon}"/>
+          <TemplatedControl Template="{TemplateBinding Icon}" Width="16" Height="16"/>
         </Border>
       </ControlTemplate>
     </Setter>
