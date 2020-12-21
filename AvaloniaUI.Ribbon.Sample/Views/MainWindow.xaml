@@ -449,6 +449,13 @@
             </ribbon:RibbonGroupBox>
           </ribbon:RibbonTab.Groups>
         </ribbon:RibbonTab>
+        <!--ribbon:RibbonTab Header="@acaly">
+          <ribbon:RibbonTab.Groups>
+            <ribbon:RibbonGroupBox Header="Test" Command="{Binding OnClickCommand}" ribbon:KeyTip.KeyTipKeys="B">
+              <ribbon:RibbonToggleButton Content="Sync On/Off" LargeIcon="{DynamicResource SlidersIconLarge}" MinSize="Large" MaxSize="Large"/>
+            </ribbon:RibbonGroupBox>
+          </ribbon:RibbonTab.Groups>
+        </ribbon:RibbonTab-->
         <ribbon:RibbonTab Header="Invisible tab" IsVisible="False"/>
         <ribbon:RibbonContextualTabGroup Header="Contextual Group 1" Background="Red" IsVisible="{Binding ShowContextualGroup1}">
           <ribbon:RibbonTab Header="Test A" ribbon:KeyTip.KeyTipKeys="T">

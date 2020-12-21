@@ -40,17 +40,25 @@
     </Setter>
   </Style>
   <Style Selector="local|RibbonToggleButton[Size=Large]">
-    <Setter Property="Padding" Value="9" />
+    <Setter Property="Padding" Value="9,4" />
+    <Setter Property="MaxWidth" Value="75"/>
+    <Setter Property="Height" Value="72"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonToggleButtonBackgroundBorder">
-          <StackPanel Orientation="Vertical">
-            <TemplatedControl Template="{TemplateBinding LargeIcon}" />
-            <ContentPresenter Content="{TemplateBinding Content}" Margin="0,3,0,2"/>
-          </StackPanel>
+          <DockPanel VerticalAlignment="Stretch">
+            <TemplatedControl Template="{TemplateBinding LargeIcon}" DockPanel.Dock="Top"/>
+            <ContentPresenter Content="{TemplateBinding Content}" Margin="0,3,0,0" VerticalAlignment="Stretch"/>
+          </DockPanel>
         </Border>
       </ControlTemplate>
     </Setter>
+  </Style>
+  <Style Selector="local|RibbonToggleButton[Size=Large] /template/ ContentPresenter TextBlock">
+    <Setter Property="TextWrapping" Value="Wrap"/>
+    <Setter Property="TextAlignment" Value="Center"/>
+    <Setter Property="Margin" Value="0,-3"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
   </Style>
   <Style Selector="local|RibbonToggleButton[Size=Medium]">
     <Setter Property="Height" Value="24"/>
