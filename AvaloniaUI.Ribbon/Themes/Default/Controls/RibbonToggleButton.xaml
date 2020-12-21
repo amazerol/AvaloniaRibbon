@@ -41,7 +41,7 @@
   </Style>
   <Style Selector="local|RibbonToggleButton[Size=Large]">
     <Setter Property="Padding" Value="9,4" />
-    <Setter Property="MaxWidth" Value="75"/>
+    <Setter Property="MaxWidth" Value="68"/>
     <Setter Property="Height" Value="72"/>
     <Setter Property="Template">
       <ControlTemplate>
