@@ -12,7 +12,7 @@
     Height="640"
     MinWidth="500"
     MinHeight="500"
-    BorderBrush="#FF2B579A"  TitleBarForeground="White"
+    BorderBrush="{DynamicResource FillBrush}" TitleBarForeground="White"
     Icon="/Assets/avalonia-logo.ico"
     mc:Ignorable="d">
   <ribbon:RibbonWindow.Resources>
@@ -150,12 +150,17 @@
       </Panel>
     </ControlTemplate>
   </ribbon:RibbonWindow.Resources>
+  <ribbon:RibbonWindow.Styles>
+    <Style Selector="CheckBox TextBlock">
+      <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+  </ribbon:RibbonWindow.Styles>
   <ribbon:RibbonWindow.TitleBarBackground>
     <VisualBrush Stretch="None" AlignmentX="Left" AlignmentY="Top">
       <VisualBrush.Visual>
         <Panel Background="{DynamicResource FillBrush}" Width="{Binding #MainWindow.Bounds.Width}" Height="{Binding #MainWindow.Bounds.Height}">
           <Panel.Resources>
-            <SolidColorBrush x:Key="FillBrush">#FF2B579A</SolidColorBrush>
+            <SolidColorBrush x:Key="FillBrush">#7F2B579A</SolidColorBrush>
             <SolidColorBrush x:Key="LineBrush">#FF274F8C</SolidColorBrush>
             <!--16000000-->
           </Panel.Resources>
@@ -184,11 +189,11 @@
             <Ellipse Canvas.Left="194" Canvas.Top="28"/>
 
 
-            <Ellipse Width="36" Height="36" StrokeThickness="6" Canvas.Left="13" Canvas.Top="11"/>
+            <Ellipse Width="36" Height="36" StrokeThickness="6" Fill="Transparent" Canvas.Left="13" Canvas.Top="11"/>
             <Path Data="M 26 36 L 26 24 L 38 24" StrokeThickness="5" StrokeJoin="Miter"/>
             <Path Data="M 26 24 L 38 36" StrokeThickness="5" StrokeJoin="Miter"/>
             
-            <Ellipse Width="55" Height="55" StrokeThickness="6" Canvas.Left="232" Canvas.Top="-19"/>
+            <Ellipse Width="55" Height="55" StrokeThickness="6" Fill="Transparent" Canvas.Left="232" Canvas.Top="-19"/>
             <Path Data="M 249 -4 L 269 -4 L 269 16" StrokeThickness="6" StrokeJoin="Miter"/>
             <Path Data="M 269 -4 L 249 16" StrokeThickness="6" StrokeJoin="Miter"/>
           </Canvas>
@@ -829,7 +834,7 @@
       <ribbon:QuickAccessItem Item="{Binding #RibbonButton1}"/>
     </ribbon:QuickAccessToolbar>
   </ribbon:RibbonWindow.QuickAccessToolbar>
-  <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="5">
+  <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Margin="25">
     <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation" IsVisible="False"/>
     <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
     <StackPanel Orientation="Horizontal">

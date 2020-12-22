@@ -1,0 +1,144 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon">
+  <Design.PreviewWith>
+    <Grid Width="200">
+      <local:Ribbon>
+        <local:RibbonTab>
+          <local:RibbonTab.Groups>
+            <local:RibbonGroupBox Header="Text or something" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Grid}}}">
+              <local:RibbonButton MinSize="Medium" MaxSize="Medium" Content="Button">
+                <local:RibbonButton.Icon>
+                  <Rectangle Width="16" Height="16" Fill="Red"/>
+                </local:RibbonButton.Icon>
+              </local:RibbonButton>
+              <local:RibbonButton MinSize="Medium" MaxSize="Medium" Content="Button">
+                <local:RibbonButton.Icon>
+                  <Rectangle Width="16" Height="16" Fill="Red"/>
+                </local:RibbonButton.Icon>
+              </local:RibbonButton>
+              <local:RibbonButton MinSize="Medium" MaxSize="Medium" Content="Button">
+                <local:RibbonButton.Icon>
+                  <Rectangle Width="16" Height="16" Fill="Red"/>
+                </local:RibbonButton.Icon>
+              </local:RibbonButton>
+            </local:RibbonGroupBox>
+          </local:RibbonTab.Groups>
+        </local:RibbonTab>
+      </local:Ribbon>
+    </Grid>
+  </Design.PreviewWith>
+
+  <Style Selector="local|RibbonGroupBox">
+    <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundChromeHighBrush}" />
+    <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
+    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="Padding" Value="5"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <!--Setter Property="Height" Value="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}, Mode=OneWay}"/-->
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Panel>
+          <Rectangle x:Name="Separator" MinWidth="1" MinHeight="1" Fill="{TemplateBinding BorderBrush}"/>
+          <DockPanel>
+            <DockPanel DockPanel.Dock="Bottom" Margin="6,0,6,1">
+              <Button Grid.Column="1" Grid.Row="1"
+                  x:Name="PART_CommandButton"
+                  Height="14"
+                  HorizontalAlignment="Right"
+                  Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Focusable="False" DockPanel.Dock="Right" Foreground="{DynamicResource SystemControlBackgroundBaseMediumHighBrush}" Background="Transparent" Padding="0">
+                <Button.IsVisible>
+                  <Binding Path="!Command" Mode="OneWay" RelativeSource="{RelativeSource Mode=TemplatedParent}">
+                    <Binding.Converter>
+                      <local:IsNullConverter/>
+                    </Binding.Converter>
+                  </Binding>
+                </Button.IsVisible>
+                <Border Width="7" Height="7" BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="1,1,0,0">
+                  <Grid Width="5" Height="5" Margin="0,0,-1,-1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="0,0,1,1"/>
+                    <Line StartPoint="1,1" EndPoint="5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="1" Margin="-1,-1,1,1"/>
+                  </Grid>
+                </Border>
+              </Button>
+              <ContentPresenter x:Name="PART_HeaderPresenter" TextBlock.FontSize="11" Content="{TemplateBinding Header}" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="Center"/>
+            </DockPanel>
+            <ItemsPresenter x:Name="PART_ItemsPresenter" Items="{TemplateBinding Items}" ItemTemplate="{TemplateBinding ItemTemplate}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="{TemplateBinding Padding}">
+              <ItemsPresenter.ItemsPanel>
+                <ItemsPanelTemplate>
+                  <local:RibbonGroupWrapPanel x:Name="PART_ItemsPanel" DisplayMode="{TemplateBinding DisplayMode}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+                </ItemsPanelTemplate>
+              </ItemsPresenter.ItemsPanel>
+            </ItemsPresenter>
+          </DockPanel>
+        </Panel>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ Rectangle#Separator">
+    <Setter Property="HorizontalAlignment" Value="Right"/>
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+    <Setter Property="Margin" Value="0,4"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ Rectangle#Separator">
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalAlignment" Value="Bottom"/>
+    <Setter Property="Margin" Value="4,0"/>
+  </Style>
+  <!--Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ ItemsPresenter#PART_ItemsPresenter">
+    <Setter Property="Margin" Value="5,2,5,3"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ ItemsPresenter#PART_ItemsPresenter">
+    <Setter Property="Margin" Value="3,5"/>
+  </Style-->
+  <!--Style Selector="local|RibbonGroupBox">
+    <Setter Property="MinWidth" Value="50"/>
+  </Style-->
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
+    <Setter Property="Orientation" Value="Vertical"/>
+    <Setter Property="Height" Value="72"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ local|RibbonGroupWrapPanel#PART_ItemsPanel">
+    <Setter Property="Orientation" Value="Horizontal"/>
+    <Setter Property="Width" Value="132"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox">
+    <Setter Property="VerticalAlignment" Value="Stretch"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox">
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+  </Style>
+  <Style Selector="local|RibbonGroupBox /template/ Button#PART_CommandButton">
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="BorderBrush" Value="Transparent" />
+  </Style>
+  <Style Selector="local|RibbonGroupBox /template/ Button#PART_CommandButton[IsVisible=True]">
+    <Setter Property="Width" Value="14"/>
+  </Style>
+  <Style Selector="local|RibbonGroupBox /template/ Button#PART_CommandButton[IsVisible=False]">
+    <Setter Property="Width" Value="0"/>
+  </Style>
+  <Style Selector="local|RibbonGroupBox /template/ Button#PART_CommandButton:pointerover">
+    <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+  </Style>
+  <!--Style Selector="local|RibbonGroupBox /template/ Button#PART_CommandButton:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource HoveredBackgroundColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
+  </Style>
+  <Style Selector="local|RibbonGroupBox /template/ Button#PART_CommandButton:pressed  /template/ ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ClickedBackgroundColorBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ClickedBorderBackgroundColorBrush}" />
+  </Style>
+  <Style Selector="local|RibbonGroupBox /template/ Button#PART_CommandButton:disabled">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}" />
+  </Style-->
+  <!--Style Selector="local|RibbonGroupBox[Command={x:Null}] /template/ Button#PART_CommandButton">
+    <Setter Property="IsVisible" Value="False" />
+  </Style>
+  <Style Selector="local|RibbonGroupBox[Command={x:Null}] /template/ ContentPresenter#PART_HeaderPresenter">
+    <Setter Property="Grid.ColumnSpan" Value="2" />
+  </Style-->
+</Styles>
