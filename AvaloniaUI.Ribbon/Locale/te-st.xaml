@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=netstandard">
+    <!--Note to self: http://www.pseudolocalize.com/-->
+
+    <sys:String x:Key="AvaloniaRibbon.File">[!!! Fïℓè  !!!]</sys:String>
+    <sys:String x:Key="AvaloniaRibbon.Recent">[!!! Rèçèñƭ ℓ !!!]</sys:String>
+    <sys:String x:Key="AvaloniaRibbon.MinimizeRibbon">[!!! Mïñï₥ïƺè ƭλè Rïββôñ ℓôřè₥ !!!]</sys:String>
+    <sys:String x:Key="AvaloniaRibbon.GetHelp">[!!! Hèℓƥ  !!!]</sys:String>
+    <sys:String x:Key="AvaloniaRibbon.AddToQAT">[!!! Âδδ ƭô Qúïçƙ Âççèƨƨ Tôôℓβář ℓôřè₥ ï !!!]</sys:String>
+    <sys:String x:Key="AvaloniaRibbon.CustomizeQAT">[!!! Çúƨƭô₥ïƺè Qúïçƙ Âççèƨƨ Tôôℓβář ℓôřè₥ ïƥ !!!]</sys:String>
+    <sys:String x:Key="AvaloniaRibbon.MoreQATCommands">[!!! Môřè çô₥₥áñδƨ... ℓôřè !!!]</sys:String>
+</ResourceDictionary>

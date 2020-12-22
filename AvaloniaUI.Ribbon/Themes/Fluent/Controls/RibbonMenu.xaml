@@ -9,8 +9,8 @@
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}"/>
     <Setter Property="Height" Value="30"/>
-    <Setter Property="Content" Value="File"/>
-    <Setter Property="RightColumnHeader" Value="Recent"/>
+    <Setter Property="Content" Value="{DynamicResource AvaloniaRibbon.File}"/>
+    <Setter Property="RightColumnHeader" Value="{DynamicResource AvaloniaRibbon.Recent}"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Panel>

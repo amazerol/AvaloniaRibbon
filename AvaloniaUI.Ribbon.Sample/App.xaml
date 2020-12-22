@@ -6,7 +6,14 @@
     <Application.DataTemplates>
         <local:ViewLocator />
     </Application.DataTemplates>
-
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://AvaloniaUI.Ribbon/Locale/te-st.xaml" />
+                <!--ResourceInclude Source="avares://AvaloniaUI.Ribbon/Locale/en-ca.xaml" /-->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
     <Application.Styles>
         <!--StyleInclude Source="avares://Avalonia.Themes.Fluent/DefaultTheme.xaml" />
 		<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml" />

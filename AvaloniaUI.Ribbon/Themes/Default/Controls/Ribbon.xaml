@@ -42,10 +42,10 @@
             <Rectangle Fill="{TemplateBinding HeaderBackground}" Margin="0,-30,0,0" IsHitTestVisible="False"/>
               <DockPanel x:Name="HeaderDockPanel">
                 <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Left"/>
-                <Button Name="HelpButton" Classes="RibbonHelpButton" Width="34" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Right">
+                <Button Name="HelpButton" Classes="RibbonHelpButton" Width="34" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Right" ToolTip.Tip="{DynamicResource AvaloniaRibbon.GetHelp}">
                   <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="?" FontWeight="Black" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
                 </Button>
-                <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Right">
+                <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" VerticalAlignment="Stretch" Width="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Right" ToolTip.Tip="{DynamicResource AvaloniaRibbon.MinimizeRibbon}">
                   <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="8" Height="4"/>
                 </ToggleButton>
                 <Border x:Name="TabHeadersClipBorder" ClipToBounds="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0,-30,0,0">
@@ -77,8 +77,8 @@
                             <Setter Property="Template" Value="{DynamicResource CheckableMenuItemControlTemplate}"/>
                           </Style>
                         </ContextMenu.Styles>
-                        <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="Add to quick access toolbar"/>
-                        <MenuItem x:Name="PART_CollapseRibbon" Header="Minimize the Ribbon" local:QuickAccessToolbar.IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                        <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="{DynamicResource AvaloniaRibbon.AddToQAT}"/>
+                        <MenuItem x:Name="PART_CollapseRibbon" Header="{DynamicResource AvaloniaRibbon.MinimizeRibbon}" local:QuickAccessToolbar.IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                       </ContextMenu>
                     </ItemsControl.ContextMenu>
                     <ItemsControl.ItemsPanel>
@@ -109,10 +109,10 @@
         <Grid ColumnDefinitions="34,*">
           <DockPanel Grid.Column="0" Background="{TemplateBinding HeaderBackground}">
             <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Top"/>
-            <Button Name="HelpButton" Classes="RibbonHelpButton" HorizontalAlignment="Stretch" Height="34" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Bottom">
+            <Button Name="HelpButton" Classes="RibbonHelpButton" HorizontalAlignment="Stretch" Height="34" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Bottom" ToolTip.Tip="{DynamicResource AvaloniaRibbon.GetHelp}">
               <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="?" FontWeight="Black" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
             </Button>
-            <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" HorizontalAlignment="Stretch" Height="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Bottom">
+            <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" HorizontalAlignment="Stretch" Height="34" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Bottom" ToolTip.Tip="{DynamicResource AvaloniaRibbon.MinimizeRibbon}">
               <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="4" Height="8"/>
             </ToggleButton>
             <LayoutTransformControl VerticalAlignment="Top">
@@ -145,8 +145,8 @@
                           <Setter Property="Template" Value="{DynamicResource CheckableMenuItemControlTemplate}"/>
                         </Style>
                       </ContextMenu.Styles>
-                      <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="Add to quick access toolbar"/>
-                      <MenuItem x:Name="PART_CollapseRibbon" Header="Minimize the Ribbon" local:QuickAccessToolbar.IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                      <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="{DynamicResource AvaloniaRibbon.AddToQAT}"/>
+                      <MenuItem x:Name="PART_CollapseRibbon" Header="{DynamicResource AvaloniaRibbon.MinimizeRibbon}" local:QuickAccessToolbar.IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
                     </ContextMenu>
                   </ItemsControl.ContextMenu>
                   <ItemsControl.ItemsPanel>

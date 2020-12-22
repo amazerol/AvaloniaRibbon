@@ -26,6 +26,7 @@ using System.Runtime.CompilerServices;
 using ReactiveUI;
 using Avalonia.Threading;
 using Avalonia.Data;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 
 namespace AvaloniaUI.Ribbon
 {
@@ -78,7 +79,8 @@ namespace AvaloniaUI.Ribbon
         };
         public QuickAccessToolbar() : base()
         {
-            _collapseRibbonItem.Header = "Minimize the Ribbon";
+            //_collapseRibbonItem.Header = new DynamicResourceExtension("AvaloniaRibbon.MinimizeRibbon"); // "Minimize the Ribbon";
+            _collapseRibbonItem[!MenuItem.HeaderProperty] = _collapseRibbonItem.GetResourceObservable("AvaloniaRibbon.MinimizeRibbon").ToBinding();
             _collapseRibbonItem[!IsEnabledProperty] = this.GetObservable(RibbonProperty).Select(x => x != null).ToBinding();
             _collapseRibbonItem.Click += (sneder, e) =>
             {
@@ -96,10 +98,11 @@ namespace AvaloniaUI.Ribbon
 
             MenuItem moreCmdItem = new MenuItem()
             {
-                Header = "More commands...",
+                //Header =  new DynamicResourceExtension()., //"More commands...",
                 IsEnabled = false, //[!IsEnabledProperty] = this.GetObservable(RibbonProperty).Select(x => x != null).ToBinding(),
                 Classes = new Classes(FIXED_ITEM_CLASS)
             };
+            moreCmdItem[!MenuItem.HeaderProperty] = moreCmdItem.GetResourceObservable("AvaloniaRibbon.MoreQATCommands").ToBinding();
 
             
 

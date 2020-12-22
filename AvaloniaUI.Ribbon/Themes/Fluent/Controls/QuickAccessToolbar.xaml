@@ -10,9 +10,36 @@
     <Setter Property="Template">
       <ControlTemplate>
         <DockPanel>
-          <ToggleButton x:Name="PART_MoreButton" DockPanel.Dock="Right">
+          <ToggleButton x:Name="PART_MoreButton" VerticalAlignment="Stretch" DockPanel.Dock="Right">
             <ToggleButton.ContextMenu>
               <ContextMenu PlacementMode="Bottom">
+                <ContextMenu.Template>
+                  <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                            CornerRadius="{DynamicResource OverlayCornerRadius}">
+                      <DockPanel>
+                        <Border DockPanel.Dock="Top" Height="30" Padding="5,0">
+                          <TextBlock Text="{DynamicResource AvaloniaRibbon.CustomizeQAT}" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="DemiBold"/>
+                        </Border>
+                        <ScrollViewer Classes="menuscroller">
+                          <ItemsPresenter Name="PART_ItemsPresenter"
+                                          Items="{TemplateBinding Items}"
+                                          ItemsPanel="{TemplateBinding ItemsPanel}"
+                                          ItemTemplate="{TemplateBinding ItemTemplate}"
+                                          Margin="{DynamicResource MenuFlyoutScrollerMargin}"
+                                          KeyboardNavigation.TabNavigation="Continue"
+                                          Grid.IsSharedSizeScope="True" />
+                        </ScrollViewer>
+                      </DockPanel>
+                    </Border>
+                  </ControlTemplate>
+                </ContextMenu.Template>
                 <ContextMenu.Styles>
                   <Style Selector="MenuItem:not(.quickAccessFixedItem)">
                     <Setter Property="Command" Value="{Binding $parent[local:QuickAccessToolbar].MoreFlyoutMenuItemCommand}"/>
