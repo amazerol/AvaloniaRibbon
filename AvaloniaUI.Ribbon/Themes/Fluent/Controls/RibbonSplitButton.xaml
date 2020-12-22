@@ -4,7 +4,7 @@
     xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon">
 
   <Style Selector="local|RibbonSplitButton">
-    <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
+    <Setter Property="BorderThickness" Value="{DynamicResource ButtonBorderThemeThickness}" />
     <Setter Property="Padding" Value="3"/>
     <Setter Property="QuickAccessTemplate">
       <ControlTemplate>
@@ -30,7 +30,7 @@
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
           <StackPanel Orientation="Vertical">
-            <Button Name="RibbonSplitButtonTopButton" Padding="{TemplateBinding Padding}" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Button Name="RibbonSplitButtonTopButton" Padding="{TemplateBinding Padding}" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
               <TemplatedControl Template="{TemplateBinding LargeIcon}" />
             </Button>
             <ToggleButton
@@ -42,18 +42,17 @@
                 FontSize="12.5"
                 Padding="9,0,9,9"
                 IsChecked="{TemplateBinding IsDropDownOpen,
-                                                        Mode=TwoWay}">
-              <WrapPanel>
+                                                        Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+              <DockPanel>
                 <ContentPresenter Content="{TemplateBinding Content}"/>
                 <Path
-                    Width="8"
-                    Height="4"
-                    Margin="5,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
-                    Fill="{TemplateBinding Foreground}"
-                    Stretch="Uniform" />
+                    Data="M 0 0 L 3 3 L 6 0"
+                    Stroke="{Binding (TextBlock.Foreground), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}}"
+                    StrokeThickness="1"
+                    Margin="4,0,0,0"
+                    DockPanel.Dock="Right"/>
                 <Popup
                   Name="PART_Popup"
                   MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
@@ -75,7 +74,7 @@
                     </VisualLayerManager>
                   </Border>
                 </Popup>
-              </WrapPanel>
+              </DockPanel>
             </ToggleButton>
           </StackPanel>
         </Border>
@@ -95,17 +94,14 @@
                 FontSize="12.5"
                 Padding="{TemplateBinding Padding}"
                 IsChecked="{TemplateBinding IsDropDownOpen,
-                                                        Mode=TwoWay}">
+                                                        Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
               <Grid>
                 <Path
-                    Width="8"
-                    Height="4"
-                    Margin="0,3,0,2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
-                    Fill="{TemplateBinding Foreground}"
-                    Stretch="Uniform" />
+                    Data="M 0 0 L 3 3 L 6 0"
+                    Stroke="{Binding (TextBlock.Foreground), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}}"
+                    StrokeThickness="1"/>
                 <Popup
                   Name="PART_Popup"
                   MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
@@ -129,7 +125,7 @@
                 </Popup>
               </Grid>
             </ToggleButton>
-            <Button Name="RibbonSplitButtonTopButton" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Button Name="RibbonSplitButtonTopButton" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
               <StackPanel Orientation="Horizontal">
                 <TemplatedControl Template="{TemplateBinding Icon}" />
                 <ContentPresenter Content="{TemplateBinding Content}" Margin="3,0,0,0" />
@@ -154,17 +150,14 @@
                 FontSize="12.5"
                 Padding="{TemplateBinding Padding}"
                 IsChecked="{TemplateBinding IsDropDownOpen,
-                                                        Mode=TwoWay}">
+                                                        Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
               <Grid>
                 <Path
-                    Width="8"
-                    Height="4"
-                    Margin="0,3,0,2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
-                    Fill="{Binding $parent[ToggleButton].Foreground}"
-                    Stretch="Uniform" />
+                    Data="M 0 0 L 3 3 L 6 0"
+                    Stroke="{Binding (TextBlock.Foreground), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}}"
+                    StrokeThickness="1"/>
                 <Popup
                   Name="PART_Popup"
                   MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
@@ -188,7 +181,7 @@
                 </Popup>
               </Grid>
             </ToggleButton>
-            <Button Name="RibbonSplitButtonTopButton" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+            <Button Name="RibbonSplitButtonTopButton" BorderThickness="0" Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Padding="5,5,5,6">
               <TemplatedControl Template="{TemplateBinding Icon}" />
             </Button>
           </DockPanel>
@@ -198,10 +191,20 @@
   </Style>
 
 
-
-  <Style Selector="local|RibbonSplitButton:pointerover /template/ Border#border">
-    <Setter Property="BorderBrush" Value="{DynamicResource HoveredBorderBackgroundColorBrush}" />
+  <Style Selector="local|RibbonSplitButton:not(local|RibbonSplitButton[Size=Large]) /template/ Button#RibbonSplitButtonTopButton /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="CornerRadius" Value="2,0,0,2"/>
   </Style>
+  <Style Selector="local|RibbonSplitButton[Size=Large] /template/ Button#RibbonSplitButtonTopButton /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="CornerRadius" Value="3,2,0,0"/>
+  </Style>
+
+  <Style Selector="local|RibbonSplitButton:not(local|RibbonSplitButton[Size=Large]) /template/ ToggleButton#toggle /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="CornerRadius" Value="0,2,2,0"/>
+  </Style>
+  <Style Selector="local|RibbonSplitButton[Size=Large] /template/ ToggleButton#toggle /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="CornerRadius" Value="0,0,2,2"/>
+  </Style>
+  
   <Style Selector="local|RibbonSplitButton local|RibbonButton /template/ Image">
     <Setter Property="Margin" Value="0" />
   </Style>
@@ -221,12 +224,13 @@
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
     <Setter Property="BorderThickness" Value="{TemplateBinding BorderThickness}" />
+    <Setter Property="CornerRadius" Value="{DynamicResource ControlCornerRadius}" />
   </Style>
   <Style Selector="local|RibbonSplitButton:pointerover /template/ Border.RibbonButtonBackgroundBorder">
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
   </Style>
   <Style Selector="local|RibbonSplitButton[IsDropDownOpen=True] /template/ Border.RibbonButtonBackgroundBorder">
-    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ButtonBackgroundPointerOver}"/>
   </Style>
   <Style Selector="local|RibbonSplitButton:disabled /template/ Border.RibbonButtonBackgroundBorder">
     <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
@@ -236,10 +240,10 @@
     <Setter Property="Background" Value="Transparent" />
     <Setter Property="BorderBrush" Value="Transparent" />
   </Style>
-  <Style Selector="local|RibbonSplitButton /template/ Button#RibbonSplitButtonTopButton:pointerover">
+  <!--Style Selector="local|RibbonSplitButton /template/ Button#RibbonSplitButtonTopButton:pointerover">
     <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
   </Style>
   <Style Selector="local|RibbonSplitButton /template/ Button#RibbonSplitButtonTopButton:pressed">
     <Setter Property="Background" Value="{DynamicResource ThemeControlHighBrush}"/>
-  </Style>
+  </Style-->
 </Styles>

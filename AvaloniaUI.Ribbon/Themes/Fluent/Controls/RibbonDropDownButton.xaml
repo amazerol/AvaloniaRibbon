@@ -38,20 +38,18 @@
               FontSize="12.5"
               Padding="{TemplateBinding Padding}"
               IsChecked="{TemplateBinding IsDropDownOpen,
-                                                        Mode=TwoWay}">
+                                                        Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
             <StackPanel Orientation="Vertical">
               <TemplatedControl Template="{TemplateBinding LargeIcon}" Margin="0,0,0,4"/>
               <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <ContentPresenter Content="{TemplateBinding Content}"/>
                 <Path
-                    Width="8"
-                    Height="4"
-                    Margin="5,0"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
-                    Fill="{TemplateBinding Foreground}"
-                    Stretch="Uniform" />
+                    Data="M 0 0 L 3 3 L 6 0"
+                    Stroke="{Binding (TextBlock.Foreground), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}}"
+                    StrokeThickness="1"
+                    Margin="4,0,0,0"/>
               </StackPanel>
               <Popup
                 Name="PART_Popup"
@@ -93,19 +91,17 @@
                 FontSize="12.5"
                 Padding="{TemplateBinding Padding}"
                 IsChecked="{TemplateBinding IsDropDownOpen,
-                                                        Mode=TwoWay}">
+                                                        Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
               <StackPanel Orientation="Horizontal">
                 <TemplatedControl Template="{TemplateBinding Icon}" />
                 <ContentPresenter Content="{TemplateBinding Content}" Margin="3,0,0,0" />
                 <Path
-                    Width="8"
-                    Height="4"
-                    Margin="0,3,0,2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
-                    Fill="{TemplateBinding Foreground}"
-                    Stretch="Uniform" />
+                    Data="M 0 0 L 3 3 L 6 0"
+                    Stroke="{Binding (TextBlock.Foreground), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}}"
+                    StrokeThickness="1"
+                    Margin="4,0,0,0"/>
                 <Popup
                   Name="PART_Popup"
                   MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"
@@ -148,18 +144,16 @@
                 FontSize="12.5"
                 Padding="{TemplateBinding Padding}"
                 IsChecked="{TemplateBinding IsDropDownOpen,
-                                                        Mode=TwoWay}">
+                                                        Mode=TwoWay}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
               <StackPanel Orientation="Horizontal">
                 <TemplatedControl Template="{TemplateBinding Icon}" Margin="0,0,4,0"/>
                 <Path
-                    Width="8"
-                    Height="4"
-                    Margin="0,3,0,2"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Data="M0,0 L3,0 4.5,1.5 6,0 9,0 4.5,4.5 z"
-                    Fill="{TemplateBinding Foreground}"
-                    Stretch="Uniform" />
+                    Data="M 0 0 L 3 3 L 6 0"
+                    Stroke="{Binding (TextBlock.Foreground), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}}"
+                    StrokeThickness="1"
+                    Margin="4,0,0,0"/>
                 <Popup
                   Name="PART_Popup"
                   MinWidth="{Binding Bounds.Width, RelativeSource={RelativeSource TemplatedParent}}"

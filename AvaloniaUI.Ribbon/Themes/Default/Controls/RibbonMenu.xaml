@@ -29,7 +29,7 @@
             <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderHighBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}">
               <DockPanel>
                 <DockPanel Name="MenuRightColumnDockPanel" Width="200" DockPanel.Dock="Right">
-                  <Grid Height="34" DockPanel.Dock="Top">
+                  <Grid Height="34" DockPanel.Dock="Top" IsVisible="{Binding !HasSelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}}">
                     <TextBlock Text="{TemplateBinding RightColumnHeader}" FontWeight="SemiBold" Margin="10,0" VerticalAlignment="Center"/>
                   </Grid>
                   <Panel>
