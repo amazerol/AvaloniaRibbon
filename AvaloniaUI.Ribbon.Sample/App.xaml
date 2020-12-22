@@ -9,8 +9,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="avares://AvaloniaUI.Ribbon/Locale/te-st.xaml" />
-                <!--ResourceInclude Source="avares://AvaloniaUI.Ribbon/Locale/en-ca.xaml" /-->
+                <!--ResourceInclude Source="avares://AvaloniaUI.Ribbon/Locale/te-st.xaml" /-->
+                <ResourceInclude Source="avares://AvaloniaUI.Ribbon/Locale/en-ca.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

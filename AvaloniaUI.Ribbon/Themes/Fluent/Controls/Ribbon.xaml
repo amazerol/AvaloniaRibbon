@@ -30,7 +30,7 @@
       <ControlTemplate>
         <Panel Margin="0,0,0,8">
           <DockPanel>
-            <Rectangle Fill="{TemplateBinding HeaderBackground}" Height="34" IsHitTestVisible="False" DockPanel.Dock="Top"/>
+            <Rectangle x:Name="HeaderBackgroundRectangle" Fill="{TemplateBinding HeaderBackground}" Height="34" IsHitTestVisible="False" DockPanel.Dock="Top"/>
             <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" BoxShadow="0 4 10 #40000000"/>
           </DockPanel>
           <DockPanel Background="Transparent" Margin="0,34,0,0">
@@ -108,62 +108,65 @@
     <Setter Property="Margin" Value="0,0,0,-4"/>
   </Style-->
   <Style Selector="local|Ribbon[Orientation=Vertical]">
-    <!--Setter Property="Margin" Value="0,0,-4,0"/-->
+    <Setter Property="Margin" Value="0,0,-8,0"/>
     <Setter Property="Template">
       <ControlTemplate>
-        <Grid ColumnDefinitions="30,*">
-          <DockPanel Grid.Column="0" Background="{TemplateBinding HeaderBackground}">
-            <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Top"/>
-            <Button Name="HelpButton" Classes="RibbonHelpButton" HorizontalAlignment="Stretch" Height="30" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Bottom" ToolTip.Tip="{DynamicResource AvaloniaRibbon.GetHelp}">
-              <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="?" FontWeight="Black" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}"/>
-            </Button>
-            <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" HorizontalAlignment="Stretch" Height="30" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Bottom" ToolTip.Tip="{DynamicResource AvaloniaRibbon.MinimizeRibbon}">
-              <Path Classes="RibbonExpandCollapsePath" Fill="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="4" Height="8"/>
-            </ToggleButton>
-            <LayoutTransformControl VerticalAlignment="Top">
-              <LayoutTransformControl.LayoutTransform>
-                <RotateTransform Angle="-90"/>
-              </LayoutTransformControl.LayoutTransform>
-              
-              <ItemsPresenter Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Items="{TemplateBinding Tabs}">
-                <ItemsPresenter.ItemsPanel>
-                  <ItemsPanelTemplate>
-                    <StackPanel x:Name="PART_TabsPanel" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-                  </ItemsPanelTemplate>
-                </ItemsPresenter.ItemsPanel>
-              </ItemsPresenter>
-            </LayoutTransformControl>
-            <Popup x:Name="PART_CollapsedContentPopup" Height="{Binding Path=Bounds.Height, RelativeSource={RelativeSource Mode=TemplatedParent}}" Width="138" PlacementMode="Right" StaysOpen="False" IsOpen="{Binding IsCollapsedPopupOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
-              <!--PlacementTarget="{Binding ElementName=SeparatorRectangle}"-->
-              <ContentControl x:Name="PART_PopupGroupsPresenterHolder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0"/>
-            </Popup>
-          </DockPanel>
-          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0" VerticalAlignment="Stretch" Grid.Column="1">
-            <Grid>
-              <ContentPresenter Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" IsVisible="False"/>
-              <ContentControl Name="PART_GroupsPresenterHolder" VerticalAlignment="Stretch">
-                <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="Stretch" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Width="138">
-                  <ItemsControl.ContextMenu>
-                    <ContextMenu x:Name="PART_ContentAreaContextMenu">
-                      <ContextMenu.Styles>
-                        <Style Selector="MenuItem">
-                          <Setter Property="Template" Value="{DynamicResource CheckableMenuItemControlTemplate}"/>
-                        </Style>
-                      </ContextMenu.Styles>
-                      <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="{DynamicResource AvaloniaRibbon.AddToQAT}"/>
-                      <MenuItem x:Name="PART_CollapseRibbon" Header="{DynamicResource AvaloniaRibbon.MinimizeRibbon}" local:QuickAccessToolbar.IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-                    </ContextMenu>
-                  </ItemsControl.ContextMenu>
-                  <ItemsControl.ItemsPanel>
+        <Panel Margin="0,0,8,0">
+          <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" BoxShadow="4 0 10 #40000000"/>
+          <Grid ColumnDefinitions="30,*">
+            <DockPanel Grid.Column="0">
+              <ContentPresenter x:Name="PART_MenuPresenter" Content="{TemplateBinding Menu}" DockPanel.Dock="Top" MinHeight="30"/>
+              <Button Name="HelpButton" Classes="RibbonHelpButton" HorizontalAlignment="Stretch" Focusable="False" Command="{TemplateBinding HelpButtonCommand}" DockPanel.Dock="Bottom" ToolTip.Tip="{DynamicResource AvaloniaRibbon.GetHelp}">
+                <TextBlock HorizontalAlignment="Center" TextAlignment="Center" VerticalAlignment="Center" Text="?" Foreground="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" Height="10" Margin="0,-1"/>
+              </Button>
+              <ToggleButton Name="ExpandCollapseToggleButton" Classes="RibbonToggleButton" HorizontalAlignment="Stretch" IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Focusable="False" DockPanel.Dock="Bottom" ToolTip.Tip="{DynamicResource AvaloniaRibbon.MinimizeRibbon}">
+                <Path Classes="RibbonExpandCollapsePath" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ToggleButton}}" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="4" Height="8"/>
+              </ToggleButton>
+              <LayoutTransformControl VerticalAlignment="Top">
+                <LayoutTransformControl.LayoutTransform>
+                  <RotateTransform Angle="-90"/>
+                </LayoutTransformControl.LayoutTransform>
+                
+                <ItemsPresenter Name="PART_ItemsPresenter" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Items="{TemplateBinding Tabs}">
+                  <ItemsPresenter.ItemsPanel>
                     <ItemsPanelTemplate>
-                      <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="{Binding $parent[ItemsControl].Bounds.Height}" Orientation="Vertical" Margin="0"/>
+                      <StackPanel x:Name="PART_TabsPanel" Orientation="Horizontal" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                     </ItemsPanelTemplate>
-                  </ItemsControl.ItemsPanel>
-                </ItemsControl>
-              </ContentControl>
-            </Grid>
-          </Border>
-        </Grid>
+                  </ItemsPresenter.ItemsPanel>
+                </ItemsPresenter>
+              </LayoutTransformControl>
+              <Popup x:Name="PART_CollapsedContentPopup" Height="{Binding Path=Bounds.Height, RelativeSource={RelativeSource Mode=TemplatedParent}}" Width="138" PlacementMode="Right" StaysOpen="False" IsOpen="{Binding IsCollapsedPopupOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}">
+                <!--PlacementTarget="{Binding ElementName=SeparatorRectangle}"-->
+                <ContentControl x:Name="PART_PopupGroupsPresenterHolder" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0"/>
+              </Popup>
+            </DockPanel>
+            <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0" VerticalAlignment="Stretch" Grid.Column="1">
+              <Grid>
+                <ContentPresenter Name="PART_SelectedContentHost" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" IsVisible="False"/>
+                <ContentControl Name="PART_GroupsPresenterHolder" VerticalAlignment="Stretch">
+                  <ItemsControl Name="PART_SelectedGroupsHost" Items="{TemplateBinding SelectedGroups}" VerticalAlignment="Stretch" TextBlock.Foreground="{TemplateBinding Foreground}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Width="138">
+                    <ItemsControl.ContextMenu>
+                      <ContextMenu x:Name="PART_ContentAreaContextMenu">
+                        <ContextMenu.Styles>
+                          <Style Selector="MenuItem">
+                            <Setter Property="Template" Value="{DynamicResource CheckableMenuItemControlTemplate}"/>
+                          </Style>
+                        </ContextMenu.Styles>
+                        <MenuItem x:Name="PART_PinLastHoveredControlToQuickAccess" Header="{DynamicResource AvaloniaRibbon.AddToQAT}"/>
+                        <MenuItem x:Name="PART_CollapseRibbon" Header="{DynamicResource AvaloniaRibbon.MinimizeRibbon}" local:QuickAccessToolbar.IsChecked="{Binding IsCollapsed, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+                      </ContextMenu>
+                    </ItemsControl.ContextMenu>
+                    <ItemsControl.ItemsPanel>
+                      <ItemsPanelTemplate>
+                        <local:RibbonGroupsStackPanel x:Name="PART_ItemsPanel" HorizontalAlignment="Stretch" VerticalAlignment="Top" Height="{Binding $parent[ItemsControl].Bounds.Height}" Orientation="Vertical" Margin="0"/>
+                      </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                  </ItemsControl>
+                </ContentControl>
+              </Grid>
+            </Border>
+          </Grid>
+        </Panel>
       </ControlTemplate>
     </Setter>
   </Style>
@@ -171,12 +174,13 @@
   <Style Selector="local|RibbonWindow[HasSystemDecorations=False] local|Ribbon[Orientation=Horizontal] /template/ Border#TabHeadersClipBorder">
     <Setter Property="Clip" Value="{DynamicResource TabHeadersClipBorderClip}"/>
   </Style>
+  <Style Selector="local|RibbonWindow local|Ribbon /template/ Rectangle#HeaderBackgroundRectangle">
+    <Setter Property="Opacity" Value="0"/>
+    <!--Setter Property="IsVisible" Value="False"/-->
+  </Style>
   <Style Selector="local|Ribbon /template/ Button.RibbonHelpButton">
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
-  </Style>
-  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon /template/ Button.RibbonHelpButton:not(:pointerover):not(:pressed)">
-    <Setter Property="Opacity" Value="0.5"/>
   </Style>
   <Style Selector="local|Ribbon /template/ Button.RibbonHelpButton:pointerover">
     <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
@@ -184,22 +188,37 @@
   </Style>
   
     
-  <Style Selector="local|Ribbon /template/ ToggleButton.RibbonToggleButton">
-    <Setter Property="Background" Value="Transparent"/>
-    <Setter Property="BorderBrush" Value="Transparent"/>
-  </Style>
-  <Style Selector="local|RibbonWindow[IsActive=False] local|Ribbon /template/ ToggleButton.RibbonToggleButton:not(:pointerover):not(:pressed):not(:checked)">
-    <Setter Property="Opacity" Value="0.5"/>
-  </Style>
   <Style Selector="local|Ribbon /template/ ToggleButton.RibbonToggleButton,
                    local|Ribbon /template/ Button.RibbonHelpButton">
     <Setter Property="Margin" Value="3"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] /template/ ToggleButton.RibbonToggleButton,
+                   local|Ribbon[Orientation=Horizontal] /template/ Button.RibbonHelpButton">
     <Setter Property="Padding" Value="12,3"/>
+  </Style>
+  <Style Selector="local|Ribbon[Orientation=Vertical] /template/ ToggleButton.RibbonToggleButton,
+                   local|Ribbon[Orientation=Vertical] /template/ Button.RibbonHelpButton">
+    <Setter Property="Padding" Value="3,12"/>
   </Style>
   <Style Selector="local|Ribbon /template/ ToggleButton.RibbonToggleButton:not(:pointerover):not(:pressed),
                    local|Ribbon /template/ Button.RibbonHelpButton:not(:pointerover):not(:pressed)">
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundChromeMediumBrush}"/>
+  </Style>
+  <Style Selector="local|Ribbon /template/ ToggleButton.RibbonToggleButton:checked /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundChromeMediumBrush}"/>
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForeground}" />
+  </Style>
+  <Style Selector="local|Ribbon /template/ ToggleButton.RibbonToggleButton:checked:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundPointerOver}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushPointerOver}" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundPointerOver}" />
+  </Style>
+  <Style Selector="local|Ribbon /template/ ToggleButton.RibbonToggleButton:checked:pressed  /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Background" Value="{DynamicResource ToggleButtonBackgroundPressed}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ToggleButtonBorderBrushPressed}" />
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource ToggleButtonForegroundPressed}" />
   </Style>
   <!--Style Selector="local|Ribbon /template/ ToggleButton#ExpandCollapseToggleButton:not(:pressed):checked:pointerover /template/ ContentPresenter">
     <Setter Property="Background" Value="{DynamicResource ThemeControlMidBrush}"/>
@@ -220,9 +239,6 @@
   <!--Style Selector="local|Ribbon[IsCollapsed=True] /template/ ItemsControl#PART_SelectedGroupsHost">
     <Setter Property="IsVisible" Value="false"/>
   </Style-->
-  <Style Selector="local|Ribbon /template/ WrapPanel">
-    <Setter Property="Background" Value="{Binding $parent[local:Ribbon].HeaderBackground}" />
-  </Style>
 
   <Style Selector="local|Ribbon /template/ Popup Menu.RibbonMenuMenu">
     <Setter Property="Background" Value="Transparent" />

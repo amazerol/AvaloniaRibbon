@@ -1,0 +1,56 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon">
+  <Style Selector="local|RibbonDropDownItemPresenter">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="BorderThickness" Value="0"/>
+    <Setter Property="Padding" Value="{DynamicResource MenuFlyoutItemThemePadding}" />
+    <Setter Property="Command" Value="{Binding Command}"/>
+    <Setter Property="CommandParameter" Value="{Binding CommandParameter}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border x:Name="BackgroundBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+          <DockPanel HorizontalAlignment="Stretch" VerticalAlignment="Center" Margin="{TemplateBinding Padding}">
+            <ContentPresenter x:Name="PART_ContentPresenter" IsVisible="False" IsHitTestVisible="False"/>
+            <Panel DockPanel.Dock="Left" VerticalAlignment="Center" Width="16" Margin="0,0,4,0">
+              <TemplatedControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Template="{Binding Icon}" IsVisible="{Binding !IsChecked}"/>
+              <Path x:Name="PART_ChevronPath" Fill="{TemplateBinding Foreground}" Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z" IsVisible="{Binding IsChecked}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Panel>
+            <TextBlock VerticalAlignment="Center" Text="{Binding Text}" TextAlignment="Left" Background="Transparent"/>
+          </DockPanel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <Style Selector="local|RibbonDropDownItemPresenter:pointerover /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPointerOver}" />
+  </Style>
+  <Style Selector="local|RibbonDropDownItemPresenter:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource MenuFlyoutItemForegroundPointerOver}" />
+  </Style>
+  <Style Selector="local|RibbonDropDownItemPresenter:pointerover /template/ Path#PART_ChevronPath">
+    <Setter Property="Fill" Value="{DynamicResource MenuFlyoutSubItemChevronPointerOver}" />
+  </Style>
+
+  <Style Selector="local|RibbonDropDownItemPresenter:pressed /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundPressed}" />
+  </Style>
+  <Style Selector="local|RibbonDropDownItemPresenter:pressed /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource MenuFlyoutItemForegroundPressed}" />
+  </Style>
+  <Style Selector="local|RibbonDropDownItemPresenter:pressed /template/ Path#PART_ChevronPath">
+    <Setter Property="Fill" Value="{DynamicResource MenuFlyoutSubItemChevronPressed}" />
+  </Style>
+
+  <Style Selector="local|RibbonDropDownItemPresenter:disabled /template/ Border#BackgroundBorder">
+    <Setter Property="Background" Value="{DynamicResource MenuFlyoutItemBackgroundDisabled}" />
+  </Style>
+  <Style Selector="local|RibbonDropDownItemPresenter:disabled /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="TextBlock.Foreground" Value="{DynamicResource MenuFlyoutItemForegroundDisabled}" />
+  </Style>
+  <Style Selector="local|RibbonDropDownItemPresenter:disabled /template/ Path#PART_ChevronPath">
+    <Setter Property="Fill" Value="{DynamicResource MenuFlyoutSubItemChevronDisabled}" />
+  </Style>
+</Styles>

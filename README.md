@@ -9,7 +9,9 @@ It is presently used in **[Jaya File Manager](https://github.com/JayaFM/Jaya)**,
 
 AvaloniaRibbon in its current form is developed and maintained by [Splitwirez](https://github.com/Splitwirez) at the [AvaloniaRibbon repo](https://github.com/Splitwirez/AvaloniaRibbon). It is is based on an earlier repo by [Alban Mazerolles](https://github.com/amazerol), which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
 
-![Preview](https://i.imgur.com/IdD64Kr.png)
+![Fluent-Light theme preview, horizontal orientation](/ReadmeImages/Ribbon-FluentLight-Horizontal.png)
+
+![Fluent-Light theme preview, vertical orientation](/ReadmeImages/Ribbon-FluentLight-Vertical.png)
 
 Include ribbon styles to App.xaml as shown below.
 ```xaml

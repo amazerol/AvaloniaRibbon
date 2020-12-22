@@ -14,14 +14,12 @@
     <Setter Property="BorderBrush" Value="Transparent"/>
     <Setter Property="Margin" Value="0" />
     <Setter Property="Padding" Value="10,0" />
-    <Setter Property="Content" Value=" "/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border Background="{TemplateBinding Background}"
               BorderBrush="{TemplateBinding BorderBrush}"
               BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-          <Panel x:Name="ContentPanel" Margin="{TemplateBinding Padding}">
-            <!--Border x:Name="ContextualBackground" CornerRadius="{DynamicResource ControlCornerRadius}" Background="{Binding $parent[local:RibbonContextualTabGroup].Background}" Opacity="0.25" IsVisible="{TemplateBinding IsContextual}" Margin="-2,3"/-->
+          <Panel x:Name="ContentPanel" HorizontalAlignment="Center" Margin="{TemplateBinding Padding}">
             <ContentPresenter
                 Name="PART_ContentPresenter"
                 HorizontalAlignment="Center"
@@ -36,7 +34,7 @@
                 <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
               </Rectangle.Fill>
             </Rectangle>
-            <Border x:Name="SelectedBorder" BorderThickness="0" MinWidth="3" MinHeight="3" IsVisible="{TemplateBinding IsSelected}"/>
+            <Border x:Name="SelectedBorder" BorderThickness="0" MinWidth="3" MinHeight="3" IsVisible="{TemplateBinding IsSelected}" CornerRadius="1.5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="-2,3"/>
             <!--Panel IsVisible="{TemplateBinding IsContextual}" Opacity="0.25">
               <Border x:Name="ContextualSelectedBorder" BorderThickness="{Binding #SelectedBorder.BorderThickness}" HorizontalAlignment="{Binding #SelectedBorder.HorizontalAlignment}" VerticalAlignment="{Binding #SelectedBorder.VerticalAlignment}" IsVisible="{Binding #SelectedBorder.IsVisible}" Opacity="{Binding #SelectedBorder.Opacity}"/>
             </Panel-->
@@ -63,13 +61,13 @@
   <Style Selector="local|RibbonTab[IsContextual=False] /template/ Border#SelectedBorder">
     <Setter Property="Background" Value="{DynamicResource TabItemHeaderSelectedPipeFill}"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonTab /template/ Panel#ContentPanel">
+  <!--Style Selector="local|RibbonTab /template/ Panel#ContentPanel">
     <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="Margin" Value="10,0"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonTab /template/ Border#SelectedBorder">
+  <Style Selector="local|RibbonTab /template/ Border#SelectedBorder">
     <Setter Property="HorizontalAlignment" Value="Stretch"/>
     <Setter Property="VerticalAlignment" Value="Bottom"/>
-    <Setter Property="CornerRadius" Value="1.5"/>
     <Setter Property="Margin" Value="-2,3"/>
-  </Style>
+  </Style-->
 </Styles>

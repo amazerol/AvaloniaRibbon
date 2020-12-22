@@ -5,70 +5,90 @@
     xmlns:col="clr-namespace:System.Collections"
     xmlns:sys="clr-namespace:System;assembly=netstandard">
     <ControlTemplate x:Key="CheckableMenuItemControlTemplate" TargetType="{x:Type MenuItem}">
-      <Border Name="root"
-              Background="{TemplateBinding Background}"
-              BorderBrush="{TemplateBinding BorderBrush}"
-              BorderThickness="{TemplateBinding BorderThickness}">
-        <Grid>
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="20"/>
-            <ColumnDefinition Width="5"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGT"/>
-            <ColumnDefinition Width="20"/>
-          </Grid.ColumnDefinitions>
-          <ContentPresenter Name="icon"
-                            Content="{TemplateBinding Icon}"
-                            Width="16"
-                            Height="16"
-                            Margin="3"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center" IsVisible="{Binding !(local:QuickAccessToolbar.IsChecked), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
-          <Path Name="check"
-                Fill="{TemplateBinding Foreground}"
-                Data="F1M10,1.2L4.7,9.1 4.5,9.1 0,5.2 1.3,3.5 4.3,6.1 8.3,0 10,1.2z"
-                IsVisible="{Binding (local:QuickAccessToolbar.IsChecked), RelativeSource={RelativeSource Mode=TemplatedParent}}"
-                Margin="3"
-                VerticalAlignment="Center"/>
-          <Rectangle Height="16" Margin="3" IsVisible="{Binding #check.IsVisible}" Opacity="0" IsHitTestVisible="False"/>
-          <ContentPresenter Name="PART_HeaderPresenter"
-                            Content="{TemplateBinding Header}"
-                            Margin="{TemplateBinding Padding}"
-                            VerticalAlignment="Center"
-                            Grid.Column="2">
-            <ContentPresenter.DataTemplates>
-              <DataTemplate DataType="sys:String">
-                <AccessText Text="{Binding}"/>
-              </DataTemplate>
-            </ContentPresenter.DataTemplates>
-          </ContentPresenter>
-          <TextBlock x:Name="PART_InputGestureText"
-                    Grid.Column="3"
-                    Text="{TemplateBinding InputGesture, Converter={StaticResource KeyGestureConverter}}"
+      <Panel>
+        <Border Name="PART_LayoutRoot"
+                Padding="{TemplateBinding Padding}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}">
+          <Grid>
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="Auto"
+                                SharedSizeGroup="MenuItemIcon" />
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto"
+                                SharedSizeGroup="MenuItemIGT" />
+              <ColumnDefinition Width="Auto"
+                                SharedSizeGroup="MenuItemChevron" />
+            </Grid.ColumnDefinitions>
+            <Panel Width="16"
+                   Height="16"
+                   Margin="{DynamicResource MenuIconPresenterMargin}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center">
+              <ContentPresenter Name="PART_IconPresenter"
+                              Content="{TemplateBinding Icon}" IsVisible="{Binding !(local:QuickAccessToolbar.IsChecked), RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+              <Path x:Name="CheckGlyph"
+                    Fill="{TemplateBinding Foreground}"
+                    Data="M1507 31L438 1101L-119 543L-29 453L438 919L1417 -59L1507 31Z"
+                    IsVisible="{Binding (local:QuickAccessToolbar.IsChecked), RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                    Width="9"
+                    Stretch="Uniform"
                     VerticalAlignment="Center"/>
-          <Path Name="rightArrow"
-                Data="M0,0L4,3.5 0,7z"
-                Fill="{DynamicResource ThemeForegroundBrush}"
-                Margin="10,0,0,0"
-                VerticalAlignment="Center"
-                Grid.Column="4"/>
-          <Popup Name="PART_Popup"
+            </Panel>
+
+            <ContentPresenter Name="PART_HeaderPresenter"
+                              Content="{TemplateBinding Header}"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Stretch"
+                              Grid.Column="1">
+              <ContentPresenter.DataTemplates>
+                <DataTemplate DataType="sys:String">
+                  <AccessText Text="{Binding}" />
+                </DataTemplate>
+              </ContentPresenter.DataTemplates>
+            </ContentPresenter>
+            <TextBlock x:Name="PART_InputGestureText"
+                        Grid.Column="2"
+                        Classes="CaptionTextBlockStyle"
+                        Margin="{DynamicResource MenuInputGestureTextMargin}"
+                        Text="{TemplateBinding InputGesture, Converter={StaticResource KeyGestureConverter}}"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center" />
+            <Path Name="PART_ChevronPath"
+                  Stretch="Uniform"
+                  Width="8"
+                  Height="16"
+                  Data="{StaticResource MenuItemChevronPathData}"
+                  Margin="{DynamicResource MenuFlyoutItemChevronMargin}"
+                  VerticalAlignment="Center"
+                  Grid.Column="3" />
+          </Grid>
+        </Border>
+        <Popup Name="PART_Popup"
+                WindowManagerAddShadowHint="False"
                 PlacementMode="Right"
+                HorizontalOffset="{StaticResource MenuFlyoutSubItemPopupHorizontalOffset}"
                 IsLightDismissEnabled="True"
                 IsOpen="{TemplateBinding IsSubMenuOpen, Mode=TwoWay}">
-            <Border Background="{TemplateBinding Background}"
-                    BorderBrush="{DynamicResource ThemeBorderMidBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}">
-              <ScrollViewer Classes="menuscroller">                  
-                  <ItemsPresenter Name="PART_ItemsPresenter"
-                                  Items="{TemplateBinding Items}"
-                                  ItemsPanel="{TemplateBinding ItemsPanel}"
-                                  ItemTemplate="{TemplateBinding ItemTemplate}"
-                                  Grid.IsSharedSizeScope="True"/>
-              </ScrollViewer>
-            </Border>
-          </Popup>
-          </Grid>
-      </Border>
+          <Border Background="{DynamicResource MenuFlyoutPresenterBackground}"
+                  BorderBrush="{DynamicResource MenuFlyoutPresenterBorderBrush}"
+                  BorderThickness="{DynamicResource MenuFlyoutPresenterBorderThemeThickness}"
+                  Padding="{DynamicResource MenuFlyoutPresenterThemePadding}"
+                  MaxWidth="{DynamicResource FlyoutThemeMaxWidth}"
+                  MinHeight="{DynamicResource MenuFlyoutThemeMinHeight}"
+                  HorizontalAlignment="Stretch"
+                  CornerRadius="{DynamicResource OverlayCornerRadius}">
+            <ScrollViewer Classes="menuscroller">
+              <ItemsPresenter Name="PART_ItemsPresenter"
+                              Items="{TemplateBinding Items}"
+                              ItemsPanel="{TemplateBinding ItemsPanel}"
+                              ItemTemplate="{TemplateBinding ItemTemplate}"
+                              Margin="{DynamicResource MenuFlyoutScrollerMargin}"
+                              Grid.IsSharedSizeScope="True" />
+            </ScrollViewer>
+          </Border>
+        </Popup>
+      </Panel>
     </ControlTemplate>
 </ResourceDictionary>

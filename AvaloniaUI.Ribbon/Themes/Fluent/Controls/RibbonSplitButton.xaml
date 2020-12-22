@@ -25,6 +25,7 @@
   </Style>
   <Style Selector="local|RibbonSplitButton[Size=Large]">
     <Setter Property="Padding" Value="9,9,9,3"/>
+    <Setter Property="MaxWidth" Value="66"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">
@@ -61,14 +62,15 @@
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
                   StaysOpen="False" VerticalOffset="-1">
-                  <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                  <Border Background="{DynamicResource MenuFlyoutPresenterBackground}" BorderBrush="{DynamicResource MenuFlyoutPresenterBorderBrush}" BorderThickness="{DynamicResource MenuFlyoutPresenterBorderThemeThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" TextBlock.FontSize="{DynamicResource ContentControlFontSize}" Padding="{DynamicResource MenuFlyoutPresenterThemePadding}">
                     <VisualLayerManager>
-                      <ScrollViewer>
+                      <ScrollViewer Classes="menuscroller">
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"
                             ItemTemplate="{TemplateBinding ItemTemplate}"
                             Items="{TemplateBinding Items}"
-                            ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            Margin="{DynamicResource MenuFlyoutScrollerMargin}"/>
                       </ScrollViewer>
                     </VisualLayerManager>
                   </Border>
@@ -112,14 +114,15 @@
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
                   StaysOpen="False" VerticalOffset="-1">
-                  <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                  <Border Background="{DynamicResource MenuFlyoutPresenterBackground}" BorderBrush="{DynamicResource MenuFlyoutPresenterBorderBrush}" BorderThickness="{DynamicResource MenuFlyoutPresenterBorderThemeThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" TextBlock.FontSize="{DynamicResource ContentControlFontSize}" Padding="{DynamicResource MenuFlyoutPresenterThemePadding}">
                     <VisualLayerManager>
-                      <ScrollViewer>
+                      <ScrollViewer Classes="menuscroller">
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"
                             ItemTemplate="{TemplateBinding ItemTemplate}"
                             Items="{TemplateBinding Items}"
-                            ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            Margin="{DynamicResource MenuFlyoutScrollerMargin}"/>
                       </ScrollViewer>
                     </VisualLayerManager>
                   </Border>
@@ -170,14 +173,15 @@
                   ObeyScreenEdges="True"
                   PlacementTarget="{TemplateBinding}"
                   StaysOpen="False" VerticalOffset="-1">
-                  <Border BorderBrush="{DynamicResource ThemeBorderMidBrush}" BorderThickness="1">
+                  <Border Background="{DynamicResource MenuFlyoutPresenterBackground}" BorderBrush="{DynamicResource MenuFlyoutPresenterBorderBrush}" BorderThickness="{DynamicResource MenuFlyoutPresenterBorderThemeThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" TextBlock.FontSize="{DynamicResource ContentControlFontSize}" Padding="{DynamicResource MenuFlyoutPresenterThemePadding}">
                     <VisualLayerManager>
-                      <ScrollViewer>
+                      <ScrollViewer Classes="menuscroller">
                         <ItemsPresenter
                             Name="PART_ItemsPresenter"
                             ItemTemplate="{TemplateBinding ItemTemplate}"
                             Items="{TemplateBinding Items}"
-                            ItemsPanel="{TemplateBinding ItemsPanel}"/>
+                            ItemsPanel="{TemplateBinding ItemsPanel}"
+                            Margin="{DynamicResource MenuFlyoutScrollerMargin}"/>
                       </ScrollViewer>
                     </VisualLayerManager>
                   </Border>

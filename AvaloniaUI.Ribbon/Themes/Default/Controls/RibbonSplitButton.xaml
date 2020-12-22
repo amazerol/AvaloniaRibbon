@@ -25,6 +25,7 @@
   </Style>
   <Style Selector="local|RibbonSplitButton[Size=Large]">
     <Setter Property="Padding" Value="9,9,9,3"/>
+    <Setter Property="MaxWidth" Value="68"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">

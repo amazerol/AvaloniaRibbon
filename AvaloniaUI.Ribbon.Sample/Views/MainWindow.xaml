@@ -9,7 +9,7 @@
     xmlns:ribbon="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon"
     Title="Avalonia Ribbon"
     Width="980"
-    Height="640"
+    Height="720"
     MinWidth="500"
     MinHeight="500"
     BorderBrush="{DynamicResource FillBrush}" TitleBarForeground="White"
@@ -160,7 +160,7 @@
       <VisualBrush.Visual>
         <Panel Background="{DynamicResource FillBrush}" Width="{Binding #MainWindow.Bounds.Width}" Height="{Binding #MainWindow.Bounds.Height}">
           <Panel.Resources>
-            <SolidColorBrush x:Key="FillBrush">#7F2B579A</SolidColorBrush>
+            <SolidColorBrush x:Key="FillBrush">#C02B579A</SolidColorBrush>
             <SolidColorBrush x:Key="LineBrush">#FF274F8C</SolidColorBrush>
             <!--16000000-->
           </Panel.Resources>

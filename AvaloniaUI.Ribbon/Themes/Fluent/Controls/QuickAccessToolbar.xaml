@@ -24,7 +24,7 @@
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             CornerRadius="{DynamicResource OverlayCornerRadius}">
                       <DockPanel>
-                        <Border DockPanel.Dock="Top" Height="30" Padding="5,0">
+                        <Border DockPanel.Dock="Top" Height="30" Padding="15,0">
                           <TextBlock Text="{DynamicResource AvaloniaRibbon.CustomizeQAT}" HorizontalAlignment="Left" VerticalAlignment="Center" FontWeight="DemiBold"/>
                         </Border>
                         <ScrollViewer Classes="menuscroller">

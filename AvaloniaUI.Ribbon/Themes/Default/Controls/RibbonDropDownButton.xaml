@@ -56,6 +56,7 @@
   </Style>
   <Style Selector="local|RibbonDropDownButton[Size=Large]">
     <Setter Property="Padding" Value="9" />
+    <Setter Property="MaxWidth" Value="68"/>
     <Setter Property="Template">
       <ControlTemplate>
         <Border Classes="RibbonButtonBackgroundBorder">

@@ -26,7 +26,7 @@
                           VerticalContentAlignment="Center"
                           IsChecked="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"/>
           <Popup PlacementTarget="{Binding #ContentButton}" PlacementMode="Bottom" VerticalOffset="-30" StaysOpen="False" IsOpen="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Width="500" MinHeight="300">
-            <Border Background="{DynamicResource ThemeBackgroundBrush}" BorderBrush="{DynamicResource ThemeBorderHighBrush}" BorderThickness="{DynamicResource ThemeBorderThickness}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}">
+            <Border Background="{DynamicResource MenuFlyoutPresenterBackground}" BorderBrush="{DynamicResource MenuFlyoutPresenterBorderBrush}" BorderThickness="{DynamicResource MenuFlyoutPresenterBorderThemeThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}">
               <DockPanel>
                 <DockPanel Name="MenuRightColumnDockPanel" Width="200" DockPanel.Dock="Right">
                   <Grid Height="30" DockPanel.Dock="Top">
@@ -79,9 +79,6 @@
   </Style>
   <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonMenu">
     <Setter Property="Padding" Value="4"/>
-  </Style>
-  <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonMenu /template/ ToggleButton#ContentButton:not(:pointerover):not(:pressed):not(:checked)">
-    <Setter Property="Opacity" Value="0.5"/>
   </Style>
   <Style Selector="local|Ribbon local|RibbonMenu /template/ ToggleButton#ContentButton:not(:pointerover):not(:pressed):not(:checked)">
     <Setter Property="Foreground" Value="{Binding $parent[local:Ribbon].Foreground}"/>

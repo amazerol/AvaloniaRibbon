@@ -15,6 +15,7 @@
     <StyleInclude Source="/Themes/Fluent/Controls/RibbonButton.xaml" />
     <StyleInclude Source="/Themes/Fluent/Controls/RibbonSplitButton.xaml" />
     <StyleInclude Source="/Themes/Fluent/Controls/RibbonDropDownButton.xaml" />
+    <StyleInclude Source="/Themes/Fluent/Controls/RibbonDropDownButtonItemPresenter.xaml" />
     <StyleInclude Source="/Themes/Fluent/Controls/RibbonToggleButton.xaml" />
     <StyleInclude Source="/Themes/Fluent/Controls/RibbonGroupBox.xaml" />
     <StyleInclude Source="/Themes/Fluent/Controls/KeyTip.xaml" />

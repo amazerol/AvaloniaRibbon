@@ -10,10 +10,10 @@
   </Styles.Resources>
   <Style Selector="local|RibbonWindow">
     <Setter Property="BorderBrush">
-      <SolidColorBrush Color="{DynamicResource SystemAccentColor}" Opacity="0.5"/>
+      <SolidColorBrush Color="{DynamicResource SystemAccentColor}" Opacity="0.75"/>
     </Setter>
     <Setter Property="TitleBarBackground">
-      <SolidColorBrush Color="{DynamicResource SystemAccentColor}" Opacity="0.5"/>
+      <SolidColorBrush Color="{DynamicResource SystemAccentColor}" Opacity="0.75"/>
     </Setter>
     <Setter Property="TitleBarForeground" Value="{DynamicResource SystemControlForegroundChromeWhiteBrush}" />
     <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltHighBrush}"/> 
@@ -35,8 +35,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="*"/>
               </Grid.ColumnDefinitions>
-              <!--Rectangle x:Name="RowDefinitionsHelper" IsHitTestVisible="False" Grid.Row="0" Grid.ColumnSpan="2"/-->
-              <Rectangle x:Name="TitlebarFill" Fill="{TemplateBinding TitleBarBackground}" IsHitTestVisible="False" Grid.Row="0" Grid.ColumnSpan="2" Grid.RowSpan="3"/>
+              <Border x:Name="TitlebarFill" Background="{TemplateBinding TitleBarBackground}" IsHitTestVisible="False" Grid.Row="0" Grid.ColumnSpan="2" />
               <ContentPresenter x:Name="PART_ContentPresenter" Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" Background="{TemplateBinding Background}" CornerRadius="0,0,3,3"/>
               <ContentPresenter x:Name="PART_RibbonPresenter" Content="{TemplateBinding Ribbon}"/>
               <Panel x:Name="PART_TitleBar" Grid.Row="0" Grid.ColumnSpan="2" Background="#01000000" VerticalAlignment="Top">
@@ -251,6 +250,9 @@
   </Style>
   <Style Selector="local|RibbonWindow[HasSystemDecorations=False][WindowState=Normal] /template/ Border.OuterBorder">
     <Setter Property="CornerRadius" Value="4"/>
+  </Style>
+  <Style Selector="local|RibbonWindow[HasSystemDecorations=False] /template/ Border#TitlebarFill">
+    <Setter Property="CornerRadius" Value="3,3,0,0"/>
   </Style>
   <Style Selector="local|RibbonWindow[WindowState=Maximized] /template/ Border.OuterBorder">
     <Setter Property="BorderThickness" Value="0"/>
