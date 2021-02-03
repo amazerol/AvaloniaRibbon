@@ -221,7 +221,7 @@ namespace AvaloniaUI.Ribbon
         protected override void OnPointerWheelChanged(PointerWheelEventArgs e)
         {
             int newIndex = SelectedIndex;
-            bool switchTabs = false;
+            
             if (ItemCount > 1)
             {
                 if (((Orientation == Orientation.Horizontal) && (e.Delta.Y > 0)) || ((Orientation == Orientation.Vertical) && (e.Delta.Y < 0)))
@@ -478,7 +478,7 @@ namespace AvaloniaUI.Ribbon
             bool secondClick = false;
             
             _itemHeadersPresenter.PointerReleased += (sneder, args) =>
-            {
+            {   
                 if (IsCollapsed)
                 {
                     RibbonTab mouseOverItem = null;
@@ -513,7 +513,7 @@ namespace AvaloniaUI.Ribbon
                     }
                 }
             };
-            _itemHeadersPresenter.DoubleTapped += (sneder, args) =>
+            /*_itemHeadersPresenter.DoubleTapped += (sneder, args) =>
             {
                 if (IsCollapsed)
                 {
@@ -526,7 +526,7 @@ namespace AvaloniaUI.Ribbon
                     IsCollapsed = true;
                     secondClick = true;
                 }
-            };
+            };*/
             
             var pinToQat = e.NameScope.Find<MenuItem>("PART_PinLastHoveredControlToQuickAccess");
             pinToQat.Click += (sneder, args) =>

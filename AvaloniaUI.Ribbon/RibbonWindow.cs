@@ -16,6 +16,7 @@ using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
 using Icon = System.Drawing.Icon;
+using System.Timers;
 
 namespace AvaloniaUI.Ribbon
 {
@@ -145,6 +146,8 @@ namespace AvaloniaUI.Ribbon
         }
 
         
+        bool _titlebarSecondClick = false;
+
         protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
             base.OnApplyTemplate(e);
@@ -153,16 +156,26 @@ namespace AvaloniaUI.Ribbon
             {
                 var titleBar = GetControl<Control>(e, "PART_TitleBar");
 
-                /*if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {*/
-                //}
-
                 titleBar.PointerPressed += (object sender, PointerPressedEventArgs ep) =>
                 {
-                    if (ep.ClickCount > 1)
+                    if (_titlebarSecondClick)
                         window.WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
                     else
                         window.PlatformImpl?.BeginMoveDrag(ep);
+                    
+
+                    if (!_titlebarSecondClick)
+                    {
+                        _titlebarSecondClick = true;
+
+                        Timer secondClickTimer = new Timer(250);
+                        secondClickTimer.Elapsed += (sneder, e) =>
+                        {
+                            _titlebarSecondClick = false;
+                            secondClickTimer.Stop();
+                        };
+                        secondClickTimer.Start();
+                    }
                 };
 
                 try
