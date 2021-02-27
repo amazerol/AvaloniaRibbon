@@ -37,18 +37,19 @@ namespace AvaloniaUI.Ribbon
 
         public static Ribbon GetParentRibbon(IControl control)
         {
-            IControl parentRbn = control.Parent;
-            while (!(parentRbn is Ribbon))
+            return Avalonia.VisualTree.VisualExtensions.FindAncestorOfType<Ribbon>(control, true);
+            /*IControl parentRbn = control.Parent;
+            while ((!(parentRbn is Ribbon)) && (parentRbn != null))
             {
                 parentRbn = parentRbn.Parent;
-                if (parentRbn == null)
-                    break;
+                /*if (parentRbn == null)
+                    break;*
             }
             
             if (parentRbn is Ribbon ribbon)
                 return ribbon;
             else
-                return null;
+                return null;*/
         }
     }
 }

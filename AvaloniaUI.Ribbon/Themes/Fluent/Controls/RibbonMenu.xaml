@@ -27,8 +27,9 @@
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"
                           IsChecked="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}"/>
-          <Popup x:Name="MenuPopup" PlacementTarget="{Binding #ContentButton}" PlacementMode="Bottom" VerticalOffset="-38" HorizontalOffset="-8" StaysOpen="False" IsOpen="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Width="500" MinHeight="300">
-            <Border x:Name="MenuRootBorder" Background="{DynamicResource MenuFlyoutPresenterBackground}" BorderBrush="{DynamicResource MenuFlyoutPresenterBorderBrush}" BorderThickness="{DynamicResource MenuFlyoutPresenterBorderThemeThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}" Margin="8" BoxShadow="0 4 10 #40000000">
+          <Popup x:Name="MenuPopup" PlacementTarget="{Binding #ContentButton}" PlacementMode="Bottom" VerticalOffset="-30" HorizontalOffset="0" StaysOpen="False" IsOpen="{Binding IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}, Mode=TwoWay}" Width="500" MinHeight="300">
+            <Border x:Name="MenuRootBorder" Background="{DynamicResource MenuFlyoutPresenterBackground}" BorderBrush="{DynamicResource MenuFlyoutPresenterBorderBrush}" BorderThickness="{DynamicResource MenuFlyoutPresenterBorderThemeThickness}" CornerRadius="{DynamicResource OverlayCornerRadius}" TextBlock.Foreground="{DynamicResource ThemeForegroundBrush}">
+            <!--BoxShadow="0 4 10 #40000000"-->
               <DockPanel>
                 <DockPanel Name="MenuRightColumnDockPanel" Width="200" DockPanel.Dock="Right">
                   <Grid Height="30" DockPanel.Dock="Top" IsVisible="{Binding !HasSelectedItem, RelativeSource={RelativeSource Mode=TemplatedParent}}">
@@ -60,6 +61,7 @@
                               HorizontalContentAlignment="Center"
                               VerticalContentAlignment="Center"
                               IsChecked="{Binding !IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                              ClickMode="Press"
                               DockPanel.Dock="Top">
                       <Panel Width="24" Height="24">
                         <Ellipse Stroke="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="1"/>
@@ -94,9 +96,9 @@
     <Setter Property="Background" Value="Transparent"/>
     <Setter Property="BorderBrush" Value="Transparent"/>
   </Style>
-  <Style Selector="local|RibbonMenu /template/ Popup#MenuPopup > PopupRoot">
+  <!--Style Selector="local|RibbonMenu /template/ Popup#MenuPopup > PopupRoot">
     <Setter Property="TransparencyLevelHint" Value="Transparent"/>
-  </Style>
+  </Style-->
   
   <Style Selector="local|RibbonMenuItem">
     <Setter Property="Template">

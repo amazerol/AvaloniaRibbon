@@ -57,6 +57,7 @@
                             HorizontalContentAlignment="Left"
                             VerticalContentAlignment="Center"
                             IsChecked="{Binding !IsMenuOpen, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                            ClickMode="Press"
                             DockPanel.Dock="Top">
                     <Panel Width="24" Height="24">
                       <Ellipse Stroke="{Binding $parent[ToggleButton].Foreground}" StrokeThickness="2"/>
