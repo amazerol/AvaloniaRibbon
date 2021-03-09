@@ -21,7 +21,7 @@ namespace AvaloniaUI.Ribbon
         public static bool HasKeyTipKey(Control element, Key key)
         {
             string keys = GetKeyTipKeys(element);
-            return HasKeyTipKeys(element) && keys.Contains(key.ToString(), StringComparison.OrdinalIgnoreCase);
+            return HasKeyTipKeys(element) && keys.ToLowerInvariant().Contains(key.ToString().ToLowerInvariant());
         }
         public static bool HasKeyTipKeys(Control element)
         {

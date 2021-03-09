@@ -835,6 +835,7 @@
     </ribbon:QuickAccessToolbar>
   </ribbon:RibbonWindow.QuickAccessToolbar>
   <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10" Margin="25">
+    <ToggleSwitch x:Name="LightsToggleSwitch" IsChecked="True" OnContent="Lights on" OffContent="Lights off"/>
     <Button x:Name="HorizontalRibbonButton" Content="Switch Ribbon to horizontal orientation" IsVisible="False"/>
     <Button x:Name="VerticalRibbonButton" Content="Switch Ribbon to vertical orientation"/>
     <StackPanel Orientation="Horizontal">

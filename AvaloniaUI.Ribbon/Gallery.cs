@@ -86,7 +86,7 @@ namespace AvaloniaUI.Ribbon
             {
                 a.Handled = true;
             };*/
-            e.NameScope.Find<Control>("PART_FlyoutRoot").PointerLeave += (sneder, e) => IsDropDownOpen = false;
+            e.NameScope.Find<Control>("PART_FlyoutRoot").PointerLeave += (sneder, a) => IsDropDownOpen = false;
 
             UpdatePresenterLocation(IsDropDownOpen);
         }

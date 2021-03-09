@@ -7,7 +7,7 @@ namespace AvaloniaUI.Ribbon
 {
     public interface IRibbonMenu
     {
-        public bool IsMenuOpen
+        bool IsMenuOpen
         {
             get;
             set;

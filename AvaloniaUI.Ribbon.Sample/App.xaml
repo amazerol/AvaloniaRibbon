@@ -15,12 +15,13 @@
         </ResourceDictionary>
     </Application.Resources>
     <Application.Styles>
-        <!--StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml" />
-		<StyleInclude Source="avares://Avalonia.Themes.Default/Accents/BaseLight.xaml" />
-        <StyleInclude Source="avares://AvaloniaUI.Ribbon/Themes/Default/AvaloniaRibbon.xaml" /-->
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/BaseLight.xaml" />
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/Base.xaml" />
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentBaseLight.xaml" />
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Accents/FluentControlResourcesLight.xaml" />
+        <StyleInclude Source="avares://Avalonia.Themes.Fluent/Controls/FluentControls.xaml" />
 
 
-        <FluentTheme Mode="Light"/>
-        <StyleInclude Source="avares://AvaloniaUI.Ribbon/Themes/Fluent/AvaloniaRibbon.xaml" />
+        <StyleInclude Source="avares://AvaloniaUI.Ribbon/Styles/Fluent/AvaloniaRibbon.xaml" />
     </Application.Styles>
 </Application>

@@ -34,7 +34,10 @@ namespace AvaloniaUI.Ribbon
             get;
             set;
         }
+    }
 
+    public static class RibbonControlExtensions
+    {
         public static Ribbon GetParentRibbon(IControl control)
         {
             return Avalonia.VisualTree.VisualExtensions.FindAncestorOfType<Ribbon>(control, true);

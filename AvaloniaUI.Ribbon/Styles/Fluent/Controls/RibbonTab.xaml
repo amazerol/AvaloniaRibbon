@@ -29,7 +29,7 @@
                 Content="{TemplateBinding Header}"
                 TextBlock.Foreground="{TemplateBinding Foreground}"
                 ContentTemplate="{TemplateBinding HeaderTemplate}"/>
-            <Rectangle x:Name="TextEmphasis" Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Rectangle x:Name="TextEmphasis" Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}" HorizontalAlignment="Center" VerticalAlignment="Center" ZIndex="-1">
               <Rectangle.Fill>
                 <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
               </Rectangle.Fill>

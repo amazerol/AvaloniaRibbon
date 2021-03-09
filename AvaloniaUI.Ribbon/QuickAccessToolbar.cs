@@ -107,7 +107,7 @@ namespace AvaloniaUI.Ribbon
             
 
 
-            morCtx.MenuOpened += (sneder, e) => 
+            morCtx.MenuOpened += (sneder, a) => 
             {
                 if (more.IsChecked != true)
                     more.IsChecked = true;
@@ -125,14 +125,14 @@ namespace AvaloniaUI.Ribbon
                 morCtx.Items = morCtxItems;
             };
 
-            morCtx.MenuClosed += (sneder, e) =>
+            morCtx.MenuClosed += (sneder, a) =>
             {
                 if (more.IsChecked == true)
                     more.IsChecked = false;
             };
 
-            more.Checked += (sneder, e) => morCtx.Open(more);
-            more.Unchecked += (sneder, e) => morCtx.Close();
+            more.Checked += (sneder, a) => morCtx.Open(more);
+            more.Unchecked += (sneder, a) => morCtx.Close();
         }
 
         /*protected override void ItemsChanged(AvaloniaPropertyChangedEventArgs e)

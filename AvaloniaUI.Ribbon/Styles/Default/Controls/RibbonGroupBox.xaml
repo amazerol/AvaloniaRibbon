@@ -32,7 +32,7 @@
 
   <Style Selector="local|RibbonGroupBox">
     <Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}" />
-    <Setter Property="BorderBrush" Value="{DynamicResource SystemControlForegroundChromeHighBrush}" />
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}" />
     <Setter Property="Foreground" Value="{DynamicResource ThemeForegroundBrush}" />
     <Setter Property="BorderThickness" Value="{DynamicResource ThemeBorderThickness}"/>
     <Setter Property="Padding" Value="5"/>
@@ -40,15 +40,14 @@
     <!--Setter Property="Height" Value="{Binding Path=Height, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Panel}, Mode=OneWay}"/-->
     <Setter Property="Template">
       <ControlTemplate>
-        <Panel>
-          <Rectangle x:Name="Separator" MinWidth="1" MinHeight="1" Fill="{TemplateBinding BorderBrush}"/>
+        <Border x:Name="EdgeBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
           <DockPanel>
-            <DockPanel DockPanel.Dock="Bottom" Margin="6,0,6,1">
+            <DockPanel DockPanel.Dock="Bottom">
               <Button Grid.Column="1" Grid.Row="1"
                   x:Name="PART_CommandButton"
                   Height="14"
                   HorizontalAlignment="Right"
-                  Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Focusable="False" DockPanel.Dock="Right" Foreground="{DynamicResource SystemControlBackgroundBaseMediumHighBrush}" Background="Transparent" Padding="0">
+                  Command="{TemplateBinding Command}" CommandParameter="{TemplateBinding CommandParameter}" Focusable="False" DockPanel.Dock="Right">
                 <Button.IsVisible>
                   <Binding Path="!Command" Mode="OneWay" RelativeSource="{RelativeSource Mode=TemplatedParent}">
                     <Binding.Converter>
@@ -56,10 +55,11 @@
                     </Binding.Converter>
                   </Binding>
                 </Button.IsVisible>
-                <Border Width="7" Height="7" BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="1,1,0,0">
-                  <Grid Width="5" Height="5" Margin="0,0,-1,-1" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="0,0,1,1"/>
-                    <Line StartPoint="1,1" EndPoint="5,5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="1" Margin="-1,-1,1,1"/>
+                <Border>
+                  <Grid Width="9" Height="9">
+                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="2,2,0,0"/>
+                    <Line StartPoint="0,0" EndPoint="6,6" HorizontalAlignment="Right" VerticalAlignment="Bottom" Stroke="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" StrokeThickness="2"/>
+                    <Border BorderBrush="{Binding Foreground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Button}}" BorderThickness="0,0,2,2" Width="5" Height="5" HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
                   </Grid>
                 </Border>
               </Button>
@@ -73,19 +73,15 @@
               </ItemsPresenter.ItemsPanel>
             </ItemsPresenter>
           </DockPanel>
-        </Panel>
+        </Border>
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ Rectangle#Separator">
-    <Setter Property="HorizontalAlignment" Value="Right"/>
-    <Setter Property="VerticalAlignment" Value="Stretch"/>
-    <Setter Property="Margin" Value="0,4"/>
+  <Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ Border#EdgeBorder">
+    <Setter Property="BorderThickness" Value="0,0,1,0"/>
   </Style>
-  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ Rectangle#Separator">
-    <Setter Property="HorizontalAlignment" Value="Stretch"/>
-    <Setter Property="VerticalAlignment" Value="Bottom"/>
-    <Setter Property="Margin" Value="4,0"/>
+  <Style Selector="local|Ribbon[Orientation=Vertical] local|RibbonGroupBox /template/ Border#EdgeBorder">
+    <Setter Property="BorderThickness" Value="0,0,0,1"/>
   </Style>
   <!--Style Selector="local|Ribbon[Orientation=Horizontal] local|RibbonGroupBox /template/ ItemsPresenter#PART_ItemsPresenter">
     <Setter Property="Margin" Value="5,2,5,3"/>

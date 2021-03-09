@@ -156,7 +156,7 @@ namespace AvaloniaUI.Ribbon
         private void InputRoot_Deactivated(object sender, EventArgs e)
         {
             KeyTip.SetShowChildKeyTipKeys(this, false);
-            IRibbonControl.GetParentRibbon(this)?.Close();
+            RibbonControlExtensions.GetParentRibbon(this)?.Close();
         }
     }
 }

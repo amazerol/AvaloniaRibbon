@@ -26,7 +26,7 @@ namespace AvaloniaUI.Ribbon
 
         void SwitchToNextVisibleTab()
         {
-            Ribbon rbn = IRibbonControl.GetParentRibbon(this);
+            Ribbon rbn = RibbonControlExtensions.GetParentRibbon(this);
             if ((rbn != null) && ((IAvaloniaList<object>)Items).Contains(rbn.SelectedItem))
             {
                 int selIndex = rbn.SelectedIndex;
