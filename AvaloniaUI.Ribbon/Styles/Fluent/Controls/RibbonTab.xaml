@@ -29,7 +29,17 @@
                 Content="{TemplateBinding Header}"
                 TextBlock.Foreground="{TemplateBinding Foreground}"
                 ContentTemplate="{TemplateBinding HeaderTemplate}"/>
-            <Rectangle x:Name="TextEmphasis" Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}" HorizontalAlignment="Center" VerticalAlignment="Center" ZIndex="-1">
+            <Rectangle Classes="textEmphasis" Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}">
+              <Rectangle.Fill>
+                <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
+              </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Classes="textEmphasis" Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}">
+              <Rectangle.Fill>
+                <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
+              </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Classes="textEmphasis" Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}">
               <Rectangle.Fill>
                 <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
               </Rectangle.Fill>
@@ -43,7 +53,20 @@
       </ControlTemplate>
     </Setter>
   </Style>
-  <Style Selector="local|RibbonTab[IsSelected=False]:not(:pointerover) /template/ Rectangle#TextEmphasis">
+  
+  <Style Selector="local|RibbonTab /template/ Rectangle.textEmphasis">
+   <!--Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}" HorizontalAlignment="Center" VerticalAlignment="Center" ZIndex="-1">
+              <Rectangle.Fill>
+                <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
+              </Rectangle.Fill-->
+    <!--Setter Property="Width" Value="{Binding #PART_ContentPresenter.Bounds.Width}"/>
+    <Setter Property="Height" Value="{Binding #PART_ContentPresenter.Bounds.Height}"/-->
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="Stroke" Value="{Binding $parent[local:RibbonTab].Foreground}"/>
+    <Setter Property="ZIndex" Value="-1"/>
+  </Style>
+  <Style Selector="local|RibbonTab[IsSelected=False]:not(:pointerover) /template/ Rectangle.textEmphasis">
     <Setter Property="IsVisible" Value="False"/>
   </Style>
   <!--Style Selector="local|RibbonTab:not(:selected):not(:pointerover):not(:pressed) /template/ Border#SelectedBorder,
