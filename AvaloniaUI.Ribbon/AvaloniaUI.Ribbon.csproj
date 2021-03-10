@@ -5,17 +5,19 @@
     <RootNamespace>AvaloniaUI.Ribbon</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <Version>1.1.0</Version>
-    <Authors>Alban Mazerolles, Rubal Walia, Splitwirez</Authors>
-    <PackageId>AvaloniaRibbon</PackageId>
+    <Authors>Splitwirez, Alban Mazerolles, Rubal Walia</Authors>
+    <PackageId>AvaloniaUIRibbon</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Splitwirez/AvaloniaRibbon</PackageProjectUrl>
-    <Description></Description>
+    <Description>Ribbon UI for Avalonia</Description>
     <RepositoryType>Git</RepositoryType>
     <RepositoryUrl>https://github.com/Splitwirez/AvaloniaRibbon.git</RepositoryUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
     <AssemblyName>AvaloniaUI.Ribbon</AssemblyName>
     <LangVersion>8.0</LangVersion>
+	<PackageTags>ribbon;avalonia;avaloniaui;avalonia ui;ribbon;ribbonui;ribbon ui;crossplat;crossplatform;cross platform;xplat;xplatform</PackageTags>
+    <!--owners? requireLicenseAcceptance? releaseNotes? copyright?-->
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
