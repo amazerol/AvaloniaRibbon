@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>AvaloniaUI.Ribbon</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Version>1.1.0</Version>
+    <Version>1.1.0-beta</Version>
     <Authors>Splitwirez, Alban Mazerolles, Rubal Walia</Authors>
     <PackageId>AvaloniaUIRibbon</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
