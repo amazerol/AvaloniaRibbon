@@ -16,8 +16,18 @@ AvaloniaRibbon in its current form is developed and maintained by [Splitwirez](h
 ![Fluent-Dark theme preview, vertical orientation](/ReadmeImages/Ribbon-FluentDark-Vertical.png)
 
 Include ribbon styles to App.xaml as shown below.
+
+Fluent theme:
 ```xaml
-    <StyleInclude Source="avares://Avalonia.Controls.Ribbon/Styles/RibbonStyles.xaml" />
+    <StyleInclude Source="avares://AvaloniaUI.Ribbon/Styles/Fluent/AvaloniaRibbon.xaml" />
+```
+"Default" theme:
+```xaml
+    <StyleInclude Source="avares://AvaloniaUI.Ribbon/Styles/Default/AvaloniaRibbon.xaml" />
+```
+and localized text (same for both themes):
+```xaml
+    <ResourceInclude Source="avares://AvaloniaUI.Ribbon/Locale/en-ca.xaml" />
 ```
 
 Use the below mentioned sample as an example to use the ribbon control. 
