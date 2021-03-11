@@ -1,0 +1,77 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon">
+    <Design.PreviewWith>
+        <local:RibbonTab Header="Test" />
+    </Design.PreviewWith>
+
+  <Style Selector="local|RibbonTab">
+    <Setter Property="FontSize" Value="12" />
+    <Setter Property="Height" Value="34" />
+    <Setter Property="HorizontalContentAlignment" Value="Center" />
+    <Setter Property="VerticalContentAlignment" Value="Center" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{Binding $parent[local:Ribbon].HeaderForeground}"/>
+    <Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderHighBrush}"/>
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="Padding" Value="10,0" />
+    <Setter Property="Content" Value=" "/>
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+          <Grid>
+            <ContentPresenter
+                Name="PART_ContentPresenter"
+                Margin="{TemplateBinding Padding}"
+                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                Content="{TemplateBinding Header}"
+                TextBlock.Foreground="{TemplateBinding Foreground}"
+                ContentTemplate="{TemplateBinding HeaderTemplate}"/>
+            <Border x:Name="SelectedBorder" BorderBrush="{TemplateBinding Foreground}" BorderThickness="0,0,0,3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Panel IsVisible="{TemplateBinding IsContextual}" Opacity="0.25">
+              <Border x:Name="ContextualSelectedBorder" BorderThickness="{Binding #SelectedBorder.BorderThickness}" HorizontalAlignment="{Binding #SelectedBorder.HorizontalAlignment}" VerticalAlignment="{Binding #SelectedBorder.VerticalAlignment}" IsVisible="{Binding #SelectedBorder.IsVisible}" Opacity="{Binding #SelectedBorder.Opacity}"/>
+            </Panel>
+          </Grid>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  <!--Style Selector="local|RibbonTab:not(:selected) /template/ Border#SelectedBorder">
+    <Setter Property="BorderBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+  </Style>
+  <Style Selector="local|Ribbon[IsCollapsed=true][IsCollapsedPopupOpen=false] local|RibbonTab /template/ Border#SelectedBorder">
+    <Setter Property="BorderBrush" Value="{Binding Foreground, RelativeSource={RelativeSource Mode=TemplatedParent}}"/>
+  </Style-->
+  <Style Selector="local|RibbonTab:not(:selected):not(:pointerover):not(:pressed) /template/ Border#SelectedBorder,
+                   local|Ribbon[IsCollapsed=true][IsCollapsedPopupOpen=false] local|RibbonTab:not(:pointerover):not(:pressed) /template/ Border#SelectedBorder">
+    <Setter Property="IsVisible" Value="False"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+  </Style>
+  <Style Selector="local|RibbonTab:not(:selected):pointerover /template/ Border#SelectedBorder">
+    <Setter Property="Margin" Value="3,0"/>
+  </Style>
+  <Style Selector="local|RibbonTab:disabled">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+
+  <Style Selector="local|RibbonTab[IsContextual=True] /template/ Border#ContextualSelectedBorder">
+    <Setter Property="BorderBrush" Value="{Binding $parent[local:RibbonContextualTabGroup].Background}"/>
+  </Style>
+  <!--Style Selector="local|RibbonWindow local|RibbonTab">
+    <Setter Property="BorderBrush" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
+    <Setter Property="Foreground" Value="{Binding TitleBarForeground, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:RibbonWindow}}"/>
+  </Style-->
+  <Style Selector="local|RibbonWindow[IsActive=False] local|RibbonTab">
+    <Setter Property="Opacity" Value="0.5"/>
+  </Style>
+  <!--Style Selector="local|Ribbon[IsCollapsed=False] local|RibbonTab:selected">
+    <Setter Property="Foreground" Value="{DynamicResource TitleBarColorBrush}" />
+    <Setter Property="Background" Value="{Binding $parent.Background}" />
+  </Style-->
+</Styles>

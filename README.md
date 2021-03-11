@@ -9,11 +9,25 @@ It is presently used in **[Jaya File Manager](https://github.com/JayaFM/Jaya)**,
 
 AvaloniaRibbon in its current form is developed and maintained by [Splitwirez](https://github.com/Splitwirez) at the [AvaloniaRibbon repo](https://github.com/Splitwirez/AvaloniaRibbon). It is is based on an earlier repo by [Alban Mazerolles](https://github.com/amazerol), which can be found [here](https://github.com/amazerol/AvaloniaRibbon).
 
-![Preview](https://i.imgur.com/IdD64Kr.png)
+![Fluent-Light theme preview, horizontal orientation](/ReadmeImages/Ribbon-FluentLight-Horizontal.png)
+![Fluent-Dark theme preview, horizontal orientation](/ReadmeImages/Ribbon-FluentDark-Horizontal.png)
+
+![Fluent-Light theme preview, vertical orientation](/ReadmeImages/Ribbon-FluentLight-Vertical.png)
+![Fluent-Dark theme preview, vertical orientation](/ReadmeImages/Ribbon-FluentDark-Vertical.png)
 
 Include ribbon styles to App.xaml as shown below.
+
+Fluent theme:
 ```xaml
-    <StyleInclude Source="avares://Avalonia.Controls.Ribbon/Styles/RibbonStyles.xaml" />
+    <StyleInclude Source="avares://AvaloniaUI.Ribbon/Styles/Fluent/AvaloniaRibbon.xaml" />
+```
+"Default" theme:
+```xaml
+    <StyleInclude Source="avares://AvaloniaUI.Ribbon/Styles/Default/AvaloniaRibbon.xaml" />
+```
+and localized text (same for both themes):
+```xaml
+    <ResourceInclude Source="avares://AvaloniaUI.Ribbon/Locale/en-ca.xaml" />
 ```
 
 Use the below mentioned sample as an example to use the ribbon control. 
@@ -311,6 +325,14 @@ Use the below mentioned sample as an example to use the ribbon control.
 ```
 
 ## Change Log
+
+### Update (01/03/2021)
+- Update to Avalonia 0.10
+- Added Fluent Theme
+- Added contextual tabs
+- Added Quick Access Toolbar (Experimental)
+- Assorted bugfixes
+- Probably something else I forgot to mention lol
 
 ### Update (06/03/2020)
 - Re-organized some stuff
