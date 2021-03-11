@@ -326,6 +326,14 @@ Use the below mentioned sample as an example to use the ribbon control.
 
 ## Change Log
 
+### Update (01/03/2021)
+- Update to Avalonia 0.10
+- Added Fluent Theme
+- Added contextual tabs
+- Added Quick Access Toolbar (Experimental)
+- Assorted bugfixes
+- Probably something else I forgot to mention lol
+
 ### Update (06/03/2020)
 - Re-organized some stuff
 - `RibbonWindow` is now an actual Window in its own right
