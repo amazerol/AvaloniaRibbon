@@ -1,8 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
+using Avalonia.Data;
 using Avalonia.Data.Converters;
 using Avalonia.Input;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Styling;
@@ -12,34 +14,121 @@ using System.Collections.Generic;
 using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
+using System.Runtime.InteropServices;
 using Icon = System.Drawing.Icon;
+using System.Timers;
 
 namespace AvaloniaUI.Ribbon
 {
     public class RibbonWindow : Window, IStyleable
     {
-        public static readonly StyledProperty<IBrush> TitleBarBackgroundProperty;
-        public static readonly StyledProperty<IBrush> TitleBarForegroundProperty;
-        
-        static RibbonWindow()
-        {
-            TitleBarBackgroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarBackground));
-            TitleBarForegroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarForeground));
-        }
-
-        Type IStyleable.StyleKey => typeof(RibbonWindow);
-
+        public static readonly StyledProperty<IBrush> TitleBarBackgroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarBackground));
         public IBrush TitleBarBackground
         {
-            get { return GetValue(TitleBarBackgroundProperty); }
-            set { SetValue(TitleBarBackgroundProperty, value); }
+            get => GetValue(TitleBarBackgroundProperty);
+            set => SetValue(TitleBarBackgroundProperty, value);
         }
 
+        public static readonly StyledProperty<IBrush> TitleBarForegroundProperty = AvaloniaProperty.Register<RibbonWindow, IBrush>(nameof(TitleBarForeground));
         public IBrush TitleBarForeground
         {
-            get { return GetValue(TitleBarForegroundProperty); }
-            set { SetValue(TitleBarForegroundProperty, value); }
+            get => GetValue(TitleBarForegroundProperty);
+            set => SetValue(TitleBarForegroundProperty, value);
         }
+
+        public static readonly StyledProperty<Orientation> OrientationProperty = StackLayout.OrientationProperty.AddOwner<RibbonWindow>();
+        public Orientation Orientation
+        {
+            get => GetValue(OrientationProperty);
+            set => SetValue(OrientationProperty, value);
+        }
+
+        static bool UseLeftSideCaptionButtons()
+        {
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                return true;
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                //TODO: See if there's any sane way of getting  the user's Window manager/decorator/etc and its configuration, and deciding or guessing based on that
+                return false;
+            }
+            else //on Windows
+                return false;
+        }
+        public static readonly StyledProperty<bool> LeftSideCaptionButtonsProperty = AvaloniaProperty.Register<RibbonWindow, bool>(nameof(LeftSideCaptionButtons), UseLeftSideCaptionButtons());
+        public bool LeftSideCaptionButtons
+        {
+            get => GetValue(LeftSideCaptionButtonsProperty);
+            set => SetValue(LeftSideCaptionButtonsProperty, value);
+        }
+
+        public static readonly StyledProperty<Ribbon> RibbonProperty = AvaloniaProperty.Register<RibbonWindow, Ribbon>(nameof(Ribbon), null);
+        public Ribbon Ribbon
+        {
+            get => GetValue(RibbonProperty);
+            set => SetValue(RibbonProperty, value);
+        }
+
+        public static readonly StyledProperty<QuickAccessToolbar> QuickAccessToolbarProperty = Ribbon.QuickAccessToolbarProperty.AddOwner<RibbonWindow>();
+        public QuickAccessToolbar QuickAccessToolbar
+        {
+            get => GetValue(QuickAccessToolbarProperty);
+            set => SetValue(QuickAccessToolbarProperty, value);
+        }
+
+
+        static RibbonWindow()
+        {
+            OrientationProperty.OverrideDefaultValue<RibbonWindow>(Orientation.Horizontal);
+
+            RibbonProperty.Changed.AddClassHandler<RibbonWindow>((sender, e) => sender.RefreshRibbon(e.OldValue, e.NewValue));
+            QuickAccessToolbarProperty.Changed.AddClassHandler<RibbonWindow>((sender, e) => sender.RefreshQat(e.OldValue, e.NewValue));
+        }
+
+        public RibbonWindow() : base()
+        {
+            RefreshRibbon(null, Ribbon);
+            RefreshQat(null, QuickAccessToolbar);
+        }
+
+        void RefreshRibbon(object oldValue, object newValue)
+        {
+            if ((oldValue != null) && (oldValue is Ribbon oldRibbon))
+            {
+                oldRibbon.QuickAccessToolbar = null;
+                oldRibbon.ClearValue(Ribbon.OrientationProperty); 
+            }
+
+
+            if ((newValue != null) && (newValue is Ribbon newRibbon))
+            {
+                newRibbon.QuickAccessToolbar = QuickAccessToolbar;
+                newRibbon[!Ribbon.OrientationProperty] = this[!OrientationProperty];
+
+                if (QuickAccessToolbar != null)
+                    QuickAccessToolbar.Ribbon = newRibbon;
+            }
+            else if (QuickAccessToolbar != null)
+                QuickAccessToolbar.Ribbon = null;
+        }
+
+        void RefreshQat(object oldValue, object newValue)
+        {
+            if ((oldValue != null) && (oldValue is QuickAccessToolbar oldQat))
+                oldQat.Ribbon = null;
+
+
+            if ((newValue != null) && (newValue is QuickAccessToolbar newQat))
+            {
+                newQat.Ribbon = Ribbon;
+
+                if (Ribbon != null)
+                    Ribbon.QuickAccessToolbar = newQat;
+            }
+            else if (Ribbon != null)
+                Ribbon.QuickAccessToolbar = null;
+        }
+        
 
         void SetupSide(string name, StandardCursorType cursor, WindowEdge edge, ref TemplateAppliedEventArgs e)
         {
@@ -56,26 +145,37 @@ namespace AvaloniaUI.Ribbon
             return e.NameScope.Get<T>(name);
         }
 
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        
+        bool _titlebarSecondClick = false;
+
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
-            base.OnTemplateApplied(e);
+            base.OnApplyTemplate(e);
             var window = this;
             try
             {
-                var titleBar = GetControl<Control>(e, "TitleBar");
-
-                if (Environment.OSVersion.Platform == PlatformID.Win32NT)
-                {
-
-                    titleBar.DoubleTapped += delegate
-                    {
-                        window.WindowState = ((Window)this.GetVisualRoot()).WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-                    };
-                }
+                var titleBar = GetControl<Control>(e, "PART_TitleBar");
 
                 titleBar.PointerPressed += (object sender, PointerPressedEventArgs ep) =>
                 {
-                    window.PlatformImpl?.BeginMoveDrag(ep);
+                    if (_titlebarSecondClick)
+                        window.WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
+                    else
+                        window.PlatformImpl?.BeginMoveDrag(ep);
+                    
+
+                    if (!_titlebarSecondClick)
+                    {
+                        _titlebarSecondClick = true;
+
+                        Timer secondClickTimer = new Timer(250);
+                        secondClickTimer.Elapsed += (sneder, e) =>
+                        {
+                            _titlebarSecondClick = false;
+                            secondClickTimer.Stop();
+                        };
+                        secondClickTimer.Start();
+                    }
                 };
 
                 try
@@ -93,29 +193,25 @@ namespace AvaloniaUI.Ribbon
                     SetupSide("BottomLeft", StandardCursorType.BottomLeftCorner, WindowEdge.SouthWest, ref e);
                     SetupSide("BottomRight", StandardCursorType.BottomRightCorner, WindowEdge.SouthEast, ref e);
                 }
-                catch (Exception x)
-                {
+                catch { }
 
-                }
-
-                GetControl<Button>(e, "MinimizeButton").Click += delegate
+                GetControl<Button>(e, "PART_MinimizeButton").Click += delegate
                 {
                     window.WindowState = WindowState.Minimized;
                 };
-                GetControl<Button>(e, "MaximizeButton").Click += delegate
+                GetControl<Button>(e, "PART_MaximizeButton").Click += delegate
                 {
                     window.WindowState = window.WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
                 };
-                GetControl<Button>(e, "CloseButton").Click += delegate
+                GetControl<Button>(e, "PART_CloseButton").Click += delegate
                 {
                     window.Close();
                 };
             }
-            catch (KeyNotFoundException ex)
-            {
-
-            }
+            catch (KeyNotFoundException) { }
         }
+
+        Type IStyleable.StyleKey => typeof(RibbonWindow);
     }
 
     public class WindowIconToImageConverter : IValueConverter
@@ -132,7 +228,7 @@ namespace AvaloniaUI.Ribbon
                 {
                     return new Bitmap(stream);
                 }
-                catch (ArgumentNullException ex)
+                catch (ArgumentNullException)
                 {
                     try
                     {
@@ -142,7 +238,7 @@ namespace AvaloniaUI.Ribbon
                         bmp.Save(stream, ImageFormat.Png);
                         return new Bitmap(stream);
                     }
-                    catch (ArgumentException e)
+                    catch (ArgumentException)
                     {
                         Icon icon = Icon.ExtractAssociatedIcon(System.Reflection.Assembly.GetEntryAssembly().Location);
                         System.Drawing.Bitmap bmp = icon.ToBitmap();

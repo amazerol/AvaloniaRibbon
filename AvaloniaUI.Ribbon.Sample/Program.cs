@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Logging;
-using Avalonia.Logging.Serilog;
 using Avalonia.Platform;
 
 namespace AvaloniaUI.Ribbon.Samples
@@ -10,8 +9,7 @@ namespace AvaloniaUI.Ribbon.Samples
         static AppBuilder BuildAvaloniaApp()
         {
             return AppBuilder.Configure<App>()
-                           .UsePlatformDetect()
-                           .LogToDebug(LogEventLevel.Warning);
+                           .UsePlatformDetect();
         }
 
         // The entry point. Things aren't ready yet, so at this point

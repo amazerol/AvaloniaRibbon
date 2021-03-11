@@ -1,0 +1,96 @@
+﻿<Styles
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:AvaloniaUI.Ribbon;assembly=AvaloniaUI.Ribbon">
+    <Design.PreviewWith>
+        <local:RibbonTab Header="Test" />
+    </Design.PreviewWith>
+
+  <Style Selector="local|RibbonTab">
+    <Setter Property="FontSize" Value="12.5" />
+    <Setter Property="Height" Value="30" />
+    <Setter Property="Background" Value="Transparent" />
+    <Setter Property="Foreground" Value="{Binding $parent[local:Ribbon].Foreground}"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+    <Setter Property="Margin" Value="0" />
+    <Setter Property="Padding" Value="10,0" />
+    <Setter Property="Template">
+      <ControlTemplate>
+        <Border Background="{TemplateBinding Background}"
+              BorderBrush="{TemplateBinding BorderBrush}"
+              BorderThickness="{TemplateBinding BorderThickness}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+          <Panel x:Name="ContentPanel" HorizontalAlignment="Center" Margin="{TemplateBinding Padding}">
+            <ContentPresenter
+                Name="PART_ContentPresenter"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
+                Content="{TemplateBinding Header}"
+                TextBlock.Foreground="{TemplateBinding Foreground}"
+                ContentTemplate="{TemplateBinding HeaderTemplate}"/>
+            <Rectangle Classes="textEmphasis" Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}">
+              <Rectangle.Fill>
+                <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
+              </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Classes="textEmphasis" Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}">
+              <Rectangle.Fill>
+                <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
+              </Rectangle.Fill>
+            </Rectangle>
+            <Rectangle Classes="textEmphasis" Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}">
+              <Rectangle.Fill>
+                <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
+              </Rectangle.Fill>
+            </Rectangle>
+            <Border x:Name="SelectedBorder" BorderThickness="0" MinWidth="3" MinHeight="3" IsVisible="{TemplateBinding IsSelected}" CornerRadius="1.5" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Margin="-2,3"/>
+            <!--Panel IsVisible="{TemplateBinding IsContextual}" Opacity="0.25">
+              <Border x:Name="ContextualSelectedBorder" BorderThickness="{Binding #SelectedBorder.BorderThickness}" HorizontalAlignment="{Binding #SelectedBorder.HorizontalAlignment}" VerticalAlignment="{Binding #SelectedBorder.VerticalAlignment}" IsVisible="{Binding #SelectedBorder.IsVisible}" Opacity="{Binding #SelectedBorder.Opacity}"/>
+            </Panel-->
+          </Panel>
+        </Border>
+      </ControlTemplate>
+    </Setter>
+  </Style>
+  
+  <Style Selector="local|RibbonTab /template/ Rectangle.textEmphasis">
+   <!--Width="{Binding #PART_ContentPresenter.Bounds.Width}" Height="{Binding #PART_ContentPresenter.Bounds.Height}" HorizontalAlignment="Center" VerticalAlignment="Center" ZIndex="-1">
+              <Rectangle.Fill>
+                <VisualBrush Stretch="Fill" Visual="{Binding #PART_ContentPresenter}"/>
+              </Rectangle.Fill-->
+    <!--Setter Property="Width" Value="{Binding #PART_ContentPresenter.Bounds.Width}"/>
+    <Setter Property="Height" Value="{Binding #PART_ContentPresenter.Bounds.Height}"/-->
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="VerticalAlignment" Value="Center"/>
+    <Setter Property="Stroke" Value="{Binding $parent[local:RibbonTab].Foreground}"/>
+    <Setter Property="ZIndex" Value="-1"/>
+  </Style>
+  <Style Selector="local|RibbonTab[IsSelected=False]:not(:pointerover) /template/ Rectangle.textEmphasis">
+    <Setter Property="IsVisible" Value="False"/>
+  </Style>
+  <!--Style Selector="local|RibbonTab:not(:selected):not(:pointerover):not(:pressed) /template/ Border#SelectedBorder,
+                   local|Ribbon[IsCollapsed=true][IsCollapsedPopupOpen=false] local|RibbonTab:not(:pointerover):not(:pressed) /template/ Border#SelectedBorder">
+    <Setter Property="IsVisible" Value="False"/>
+    <Setter Property="BorderBrush" Value="Transparent"/>
+  </Style-->
+  <Style Selector="local|RibbonTab:disabled /template/ ContentPresenter#PART_ContentPresenter">
+    <Setter Property="Opacity" Value="{DynamicResource ThemeDisabledOpacity}"/>
+  </Style>
+
+  <Style Selector="local|RibbonTab[IsContextual=True] /template/ Border#SelectedBorder">
+    <Setter Property="Background" Value="{Binding $parent[local:RibbonContextualTabGroup].Background}"/>
+  </Style>
+  <Style Selector="local|RibbonTab[IsContextual=False] /template/ Border#SelectedBorder">
+    <Setter Property="Background" Value="{DynamicResource TabItemHeaderSelectedPipeFill}"/>
+  </Style>
+  <!--Style Selector="local|RibbonTab /template/ Panel#ContentPanel">
+    <Setter Property="HorizontalAlignment" Value="Center"/>
+    <Setter Property="Margin" Value="10,0"/>
+  </Style>
+  <Style Selector="local|RibbonTab /template/ Border#SelectedBorder">
+    <Setter Property="HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="VerticalAlignment" Value="Bottom"/>
+    <Setter Property="Margin" Value="-2,3"/>
+  </Style-->
+</Styles>

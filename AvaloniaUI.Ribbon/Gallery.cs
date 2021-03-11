@@ -49,19 +49,19 @@ namespace AvaloniaUI.Ribbon
 
         public RibbonControlSize Size
         {
-            get => GetValue(SizeProperty);
+            get => (RibbonControlSize)GetValue(SizeProperty);
             set => SetValue(SizeProperty, value);
         }
 
         public RibbonControlSize MinSize
         {
-            get => GetValue(MinSizeProperty);
+            get => (RibbonControlSize)GetValue(MinSizeProperty);
             set => SetValue(MinSizeProperty, value);
         }
 
         public RibbonControlSize MaxSize
         {
-            get => GetValue(MaxSizeProperty);
+            get => (RibbonControlSize)GetValue(MaxSizeProperty);
             set => SetValue(MaxSizeProperty, value);
         }
 
@@ -69,9 +69,9 @@ namespace AvaloniaUI.Ribbon
         ContentControl _mainPresenter;
         ContentControl _flyoutPresenter;
 
-        protected override void OnTemplateApplied(TemplateAppliedEventArgs e)
+        protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
         {
-            base.OnTemplateApplied(e);
+            base.OnApplyTemplate(e);
             
             _itemsPresenter = e.NameScope.Find<ItemsPresenter>("PART_ItemsPresenter");
             _mainPresenter = e.NameScope.Find<ContentControl>("PART_ItemsPresenterHolder");
@@ -82,7 +82,11 @@ namespace AvaloniaUI.Ribbon
             e.NameScope.Find<RepeatButton>("PART_DownButton").Click += (sneder, args) => pres.Offset = pres.Offset.WithY(Math.Min(pres.Offset.Y + ItemHeight, _mainPresenter.Bounds.Height - pres.Bounds.Height));
 
             _flyoutPresenter = e.NameScope.Find<ContentControl>("PART_FlyoutItemsPresenterHolder");
-            _flyoutPresenter.PointerWheelChanged += (s, a) => a.Handled = true;
+            /*_flyoutPresenter.PointerWheelChanged += (s, a) => 
+            {
+                a.Handled = true;
+            };*/
+            e.NameScope.Find<Control>("PART_FlyoutRoot").PointerLeave += (sneder, a) => IsDropDownOpen = false;
 
             UpdatePresenterLocation(IsDropDownOpen);
         }

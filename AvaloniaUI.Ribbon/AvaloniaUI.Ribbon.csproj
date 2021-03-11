@@ -1,20 +1,23 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>AvaloniaUI.Ribbon</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <Version>1.0.5</Version>
-    <Authors>Alban Mazerolles, Rubal Walia, Splitwirez</Authors>
-    <PackageId>AvaloniaRibbon</PackageId>
+    <Version>1.1.0-beta</Version>
+    <Authors>Splitwirez, Alban Mazerolles, Rubal Walia</Authors>
+    <PackageId>AvaloniaUIRibbon</PackageId>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/waliarubal/AvaloniaRibbon</PackageProjectUrl>
-    <Description></Description>
+    <PackageProjectUrl>https://github.com/Splitwirez/AvaloniaRibbon</PackageProjectUrl>
+    <Description>Ribbon UI for Avalonia</Description>
     <RepositoryType>Git</RepositoryType>
-    <RepositoryUrl>https://github.com/waliarubal/AvaloniaRibbon.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Splitwirez/AvaloniaRibbon.git</RepositoryUrl>
     <PackageLicenseUrl></PackageLicenseUrl>
     <AssemblyName>AvaloniaUI.Ribbon</AssemblyName>
+    <LangVersion>8.0</LangVersion>
+	<PackageTags>ribbon;avalonia;avaloniaui;avalonia ui;ribbon;ribbonui;ribbon ui;crossplat;crossplatform;cross platform;xplat;xplatform</PackageTags>
+    <!--owners? requireLicenseAcceptance? releaseNotes? copyright?-->
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
@@ -26,8 +29,8 @@
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.10" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.10" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.10" />
+    <PackageReference Include="Avalonia" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
   </ItemGroup>
 </Project>

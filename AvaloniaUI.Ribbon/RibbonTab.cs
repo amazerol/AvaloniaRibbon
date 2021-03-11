@@ -8,6 +8,7 @@ using Avalonia.Styling;
 using System;
 using System.Collections;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace AvaloniaUI.Ribbon
 {
@@ -15,14 +16,21 @@ namespace AvaloniaUI.Ribbon
     {
         Type IStyleable.StyleKey => typeof(RibbonTab);
 
-        public static readonly DirectProperty<RibbonTab, IEnumerable> GroupsProperty = AvaloniaProperty.RegisterDirect<RibbonTab, IEnumerable>(nameof(Groups), o => o.Groups, (o, v) => o.Groups = v);
+        public static readonly DirectProperty<RibbonTab, ObservableCollection<RibbonGroupBox>> GroupsProperty = AvaloniaProperty.RegisterDirect<RibbonTab, ObservableCollection<RibbonGroupBox>>(nameof(Groups), o => o.Groups, (o, v) => o.Groups = v);
 
-        private IEnumerable _groups = new AvaloniaList<object>();
+        private ObservableCollection<RibbonGroupBox> _groups = new ObservableCollection<RibbonGroupBox>();
         [Content]
-        public IEnumerable Groups
+        public ObservableCollection<RibbonGroupBox> Groups
         {
             get { return _groups; }
             set { SetAndRaise(GroupsProperty, ref _groups, value); }
+        }
+
+        public static readonly StyledProperty<bool> IsContextualProperty = AvaloniaProperty.Register<RibbonTab, bool>(nameof(IsContextual), false);
+        public bool IsContextual
+        {
+            get => GetValue(IsContextualProperty);
+            set => SetValue(IsContextualProperty, value);
         }
 
         static RibbonTab()
@@ -148,7 +156,7 @@ namespace AvaloniaUI.Ribbon
         private void InputRoot_Deactivated(object sender, EventArgs e)
         {
             KeyTip.SetShowChildKeyTipKeys(this, false);
-            (Parent as Ribbon).Close();
+            RibbonControlExtensions.GetParentRibbon(this)?.Close();
         }
     }
 }
